@@ -5,24 +5,21 @@ extern ss::Application application;
 
 namespace ss::graphics
 {
-
-
-
 	GraphicDevice_Dx11::GraphicDevice_Dx11()
 	{
 		// Device, Context »ý¼º
 		HWND hWnd = application.GetHwnd();
 		UINT deviceFlag = D3D11_CREATE_DEVICE_DEBUG;
 		D3D_FEATURE_LEVEL featureLevel = (D3D_FEATURE_LEVEL)0;
-
+		
 		//ID3D11Device* pDevice = nullptr;
 		//ID3D11DeviceContext* pContext = nullptr;
 		//ID3D11DeviceContext** ppContext = &pContext;
 		D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr
-			, deviceFlag, nullptr, 0
-			, D3D11_SDK_VERSION
-			, mDevice.GetAddressOf(), &featureLevel
-			, mContext.GetAddressOf());
+		, deviceFlag, nullptr, 0
+		, D3D11_SDK_VERSION
+		, mDevice.GetAddressOf(), &featureLevel
+		, mContext.GetAddressOf());
 
 		// SwapChain
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
@@ -32,7 +29,7 @@ namespace ss::graphics
 
 		if (!CreateSwapChain(&swapChainDesc, hWnd))
 			return;
-
+		
 		// get rendertarget by swapchain
 		if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
 			, (void**)mRenderTarget.GetAddressOf())))
@@ -62,9 +59,8 @@ namespace ss::graphics
 
 	GraphicDevice_Dx11::~GraphicDevice_Dx11()
 	{
+
 	}
-
-
 	bool GraphicDevice_Dx11::CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* desc, HWND hWnd)
 	{
 		DXGI_SWAP_CHAIN_DESC dxgiDesc = {};
@@ -82,7 +78,7 @@ namespace ss::graphics
 		dxgiDesc.BufferDesc.RefreshRate.Denominator = 1;
 		dxgiDesc.BufferDesc.Scaling = DXGI_MODE_SCALING::DXGI_MODE_SCALING_UNSPECIFIED;
 		dxgiDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-
+		
 		dxgiDesc.SampleDesc.Count = 1;
 		dxgiDesc.SampleDesc.Quality = 0;
 
@@ -118,7 +114,7 @@ namespace ss::graphics
 
 		dxgiDesc.SampleDesc.Count = desc->SampleDesc.Count;
 		dxgiDesc.SampleDesc.Quality = 0;
-
+		
 		dxgiDesc.MipLevels = desc->MipLevels;
 		dxgiDesc.MiscFlags = desc->MiscFlags;
 
@@ -130,7 +126,7 @@ namespace ss::graphics
 
 		return true;
 	}
-
+	
 	void GraphicDevice_Dx11::Draw()
 	{
 		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
