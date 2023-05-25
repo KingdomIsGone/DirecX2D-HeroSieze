@@ -1,4 +1,7 @@
 #include "ssApplication.h"
+#include "ssInput.h"
+#include "ssTime.h"
+#include "ssRenderer.h"
 
 
 namespace ss
@@ -25,10 +28,16 @@ namespace ss
 
 	void Application::Initialize()
 	{
+		Time::Initiailize();
+		Input::Initialize();
+
+		renderer::Initialize();
 	}
 
 	void Application::Update()
 	{
+		Time::Update();
+		Input::Update();
 	}
 
 	void Application::LateUpdate()
@@ -37,6 +46,8 @@ namespace ss
 
 	void Application::Render()
 	{
+		Time::Render();
+
 		graphicDevice->Draw();
 	}
 
@@ -49,6 +60,7 @@ namespace ss
 			mHeight = height;
 
 			graphicDevice = std::make_unique<ss::graphics::GraphicDevice_Dx11>();
+			ss::graphics::GetDevice() = graphicDevice.get();
 		}
 
 		RECT rt = { 0, 0, (LONG)width , (LONG)height };

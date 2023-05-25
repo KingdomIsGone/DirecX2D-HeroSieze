@@ -23,6 +23,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssEngine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssTime.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssTime.cpp" />
