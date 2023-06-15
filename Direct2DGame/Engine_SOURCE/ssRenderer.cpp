@@ -1,50 +1,47 @@
 #include "ssRenderer.h"
 
-namespace ss::renderer
+namespace renderer
 {
-	Vertex vertexes[100] = {};
+	using namespace ss;
+	using namespace ss::graphics;
+	Vertex vertexes[300] = {};
+
 	int vertexCount = 0;
 	
-	// Input Layout (정점 정보)
-	ID3D11InputLayout* triangleLayout = nullptr;
-
-	// Vertex Buffer
-	ID3D11Buffer* triangleBuffer = nullptr;
-	ID3D11Buffer* triangleIdxBuffer = nullptr;
-	ID3D11Buffer* triangleConstantBuffer = nullptr;
-
-	// error blob
-	ID3DBlob* errorBlob = nullptr;
-
-	// Vertex Shader code -> Binary Code
-	ID3DBlob* triangleVSBlob = nullptr;
-
-	// Vertex Shader
-	ID3D11VertexShader* triangleVSShader = nullptr;
-
-	// Pixel Shader code -> Binary Code
-	ID3DBlob* trianglePSBlob = nullptr;
-
-	// Vertex Shader
-	ID3D11PixelShader* trianglePSShader = nullptr;
+	ss::Mesh* mesh = nullptr;
+	ss::Shader* shader = nullptr;
+	ss::graphics::ConstantBuffer* constantBuffer = nullptr;
+	
 
 	void SetupState()
 	{
+		// Input layout 정점 구조 정보를 넘겨줘야한다.
+		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
 
+		arrLayout[0].AlignedByteOffset = 0;
+		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		arrLayout[0].InputSlot = 0;
+		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[0].SemanticName = "POSITION";
+		arrLayout[0].SemanticIndex = 0;
+
+		arrLayout[1].AlignedByteOffset = 12;
+		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		arrLayout[1].InputSlot = 0;
+		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[1].SemanticName = "COLOR";
+		arrLayout[1].SemanticIndex = 0;
+
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 2
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 	}
 
 	void LoadBuffer()
 	{
 		// Vertex Buffer
-		D3D11_BUFFER_DESC triangleDesc = {};
-		triangleDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-		triangleDesc.ByteWidth = sizeof(Vertex) * vertexCount;
-		triangleDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-		triangleDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
-
-		D3D11_SUBRESOURCE_DATA triangleData = {};
-		triangleData.pSysMem = vertexes;
-		ss::graphics::GetDevice()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
+		mesh = new ss::Mesh();
+		mesh->CreateVertexBuffer(vertexes, 300);
 
 		std::vector<UINT> indexes = {};
 		/*indexes.push_back(0);
@@ -55,37 +52,22 @@ namespace ss::renderer
 		{
 			indexes.push_back(i);
 		}
+		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+
+
 		
-
-		// Index Buffer
-		D3D11_BUFFER_DESC triangleIdxDesc = {};
-		triangleIdxDesc.ByteWidth = sizeof(UINT) * indexes.size();
-		triangleIdxDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
-		triangleIdxDesc.Usage = D3D11_USAGE_DEFAULT;
-		triangleIdxDesc.CPUAccessFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA triangleIdxData = {};
-		triangleIdxData.pSysMem = indexes.data();
-		ss::graphics::GetDevice()->CreateBuffer(&triangleIdxBuffer, &triangleIdxDesc, &triangleIdxData);
-
 		// Constant Buffer
-		D3D11_BUFFER_DESC triangleCSDesc = {};
-		triangleCSDesc.ByteWidth = sizeof(Vector4);
-		triangleCSDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
-		triangleCSDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-		triangleCSDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		constantBuffer = new ConstantBuffer(eCBType::Transform);
+		constantBuffer->Create(sizeof(Transform));
 
-		ss::graphics::GetDevice()->CreateBuffer(&triangleConstantBuffer, &triangleCSDesc, nullptr);
-
-		Vector4 pos(0.0f, 0.0f, 0.0f, 1.0f);
-		ss::graphics::GetDevice()->SetConstantBuffer(triangleConstantBuffer, &pos, sizeof(Vector4));
-		ss::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, triangleConstantBuffer);
-		//
+		constantBuffer->Bind(eShaderStage::VS);
 	}
 
 	void LoadShader()
 	{
-		ss::graphics::GetDevice()->CreateShader();
+		shader = new ss::Shader();
+		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
 	}
 
 	void Initialize()
@@ -93,7 +75,7 @@ namespace ss::renderer
 		vertexes[vertexCount].pos = Vector3(0.0f, 0.0f, 0.0f);
 		vertexes[vertexCount++].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 		vertexes[vertexCount].pos = Vector3(0.0f, 0.1f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[vertexCount++].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 		vertexes[vertexCount].pos = Vector3(0.1f, 0.1f, 0.0f);
 		vertexes[vertexCount++].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 		vertexes[vertexCount].pos = Vector3(0.0f, 0.0f, 0.0f);
@@ -103,21 +85,16 @@ namespace ss::renderer
 		vertexes[vertexCount].pos = Vector3(0.1f, 0.0f, 0.0f);
 		vertexes[vertexCount++].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-		vertexes[vertexCount].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[vertexCount].pos = Vector3(0.3f, 0.7f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[vertexCount].pos = Vector3(0.5f, 0.9f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-		vertexes[vertexCount].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[vertexCount].pos = Vector3(0.5f, 0.9f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[vertexCount].pos = Vector3(0.7f, 0.7f, 0.0f);
-		vertexes[vertexCount++].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-
-		SetupState();
 		LoadBuffer();
 		LoadShader();
+		SetupState();
+	}
+
+
+	void Release()
+	{
+		delete mesh;
+		delete shader;
+		delete constantBuffer;
 	}
 }
