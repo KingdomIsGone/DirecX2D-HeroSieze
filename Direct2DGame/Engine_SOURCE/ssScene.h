@@ -15,7 +15,12 @@ namespace ss
 		virtual void LateUpdate();
 		virtual void Render();
 
+		virtual void OnEnter();
+		virtual void OnExit();
+
+		void AddGameObject(eLayerType type, GameObject* gameObj);
+
 	private:
-		std::vector<Layer*> mLayers;
+		std::vector<Layer> mLayers;
 	};
 }

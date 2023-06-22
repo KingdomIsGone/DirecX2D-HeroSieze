@@ -46,6 +46,9 @@
     <Filter Include="Scene\SceneManager">
       <UniqueIdentifier>{45d8b63d-37cf-4ac5-8ea9-02c7ef985b78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{f6336fd8-43fb-4bc1-9dee-66c6d6ce3862}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -99,9 +102,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssScript.h">
       <Filter>GameObject\Component\Script</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
@@ -115,6 +115,19 @@
       <Filter>Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssPlayScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssTransform.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssScene.h">
+      <Filter>Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssMeshRenderer.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssMaterial.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCameraScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -156,9 +169,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssScript.cpp">
       <Filter>GameObject\Component\Script</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
@@ -172,6 +182,19 @@
       <Filter>Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssPlayScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssTransform.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssScene.cpp">
+      <Filter>Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssMeshRenderer.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssMaterial.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCameraScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)ssMath.inl">

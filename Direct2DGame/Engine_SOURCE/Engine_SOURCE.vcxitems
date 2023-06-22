@@ -16,6 +16,8 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssEntity.h" />
@@ -25,9 +27,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResource.h" />
@@ -36,10 +40,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssEntity.cpp" />
@@ -47,8 +55,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssMeshRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssResource.cpp" />
@@ -57,7 +67,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)ssMath.inl" />

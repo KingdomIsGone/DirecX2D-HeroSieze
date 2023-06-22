@@ -6,33 +6,28 @@
 #include "ssConstantBuffer.h"
 
 using namespace ss::math;
+using namespace ss::graphics;
 namespace renderer
 {
 	struct Vertex
 	{
 		Vector3 pos;
 		Vector4 color;
+		Vector2 uv;
 	};
-	struct Transform
+
+	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 	{
-		Vector4 Pos;
-		Vector4 Color;
-		Vector4 Scale;
+		Matrix mWorld;
+		Matrix mView;
+		Matrix mProjection;
 	};
 	
 	extern Vertex vertexes[];
-	extern ss::Mesh* mesh;
-	extern ss::Shader* shader;
-	extern ss::graphics::ConstantBuffer* constantBuffer;
-
-	extern float x;
-	extern float y;
-
+	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
 
 	void Initialize();
 	void Release();
-
-
 }
 

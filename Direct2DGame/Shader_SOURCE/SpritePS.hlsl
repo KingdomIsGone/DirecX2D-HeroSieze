@@ -1,7 +1,7 @@
 
 struct VSIn
 {
-    float3 Pos : POSITIION;
+    float3 Pos : POSITION;
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
@@ -24,5 +24,9 @@ float4 main(VSOut In) : SV_TARGET
     float4 color = (float) 0.0f;
     color = smileTexture.Sample(anisotropicSampler, In.UV);
     
-    return color;
+    //cos(100.0f);
+    
+    //dot()
+
+	return color;
 }

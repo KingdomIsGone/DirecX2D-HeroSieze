@@ -1,8 +1,7 @@
 #pragma once
 #include "ssEntity.h"
 #include "ssComponent.h"
-#include "ssRenderer.h"
-
+#include "ssScript.h"
 namespace ss
 {
 	class GameObject : public Entity
@@ -26,10 +25,17 @@ namespace ss
 		template <typename T>
 		T* GetComponent()
 		{
-			t* component;
-			for (T* comp : mComponents)
+			T* component;
+			for (Component* comp : mComponents)
 			{
 				component = dynamic_cast<T*>(comp);
+				if (component != nullptr)
+					return component;
+			}
+
+			for (Script* script : mScripts)
+			{
+				component = dynamic_cast<T*>(script);
 				if (component != nullptr)
 					return component;
 			}
@@ -43,11 +49,17 @@ namespace ss
 			T* comp = new T();
 
 			Component* buff = dynamic_cast<Component*>(comp);
+			Script* script = dynamic_cast<Script*>(buff);
 
 			if (buff == nullptr)
 				return nullptr;
 
-			mComponents.push_back(buff);
+			if (script == nullptr)
+				mComponents.push_back(buff);
+			else
+				mScripts.push_back(script);
+
+			comp->SetOwner(this);
 
 			return comp;
 		}
@@ -55,5 +67,6 @@ namespace ss
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
+		std::vector<Script*> mScripts;
 	};
 }
