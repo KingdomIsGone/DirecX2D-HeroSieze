@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace ss::enums
 {
 	enum class eComponentType
@@ -10,6 +11,7 @@ namespace ss::enums
 		Particle,
 		MeshRenderer,
 		Script,
+		Camera,
 		End,
 	};
 

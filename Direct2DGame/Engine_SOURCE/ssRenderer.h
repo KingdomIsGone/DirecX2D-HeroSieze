@@ -4,6 +4,7 @@
 #include "ssMesh.h"
 #include "ssShader.h"
 #include "ssConstantBuffer.h"
+#include "ssCamera.h"
 
 using namespace ss::math;
 using namespace ss::graphics;
@@ -22,12 +23,18 @@ namespace renderer
 		Matrix mView;
 		Matrix mProjection;
 	};
-	
+
 	extern Vertex vertexes[];
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
+	extern Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState[];
+	extern Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
+
+	extern std::vector<ss::Camera*> cameras;
 
 	void Initialize();
+	void Render();
 	void Release();
 }
-

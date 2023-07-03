@@ -11,7 +11,7 @@ namespace ss
 	public:
 		Mesh();
 		~Mesh();
-
+		
 		virtual HRESULT Load(const std::wstring& path) override;
 
 		bool CreateVertexBuffer(void* data, UINT Count);
@@ -25,7 +25,7 @@ namespace ss
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mVertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mIndexBuffer;
-
+		
 		D3D11_BUFFER_DESC mVBDesc;
 		D3D11_BUFFER_DESC mIBDesc;
 

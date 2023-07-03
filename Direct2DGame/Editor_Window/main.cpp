@@ -3,10 +3,17 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
-#include "ssApplication.h"
-#include "ssRenderer.h"
-#include "ssResources.h"
-#include "ssSceneManager.h"
+
+#include "..\Engine_SOURCE\ssApplication.h"
+#include "..\Engine_SOURCE\ssRenderer.h"
+#include "..\Engine_SOURCE\ssResources.h"
+#include "..\ssEngine\LoadScenes.h"
+
+#ifdef _DEBUG
+#pragma comment(lib, "..\\x64\\Debug\\ssEngine.lib")
+#else
+#pragma comment(lib, "..\\x64\\Release\\ssEngine.lib")
+#endif
 
 ss::Application application;
 
@@ -30,9 +37,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc();
+    //_CrtSetBreakAlloc(592);
     // TODO: 여기에 코드를 입력합니다.
 
     // 전역 문자열을 초기화합니다.
@@ -84,7 +90,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    WNDCLASSEXW wcex;
+    WNDCLASSEXW wcex = {};
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
@@ -130,6 +136,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    application.Initialize();
+   ss::InitializeScenes();
 
    return TRUE;
 }

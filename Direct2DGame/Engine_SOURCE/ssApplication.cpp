@@ -4,6 +4,7 @@
 #include "ssRenderer.h"
 #include "ssSceneManager.h"
 
+
 namespace ss
 {
 	Application::Application()
@@ -17,6 +18,7 @@ namespace ss
 
 	Application::~Application()
 	{
+
 	}
 
 	void Application::Run()
@@ -53,7 +55,9 @@ namespace ss
 
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
-		SceneManager::Render();
+		
+		//SceneManager::Render();
+		renderer::Render();
 		//graphicDevice->Draw();
 
 		graphicDevice->Present();

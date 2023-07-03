@@ -1,6 +1,4 @@
 #include "ssScene.h"
-#include "ssInput.h"
-#include "ssTime.h"
 
 namespace ss
 {
@@ -15,9 +13,6 @@ namespace ss
 
 	void Scene::Initialize()
 	{
-		// 여기서 초기 게임 맵데이터를 세팅해줘야 한다.
-
-
 		
 	}
 

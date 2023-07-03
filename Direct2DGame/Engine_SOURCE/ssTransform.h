@@ -28,9 +28,12 @@ namespace ss
 		Vector3 GetRotation() { return mRotation; }
 		Vector3 GetScale() { return mScale; }
 
-		Vector3 Foward() { return mForward; }
+		Vector3 Foward() { return mFoward; }
 		Vector3 Right() { return mRight; }
 		Vector3 Up() { return mUp; }
+
+		void SetParent(Transform* transform) { mParent = transform; }
+		Transform* GetParent() { return mParent; }
 
 	private:
 		Vector3 mPosition;
@@ -38,9 +41,12 @@ namespace ss
 		Vector3 mScale;
 
 		Vector3 mUp;
-		Vector3 mForward;
+		Vector3 mFoward;
 		Vector3 mRight;
 
 		Matrix mWorld;
+
+		Transform* mParent;
 	};
 }
+

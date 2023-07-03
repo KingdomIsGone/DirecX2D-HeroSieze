@@ -1,5 +1,6 @@
 #pragma once
-#include "ssScene.h"
+//#include "ssScene.h"
+#include "..\Engine_SOURCE\ssScene.h"
 
 namespace ss
 {

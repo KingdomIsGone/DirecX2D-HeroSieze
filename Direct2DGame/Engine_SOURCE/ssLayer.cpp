@@ -1,5 +1,6 @@
 #include "ssLayer.h"
 
+
 namespace ss
 {
 	Layer::Layer()
@@ -41,7 +42,6 @@ namespace ss
 			gameObj->Render();
 		}
 	}
-
 	void Layer::AddGameObject(GameObject* gameObj)
 	{
 		mGameObjects.push_back(gameObj);

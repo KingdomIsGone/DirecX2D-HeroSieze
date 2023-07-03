@@ -8,30 +8,16 @@ namespace ss::graphics
 {
 	GraphicDevice_Dx11::GraphicDevice_Dx11()
 	{
-		// 1. graphic device, context 생성
-
-		// 2. 화면에 렌더링 할수 있게 도와주는
-		// swapchain 생성
-
-		// 3. rendertarget,view 생성하고 
-		// 4. 깊이버퍼와 깊이버퍼 뷰 생성해주고
-
-		// 5. 레더타겟 클리어 ( 화면 지우기 )
-		// 6. present 함수로 렌더타겟에 있는 텍스쳐를
-		//    모니터에 그려준다.
-
-		// Device, Context 생성
 		HWND hWnd = application.GetHwnd();
 		UINT deviceFlag = D3D11_CREATE_DEVICE_DEBUG;
 		D3D_FEATURE_LEVEL featureLevel = (D3D_FEATURE_LEVEL)0;
-		
+
 		D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr
 			, deviceFlag, nullptr, 0
 			, D3D11_SDK_VERSION
 			, mDevice.GetAddressOf(), &featureLevel
 			, mContext.GetAddressOf());
 
-		// SwapChain
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 		swapChainDesc.BufferCount = 2;
 		swapChainDesc.BufferDesc.Width = application.GetWidth();
@@ -39,28 +25,24 @@ namespace ss::graphics
 
 		if (!CreateSwapChain(&swapChainDesc, hWnd))
 			return;
-		
-		// get rendertarget by swapchain
+
 		if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
 			, (void**)mRenderTarget.GetAddressOf())))
 			return;
 
-		// create rendertarget view
-
 		mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get()
 			, nullptr, mRenderTargetView.GetAddressOf());
 
-		//스텐실 버퍼
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
 		depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
 		depthStencilDesc.CPUAccessFlags = 0;
 
 		depthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-		
 		depthStencilDesc.Width = application.GetWidth();
 		depthStencilDesc.Height = application.GetHeight();
 		depthStencilDesc.ArraySize = 1;
+
 		depthStencilDesc.SampleDesc.Count = 1;
 		depthStencilDesc.SampleDesc.Quality = 0;
 
@@ -73,18 +55,6 @@ namespace ss::graphics
 
 		RECT winRect = {};
 		GetClientRect(hWnd, &winRect);
-
-
-		//typedef struct D3D11_VIEWPORT
-		//{
-		//	FLOAT TopLeftX;
-		//	FLOAT TopLeftY;
-		//	FLOAT Width;
-		//	FLOAT Height;
-		//	FLOAT MinDepth;
-		//	FLOAT MaxDepth;
-		//} 	D3D11_VIEWPORT;
-
 		mViewPort =
 		{
 			0.0f, 0.0f
@@ -118,7 +88,7 @@ namespace ss::graphics
 		dxgiDesc.BufferDesc.RefreshRate.Denominator = 1;
 		dxgiDesc.BufferDesc.Scaling = DXGI_MODE_SCALING::DXGI_MODE_SCALING_UNSPECIFIED;
 		dxgiDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-		
+
 		dxgiDesc.SampleDesc.Count = 1;
 		dxgiDesc.SampleDesc.Quality = 0;
 
@@ -198,14 +168,13 @@ namespace ss::graphics
 
 		if (errorBlob)
 		{
-			OutputDebugStringA((char*)(errorBlob->GetBufferPointer()));
+			OutputDebugStringA( (char*)(errorBlob->GetBufferPointer()) );
 			errorBlob->Release();
 			errorBlob = nullptr;
 		}
 
 		return false;
 	}
-
 	bool GraphicDevice_Dx11::CreateVertexShader(const void* pShaderBytecode
 		, SIZE_T BytecodeLength
 		, ID3D11VertexShader** ppVertexShader)
@@ -226,7 +195,7 @@ namespace ss::graphics
 		return true;
 	}
 
-	bool GraphicDevice_Dx11::CreateSampler(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState)
+	bool GraphicDevice_Dx11::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState)
 	{
 		if (FAILED(mDevice->CreateSamplerState(pSamplerDesc, ppSamplerState)))
 			return false;
@@ -234,9 +203,51 @@ namespace ss::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateRasterizeState(const D3D11_RASTERIZER_DESC* pRasterizerDesc
+		, ID3D11RasterizerState** ppRasterizerState)
+	{
+		if (FAILED(mDevice->CreateRasterizerState(pRasterizerDesc, ppRasterizerState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc
+		, ID3D11DepthStencilState** ppDepthStencilState)
+	{
+		if (FAILED(mDevice->CreateDepthStencilState(pDepthStencilDesc, ppDepthStencilState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateBlendState(const D3D11_BLEND_DESC* pBlendStateDesc
+		, ID3D11BlendState** ppBlendState)
+	{
+		if (FAILED(mDevice->CreateBlendState(pBlendStateDesc, ppBlendState)))
+			return false;
+
+		return true;
+	}
+	
 	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* viewPort)
 	{
 		mContext->RSSetViewports(1, viewPort);
+	}
+
+	void GraphicDevice_Dx11::BindRasterizeState(ID3D11RasterizerState* pRasterizerState)
+	{
+		mContext->RSSetState(pRasterizerState);
+	}
+
+	void GraphicDevice_Dx11::BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState)
+	{
+		mContext->OMSetDepthStencilState(pDepthStencilState, 0);
+	}
+
+	void GraphicDevice_Dx11::BindBlendState(ID3D11BlendState* pBlendState)
+	{
+		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
 	}
 
 	void GraphicDevice_Dx11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
@@ -326,6 +337,7 @@ namespace ss::graphics
 		mContext->PSSetConstantBuffers((UINT)type, 1, &buffer);
 		mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 	}
+
 	void GraphicDevice_Dx11::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
 	{
 		switch (stage)
@@ -354,6 +366,7 @@ namespace ss::graphics
 			break;
 		}
 	}
+
 	void GraphicDevice_Dx11::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplers)
 	{
 		switch (stage)
@@ -382,6 +395,7 @@ namespace ss::graphics
 			break;
 		}
 	}
+
 	void GraphicDevice_Dx11::ClearTarget()
 	{
 		// render target clear
@@ -393,10 +407,10 @@ namespace ss::graphics
 
 	void GraphicDevice_Dx11::UpdateViewPort()
 	{
-		//  viewPort update
-		HWND hwnd = application.GetHwnd();
+		// viewport update
+		HWND hWnd = application.GetHwnd();
 		RECT winRect = {};
-		GetClientRect(hwnd, &winRect);
+		GetClientRect(hWnd, &winRect);
 		mViewPort =
 		{
 			0.0f, 0.0f
@@ -415,7 +429,6 @@ namespace ss::graphics
 
 	void GraphicDevice_Dx11::Present()
 	{
-		// 레더타겟에 있는 이미지를 화면에 그려준다
 		mSwapChain->Present(0, 0);
 	}
 }

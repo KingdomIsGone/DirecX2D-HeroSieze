@@ -1,5 +1,6 @@
 #include "ssComponent.h"
 
+
 namespace ss
 {
 	Component::Component(eComponentType type)

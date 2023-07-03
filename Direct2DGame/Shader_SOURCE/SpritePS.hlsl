@@ -13,20 +13,19 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
-Texture2D smileTexture : register(t0);
+Texture2D albedoTexture : register(t0);
 
 SamplerState pointSampler : register(s0);
 SamplerState anisotropicSampler : register(s1);
 
+
 float4 main(VSOut In) : SV_TARGET
 {
-    //return In.Color;
-    float4 color = (float) 0.0f;
-    color = smileTexture.Sample(anisotropicSampler, In.UV);
+    float4 color = (float4)0.0f;
+    //color.r = 1.0f;
+    //color.b = 1.0f;
     
-    //cos(100.0f);
+    color = albedoTexture.Sample(anisotropicSampler, In.UV);
     
-    //dot()
-
-	return color;
+    return color;
 }

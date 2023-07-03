@@ -55,7 +55,6 @@ namespace ss
 			mResources.insert(std::make_pair(key, resource));
 		}
 
-
 	private:
 		static std::map<std::wstring, std::shared_ptr<Resource>> mResources;
 	};

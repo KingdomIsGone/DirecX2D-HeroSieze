@@ -2,19 +2,43 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="ssEngine.cpp" />
+    <ClCompile Include="ssPlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssCameraScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ssUIScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ssPlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssCameraScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssUIScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadScenes.h">
+      <Filter>Contents\Load</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Load">
-      <UniqueIdentifier>{10b5c999-1b99-4ec2-8295-c27a8f9c282a}</UniqueIdentifier>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{ed010504-6671-4ca5-864f-b9f58051cb28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script">
-      <UniqueIdentifier>{e70998d9-55f7-4cd0-8e2e-c2a23517193a}</UniqueIdentifier>
+    <Filter Include="Contents\Load">
+      <UniqueIdentifier>{2cfadb9c-f8c6-41fd-9846-5e6bd4b50b79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{7d7497bb-1034-4064-ab58-dcff59a2196d}</UniqueIdentifier>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{d0a60e39-82c2-4819-9931-93e5a2d9e021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script">
+      <UniqueIdentifier>{02a6d4b6-df18-4b04-b5c4-bf97bbaba9ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

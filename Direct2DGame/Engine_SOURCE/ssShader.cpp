@@ -1,4 +1,5 @@
 #include "ssShader.h"
+#include "ssRenderer.h"
 
 namespace ss
 {
@@ -6,6 +7,9 @@ namespace ss
 		: Resource(enums::eResourceType::Shader)
 		, mInputLayout(nullptr)
 		, mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		, mRSType(eRSType::SolidBack)
+		, mDSType(eDSType::Less)
+		, mBSType(eBSType::AlphaBlend)
 	{
 	}
 
@@ -13,16 +17,14 @@ namespace ss
 	{
 		mInputLayout->Release();
 	}
-
 	HRESULT Shader::Load(const std::wstring& path)
 	{
 		return E_NOTIMPL;
 	}
-
 	bool Shader::Create(const eShaderStage stage
 		, const std::wstring& fileName
 		, const std::string& funcName)
-	{
+    {
 		std::filesystem::path shaderPath
 			= std::filesystem::current_path().parent_path();
 		shaderPath += L"\\Shader_SOURCE\\";
@@ -43,16 +45,24 @@ namespace ss
 			GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
 				, mPSBlob->GetBufferSize(), mPS.GetAddressOf());
 		}
-
+		
 
 		return true;;
-	}
+    }
 	void Shader::Binds()
 	{
-		GetDevice()->BindPrimitiveTopology(mTopology); // 정점자료를 통해 도형을 만들기 위해 기본도형 위상 구조PrimitiveTopology를 설정해줘야 한다.
-		GetDevice()->BindInputLayout(mInputLayout);      
+		GetDevice()->BindPrimitiveTopology(mTopology);
+		GetDevice()->BindInputLayout(mInputLayout);
 
 		GetDevice()->BindVertexShader(mVS.Get());
 		GetDevice()->BindPixelShader(mPS.Get());
+
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rsState = renderer::rasterizerStates[(UINT)mRSType];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)mDSType];
+		Microsoft::WRL::ComPtr<ID3D11BlendState> bsState = renderer::blendStates[(UINT)mBSType];
+
+		GetDevice()->BindRasterizeState(rsState.Get());
+		GetDevice()->BindDepthStencilState(dsState.Get());
+		GetDevice()->BindBlendState(bsState.Get());
 	}
 }

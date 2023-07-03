@@ -1,14 +1,14 @@
 #pragma once
-#include "ssComponent.h"
-
+//#include "ssScene.h"
+#include "..\Engine_SOURCE\ssScene.h"
 
 namespace ss
 {
-	class Script : public Component
+	class UIScene : public Scene
 	{
 	public:
-		Script();
-		~Script();
+		UIScene();
+		virtual ~UIScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

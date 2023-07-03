@@ -34,7 +34,7 @@ namespace ss
 
 	void GameObject::Initialize()
 	{
-		
+
 	}
 
 	void GameObject::Update()

@@ -2,6 +2,7 @@
 #include "ssEntity.h"
 #include "ssComponent.h"
 #include "ssScript.h"
+
 namespace ss
 {
 	class GameObject : public Entity
@@ -47,9 +48,11 @@ namespace ss
 		T* AddComponent()
 		{
 			T* comp = new T();
-
-			Component* buff = dynamic_cast<Component*>(comp);
-			Script* script = dynamic_cast<Script*>(buff);
+			
+			Component* buff
+				= dynamic_cast<Component*>(comp);
+			Script* script
+				= dynamic_cast<Script*>(buff);
 
 			if (buff == nullptr)
 				return nullptr;
@@ -58,7 +61,7 @@ namespace ss
 				mComponents.push_back(buff);
 			else
 				mScripts.push_back(script);
-
+			
 			comp->SetOwner(this);
 
 			return comp;

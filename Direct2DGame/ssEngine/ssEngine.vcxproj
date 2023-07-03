@@ -24,6 +24,7 @@
     <ProjectGuid>{75e637f6-8e03-4459-b01b-0edc06f8761f}</ProjectGuid>
     <RootNamespace>YamYamEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ssEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -44,6 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -51,6 +53,7 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -149,9 +152,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="ssUIScene.h" />
+    <ClInclude Include="ssCameraScript.h" />
+    <ClInclude Include="ssPlayScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ssUIScene.cpp" />
+    <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
+    <ClCompile Include="ssPlayScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="C:\Pss_Programing\DirectX2D\DirectX2D\Direct2DGame\Engine_SOURCE\ssMath.inl">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

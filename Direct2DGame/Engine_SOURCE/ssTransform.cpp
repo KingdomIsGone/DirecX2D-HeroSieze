@@ -1,6 +1,7 @@
 #include "ssTransform.h"
 #include "ssRenderer.h"
 #include "ssConstantBuffer.h"
+#include "ssCamera.h"
 
 namespace ss
 {
@@ -19,6 +20,7 @@ namespace ss
 
 	void Transform::Initialize()
 	{
+
 	}
 
 	void Transform::Update()
@@ -29,6 +31,7 @@ namespace ss
 	void Transform::LateUpdate()
 	{
 		mWorld = Matrix::Identity;
+
 		Matrix scale = Matrix::CreateScale(mScale);
 
 		Matrix rotation;
@@ -42,8 +45,13 @@ namespace ss
 		mWorld = scale * rotation * position;
 
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
-		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
+		mFoward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
+
+		if (mParent)
+		{
+			mWorld *= mParent->mWorld;
+		}
 	}
 
 	void Transform::Render()
@@ -55,12 +63,11 @@ namespace ss
 	{
 		renderer::TransformCB trCB = {};
 		trCB.mWorld = mWorld;
+		trCB.mView = Camera::GetViewMatrix();
+		trCB.mProjection = Camera::GetProjectionMatrix();
 
-		//trCB.mView = mWorld;
-		//trCB.mProjection = mWorld;
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		cb->SetData(&trCB);
-
 		cb->Bind(eShaderStage::VS);
 	}
 

@@ -1,5 +1,6 @@
 #pragma once
-#include "ssScript.h"
+//#include "ssScript.h"
+#include <ssScript.h>
 
 namespace ss
 {

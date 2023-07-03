@@ -4,6 +4,8 @@
 namespace ss::graphics
 {
 
+
+
 	ConstantBuffer::ConstantBuffer(const eCBType type)
 		: GpuBuffer()
 		, mType(type)
@@ -18,8 +20,8 @@ namespace ss::graphics
 	bool ConstantBuffer::Create(size_t size)
 	{
 		desc.ByteWidth = size;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
+		desc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 		ss::graphics::GetDevice()->CreateBuffer(buffer.GetAddressOf(), &desc, nullptr);

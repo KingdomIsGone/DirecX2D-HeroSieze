@@ -5,7 +5,7 @@ namespace ss::graphics
 {
 	Texture::Texture()
 		: Resource(enums::eResourceType::Texture)
-		, mImage{}
+		, mImage {}
 		, mTexture(nullptr)
 		, mSRV(nullptr)
 		, mDesc{}
@@ -54,5 +54,16 @@ namespace ss::graphics
 	void Texture::BindShader(eShaderStage stage, UINT startSlot)
 	{
 		GetDevice()->BindShaderResource(stage, startSlot, mSRV.GetAddressOf());
+	}
+	void Texture::Clear()
+	{
+		ID3D11ShaderResourceView* srv = nullptr;
+
+		GetDevice()->BindShaderResource(eShaderStage::VS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::DS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::GS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::HS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::CS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::PS, 0, &srv);
 	}
 }
