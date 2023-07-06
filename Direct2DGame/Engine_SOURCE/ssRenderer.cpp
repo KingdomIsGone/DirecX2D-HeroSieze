@@ -227,14 +227,7 @@ namespace renderer
 			Resources::Insert(L"SpriteMaterial02", spriteMateiral);
 		}
 
-		{
-			std::shared_ptr<Texture> texture
-				= Resources::Load<Texture>(L"CharacterCircle", L"..\\Resources\\Texture\\UI\\CharacterCircle.png");
-			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(spriteShader);
-			spriteMateiral->SetTexture(texture);
-			Resources::Insert(L"CharacterCircle0", spriteMateiral);
-		}
+		
 	}
 
 	void Initialize()

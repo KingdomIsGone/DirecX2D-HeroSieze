@@ -68,7 +68,7 @@ namespace ss::graphics
 	enum class eRenderingMode
 	{
 		Opaque,
-		CutOut,
+		CutOut,  //알파값을 기준으로 투명한 영역과 불투명한 영역을 나누고 투명한 영역을 잘라냄
 		Transparent,
 		End,
 	};

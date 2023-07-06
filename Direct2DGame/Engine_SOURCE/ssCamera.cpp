@@ -69,7 +69,7 @@ namespace ss
 		ZSortTransparencyGameObjects();
 		RenderOpaque();
 
-		DisableDepthStencilState();
+		DisableDepthStencilState();  //투명한 물체의 경우 뒤의 색과 혼합하기 위해 스텐실 버퍼를 끈다.
 		RenderCutOut();
 		RenderTransparent();
 		EnableDepthStencilState();
@@ -181,7 +181,7 @@ namespace ss
 			case ss::graphics::eRenderingMode::Opaque:
 				mOpaqueGameObjects.push_back(obj);
 				break;
-			case ss::graphics::eRenderingMode::CutOut:
+			case ss::graphics::eRenderingMode::CutOut:   
 				mCutOutGameObjects.push_back(obj);
 				break;
 			case ss::graphics::eRenderingMode::Transparent:
