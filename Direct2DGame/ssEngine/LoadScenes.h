@@ -18,7 +18,7 @@ namespace ss
 	void InitializeScenes()
 	{
 		//PlayScene* playScene = new PlayScene();
-		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<UIScene>(L"UIScene");
+		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 	}
 }

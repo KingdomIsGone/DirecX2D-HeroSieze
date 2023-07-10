@@ -25,6 +25,11 @@ namespace ss
 		mActiveScene->Render();
 	}
 
+	void SceneManager::Destroy()
+	{
+		mActiveScene->Destroy();
+	}
+
 	void SceneManager::Release()
 	{
 		for (auto& iter : mScenes)

@@ -82,6 +82,9 @@
     <Filter Include="Resource\Mesh">
       <UniqueIdentifier>{b2e59455-c2b7-441b-a72d-ecbca16082b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{d3faf4aa-d6e6-4a78-a195-719aca4b4084}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -164,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCamera.h">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssObject.h">
+      <Filter>Common\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

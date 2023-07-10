@@ -17,6 +17,7 @@ namespace ss
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Destroy();
 
 		void SetWindow(HWND hwnd, UINT width, UINT height);
 

@@ -31,6 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssEngine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResources.h" />

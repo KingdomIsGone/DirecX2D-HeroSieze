@@ -11,6 +11,9 @@
     <ClCompile Include="ssUIScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="ssGridScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -25,6 +28,9 @@
     </ClInclude>
     <ClInclude Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="ssGridScript.h">
+      <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

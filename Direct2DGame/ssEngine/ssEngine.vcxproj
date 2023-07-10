@@ -153,11 +153,13 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
