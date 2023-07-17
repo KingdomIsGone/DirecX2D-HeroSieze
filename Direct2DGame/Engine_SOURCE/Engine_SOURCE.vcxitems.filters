@@ -85,6 +85,9 @@
     <Filter Include="Common\Object">
       <UniqueIdentifier>{d3faf4aa-d6e6-4a78-a195-719aca4b4084}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Collider">
+      <UniqueIdentifier>{73c64d97-4aba-4f63-84ca-57fe43dfe00c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -171,6 +174,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssObject.h">
       <Filter>Common\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCollisionManager.h">
+      <Filter>Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h">
+      <Filter>GameObject\Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -241,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCamera.cpp">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCollisionManager.cpp">
+      <Filter>Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp">
+      <Filter>GameObject\Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ namespace renderer
 {
 	using namespace ss;
 	using namespace ss::graphics;
-	Vertex vertexes[4] = {};
+
 	ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End] = {};
 
@@ -20,7 +20,9 @@ namespace renderer
 	
 
 	//
+	ss::Camera* mainCamera = nullptr;
 	std::vector<ss::Camera*> cameras = {};
+	std::vector<DebugMesh> debugMeshs = {};
 
 	void SetupState()
 	{
@@ -64,6 +66,10 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = ss::Resources::Find<Shader>(L"DebugShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 
 #pragma endregion
 #pragma region Sampler State
@@ -85,22 +91,22 @@ namespace renderer
 		rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 		rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 		GetDevice()->CreateRasterizeState(&rasterizerDesc
-			, rasterizerStates[(UINT)eRSType::SolidBack].GetAddressOf());
+			, rasterizerStates[(UINT)eRSType::SolidBack].GetAddressOf());  //안보이는 뒤 자르기
 
 		rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 		rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_FRONT;
 		GetDevice()->CreateRasterizeState(&rasterizerDesc
-			, rasterizerStates[(UINT)eRSType::SolidFront].GetAddressOf());
+			, rasterizerStates[(UINT)eRSType::SolidFront].GetAddressOf()); // 앞 자르기
 
 		rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 		rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 		GetDevice()->CreateRasterizeState(&rasterizerDesc
-			, rasterizerStates[(UINT)eRSType::SolidNone].GetAddressOf());
+			, rasterizerStates[(UINT)eRSType::SolidNone].GetAddressOf());  //no culling
 
 		rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
 		rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 		GetDevice()->CreateRasterizeState(&rasterizerDesc
-			, rasterizerStates[(UINT)eRSType::WireframeNone].GetAddressOf());
+			, rasterizerStates[(UINT)eRSType::WireframeNone].GetAddressOf());  //와이어 프레임
 #pragma endregion
 #pragma region Depth Stencil State
 		D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
@@ -149,13 +155,14 @@ namespace renderer
 		
 		// Alpha Blend 뒤에 물체 앞에 물체 섞기
 		blendDesc.AlphaToCoverageEnable = false;
-		blendDesc.IndependentBlendEnable = false;
-		blendDesc.RenderTarget[0].BlendEnable = true;
+		blendDesc.IndependentBlendEnable = false;   //렌더타겟 0의 설정만 사용
+		blendDesc.RenderTarget[0].BlendEnable = true;  //블렌드 할지 말지
 		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
-		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;   // Source:쉐이더에서 출력할 텍스쳐
-		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;  // Destination: 쉐이더가 출력될 목적지, 배경을 뜻함
-		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;   // Source:쉐이더에서 출력할 텍스쳐 픽셀
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;  // Destination: 렌더타겟
+		//알파 = (SrcAlpha * SrcBlendAlpha) BlendOpAlpha (DestAlpha * DestBlendAlpha) 알파값 지정
 		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD; 
 		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 		blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
@@ -181,7 +188,11 @@ namespace renderer
 
 	void LoadMesh()
 	{
+		std::vector<Vertex> vertexes = {};
+		std::vector<UINT> indexes = {};
+
 		//RECT
+		vertexes.resize(4);
 		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 		vertexes[0].uv = Vector2(0.0f, 0.0f);
@@ -197,18 +208,14 @@ namespace renderer
 		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 		vertexes[3].uv = Vector2(0.0f, 1.0f);
-	}
 
 
-	void LoadBuffer()
-	{
 		// Vertex Buffer
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
 
-		mesh->CreateVertexBuffer(vertexes, 4);
+		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
 
-		std::vector<UINT> indexes = {};
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
@@ -217,6 +224,63 @@ namespace renderer
 		indexes.push_back(2);
 		indexes.push_back(3);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		// Rect Debug Mesh
+		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugRect", rectDebug);
+		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		rectDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		// Circle Debug Mesh
+		vertexes.clear();
+		indexes.clear();
+
+		Vertex center = {};
+		center.pos = Vector3(0.0f, 0.0f, 0.0f);
+		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes.push_back(center);
+
+		int iSlice = 40;
+		float fRadius = 0.5f;
+		float fTheta = XM_2PI / (float)iSlice;
+
+		for (int i = 0; i < iSlice; ++i)
+		{
+			center.pos = Vector3(fRadius * cosf(fTheta * (float)i)
+				, fRadius * sinf(fTheta * (float)i)
+				, 0.0f);
+			center.color = Vector4(0.0f, 1.0f, 0.0f, 1.f);
+			vertexes.push_back(center);
+		}
+
+		//for (UINT i = 0; i < (UINT)iSlice; ++i)
+		//{
+		//	indexes.push_back(0);
+		//	if (i == iSlice - 1)
+		//	{
+		//		indexes.push_back(1);
+		//	}
+		//	else
+		//	{
+		//		indexes.push_back(i + 2);
+		//	}
+		//	indexes.push_back(i + 1);
+		//}
+
+		for (int i = 0; i < vertexes.size() - 2; ++i)
+		{
+			indexes.push_back(i + 1);
+		}
+		indexes.push_back(1);
+
+		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugCircle", circleDebug);
+		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+	}
+
+	void LoadBuffer()
+	{
 
 		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
@@ -239,13 +303,18 @@ namespace renderer
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		ss::Resources::Insert(L"SpriteShader", spriteShader);
 
-		std::shared_ptr<Shader> girdShader = std::make_shared<Shader>();
-		girdShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
-		girdShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
-		ss::Resources::Insert(L"GridShader", girdShader);
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		ss::Resources::Insert(L"GridShader", gridShader);
 
-		int a = 0;
-
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		debugShader->SetRSState(eRSType::SolidNone);
+		//debugShader->SetDSState(eDSType::NoWrite);
+		ss::Resources::Insert(L"DebugShader", debugShader);
 		
 	}
 
@@ -277,6 +346,12 @@ namespace renderer
 		material->SetShader(gridShader);
 		Resources::Insert(L"GridMaterial", material);
 
+		std::shared_ptr<Shader> debugShader
+			= Resources::Find<Shader>(L"DebugShader");
+
+		material = std::make_shared<Material>();
+		material->SetShader(debugShader);
+		Resources::Insert(L"DebugMaterial", material);
 	}
 
 	void Initialize()
@@ -286,6 +361,11 @@ namespace renderer
 		LoadShader();
 		SetupState();
 		LoadMaterial();
+	}
+
+	void PushDebugMeshAttribute(DebugMesh mesh)
+	{
+		debugMeshs.push_back(mesh);
 	}
 
 	void Render()

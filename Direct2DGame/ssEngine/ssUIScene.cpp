@@ -35,7 +35,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"CharacterCircle0"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.7f, 1.4f, 1.0001f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.7f, 1.4f, 1.01f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 
@@ -59,7 +59,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"HPMPMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.74f, 1.4f, 1.0001f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.74f, 1.4f, 1.01f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(1.5f, 0.22f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -81,7 +81,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"ItemUseMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.3f, 1.1f, 1.0001f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.3f, 1.1f, 1.01f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.27f, 0.27f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -103,7 +103,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SkillMenuMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.92f, -1.42f, 1.0001f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.92f, -1.42f, 1.01f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(2.34f, 0.72f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -112,21 +112,136 @@ namespace ss
 		{
 			{
 				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"ttex", L"..\\Resources\\Texture\\UI\\t.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"tMater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"t");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"tMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.33f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"ctex", L"..\\Resources\\Texture\\UI\\c.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"cMater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"c");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"cMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.215f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"1tex", L"..\\Resources\\Texture\\UI\\1.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
 				spriteMateiral->SetShader(spriteShader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"1Mater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"1");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"1Mater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.015f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
 			}
 
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"2tex", L"..\\Resources\\Texture\\UI\\2.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"2Mater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"2");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"2Mater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.75f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"3tex", L"..\\Resources\\Texture\\UI\\3.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"3Mater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"3");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"3Mater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.485f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"4tex", L"..\\Resources\\Texture\\UI\\4.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"4Mater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"4");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"4Mater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.22f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+		}
+
+		//MenuSet
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"MenuSet", L"..\\Resources\\Texture\\UI\\MenuSet.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"MenuSetMater", spriteMateiral);
+
 			GameObject* obj = new GameObject();
-			obj->SetName(L"1");
+			obj->SetName(L"MenuSet");
 			AddGameObject(eLayerType::UI, obj);
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"1Mater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.4f, -1.4f, 1.0001f));
-			obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+			mr->SetMaterial(Resources::Find<Material>(L"MenuSetMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.27f, -1.53f, 1.005f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.25f, 0.25f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
 

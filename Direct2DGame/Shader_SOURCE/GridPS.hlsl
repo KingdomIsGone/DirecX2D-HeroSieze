@@ -17,8 +17,8 @@ float4 main(VSOut In) : SV_TARGET
 {
     float4 Out = float4(1.0f, 1.0f, 1.0f, 1.0f);
     
-    const int width = 100;
-    const int height = 100;
+    const int width = 50;
+    const int height = 50;
        
     int gridX = (int) In.GridPos.x;
     int gridY = (int) In.GridPos.y;

@@ -67,7 +67,3 @@ namespace ss::graphics
 		return device;
 	}
 }
-
-// 당신의 인생에 만족하십니까?
-// are you satisfied all your life?
-// are you haapy?

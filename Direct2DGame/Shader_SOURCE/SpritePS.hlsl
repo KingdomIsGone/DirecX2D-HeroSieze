@@ -2,14 +2,14 @@
 
 struct VSIn
 {
-    float3 Pos : POSITION;
+    float3 Pos : POSITION; //버텍스 위치
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
 
 struct VSOut
 {
-    float4 Pos : SV_Position;
+    float4 Pos : SV_Position; //픽셀 위치
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
@@ -21,7 +21,20 @@ float4 main(VSOut In) : SV_TARGET
     //color.r = 1.0f;
     //color.b = 1.0f;
     
+    //if (In.UV.y < 0.2f)
+    //{
+    //    discard;
+    //}
+    //else
+    //{
+    //    color = albedoTexture.Sample(anisotropicSampler, In.UV);
+    //}
+    
+    
     color = albedoTexture.Sample(anisotropicSampler, In.UV);
+    
+    if (color.a <= 0.0f)
+        discard;
     
     return color;
 }

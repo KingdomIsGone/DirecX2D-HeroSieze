@@ -1,6 +1,6 @@
 #pragma once
-#include "ssScript.h"
-#include "ssCamera.h"
+#include "..\\Engine_SOURCE\\ssScript.h"
+#include "..\\Engine_SOURCE\\ssCamera.h"
 
 namespace ss
 {
