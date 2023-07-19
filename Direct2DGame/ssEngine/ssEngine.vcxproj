@@ -155,13 +155,17 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssGridScript.h" />
+    <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
+    <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />

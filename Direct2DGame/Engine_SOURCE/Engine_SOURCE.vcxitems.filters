@@ -88,6 +88,12 @@
     <Filter Include="GameObject\Component\Collider">
       <UniqueIdentifier>{73c64d97-4aba-4f63-84ca-57fe43dfe00c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Animation">
+      <UniqueIdentifier>{8c557f92-1eb2-47b6-9e63-95e511c746e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Animator">
+      <UniqueIdentifier>{2ba5f3df-afc9-4887-b9ef-b9a1deecfd5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -180,6 +186,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h">
       <Filter>GameObject\Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimation.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimator.h">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -256,6 +268,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp">
       <Filter>GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimator.cpp">
+      <Filter>GameObject\Component\Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

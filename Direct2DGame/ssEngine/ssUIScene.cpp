@@ -223,6 +223,25 @@ namespace ss
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
+
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"vtex", L"..\\Resources\\Texture\\UI\\v.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"vMater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"v");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"vMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
 		}
 
 		//MenuSet
@@ -243,6 +262,84 @@ namespace ss
 			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.27f, -1.53f, 1.005f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.25f, 0.25f, 1.0f));
 			//obj->AddComponent<CameraScript>();
+		}
+
+		//ResourceBackBar
+		{
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"ResourceBackBar", L"..\\Resources\\Texture\\UI\\ResourceBackBar.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"ResourceBackBarMater", spriteMateiral);
+
+				GameObject* obj = new GameObject();
+				obj->SetName(L"ResourceBackBar1");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.35f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				GameObject* obj = new GameObject();
+				obj->SetName(L"ResourceBackBar2");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.44f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				GameObject* obj = new GameObject();
+				obj->SetName(L"ResourceBackBar3");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.53f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+
+			{
+				GameObject* obj = new GameObject();
+				obj->SetName(L"ResourceBackBar4");
+				AddGameObject(eLayerType::UI, obj);
+				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.62f, 1.005f));
+				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
+				//obj->AddComponent<CameraScript>();
+			}
+		}
+
+		//Portal
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"TownPortal", L"..\\Resources\\Texture\\UI\\Hud_Town_Portal_spr.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"TownPortalMater", spriteMateiral);
+
+			GameObject* obj = new GameObject();
+			obj->SetName(L"TownPortal");
+			AddGameObject(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"TownPortalMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.53f, 1.006f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.15f, 1.0f));
+			//obj->AddComponent<CameraScript>();  
 		}
 
 		//¹è°æ

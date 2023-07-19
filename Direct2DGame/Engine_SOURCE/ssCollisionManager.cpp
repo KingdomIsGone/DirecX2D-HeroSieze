@@ -21,7 +21,7 @@ namespace ss
 		{
 			for (UINT row = 0; row < (UINT)eLayerType::End; row++)
 			{
-				if (mMatrix[row] == true)
+				if (mMatrix[column][row] == true)
 				{
 					LayerCollision((eLayerType)column, (eLayerType)row);
 				}
@@ -110,25 +110,67 @@ namespace ss
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		// 네모 네모 충돌
-		// 분리축 이론
+		// Rect vs Rect 
+		// 0 --- 1
+		// |     |
+		// 3 --- 2
+		Vector3 arrLocalPos[4] =
+		{
+		   Vector3{-0.5f, 0.5f, 0.0f}
+		   ,Vector3{0.5f, 0.5f, 0.0f}
+		   ,Vector3{0.5f, -0.5f, 0.0f}
+		   ,Vector3{-0.5f, -0.5f, 0.0f}
+		};
 
-		// To do... (숙제)
-		// 분리축이 어렵다 하시는분들은
-		// 원 - 원 충돌
+		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
+		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		//원 - 원
-		Vector3 leftPos = left->GetOwner()->GetComponent<Transform>()->GetPosition();
-		Vector3 rightPos = right->GetOwner()->GetComponent<Transform>()->GetPosition();
+		Matrix leftMatrix = leftTr->GetMatrix();
+		Matrix rightMatrix = rightTr->GetMatrix();
 
-		float distance = sqrtf(pow(leftPos.x - rightPos.x, 2.0) + pow(leftPos.y - rightPos.y, 2.0));
-		
-		float rPlusR = left->GetRadius() + right->GetRadius();
+		Vector3 Axis[4] = {};
 
-		if (rPlusR >= distance)
-			true;
+		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
+		Matrix finalLeft = Matrix::CreateScale(leftScale);
+		finalLeft *= leftMatrix;  //콜라이더의 월드매트릭스에 스케일 곱한것 
 
-		return false;
+		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
+		Matrix finalRight = Matrix::CreateScale(rightScale);
+		finalRight *= rightMatrix;
+
+		//Vector3::Tranform 함수 : 벡터에 변환행렬을 곱해 벡터로 반환
+		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);  //left 콜라이더의 사각형 윗변 벡터=가로벡터
+		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);   //사각형 세로 벡터
+		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+
+		for (size_t i = 0; i < 4; i++)
+			Axis[i].z = 0.0f;
+
+		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		vc.z = 0.0f;
+
+		Vector3 centerDir = vc;
+		for (size_t i = 0; i < 4; i++)
+		{
+			Vector3 vA = Axis[i];
+
+			float projDistance = 0.0f;
+			for (size_t j = 0; j < 4; j++)
+			{
+				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f); //한축을 기준으로 다른 축을 내적후 이등분
+			}
+
+			if (projDistance < fabsf(centerDir.Dot(vA)))
+				return false;
+		}
+
+		return true;
 	}
 
 	void CollisionManager::SetLayer(eLayerType left, eLayerType right, bool enable)

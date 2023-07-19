@@ -10,7 +10,6 @@ namespace ss
 		, mTransform(nullptr)
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
-		, mRadius(0.0f)
 	{
 		mColliderNumber++;
 		mColliderID = mColliderNumber;

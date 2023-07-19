@@ -10,6 +10,8 @@
 #include "ssObject.h"
 #include "ssRenderer.h"
 #include "ssCollider2D.h"
+#include "ssPlayerScript.h"
+#include "ssCollisionManager.h"
 
 namespace ss
 {
@@ -21,11 +23,14 @@ namespace ss
 	}
 	void PlayScene::Initialize()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+
 		{
 			GameObject* player
 				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Player);
 			player->SetName(L"Zelda");
 			Collider2D* cd = player->AddComponent<Collider2D>();
+			cd->SetSize(Vector2(1.2f, 1.2f));
 			
 
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
@@ -45,12 +50,14 @@ namespace ss
 		{
 			GameObject* player = new GameObject();
 			player->SetName(L"Smile");
-			AddGameObject(eLayerType::Player, player);
+			AddGameObject(eLayerType::Monster, player);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
-			//player->AddComponent<CameraScript>();
+			Collider2D* cd = player->AddComponent<Collider2D>();
+			//cd->SetSize(Vector2(1.2f, 1.2f));
+			player->AddComponent<PlayerScript>();
 		}
 
 		//{

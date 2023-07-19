@@ -3,6 +3,7 @@
 #include "ssTime.h"
 #include "ssRenderer.h"
 #include "ssSceneManager.h"
+#include "ssCollisionManager.h"
 
 
 namespace ss
@@ -42,6 +43,7 @@ namespace ss
 	{
 		Time::Update();
 		Input::Update();
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 

@@ -14,6 +14,10 @@
     <ClCompile Include="ssGridScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
+    <ClCompile Include="ssPlayerScript.cpp" />
+    <ClCompile Include="ssDesertTownScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -31,6 +35,10 @@
     </ClInclude>
     <ClInclude Include="ssGridScript.h">
       <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPlayerScript.h" />
+    <ClInclude Include="ssDesertTownScene.h">
+      <Filter>Contents\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ namespace ss::enums
 		Collider2D,
 		Particle,
 		MeshRenderer,
+		Animator,
 		Script,
 		Camera,
 		End,
@@ -18,6 +19,7 @@ namespace ss::enums
 
 	enum class eLayerType
 	{
+		Map,
 		Grid,
 		Player,
 		Monster,
@@ -31,6 +33,7 @@ namespace ss::enums
 		Shader,
 		Material,
 		Mesh,
+		Animation,
 		End,
 	};
 

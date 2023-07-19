@@ -2,6 +2,7 @@
 #include "..\Engine_SOURCE\ssSceneManager.h"
 #include "ssPlayScene.h"
 #include "ssUIScene.h"
+#include "ssDesertTownScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\ssEngine.lib")
@@ -20,5 +21,6 @@ namespace ss
 		//PlayScene* playScene = new PlayScene();
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<UIScene>(L"UIScene");
+		SceneManager::CreateScene<DesertTownScene>(L"DesertTownScene");
 	}
 }

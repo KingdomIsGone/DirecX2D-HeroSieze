@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollisionManager.h" />
@@ -46,6 +48,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollisionManager.cpp" />
