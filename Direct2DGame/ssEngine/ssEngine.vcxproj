@@ -155,14 +155,24 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="ssDesertBossRoom.h" />
+    <ClInclude Include="ssDesertDungeon1.h" />
+    <ClInclude Include="ssDesertDungeon2.h" />
+    <ClInclude Include="ssDesertFieldScene.h" />
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
+    <ClInclude Include="ssValkyrieScene.h" />
+    <ClInclude Include="ssWoodsField.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ssDesertBossRoom.cpp" />
+    <ClCompile Include="ssDesertDungeon1.cpp" />
+    <ClCompile Include="ssDesertDungeon2.cpp" />
+    <ClCompile Include="ssDesertFieldScene.cpp" />
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssPlayerScript.cpp" />
@@ -170,6 +180,8 @@
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
     <ClCompile Include="ssPlayScene.cpp" />
+    <ClCompile Include="ssValkyrieScene.cpp" />
+    <ClCompile Include="ssWoodsField.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Pss_Programing\DirectX2D\DirectX2D\Direct2DGame\Engine_SOURCE\ssMath.inl">

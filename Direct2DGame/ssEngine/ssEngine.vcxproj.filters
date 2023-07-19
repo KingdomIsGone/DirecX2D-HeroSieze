@@ -18,6 +18,24 @@
     <ClCompile Include="ssDesertTownScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="ssDesertFieldScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertDungeon1.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertDungeon2.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertBossRoom.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValkyrieScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssWoodsField.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -38,6 +56,24 @@
     </ClInclude>
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssDesertTownScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertFieldScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertDungeon1.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertDungeon2.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertBossRoom.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValkyrieScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssWoodsField.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
   </ItemGroup>
