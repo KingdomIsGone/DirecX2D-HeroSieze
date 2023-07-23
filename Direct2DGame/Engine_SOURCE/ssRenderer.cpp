@@ -4,7 +4,6 @@
 #include "ssMaterial.h"
 
 
-
 namespace renderer
 {
 	using namespace ss;
@@ -67,6 +66,11 @@ namespace renderer
 			, shader->GetInputLayoutAddressOf());
 
 		shader = ss::Resources::Find<Shader>(L"DebugShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"SpriteAnimationShader");
 		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
@@ -289,6 +293,10 @@ namespace renderer
 		// Grid Buffer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
+
+		// Animation Buffer
+		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
+		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 	}
 
 	void LoadShader()
@@ -302,6 +310,11 @@ namespace renderer
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		ss::Resources::Insert(L"SpriteShader", spriteShader);
+
+		std::shared_ptr<Shader> spriteAniShader = std::make_shared<Shader>();
+		spriteAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		spriteAniShader->Create(eShaderStage::PS, L"SpriteAnimationPS.hlsl", "main");
+		ss::Resources::Insert(L"SpriteAnimationShader", spriteAniShader);
 
 		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
 		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
@@ -339,6 +352,13 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", material);
 
+		spriteShader
+			= Resources::Find<Shader>(L"SpriteAnimationShader");
+		material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteAnimationMaterial", material);
+
 		std::shared_ptr<Shader> gridShader
 			= Resources::Find<Shader>(L"GridShader");
 
@@ -352,6 +372,177 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
+
+
+		//UI
+	 //	{
+		//	//캐릭터 및 레벨창 z=1.01
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"CharacterCircle", L"..\\Resources\\Texture\\UI\\CharacterCircle.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"CharacterCircle0", spriteMateiral);
+		//		}
+		//	}
+
+		//	//HPMP Bar z=1.01
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"HPMPBarTex", L"..\\Resources\\Texture\\UI\\HpMpBar.png");
+		//			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+		//			spriteMaterial->SetShader(spriteShader);
+		//			spriteMaterial->SetTexture(texture);
+		//			spriteMaterial->SetRenderingMode(eRenderingMode::CutOut);
+		//			Resources::Insert(L"HPMPMater", spriteMaterial);
+		//		}
+		//	}
+
+		//	//USEITEMBox z=1.01
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"ItemUseTex", L"..\\Resources\\Texture\\UI\\ItemUse.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"ItemUseMater", spriteMateiral);
+		//		}
+		//	}
+
+		//	//SkillMenu z=1.01
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"SkillMenuTex", L"..\\Resources\\Texture\\UI\\SkillMenu.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"SkillMenuMater", spriteMateiral);
+		//		}
+		//	}
+
+		//	//key z=1.005
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"ttex", L"..\\Resources\\Texture\\UI\\t.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"tMater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"ctex", L"..\\Resources\\Texture\\UI\\c.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"cMater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"1tex", L"..\\Resources\\Texture\\UI\\1.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"1Mater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"2tex", L"..\\Resources\\Texture\\UI\\2.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"2Mater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"3tex", L"..\\Resources\\Texture\\UI\\3.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"3Mater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"4tex", L"..\\Resources\\Texture\\UI\\4.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"4Mater", spriteMateiral);
+		//		}
+
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"vtex", L"..\\Resources\\Texture\\UI\\v.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"vMater", spriteMateiral);
+		//		}
+		//	}
+
+		//	//MenuSet z=1.005
+		//	{
+		//		std::shared_ptr<Texture> texture
+		//			= Resources::Load<Texture>(L"MenuSet", L"..\\Resources\\Texture\\UI\\MenuSet.png");
+		//		std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//		spriteMateiral->SetShader(spriteShader);
+		//		spriteMateiral->SetTexture(texture);
+		//		Resources::Insert(L"MenuSetMater", spriteMateiral);
+		//	}
+
+		//	//ResourceBackBar z=1.005
+		//	{
+		//		{
+		//			std::shared_ptr<Texture> texture
+		//				= Resources::Load<Texture>(L"ResourceBackBar", L"..\\Resources\\Texture\\UI\\ResourceBackBar.png");
+		//			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//			spriteMateiral->SetShader(spriteShader);
+		//			spriteMateiral->SetTexture(texture);
+		//			Resources::Insert(L"ResourceBackBarMater", spriteMateiral);
+		//		}
+		//	}
+
+		//	//Portal z=1.006
+		//	{
+		//		std::shared_ptr<Texture> texture
+		//			= Resources::Load<Texture>(L"TownPortal", L"..\\Resources\\Texture\\UI\\Hud_Town_Portal_spr.png");
+		//		std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+		//		spriteMateiral->SetShader(spriteShader);
+		//		spriteMateiral->SetTexture(texture);
+		//		Resources::Insert(L"TownPortalMater", spriteMateiral);
+		//	}
+		//}
+
+		////Cursor
+		//{
+		//	{
+		//		std::shared_ptr<Texture> texture
+		//			= Resources::Load<Texture>(L"Cursor1", L"..\\Resources\\Texture\\UI\\Cursor1.png");
+		//		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+		//		spriteMaterial->SetShader(spriteShader);
+		//		spriteMaterial->SetTexture(texture);
+		//		Resources::Insert(L"Cursor1Mater", spriteMaterial);
+		//	}
+		//	{
+		//		std::shared_ptr<Texture> texture
+		//			= Resources::Load<Texture>(L"Cursor2", L"..\\Resources\\Texture\\UI\\Cursor2.png");
+		//		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+		//		spriteMaterial->SetShader(spriteShader);
+		//		spriteMaterial->SetTexture(texture);
+		//		Resources::Insert(L"Cursor2Mater", spriteMaterial);
+		//	}
+		//}
 	}
 
 	void Initialize()

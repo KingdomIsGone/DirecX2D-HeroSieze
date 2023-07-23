@@ -14,7 +14,6 @@
     <ClCompile Include="ssGridScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
-    <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssDesertTownScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -36,6 +35,9 @@
     <ClCompile Include="ssWoodsField.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="ssPlayerScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -54,7 +56,6 @@
     <ClInclude Include="ssGridScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
-    <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssDesertTownScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -75,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="ssWoodsField.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPlayerScript.h">
+      <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

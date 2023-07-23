@@ -22,6 +22,10 @@ namespace ss
 		void AddGameObject(eLayerType type, GameObject* gameObj);
 		//std::vector<GameObject*> Get
 
+
+		//custom
+		void AddGameObjectToActiveScene(eLayerType type, GameObject* gameObj);
+
 		template <typename T>
 		std::vector<T*> FindObjectsOfType()
 		{

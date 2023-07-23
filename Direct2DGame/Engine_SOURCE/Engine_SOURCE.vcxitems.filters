@@ -94,6 +94,9 @@
     <Filter Include="GameObject\Component\Animator">
       <UniqueIdentifier>{2ba5f3df-afc9-4887-b9ef-b9a1deecfd5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Cursor">
+      <UniqueIdentifier>{e0a799ee-5b96-4850-82a4-50f605224445}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimator.h">
       <Filter>GameObject\Component\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssCursor.h">
+      <Filter>GameObject\Cursor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -274,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimator.cpp">
       <Filter>GameObject\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssCursor.cpp">
+      <Filter>GameObject\Cursor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

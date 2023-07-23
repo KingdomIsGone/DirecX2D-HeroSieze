@@ -161,12 +161,16 @@ namespace ss
 			Vector3 vA = Axis[i];
 
 			float projDistance = 0.0f;
+			//한축을 기준으로 다른 축을 내적후 이등분. 
+			//이등분하여 변의 길이의 반만 구함
+			//네개의 축을 모두 for문 돌리면 직교하는 변은 내적의 길이가 0이 나옴(cos90). 
+			//따라서 따로 어떤 변을 사영해야하는지 변별하지 않고 포문 돌리고 이분의 일 하면됨.
 			for (size_t j = 0; j < 4; j++)
 			{
-				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f); //한축을 기준으로 다른 축을 내적후 이등분
+				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f); 
 			}
-
-			if (projDistance < fabsf(centerDir.Dot(vA)))
+			//두 사각형의 한 변의 반을 각각 사영한 길이의 합이 두 사각형의 중심점을 잇는 벡터의 그것보다 작으면 충돌
+			if (projDistance < fabsf(centerDir.Dot(vA))) 
 				return false;
 		}
 

@@ -19,6 +19,14 @@ namespace ss
 	}
 	void Layer::Initialize()
 	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
+
+			gameObj->Initialize();
+		}
 	}
 	void Layer::Update()
 	{

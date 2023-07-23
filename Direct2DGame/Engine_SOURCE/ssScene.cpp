@@ -1,4 +1,5 @@
 #include "ssScene.h"
+#include "ssSceneManager.h"
 
 namespace ss
 {
@@ -13,7 +14,10 @@ namespace ss
 
 	void Scene::Initialize()
 	{
-		
+		for (Layer& layer : mLayers)
+		{
+			layer.Initialize();
+		}
 	}
 
 	void Scene::Update()
@@ -56,5 +60,9 @@ namespace ss
 	void Scene::AddGameObject(eLayerType type, GameObject* gameObj)
 	{
 		mLayers[(int)type].AddGameObject(gameObj);
+	}
+	void Scene::AddGameObjectToActiveScene(eLayerType type, GameObject* gameObj)
+	{
+		SceneManager::GetActiveScene()->mLayers[(int)type].AddGameObject(gameObj);
 	}
 }

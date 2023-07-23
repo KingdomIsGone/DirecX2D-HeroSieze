@@ -1,23 +1,19 @@
 #pragma once
-//#include "ssScene.h"
-#include "..\Engine_SOURCE\ssScene.h"
+#include "ssGameObject.h"
 
 namespace ss
 {
-	class UIScene : public Scene
+	class Cursor : public GameObject
 	{
 	public:
-		UIScene();
-		virtual ~UIScene();
+		Cursor();
+		~Cursor();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-
-		void UI_Setting();
-		void TextureSetting();
-
+		
 	private:
 
 	};

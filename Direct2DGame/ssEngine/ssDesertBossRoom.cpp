@@ -12,6 +12,7 @@
 #include "ssCollider2D.h"
 #include "ssPlayerScript.h"
 #include "ssCollisionManager.h"
+#include "ssUIScene.h"
 
 namespace ss
 {
@@ -23,6 +24,8 @@ namespace ss
 	}
 	void DesertBossRoom::Initialize()
 	{
+		UIScene ui;
+		ui.UI_Setting();
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 		{
 			{
@@ -34,7 +37,7 @@ namespace ss
 				Resources::Insert(L"DesertBossRoomMater", spriteMaterial);
 			}
 			GameObject* DesertField
-				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.01f), eLayerType::Map);
+				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.5f), eLayerType::Map);
 			DesertField->SetName(L"DesertBossRoom");
 
 			MeshRenderer* mr = DesertField->AddComponent<MeshRenderer>();

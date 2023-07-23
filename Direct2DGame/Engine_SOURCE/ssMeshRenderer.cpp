@@ -2,6 +2,7 @@
 #include "ssGameObject.h"
 #include "ssTransform.h"
 #include "ssRenderer.h"
+#include "ssAnimator.h"
 
 namespace ss
 {
@@ -29,6 +30,13 @@ namespace ss
 
 		mMesh->BindBuffer();
 		mMaterial->Binds();
+
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		if (animator)
+		{
+			animator->Binds();
+		}
+
 		mMesh->Render();
 
 		mMaterial->Clear();
