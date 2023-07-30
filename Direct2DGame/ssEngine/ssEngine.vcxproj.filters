@@ -38,6 +38,9 @@
     <ClCompile Include="ssPlayerScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
+    <ClCompile Include="ssPlayer.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -80,6 +83,9 @@
     <ClInclude Include="ssPlayerScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
+    <ClInclude Include="ssPlayer.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -93,6 +99,9 @@
     </Filter>
     <Filter Include="Contents\Script">
       <UniqueIdentifier>{02a6d4b6-df18-4b04-b5c4-bf97bbaba9ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object">
+      <UniqueIdentifier>{d9e335ff-fc0b-4224-b393-f33651caf5e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

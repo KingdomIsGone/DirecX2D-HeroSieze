@@ -13,6 +13,8 @@
 #include "ssPlayerScript.h"
 #include "ssCollisionManager.h"
 #include "ssAnimator.h"
+#include "ssLight.h"
+#include "ssComputeShader.h"
 
 namespace ss
 {
@@ -25,6 +27,9 @@ namespace ss
 	void PlayScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+
+		ComputeShader* cs = new ComputeShader();
+		cs->Create(L"PaintCS.hlsl", "main");
 
 		{
 			GameObject* player
@@ -55,6 +60,8 @@ namespace ss
 			player->AddComponent<PlayerScript>();
 		}
 
+	
+
 		{
 			GameObject* player = new GameObject();
 			player->SetName(L"Smile");
@@ -67,6 +74,26 @@ namespace ss
 			//cd->SetSize(Vector2(1.2f, 1.2f));
 			//player->AddComponent<PlayerScript>();
 		}
+
+		{
+			GameObject* light = new GameObject();
+			light->SetName(L"Smile");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+		{
+			GameObject* light = new GameObject();
+			light->SetName(L"Smile");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Point);
+			lightComp->SetColor(Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+			lightComp->SetRadius(3.0f);
+		}
+
 
 		//{
 		//	GameObject* player = new GameObject();

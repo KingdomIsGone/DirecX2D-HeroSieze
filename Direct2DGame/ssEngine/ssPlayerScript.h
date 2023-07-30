@@ -1,12 +1,27 @@
 #pragma once
 //#include "ssScript.h"
-#include <ssScript.h>
+#include "..\Engine_SOURCE\ssScript.h"
+#include "..\Engine_SOURCE\ssAnimator.h"
 
 namespace ss
 {
 	class PlayerScript : public Script
 	{
 	public:
+		enum class eState
+		{
+			Idle,
+			Move,
+			ClickMove,
+		};
+	
+		enum class eDirState
+		{
+			Up,
+			Down,
+			Left,
+			Right,
+		};
 		PlayerScript();
 		~PlayerScript();
 
@@ -16,11 +31,27 @@ namespace ss
 
 		void Complete();
 
+		void Idle();
+		void Move();
+
+
+		void ClickMove();
+		void MoveToPoint(Vector3 playerpos, Vector3 point);
+		void MoveToPointAni(Vector3 playerpos, Vector3 point);
+
 		//virtual void OnCollisionEnter(Collider2D* other) override;
 		//virtual void OnCollisionStay(Collider2D* other) override;
 		//virtual void OnCollisionExit(Collider2D* other) override;
 
-	private:
 
+	private:
+		eState mState;
+		eDirState mDirState;
+		
+		class Cursor* mCursor;
+
+		bool mIsMoving;
+		Vector3 mCursorPos;
+		Vector3 mPlayerPos;
 	};
 }

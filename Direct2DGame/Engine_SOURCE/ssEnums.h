@@ -13,6 +13,7 @@ namespace ss::enums
 		MeshRenderer,
 		Animator,
 		Script,
+		Light,
 		Camera,
 		End,
 	};
@@ -23,6 +24,7 @@ namespace ss::enums
 		Grid,
 		Player,
 		Monster,
+		Light,
 		UI,
 		End = 16,
 	};
@@ -34,6 +36,7 @@ namespace ss::enums
 		Material,
 		Mesh,
 		Animation,
+		ComputeShader,
 		End,
 	};
 
@@ -43,6 +46,15 @@ namespace ss::enums
 		Circle,
 		Sphere,
 		Cube,
+		End,
+	};
+
+
+	enum class eLightType
+	{
+		Directional,
+		Point,
+		Spot,
 		End,
 	};
 }

@@ -13,8 +13,12 @@ namespace ss
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-		
-	private:
 
+		Vector3 GetPos() { return mPos; }
+
+	private:
+		Transform* mTransform;
+		static Vector3 mPos;
+		Vector3 mOffset;
 	};
 }

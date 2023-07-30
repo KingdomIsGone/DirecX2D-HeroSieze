@@ -94,6 +94,8 @@ namespace ss
 		void SetState(eState state) { mState = state; }
 		eState GetState() { return mState; }
 
+		std::vector<Component*> GetComponentVector() { return mComponents; }
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;

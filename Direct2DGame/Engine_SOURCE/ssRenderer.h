@@ -5,6 +5,8 @@
 #include "ssShader.h"
 #include "ssConstantBuffer.h"
 #include "ssCamera.h"
+#include "ssLight.h"
+
 
 using namespace ss::math;
 using namespace ss::graphics;
@@ -47,11 +49,13 @@ namespace renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
 
+	extern std::vector<ss::Light*> lights;
 	extern ss::Camera* mainCamera;
 	extern std::vector<ss::Camera*> cameras;
 	extern std::vector<DebugMesh> debugMeshs;
 
 	void Initialize();
+	void BindLights();
 	void Render();
 	void Release();
 

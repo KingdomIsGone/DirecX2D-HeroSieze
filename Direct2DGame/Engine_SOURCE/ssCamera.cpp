@@ -104,7 +104,7 @@ namespace ss
 		GetClientRect(application.GetHwnd(), &rect);
 		float width = rect.right - rect.left;
 		float height = rect.bottom - rect.top;
-		mAspectRatio = width / height;;
+		mAspectRatio = width / height;
 
 		if (type == eProjectionType::OrthoGraphic)
 		{

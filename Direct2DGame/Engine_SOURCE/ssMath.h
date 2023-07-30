@@ -17,6 +17,7 @@
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;
+#define PI 3.141592
 
 namespace ss::math
 {

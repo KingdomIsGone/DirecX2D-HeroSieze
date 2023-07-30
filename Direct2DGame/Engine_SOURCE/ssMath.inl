@@ -22,6 +22,34 @@ using namespace ss::math;
 //------------------------------------------------------------------------------
 //namespace ss::math
 
+inline static Vector2 Rotate(Vector2 vector, float degree)
+{
+    float radian = (degree / 180.0f) * PI; //radian은 180/pi. 따라서 degree를 라디안으로 나눈것= degree를 라디안으로 표현
+    vector.Normalize();
+
+    float x = vector.x * cosf(radian) - vector.y * sinf(radian);
+    float y = vector.x * sinf(radian) + vector.y * cosf(radian);
+    //atan();
+
+    return Vector2(x, y);
+}
+
+inline static float CalculateDegree(Vector2 origin, Vector2 target)
+{
+    Vector2 distance = target - origin;
+    distance.Normalize();
+    float radian = atan2(distance.y, distance.x);
+    float degree = radian * 180 / PI;
+
+    return degree;
+}
+
+inline static Vector2 DegreeToVector(float degree)
+{
+    Vector2 vector = ss::math::Rotate(Vector2(1.0f, 0.0f), degree);
+
+    return vector;
+}
 
 inline Vector2 Rectangle::Location() const noexcept
 {
