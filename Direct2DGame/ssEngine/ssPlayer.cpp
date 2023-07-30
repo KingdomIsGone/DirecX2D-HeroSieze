@@ -19,7 +19,7 @@ namespace ss
 		{
 			SetName(L"Player");
 			Collider2D* cd = AddComponent<Collider2D>();
-			cd->SetSize(Vector2(1.0f, 1.0f));
+			cd->SetSize(Vector2(0.18f, 0.23f));
 
 
 			const float pi = 3.141592f;
@@ -29,6 +29,7 @@ namespace ss
 			GetComponent<Transform>()->SetScale(Vector3(1.5f, 1.5f, 1.0f));
 			//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
 
+			//애니메이션 세팅
 			MeshRenderer* mr = AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
@@ -67,6 +68,20 @@ namespace ss
 			at->Create(L"StandLeft", StandLeftTex, Vector2(0.0f, 0.0f), Vector2(34.0f, 53.0f), 6);
 			at->Create(L"StandDown", StandDownTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 48.0f), 6);
 			at->Create(L"StandUp", StandUpTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 48.0f), 6);
+
+			std::shared_ptr<Texture> AttackDownTex
+				= Resources::Load<Texture>(L"AttackDownTex", L"..\\Resources\\Texture\\Player\\Attack\\AttackDown.png");
+			std::shared_ptr<Texture> AttackUpTex
+				= Resources::Load<Texture>(L"AttackUpTex", L"..\\Resources\\Texture\\Player\\Attack\\AttackUp.png");
+			std::shared_ptr<Texture> AttackRightTex
+				= Resources::Load<Texture>(L"AttackRightTex", L"..\\Resources\\Texture\\Player\\Attack\\AttackRight.png");
+			std::shared_ptr<Texture> AttackLeftTex
+				= Resources::Load<Texture>(L"AttackLeftTex", L"..\\Resources\\Texture\\Player\\Attack\\AttackLeft.png");
+
+			at->Create(L"AttackDown", AttackDownTex, Vector2(0.0f, 0.0f), Vector2(84.0f, 66.0f), 8, Vector2(-0.01f, 0.02f));
+			at->Create(L"AttackUp", AttackUpTex, Vector2(0.0f, 0.0f), Vector2(82.0f, 67.0f), 8, Vector2(0.01f, 0.08f));
+			at->Create(L"AttackRight", AttackRightTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8, Vector2(0.0f, -0.02f));
+			at->Create(L"AttackLeft", AttackLeftTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8, Vector2(0.0f, -0.02f));
 		}
 	
 	}

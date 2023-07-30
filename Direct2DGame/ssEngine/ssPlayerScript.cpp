@@ -45,6 +45,9 @@ namespace ss
 		case ss::PlayerScript::eState::ClickMove:
 			ClickMove();
 			break;
+		case ss::PlayerScript::eState::Attack:
+			Attack();
+			break;
 		default:
 			break;
 		}
@@ -66,6 +69,8 @@ namespace ss
 			|| Input::GetKey(eKeyCode::RIGHT)
 			|| Input::GetKey(eKeyCode::LEFT))
 			mState = eState::Move;
+
+		Attack();
 
 		ClickMove();
 
@@ -184,6 +189,8 @@ namespace ss
 
 	void PlayerScript::ClickMove()
 	{
+		Attack();
+
 		if (Input::GetKey(eKeyCode::RBUTTON))
 		{
 			mState = eState::ClickMove;
@@ -199,6 +206,25 @@ namespace ss
 
 		MoveToPointAni(playerPos, mCursorPos);
 		MoveToPoint(playerPos, mCursorPos);
+	}
+
+	void PlayerScript::Attack()
+	{
+		if (Input::GetKey(eKeyCode::LBUTTON))
+		{
+			mState = eState::Attack;
+			mIsAttacking = true;
+			mIsMoving = false;
+			mCursorPos = mCursor->GetPos();
+			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
+		}
+
+		if (!mIsAttacking)
+			return;
+		
+		Vector3 playerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		
+		AttackAni(playerPos, mCursorPos);
 	}
 
 	void PlayerScript::MoveToPoint(Vector3 playerpos, Vector3 point)
@@ -228,12 +254,57 @@ namespace ss
 		float degree = math::CalculateDegree(Vector2(playerpos.x, playerpos.y), Vector2(point.x, point.y));
 
 		if (-135.0f <= degree && degree < -45.0f)
+		{
 			animator->PlayAnimation(L"MoveDown", true);
-		else if(45.0f <= degree && degree < 135.0f)
+			mDirState = eDirState::Down;
+		}
+		else if (45.0f <= degree && degree < 135.0f)
+		{
 			animator->PlayAnimation(L"MoveUp", true);
-		else if(-45.0f <= degree && degree <45.0f)
+			mDirState = eDirState::Up;
+		}
+		else if (-45.0f <= degree && degree < 45.0f)
+		{
 			animator->PlayAnimation(L"MoveRight", true);
-		else if(135.0f <= degree || degree < -135.0f)
+			mDirState = eDirState::Right;
+		}
+		else if (135.0f <= degree || degree < -135.0f)
+		{
 			animator->PlayAnimation(L"MoveLeft", true);
+			mDirState = eDirState::Left;
+		}
+	}
+
+	void PlayerScript::AttackAni(Vector3 playerpos, Vector3 point)
+	{
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		float degree = math::CalculateDegree(Vector2(playerpos.x, playerpos.y), Vector2(point.x, point.y));
+
+		if (-135.0f <= degree && degree < -45.0f)
+		{
+			animator->PlayAnimation(L"AttackDown", true);
+			mDirState = eDirState::Down;
+		}
+		else if (45.0f <= degree && degree < 135.0f)
+		{
+			animator->PlayAnimation(L"AttackUp", true);
+			mDirState = eDirState::Up;
+		}
+		else if (-45.0f <= degree && degree < 45.0f)
+		{
+			animator->PlayAnimation(L"AttackRight", true);
+			mDirState = eDirState::Right;
+		}
+		else if (135.0f <= degree || degree < -135.0f)
+		{
+			animator->PlayAnimation(L"AttackLeft", true);
+			mDirState = eDirState::Left;
+		}
+
+		if (animator->GetActiveAnimation()->IsComplete())
+		{
+			mState = eState::Idle;
+			mIsAttacking = false;
+		}
 	}
 }

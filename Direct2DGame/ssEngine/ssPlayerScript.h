@@ -13,6 +13,7 @@ namespace ss
 			Idle,
 			Move,
 			ClickMove,
+			Attack,
 		};
 	
 		enum class eDirState
@@ -33,11 +34,12 @@ namespace ss
 
 		void Idle();
 		void Move();
-
-
 		void ClickMove();
+		void Attack();
+
 		void MoveToPoint(Vector3 playerpos, Vector3 point);
 		void MoveToPointAni(Vector3 playerpos, Vector3 point);
+		void AttackAni(Vector3 playerpos, Vector3 point);
 
 		//virtual void OnCollisionEnter(Collider2D* other) override;
 		//virtual void OnCollisionStay(Collider2D* other) override;
@@ -51,6 +53,7 @@ namespace ss
 		class Cursor* mCursor;
 
 		bool mIsMoving;
+		bool mIsAttacking;
 		Vector3 mCursorPos;
 		Vector3 mPlayerPos;
 	};

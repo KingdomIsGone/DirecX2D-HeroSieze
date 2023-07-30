@@ -57,6 +57,8 @@ namespace ss
 		std::function<void()>& CompleteEvent(const std::wstring key);
 		std::function<void()>& EndEvent(const std::wstring key);
 
+		Animation* GetActiveAnimation() { return mActiveAnimation; }
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Events*> mEvents;
