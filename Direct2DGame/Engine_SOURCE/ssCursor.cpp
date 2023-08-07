@@ -36,9 +36,9 @@ namespace ss
 			}
 		}
 
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));
+		mMr = AddComponent<MeshRenderer>();
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mMr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));
 		mTransform->SetScale(Vector3(0.2f, 0.2f, 1.0f));
 		//mTransform->SetPosition(Vector3::Zero);
 		mOffset = Vector3(0.09f, -0.09f, 0.0f);
@@ -69,7 +69,12 @@ namespace ss
 		mPos = viewport.Unproject(mPos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
 		mPos += mOffset;
 
-		mTransform->SetPosition(mPos);
+		mTransform->SetPosition(mPos); //indicator¿ë
+
+		if(Input::GetKey(eKeyCode::LBUTTON))
+			mMr->SetMaterial(Resources::Find<Material>(L"Cursor2Mater"));
+		else
+			mMr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));
 	}
 	void Cursor::LateUpdate()
 	{

@@ -25,7 +25,7 @@ namespace ss
 		void SetSize(Vector2 size) { mSize = size; }
 		void SetCenter(Vector2 size) { mCenter = size; }
 		UINT GetColliderID() { return mColliderID; }
-		
+		static bool GetIsCollide() { return mIsCollide; }
 
 	private:
 		static UINT mColliderNumber;
@@ -37,5 +37,6 @@ namespace ss
 		Vector2 mSize;
 		Vector2 mCenter;
 
+		static bool mIsCollide;
 	};
 }

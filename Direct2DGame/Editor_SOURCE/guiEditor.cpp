@@ -5,6 +5,8 @@
 #include "..\\Engine_SOURCE\\ssMeshRenderer.h"
 #include "..\\Engine_SOURCE\\ssMaterial.h"
 #include "..\\Engine_SOURCE\\ssRenderer.h"
+#include "Engine_SOURCE/ssGraphics.h"
+#include "Engine_SOURCE/ssCollider2D.h"
 
 #include "ssEngine/ssGridScript.h"
 
@@ -123,6 +125,21 @@ namespace gui
 		/*ss::MeshRenderer * mr
 			= debugObj->GetComponent<ss::MeshRenderer>();*/
 			// main camera
+
+		ss::graphics::ConstantBuffer* cb
+			= renderer::constantBuffer[(int)eCBType::Debug];
+
+		renderer::DebugCB data;
+		bool is = ss::Collider2D::GetIsCollide();
+		if (is)
+			data.debugColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		else
+			data.debugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+
+		cb->SetData(&data);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::VS);
+
 		ss::Camera* mainCamara = renderer::mainCamera;
 
 		ss::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());

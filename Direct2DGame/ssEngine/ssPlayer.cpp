@@ -78,10 +78,14 @@ namespace ss
 			std::shared_ptr<Texture> AttackLeftTex
 				= Resources::Load<Texture>(L"AttackLeftTex", L"..\\Resources\\Texture\\Player\\Attack\\AttackLeft.png");
 
-			at->Create(L"AttackDown", AttackDownTex, Vector2(0.0f, 0.0f), Vector2(84.0f, 66.0f), 8, Vector2(-0.01f, 0.02f));
-			at->Create(L"AttackUp", AttackUpTex, Vector2(0.0f, 0.0f), Vector2(82.0f, 67.0f), 8, Vector2(0.01f, 0.08f));
-			at->Create(L"AttackRight", AttackRightTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8, Vector2(0.0f, -0.02f));
-			at->Create(L"AttackLeft", AttackLeftTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8, Vector2(0.0f, -0.02f));
+			at->Create(L"AttackDown", AttackDownTex, Vector2(0.0f, 0.0f), Vector2(84.0f, 66.0f), 8
+				, Vector2(-0.01f, 0.02f), 0.05f);
+			at->Create(L"AttackUp", AttackUpTex, Vector2(0.0f, 0.0f), Vector2(82.0f, 67.0f), 8
+				, Vector2(0.01f, 0.08f), 0.05f);
+			at->Create(L"AttackRight", AttackRightTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8
+				, Vector2(0.0f, -0.02f), 0.05f);
+			at->Create(L"AttackLeft", AttackLeftTex, Vector2(0.0f, 0.0f), Vector2(71.0f, 63.0f), 8
+				, Vector2(0.0f, -0.02f), 0.05f);
 		}
 	
 	}

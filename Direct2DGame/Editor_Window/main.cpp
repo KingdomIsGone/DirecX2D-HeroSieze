@@ -1,6 +1,7 @@
 ﻿// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
-
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
 #include "framework.h"
 #include "Editor_Window.h"
 
@@ -81,6 +82,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     renderer::Release();
     ss::SceneManager::Release();
     gui::Editor::Release();
+
+    _CrtDumpMemoryLeaks();
 
     return (int) msg.wParam;
 }

@@ -4,6 +4,7 @@
 
 namespace ss
 {
+	bool Collider2D::mIsCollide = false;
 	UINT Collider2D::mColliderNumber = 0;
 	Collider2D::Collider2D()
 		: Component(eComponentType::Collider2D)
@@ -62,6 +63,8 @@ namespace ss
 		{
 			script->OnCollisionEnter(other);
 		}
+
+		mIsCollide = true;
 	}
 	void Collider2D::OnCollisionStay(Collider2D* other)
 	{
@@ -82,5 +85,7 @@ namespace ss
 		{
 			script->OnCollisionExit(other);
 		}
+
+		mIsCollide = false;
 	}
 }

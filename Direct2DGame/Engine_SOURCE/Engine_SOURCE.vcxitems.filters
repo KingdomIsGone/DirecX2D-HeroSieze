@@ -206,6 +206,7 @@
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssPaintShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -297,6 +298,7 @@
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssPaintShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)ssMath.inl">

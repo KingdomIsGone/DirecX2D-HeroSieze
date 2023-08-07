@@ -39,7 +39,19 @@
       <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="ssPlayer.cpp">
-      <Filter>Contents\Object</Filter>
+      <Filter>Contents\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireBall.cpp">
+      <Filter>Contents\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ssIndicator.cpp">
+      <Filter>Contents\Object\UI\Indicator</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertSkeleton.cpp">
+      <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMonsterScript.cpp">
+      <Filter>Contents\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +96,19 @@
       <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="ssPlayer.h">
-      <Filter>Contents\Object</Filter>
+      <Filter>Contents\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireBall.h">
+      <Filter>Contents\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ssIndicator.h">
+      <Filter>Contents\Object\UI\Indicator</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertSkeleton.h">
+      <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMonsterScript.h">
+      <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +126,24 @@
     </Filter>
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{d9e335ff-fc0b-4224-b393-f33651caf5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player">
+      <UniqueIdentifier>{bde736c3-81da-4fb2-88f1-f320787ed5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Projectile">
+      <UniqueIdentifier>{5a818605-e881-4a16-b982-a37f9cc10f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI">
+      <UniqueIdentifier>{ce438732-8866-4cab-8c42-0a55f7a2c279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Indicator">
+      <UniqueIdentifier>{2306bd52-c60a-44ee-a5cd-85d6a0ea569e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster">
+      <UniqueIdentifier>{6d6833b1-292d-4c51-a6d8-a804bab8f111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\DesertSkeleton">
+      <UniqueIdentifier>{5a929042-86ca-4e2d-a362-821e386bf357}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

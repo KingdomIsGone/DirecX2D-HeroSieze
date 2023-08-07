@@ -19,7 +19,7 @@ namespace renderer
 		Vector2 uv;
 	};
 
-	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
+	CBUFFER(TransformCB, CBSLOT_TRANSFORM)   //16바이트 단위로 정렬
 	{
 		Matrix mWorld;
 		Matrix mView;
@@ -40,6 +40,11 @@ namespace renderer
 		Vector2 spriteOffset;
 		Vector2 atlasSize;
 		UINT animationType;
+	};
+
+	CBUFFER(DebugCB, CBSLOT_DEBUG)
+	{
+		Vector4 debugColor;
 	};
 
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

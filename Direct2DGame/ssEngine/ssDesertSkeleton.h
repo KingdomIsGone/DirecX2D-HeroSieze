@@ -3,24 +3,21 @@
 
 namespace ss
 {
-	class Cursor : public GameObject
+	class DesertSkeleton : public GameObject
 	{
 	public:
-		Cursor();
-		~Cursor();
+		DesertSkeleton();
+		~DesertSkeleton();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		Vector3 GetPos() { return mPos; }
+
 
 	private:
 		Transform* mTransform;
-		static Vector3 mPos;
-		Vector3 mOffset;
-
-		class MeshRenderer* mMr;
+		Vector3 mPos;
 	};
 }

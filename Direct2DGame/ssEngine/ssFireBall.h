@@ -3,24 +3,26 @@
 
 namespace ss
 {
-	class Cursor : public GameObject
+	class FireBall : public GameObject
 	{
 	public:
-		Cursor();
-		~Cursor();
+		FireBall(float Degree);
+		~FireBall();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		Vector3 GetPos() { return mPos; }
+
 
 	private:
 		Transform* mTransform;
-		static Vector3 mPos;
-		Vector3 mOffset;
+		Vector3 mPos;
+		float mSpeed;
+		Vector2 mDirVector;
+		float mDeleteTime;
 
-		class MeshRenderer* mMr;
+		class Collider2D* mCollider;
 	};
 }

@@ -12,6 +12,10 @@
 #include "ssCursor.h"
 #include "ssPlayer.h"
 #include "ssRenderer.h"
+#include "ssFireBall.h"
+#include "ssIndicator.h"
+#include "ssDesertSkeleton.h"
+#include "ssCollisionManager.h"
 
 namespace ss
 {
@@ -48,6 +52,7 @@ namespace ss
 			renderer::mainCamera = cameraComp;
 		}
 
+		//¶óÀÌÆ®
 		{
 			GameObject* light = new GameObject();
 			light->SetName(L"Light");
@@ -56,12 +61,19 @@ namespace ss
 			lightComp->SetType(eLightType::Directional);
 			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
+
 		
 		Player* player = new Player();
 		AddGameObject(eLayerType::Player, player);
 
 		cursor = new Cursor();
 		AddGameObject(eLayerType::UI, cursor);
+
+		Indicator* indicator = new Indicator();
+		AddGameObject(eLayerType::UI, indicator);
+
+		DesertSkeleton* deSkeleton = new DesertSkeleton();
+		AddGameObject(eLayerType::Monster, deSkeleton);
 		
 		//TextureSetting();
 		UI_Setting();
@@ -89,7 +101,7 @@ namespace ss
 			//obj->AddComponent<CameraScript>();
 		}
 
-	
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void UIScene::Update()
@@ -478,6 +490,26 @@ namespace ss
 			spriteMateiral->SetShader(spriteShader);
 			spriteMateiral->SetTexture(texture);
 			Resources::Insert(L"TownPortalMater", spriteMateiral);
+		}
+
+		//Resource silverKey z=1.004
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"SilverKeyTex", L"..\\Resources\\Texture\\UI\\Hud_Key_spr.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"SilverKeyMater", spriteMateiral);
+		}
+
+		//Resource CrystalKey z=1.004
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"CrystalKeyTex", L"..\\Resources\\Texture\\UI\\Hud_Crystal_Key_spr.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"CrystalKeyMater", spriteMateiral);
 		}
 	}
 }

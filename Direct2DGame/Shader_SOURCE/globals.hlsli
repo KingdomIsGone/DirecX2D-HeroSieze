@@ -29,6 +29,11 @@ cbuffer Animator : register(b3)
     float3 pad;
 }
 
+cbuffer DebugMeshColor : register(b9)
+{
+    float4 DebugColor;
+}
+
 
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);

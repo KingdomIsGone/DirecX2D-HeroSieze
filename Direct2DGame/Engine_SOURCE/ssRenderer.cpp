@@ -3,6 +3,7 @@
 #include "ssTexture.h"
 #include "ssMaterial.h"
 #include "ssStructedBuffer.h"
+#include "ssPaintShader.h"
 
 
 namespace renderer
@@ -292,6 +293,10 @@ namespace renderer
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eSRVType::None);
+
+		// Debug Buffer
+		constantBuffer[(UINT)eCBType::Debug] = new ConstantBuffer(eCBType::Debug);
+		constantBuffer[(UINT)eCBType::Debug]->Create(sizeof(DebugCB));
 	}
 
 	void LoadShader()
@@ -324,6 +329,17 @@ namespace renderer
 
 		ss::Resources::Insert(L"DebugShader", debugShader);
 		
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		ss::Resources::Insert(L"PaintShader", paintShader);
+	}
+
+	void LoadTexture()
+	{
+		//paint texture
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+		ss::Resources::Insert(L"PaintTexuture", uavTexture);
 	}
 
 	void LoadMaterial()
@@ -340,7 +356,8 @@ namespace renderer
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
 
-		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		//texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		texture = Resources::Find<Texture>(L"PaintTexuture");
 		material = std::make_shared<Material>();
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
@@ -367,6 +384,13 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
+
+		//std::shared_ptr<Shader> debugShader
+		//	= Resources::Find<Shader>(L"DebugShader");
+
+		//material = std::make_shared<Material>();
+		//material->SetShader(debugShader);
+		//Resources::Insert(L"PaintMaterial", material);
 
 		////UI
 		//캐릭터 및 레벨창 z=1.01
@@ -523,6 +547,7 @@ namespace renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadTexture();
 		LoadMaterial();
 	}
 

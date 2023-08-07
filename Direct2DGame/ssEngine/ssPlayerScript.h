@@ -39,7 +39,9 @@ namespace ss
 
 		void MoveToPoint(Vector3 playerpos, Vector3 point);
 		void MoveToPointAni(Vector3 playerpos, Vector3 point);
+
 		void AttackAni(Vector3 playerpos, Vector3 point);
+		void AttackFireBall(Vector3 playerpos, Vector3 point);
 
 		//virtual void OnCollisionEnter(Collider2D* other) override;
 		//virtual void OnCollisionStay(Collider2D* other) override;
@@ -51,9 +53,11 @@ namespace ss
 		eDirState mDirState;
 		
 		class Cursor* mCursor;
+		class Indicator* mIndicator;
 
 		bool mIsMoving;
 		bool mIsAttacking;
+		bool mShootOnce;
 		Vector3 mCursorPos;
 		Vector3 mPlayerPos;
 	};

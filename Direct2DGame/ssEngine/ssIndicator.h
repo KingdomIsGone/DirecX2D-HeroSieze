@@ -3,24 +3,25 @@
 
 namespace ss
 {
-	class Cursor : public GameObject
+	static class Indicator : public GameObject
 	{
 	public:
-		Cursor();
-		~Cursor();
+		Indicator();
+		~Indicator();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		Vector3 GetPos() { return mPos; }
+		void aniPlay();
+		void setPos(Vector3 pos) { mPos = pos; }
 
 	private:
 		Transform* mTransform;
 		static Vector3 mPos;
-		Vector3 mOffset;
+		float mSpeed;
 
-		class MeshRenderer* mMr;
+		static class Animator* mAnimator;
 	};
 }

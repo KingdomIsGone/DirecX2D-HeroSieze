@@ -9,6 +9,9 @@
 #include "ssMeshRenderer.h"
 #include "ssCursor.h"
 #include "ssCamera.h"
+#include "ssFireBall.h"
+#include "ssSceneManager.h"
+#include "ssIndicator.h"
 
 namespace ss
 {
@@ -27,6 +30,8 @@ namespace ss
 
 		Animator* at = GetOwner()->GetComponent<Animator>();
 		mCursor = new Cursor();
+
+		mIndicator = new Indicator();
 
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
 		
@@ -197,6 +202,9 @@ namespace ss
 			mIsMoving = true;
 			mCursorPos = mCursor->GetPos();
 			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
+
+			mIndicator->setPos(mCursorPos);
+			mIndicator->aniPlay();
 		}
 
 		if (!mIsMoving)
@@ -217,14 +225,19 @@ namespace ss
 			mIsMoving = false;
 			mCursorPos = mCursor->GetPos();
 			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
+			mPlayerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 		}
 
 		if (!mIsAttacking)
 			return;
 		
-		Vector3 playerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		if (!mShootOnce)
+		{
+			AttackFireBall(mPlayerPos, mCursorPos);
+			mShootOnce = true;
+		}
 		
-		AttackAni(playerPos, mCursorPos);
+		AttackAni(mPlayerPos, mCursorPos);
 	}
 
 	void PlayerScript::MoveToPoint(Vector3 playerpos, Vector3 point)
@@ -305,6 +318,17 @@ namespace ss
 		{
 			mState = eState::Idle;
 			mIsAttacking = false;
+			mShootOnce = false;
 		}
 	}
+
+	void PlayerScript::AttackFireBall(Vector3 playerpos, Vector3 point)
+	{
+		float degree = math::CalculateDegree(Vector2(playerpos.x, playerpos.y), Vector2(point.x, point.y));
+		FireBall* fireBall = new FireBall(degree);
+		fireBall->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Monster, fireBall);
+	}
+
+	
 }

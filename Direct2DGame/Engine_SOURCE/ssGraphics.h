@@ -15,6 +15,7 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				2
 #define CBSLOT_ANIMATION2D		3
+#define CBSLOT_DEBUG            9
 //#define CBSLOT_PARTICLE			1
 
 namespace ss::graphics
@@ -36,6 +37,7 @@ namespace ss::graphics
 		Material,
 		Grid,
 		Animator,
+		Debug = 9,
 		End,
 	};
 
