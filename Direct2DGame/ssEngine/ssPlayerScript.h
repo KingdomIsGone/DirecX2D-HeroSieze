@@ -43,9 +43,15 @@ namespace ss
 		void AttackAni(Vector3 playerpos, Vector3 point);
 		void AttackFireBall(Vector3 playerpos, Vector3 point);
 
-		//virtual void OnCollisionEnter(Collider2D* other) override;
-		//virtual void OnCollisionStay(Collider2D* other) override;
-		//virtual void OnCollisionExit(Collider2D* other) override;
+
+
+		Vector3 ReverseMove(Vector3 playerpos, Vector3 point);
+		float CalculateMoveDegree(Vector3 playerpos, Vector3 point);
+
+		virtual void OnCollisionEnter(Collider2D* other) override;
+		virtual void OnCollisionStay(Collider2D* other) override;
+		virtual void OnCollisionExit(Collider2D* other) override;
+		
 
 
 	private:
@@ -58,7 +64,11 @@ namespace ss
 		bool mIsMoving;
 		bool mIsAttacking;
 		bool mShootOnce;
+		bool mIsColliding;
 		Vector3 mCursorPos;
 		Vector3 mPlayerPos;
+		float mSpeed;
+		float mPrevDegree;
+
 	};
 }

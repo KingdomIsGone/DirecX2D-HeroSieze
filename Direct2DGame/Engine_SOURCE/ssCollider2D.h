@@ -27,10 +27,14 @@ namespace ss
 		UINT GetColliderID() { return mColliderID; }
 		static bool GetIsCollide() { return mIsCollide; }
 
+		void SetCollideType(eCollideType type) { mCollideType = type; }
+		eCollideType GetCollideType() { return mCollideType; }
+
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
 		eColliderType mType;
+		eCollideType mCollideType;
 		Transform* mTransform;
 
 		Vector3 mPosition;

@@ -20,6 +20,7 @@ namespace ss
 			SetName(L"Player");
 			Collider2D* cd = AddComponent<Collider2D>();
 			cd->SetSize(Vector2(0.18f, 0.23f));
+			cd->SetCollideType(eCollideType::Player);
 
 
 			const float pi = 3.141592f;

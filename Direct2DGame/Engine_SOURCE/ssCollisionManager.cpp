@@ -173,7 +173,9 @@ namespace ss
 			{
 				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f); 
 			}
-			//두 사각형의 한 변의 반을 각각 사영한 길이의 합이 두 사각형의 중심점을 잇는 벡터의 그것보다 작으면 충돌
+
+			//두 사각형의 한 변의 반을 각각 사영한 길이의 합이 두 사각형의 중심점을 잇는 벡터의 사영보다 크면 충돌
+			//하나라도 작은게 있으면 충돌x projDistance가 합 centerDir.Dot이 중심점을 잇는 벡터의 사영
 			if (projDistance < fabsf(centerDir.Dot(vA))) 
 				return false;
 		}

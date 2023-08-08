@@ -22,6 +22,7 @@ namespace ss
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"Cursor1", L"..\\Resources\\Texture\\UI\\Cursor1.png");
 				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				spriteMaterial->SetShader(spriteShader);
 				spriteMaterial->SetTexture(texture);
 				Resources::Insert(L"Cursor1Mater", spriteMaterial);
@@ -30,6 +31,7 @@ namespace ss
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"Cursor2", L"..\\Resources\\Texture\\UI\\Cursor2.png");
 				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				spriteMaterial->SetShader(spriteShader);
 				spriteMaterial->SetTexture(texture);
 				Resources::Insert(L"Cursor2Mater", spriteMaterial);

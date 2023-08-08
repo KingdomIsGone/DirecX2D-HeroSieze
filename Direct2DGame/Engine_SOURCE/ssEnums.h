@@ -57,4 +57,11 @@ namespace ss::enums
 		Spot,
 		End,
 	};
+
+	enum class eCollideType
+	{
+		Player,
+		NormalMonster,
+		Projectile,
+	};
 }
