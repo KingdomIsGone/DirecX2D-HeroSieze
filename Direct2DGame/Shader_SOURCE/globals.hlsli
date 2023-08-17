@@ -34,6 +34,13 @@ cbuffer DebugMeshColor : register(b9)
     float4 DebugColor;
 }
 
+cbuffer ParticleSystem : register(b4)
+{
+    uint elementCount;
+    float elapsedTime;
+    int padd;
+    int padd2;
+}
 
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);
@@ -50,7 +57,19 @@ struct LightAttribute
     int pad;
 };
 
+struct Particle
+{
+    float4 position;
+    float4 direction;
+    
+    float endTime;
+    float time;
+    float speed;
+    uint active;
+};
+
 StructuredBuffer<LightAttribute> lightsAttribute : register(t13);
+StructuredBuffer<Particle> particles : register(t14);
 
 SamplerState pointSampler : register(s0);
 SamplerState anisotropicSampler : register(s1);

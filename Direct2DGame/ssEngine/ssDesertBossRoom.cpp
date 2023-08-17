@@ -13,6 +13,10 @@
 #include "ssPlayerScript.h"
 #include "ssCollisionManager.h"
 #include "ssUIScene.h"
+#include "ssPlayer.h"
+#include "ssCursor.h"
+#include "ssIndicator.h"
+#include "ssLight.h"
 
 namespace ss
 {
@@ -86,6 +90,26 @@ namespace ss
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
 			//camera->AddComponent<CameraScript>();
 		}
+
+		//라이트
+		{
+			GameObject* light = new GameObject();
+			light->SetName(L"Light");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+			
+		}
+
+		Player* player = new Player();
+		AddGameObject(eLayerType::Player, player);
+
+		Cursor* cursor = new Cursor();
+		AddGameObject(eLayerType::UI, cursor);
+
+		Indicator* indicator = new Indicator();
+		AddGameObject(eLayerType::UI, indicator);
 	}
 
 	void DesertBossRoom::Update()
@@ -95,21 +119,6 @@ namespace ss
 
 	void DesertBossRoom::LateUpdate()
 	{
-		//윈도우 좌표계에서 월드 좌표계로 바꾸기 viewPort.Unproject
-		Vector3 pos(600, 350, 0.0f);
-		Vector3 pos2(600, 350, 1000.0f);
-		Viewport viewport;
-		viewport.width = 1200.0f;
-		viewport.height = 700.0f;
-		viewport.x = 0;
-		viewport.y = 0;
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-
-		pos = viewport.Unproject(pos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
-		pos2 = viewport.Unproject(pos2, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
-		//pos, pos2를 잇는 선분으로 ray cast로 마우스 피킹 구현(3D)
-
 		Scene::LateUpdate();
 	}
 

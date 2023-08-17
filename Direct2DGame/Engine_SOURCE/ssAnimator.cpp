@@ -84,47 +84,6 @@ namespace ss
 		mEvents.insert(std::make_pair(name, events));
 	}
 
-	//void Animator::CreateFromFolder(const std::wstring& path, Vector2 size, Vector2 offset, float duration)
-	//{
-	//	Animation* animation = FindAnimation(path);
-	//	if (nullptr != animation)
-	//		return;
-
-	//	animation = new Animation();
-	//	animation->SetKey(path);
-
-	//	std::filesystem::path fs(path);
-	//	UINT fileCount = 0;
-
-	//	std::vector<std::shared_ptr<graphics::Texture>> Textures;
-
-	//	for (const auto& p : std::filesystem::recursive_directory_iterator(path))
-	//	{
-	//		std::wstring fileName = p.path().filename();
-	//		std::wstring fullName = path + L"\\" + fileName;
-
-	//		std::wstring key = fs.parent_path().filename();
-	//		key += fs.filename();
-
-	//		std::shared_ptr<Texture> texture
-	//			= Resources::Load<Texture>(fullName, path);
-
-	//		Textures.push_back(texture);
-	//		fileCount++;
-	//	}
-
-	//	
-
-	//	mAnimations.insert(std::make_pair(path, animation));
-
-	//	Events* events = FindEvents(path);
-	//	if (events != nullptr)
-	//		return;
-
-	//	events = new Events();
-	//	mEvents.insert(std::make_pair(path, events));
-	//}
-
 	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
 		std::map<std::wstring, Animation*>::iterator iter

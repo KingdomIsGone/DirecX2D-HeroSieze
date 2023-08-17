@@ -16,11 +16,16 @@
 
 namespace ss
 {
+	//Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
+	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
+	float ss::PlayerScript::mSpeed = 2.0f;
+	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
+
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)
-		, mPlayerPos(Vector3::Zero)
-		, mSpeed(2.0f)
 		, mPrevDegree(0.0f)
+		, mCollideXaxisCount(0)
+		, mCollideYaxisCount(0)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -36,12 +41,17 @@ namespace ss
 
 		mIndicator = new Indicator();
 
+		GetOwner()->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+		
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
 		
 	}
 
 	void PlayerScript::Update()
 	{
+		GetOwner()->GetComponent<Transform>()->SetPosition(mPlayerPos);
+		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
 		switch (mState)
 		{
 		case ss::PlayerScript::eState::Idle:
@@ -59,8 +69,6 @@ namespace ss
 		default:
 			break;
 		}
-
-		
 	}
 
 	void PlayerScript::Complete()
@@ -99,7 +107,6 @@ namespace ss
 		default:
 			break;
 		}
-		
 	}
 
 	void PlayerScript::Move()
@@ -210,6 +217,11 @@ namespace ss
 			float CurDegree = CalculateMoveDegree(playerPos, mCursorPos);
 			float difference = abs(CurDegree - mPrevDegree);
 
+			mCursorProjPos = mCursor->GetProjPos();
+			mCursorProjPos.z = 1.0f;
+			mPlayerProjPos = Project(playerPos);
+			mPlayerProjPos.z = 1.0f;
+
 			if(difference > 90.0f && difference < 270.0f)
 				mIsColliding = false;
 
@@ -222,10 +234,10 @@ namespace ss
 		if (!mIsMoving)
 			return;
 		
-		Vector3 playerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		mPlayerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		MoveToPointAni(playerPos, mCursorPos);
-		MoveToPoint(playerPos, mCursorPos);
+		MoveToPointAni(mPlayerPos, mCursorPos);
+		MoveToPoint(mPlayerPos, mCursorPos);
 	}
 
 	void PlayerScript::Attack()
@@ -254,6 +266,7 @@ namespace ss
 
 	void PlayerScript::MoveToPoint(Vector3 playerpos, Vector3 point)
 	{
+		mPoint = point;
 		if (playerpos.x < point.x)
 			playerpos.x += mSpeed * Time::DeltaTime();
 		else if(playerpos.x > point.x)
@@ -267,9 +280,11 @@ namespace ss
 		if (mIsColliding)
 			playerpos = ReverseMove(playerpos, point);
 
+		//playerpos = UnProject(playerpos);
+		SetPlayerPos(playerpos);
 		GetOwner()->GetComponent<Transform>()->SetPosition(playerpos);
 
-		if (abs(playerpos.x - point.x) <0.001f && abs(playerpos.y - point.y) < 0.001f && mIsColliding == false)
+		if (abs(playerpos.x - point.x) <0.0001f && abs(playerpos.y - point.y) < 0.0001f && mIsColliding == false)
 		{
 			mState = eState::Idle;
 			mIsMoving = false;
@@ -344,46 +359,29 @@ namespace ss
 		float degree = math::CalculateDegree(Vector2(playerpos.x, playerpos.y), Vector2(point.x, point.y));
 		FireBall* fireBall = new FireBall(degree);
 		fireBall->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Monster, fireBall);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, fireBall);
 	}
 
 	Vector3 PlayerScript::ReverseMove(Vector3 playerpos, Vector3 point)
 	{
-	/*	if (playerpos.x < point.x)
-			playerpos.x -= mSpeed * Time::DeltaTime();
-		else if (playerpos.x > point.x)
-			playerpos.x += mSpeed * Time::DeltaTime();
+		if (mState != eState::ClickMove)
+			return playerpos;
 
-		if (playerpos.y < point.y)
-			playerpos.y -= mSpeed * Time::DeltaTime();
-		else if (playerpos.y > point.y)
-			playerpos.y += mSpeed * Time::DeltaTime();*/
-
-		/*if (playerpos.x < point.x)
-			playerpos.x -= (mSpeed + 2.5f) * Time::DeltaTime();
-		else if (playerpos.x > point.x)
-			playerpos.x += (mSpeed + 2.5f) * Time::DeltaTime();
-
-		if (playerpos.y < point.y)
-			playerpos.y -= (mSpeed + 2.5f) * Time::DeltaTime();
-		else if (playerpos.y > point.y)
-			playerpos.y += (mSpeed + 2.5f) * Time::DeltaTime();*/
-
-		if (abs(playerpos.x - point.x) > abs(playerpos.y - point.y))
+		if (mCollideYaxisCount > 0)
 		{
 			if (playerpos.x < point.x)
-				playerpos.x -= (mSpeed + 5.f) * Time::DeltaTime();
+				playerpos.x -= (mSpeed + 0.f) * Time::DeltaTime();
 			else if (playerpos.x > point.x)
-				playerpos.x += (mSpeed + 5.f) * Time::DeltaTime();
+				playerpos.x += (mSpeed + 0.f) * Time::DeltaTime();
 		}
-		else
+		
+		if (mCollideXaxisCount > 0)
 		{
 			if (playerpos.y < point.y)
-				playerpos.y -= (mSpeed + 5.f) * Time::DeltaTime();
+				playerpos.y -= (mSpeed + 0.f) * Time::DeltaTime();
 			else if (playerpos.y > point.y)
-				playerpos.y += (mSpeed + 5.f) * Time::DeltaTime();
+				playerpos.y += (mSpeed + 0.f) * Time::DeltaTime();
 		}
-
 
 		return playerpos;
 	}
@@ -395,21 +393,66 @@ namespace ss
 		return degree;
 	}
 
+	Vector3 PlayerScript::Project(Vector3 pos)
+	{
+		Viewport viewport;
+		viewport.width = 1200.0f;
+		viewport.height = 700.0f;
+		viewport.x = 0;
+		viewport.y = 0;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+
+		pos = viewport.Project(pos, Camera::GetGpuProjectionMatrix()
+			, Camera::GetGpuViewMatrix(), Matrix::Identity);
+
+		return pos;
+	}
+
+	Vector3 PlayerScript::UnProject(Vector3 pos)
+	{
+		Viewport viewport;
+		viewport.width = 1200.0f;
+		viewport.height = 700.0f;
+		viewport.x = 0;
+		viewport.y = 0;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+
+		pos = viewport.Unproject(pos, Camera::GetGpuProjectionMatrix()
+			, Camera::GetGpuViewMatrix(), Matrix::Identity);
+
+		return pos;
+	}
+
+
+
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
 			mIsColliding = true;
-		
+			mColliderPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
+
+			float degree = math::CalculateDegree(Vector2(mPlayerPos.x, mPlayerPos.y)
+				, Vector2(mColliderPos.x, mColliderPos.y));
+
+			if ((-60.0f <= degree && degree < 60.0f) || (120.0f <= degree || degree < -120.0f))
+			{
+				mCollideYaxisCount++;
+				other->SetAxisX(false);
+			}
+			else
+			{
+				mCollideXaxisCount++;
+				other->SetAxisX(true);
+			}
 		}
 	}
 
 	void PlayerScript::OnCollisionStay(Collider2D* other)
 	{
-		/*if (other->GetCollideType() == eCollideType::NormalMonster)
-		{
-			mIsColliding = true;
-		}*/
+		
 	}
 
 	void PlayerScript::OnCollisionExit(Collider2D* other)
@@ -417,6 +460,11 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
 			mIsColliding = false;
+
+			if (other->GetAxisX())
+				mCollideXaxisCount--;
+			else
+				mCollideYaxisCount--;
 		}
 	}
 

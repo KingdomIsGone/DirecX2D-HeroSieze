@@ -8,6 +8,7 @@
 namespace ss
 {
 	Vector3 ss::Cursor::mPos = {};
+	Vector3 ss::Cursor::mprojPos = {};
 	
 	Cursor::Cursor()
 	{
@@ -67,6 +68,9 @@ namespace ss
 		mPos.x = Input::GetMousePos().x;
 		mPos.y = Input::GetMousePos().y;
 		mPos.z = 0.00f;
+
+		mprojPos = mPos;
+		mprojPos += mOffset;
 
 		mPos = viewport.Unproject(mPos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
 		mPos += mOffset;

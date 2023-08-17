@@ -16,6 +16,7 @@
 #include "ssLight.h"
 #include "ssComputeShader.h"
 #include "ssPaintShader.h"
+#include "ssParticleSystem.h"
 
 namespace ss
 {
@@ -39,7 +40,7 @@ namespace ss
 				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Player);
 			player->SetName(L"Zelda");
 			Collider2D* cd = player->AddComponent<Collider2D>();
-			cd->SetSize(Vector2(1.2f, 1.2f));
+			cd->SetSize(Vector2(1.0f, 1.0f));
 			
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -74,6 +75,18 @@ namespace ss
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 			Collider2D* cd = player->AddComponent<Collider2D>();
+			//cd->SetSize(Vector2(1.2f, 1.2f));
+			//player->AddComponent<PlayerScript>();
+		}
+
+		{
+			GameObject* player = new GameObject();
+			player->SetName(L"Particle");
+			AddGameObject(eLayerType::Monster, player);
+			ParticleSystem* mr = player->AddComponent<ParticleSystem>();
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 0.2f));
+			//Collider2D* cd = player->AddComponent<Collider2D>();
 			//cd->SetSize(Vector2(1.2f, 1.2f));
 			//player->AddComponent<PlayerScript>();
 		}

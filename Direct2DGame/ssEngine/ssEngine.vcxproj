@@ -162,10 +162,13 @@
     <ClInclude Include="ssDesertSkeleton.h" />
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssFireBall.h" />
+    <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssIndicator.h" />
+    <ClInclude Include="ssMonsterHpScript.h" />
     <ClInclude Include="ssMonsterScript.h" />
     <ClInclude Include="ssPlayer.h" />
+    <ClInclude Include="ssPlayerCameraScript.h" />
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
@@ -181,10 +184,13 @@
     <ClCompile Include="ssDesertSkeleton.cpp" />
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
+    <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssIndicator.cpp" />
+    <ClCompile Include="ssMonsterHpScript.cpp" />
     <ClCompile Include="ssMonsterScript.cpp" />
     <ClCompile Include="ssPlayer.cpp" />
+    <ClCompile Include="ssPlayerCameraScript.cpp" />
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />

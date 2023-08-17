@@ -51,6 +51,11 @@ inline static Vector2 DegreeToVector(float degree)
     return vector;
 }
 
+inline static float GetDistance(Vector3 pos1, Vector3 pos2)
+{
+    return sqrtf(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2));
+}
+
 inline Vector2 Rectangle::Location() const noexcept
 {
     return Vector2(float(x), float(y));

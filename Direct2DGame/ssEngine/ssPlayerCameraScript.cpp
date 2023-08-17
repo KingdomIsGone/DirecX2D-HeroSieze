@@ -1,0 +1,28 @@
+#include "ssPlayerCameraScript.h"
+#include "ssTransform.h"
+#include "ssGameObject.h"
+#include "ssPlayerScript.h"
+
+namespace ss
+{
+	void PlayerCameraScript::Update()
+	{
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector3 pos = tr->GetPosition();
+
+		/*mPrevPos = mCurPos;
+		mCurPos = PlayerScript::GetPlayerPos();
+
+		mDistance = mPrevPos - mCurPos;
+		
+
+		pos.x -= mDistance.x;
+		pos.y -= mDistance.y;
+
+		tr->SetPosition(pos);*/
+
+		tr->SetPosition(PlayerScript::GetPlayerPos());
+
+		pos = tr->GetPosition();
+	}
+}

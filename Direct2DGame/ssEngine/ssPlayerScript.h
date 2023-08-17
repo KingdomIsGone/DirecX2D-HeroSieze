@@ -44,9 +44,16 @@ namespace ss
 		void AttackFireBall(Vector3 playerpos, Vector3 point);
 
 
-
 		Vector3 ReverseMove(Vector3 playerpos, Vector3 point);
 		float CalculateMoveDegree(Vector3 playerpos, Vector3 point);
+
+		Vector3 Project(Vector3 pos);
+		Vector3 UnProject(Vector3 pos);
+
+		static Vector3 GetPlayerPos() { return mPlayerPos; }
+		static void SetPlayerPos(Vector3 pos) { mPlayerPos = pos; }
+		static float GetPlayerSpeed() { return mSpeed; }
+		static Vector3 GetPoint() { return mPoint; }
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
@@ -55,6 +62,11 @@ namespace ss
 
 
 	private:
+		static Vector3 mPlayerPos;
+		static Vector3 mPoint;
+		static float mSpeed;
+		Vector3 mPlayerProjPos;
+
 		eState mState;
 		eDirState mDirState;
 		
@@ -65,10 +77,12 @@ namespace ss
 		bool mIsAttacking;
 		bool mShootOnce;
 		bool mIsColliding;
-		Vector3 mCursorPos;
-		Vector3 mPlayerPos;
-		float mSpeed;
-		float mPrevDegree;
+		UINT mCollideXaxisCount;
+		UINT mCollideYaxisCount;
 
+		Vector3 mCursorPos;
+		Vector3 mCursorProjPos;
+		float mPrevDegree;
+		Vector3 mColliderPos;
 	};
 }

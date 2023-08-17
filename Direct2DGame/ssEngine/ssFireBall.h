@@ -14,14 +14,17 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-
+		float GetDamage() { return mDamage; }
+		void SetForInstance(bool is) { mForInstance = is; }
 
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
-		float mSpeed;
 		Vector2 mDirVector;
+		float mSpeed;
 		float mDeleteTime;
+		float mDamage;
+		bool mForInstance;
 
 		class Collider2D* mCollider;
 	};

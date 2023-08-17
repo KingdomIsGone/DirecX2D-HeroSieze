@@ -4,6 +4,7 @@
 #include "ssMaterial.h"
 #include "ssStructedBuffer.h"
 #include "ssPaintShader.h"
+#include "ssParticleShader.h"
 
 
 namespace renderer
@@ -80,6 +81,10 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = ss::Resources::Find<Shader>(L"ParticleShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region Sampler State
 		//Sampler State
@@ -200,6 +205,21 @@ namespace renderer
 		std::vector<Vertex> vertexes = {};
 		std::vector<UINT> indexes = {};
 
+
+		// PointMesh
+		Vertex v = {};
+		v.pos = Vector3(0.0f, 0.0f, 0.0f);
+		vertexes.push_back(v);
+		indexes.push_back(0);
+		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		Resources::Insert(L"PointMesh", mesh);
+
+
+		vertexes.clear();
+		indexes.clear();
+
 		//RECT
 		vertexes.resize(4);
 		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
@@ -220,7 +240,7 @@ namespace renderer
 
 
 		// Vertex Buffer
-		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
 
 		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
@@ -290,13 +310,13 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 
+		//ParticleCB
+		constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
+		constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
+
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
-		lightsBuffer->Create(sizeof(LightAttribute), 2, eSRVType::None);
-
-		// Debug Buffer
-		constantBuffer[(UINT)eCBType::Debug] = new ConstantBuffer(eCBType::Debug);
-		constantBuffer[(UINT)eCBType::Debug]->Create(sizeof(DebugCB));
+		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr);
 	}
 
 	void LoadShader()
@@ -306,10 +326,10 @@ namespace renderer
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
 		ss::Resources::Insert(L"TriangleShader", shader);
 
-		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
-		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
-		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
-		ss::Resources::Insert(L"SpriteShader", spriteShader);
+		shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
+		ss::Resources::Insert(L"SpriteShader", shader);
 
 		std::shared_ptr<Shader> spriteAniShader = std::make_shared<Shader>();
 		spriteAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
@@ -326,12 +346,25 @@ namespace renderer
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		debugShader->SetRSState(eRSType::WireframeNone);
-
 		ss::Resources::Insert(L"DebugShader", debugShader);
 		
 		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
 		paintShader->Create(L"PaintCS.hlsl", "main");
 		ss::Resources::Insert(L"PaintShader", paintShader);
+
+		std::shared_ptr<ParticleShader> psSystemShader = std::make_shared<ParticleShader>();
+		psSystemShader->Create(L"ParticleCS.hlsl", "main");
+		ss::Resources::Insert(L"ParticleSystemShader", psSystemShader);
+
+		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
+		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		paritcleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
+		paritcleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+		paritcleShader->SetRSState(eRSType::SolidNone);
+		paritcleShader->SetDSState(eDSType::NoWrite);
+		paritcleShader->SetBSState(eBSType::AlphaBlend);
+		paritcleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+		ss::Resources::Insert(L"ParticleShader", paritcleShader);
 	}
 
 	void LoadTexture()
@@ -344,7 +377,7 @@ namespace renderer
 
 	void LoadMaterial()
 	{
-		std::shared_ptr<Shader> spriteShader
+		std::shared_ptr<Shader> shader
 			= Resources::Find<Shader>(L"SpriteShader");
 
 
@@ -352,22 +385,22 @@ namespace renderer
 			= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
 		std::shared_ptr<Material> material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
+		material->SetShader(shader);
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
 
 		//texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 		texture = Resources::Find<Texture>(L"PaintTexuture");
 		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
+		material->SetShader(shader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", material);
 
-		std::shared_ptr<Shader> AnimationShader = 
-			Resources::Find<Shader>(L"SpriteAnimationShader");
+		shader
+			= Resources::Find<Shader>(L"SpriteAnimationShader");
 		material = std::make_shared<Material>();
-		material->SetShader(AnimationShader);
+		material->SetShader(shader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimationMaterial", material);
 
@@ -385,6 +418,13 @@ namespace renderer
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
 
+		shader
+			= Resources::Find<Shader>(L"ParticleShader");
+		material = std::make_shared<Material>();
+		material->SetShader(shader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"ParticleMaterial", material);
+
 		//std::shared_ptr<Shader> debugShader
 		//	= Resources::Find<Shader>(L"DebugShader");
 
@@ -399,7 +439,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"CharacterCircle", L"..\\Resources\\Texture\\UI\\CharacterCircle.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"CharacterCircle0", spriteMateiral);
 			}
@@ -411,7 +451,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"HPMPBarTex", L"..\\Resources\\Texture\\UI\\HpMpBar.png");
 				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-				spriteMaterial->SetShader(spriteShader);
+				spriteMaterial->SetShader(shader);
 				spriteMaterial->SetTexture(texture);
 				spriteMaterial->SetRenderingMode(eRenderingMode::CutOut);
 				Resources::Insert(L"HPMPMater", spriteMaterial);
@@ -424,7 +464,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"ItemUseTex", L"..\\Resources\\Texture\\UI\\ItemUse.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"ItemUseMater", spriteMateiral);
 			}
@@ -436,7 +476,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"SkillMenuTex", L"..\\Resources\\Texture\\UI\\SkillMenu.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"SkillMenuMater", spriteMateiral);
 			}
@@ -448,7 +488,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"ttex", L"..\\Resources\\Texture\\UI\\t.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"tMater", spriteMateiral);
 			}
@@ -457,7 +497,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"ctex", L"..\\Resources\\Texture\\UI\\c.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"cMater", spriteMateiral);
 			}
@@ -466,7 +506,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"1tex", L"..\\Resources\\Texture\\UI\\1.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"1Mater", spriteMateiral);
 			}
@@ -475,7 +515,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"2tex", L"..\\Resources\\Texture\\UI\\2.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"2Mater", spriteMateiral);
 			}
@@ -484,7 +524,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"3tex", L"..\\Resources\\Texture\\UI\\3.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"3Mater", spriteMateiral);
 			}
@@ -493,7 +533,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"4tex", L"..\\Resources\\Texture\\UI\\4.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"4Mater", spriteMateiral);
 			}
@@ -502,7 +542,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"vtex", L"..\\Resources\\Texture\\UI\\v.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"vMater", spriteMateiral);
 			}
@@ -513,7 +553,7 @@ namespace renderer
 			std::shared_ptr<Texture> texture
 				= Resources::Load<Texture>(L"MenuSet", L"..\\Resources\\Texture\\UI\\MenuSet.png");
 			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetShader(shader);
 			spriteMateiral->SetTexture(texture);
 			Resources::Insert(L"MenuSetMater", spriteMateiral);
 		}
@@ -524,7 +564,7 @@ namespace renderer
 				std::shared_ptr<Texture> texture
 					= Resources::Load<Texture>(L"ResourceBackBar", L"..\\Resources\\Texture\\UI\\ResourceBackBar.png");
 				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetShader(shader);
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"ResourceBackBarMater", spriteMateiral);
 			}
@@ -535,7 +575,7 @@ namespace renderer
 			std::shared_ptr<Texture> texture
 				= Resources::Load<Texture>(L"TownPortal", L"..\\Resources\\Texture\\UI\\Hud_Town_Portal_spr.png");
 			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetShader(shader);
 			spriteMateiral->SetTexture(texture);
 			Resources::Insert(L"TownPortalMater", spriteMateiral);
 		}
@@ -566,8 +606,8 @@ namespace renderer
 		}
 
 		lightsBuffer->SetData(lightsAttributes.data(), lightsAttributes.size());
-		lightsBuffer->Bind(eShaderStage::VS, 13);
-		lightsBuffer->Bind(eShaderStage::PS, 13);
+		lightsBuffer->BindSRV(eShaderStage::VS, 13);
+		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
 	void Render()

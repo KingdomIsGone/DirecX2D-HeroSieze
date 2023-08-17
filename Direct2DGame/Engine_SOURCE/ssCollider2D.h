@@ -30,6 +30,9 @@ namespace ss
 		void SetCollideType(eCollideType type) { mCollideType = type; }
 		eCollideType GetCollideType() { return mCollideType; }
 
+		void SetAxisX(bool is) { mXaxisCollision = is; }
+		bool GetAxisX() { return mXaxisCollision; }
+
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
@@ -42,5 +45,6 @@ namespace ss
 		Vector2 mCenter;
 
 		static bool mIsCollide;
+		bool mXaxisCollision;
 	};
 }

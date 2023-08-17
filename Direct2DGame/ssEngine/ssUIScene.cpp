@@ -16,6 +16,7 @@
 #include "ssIndicator.h"
 #include "ssDesertSkeleton.h"
 #include "ssCollisionManager.h"
+#include "ssPlayerCameraScript.h"
 
 namespace ss
 {
@@ -36,7 +37,20 @@ namespace ss
 			renderer::cameras.push_back(cameraComp);
 			
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			camera->AddComponent<CameraScript>();
+		}
+
+		//Player Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f , 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::Player, true);
+			camera->AddComponent<PlayerCameraScript>();
 		}
 
 		//UI Camera
@@ -48,8 +62,8 @@ namespace ss
 			renderer::cameras.push_back(cameraComp);
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
-			//camera->AddComponent<CameraScript>();
 			renderer::mainCamera = cameraComp;
+			camera->AddComponent<PlayerCameraScript>();
 		}
 
 		//라이트
@@ -65,6 +79,7 @@ namespace ss
 		
 		Player* player = new Player();
 		AddGameObject(eLayerType::Player, player);
+		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 
 		cursor = new Cursor();
 		AddGameObject(eLayerType::UI, cursor);
@@ -72,11 +87,17 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::UI, indicator);
 
-		DesertSkeleton* deSkeleton = new DesertSkeleton();
+		/*DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
+		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.0f);*/
 		
 		//TextureSetting();
 		UI_Setting();
+
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Projectile, true);
+
 
 		//배경 z=1.1f
 		{
@@ -92,7 +113,7 @@ namespace ss
 
 			GameObject* obj = new GameObject();
 			obj->SetName(L"TownhallBack");
-			AddGameObject(eLayerType::Player, obj);
+			AddGameObject(eLayerType::Map, obj);
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"TownHallMater"));
@@ -100,8 +121,6 @@ namespace ss
 			obj->GetComponent<Transform>()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void UIScene::Update()

@@ -5,12 +5,14 @@
 #include "ssAnimator.h"
 #include "ssCollider2D.h"
 #include "ssMonsterScript.h"
+#include "ssMonsterHpScript.h"
 
 namespace ss
 {
 	DesertSkeleton::DesertSkeleton()
 	{
 		AddComponent<MonsterScript>();
+		AddComponent<MonsterHpScript>()->ModifyHp(1000.0f);
 
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
@@ -29,19 +31,19 @@ namespace ss
 		//Move Ani
 		std::shared_ptr<Texture> Skeleton_UpTex
 			= Resources::Load<Texture>(L"Skeleton_UpTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Move\\Desert_Skeleton_Up_spr36478.png");
-		at->Create(L"Skeleton_Up", Skeleton_UpTex, Vector2(0.0f, 0.0f), Vector2(36.0f, 47.0f), 8);
+		at->Create(L"SkeletonUp", Skeleton_UpTex, Vector2(0.0f, 0.0f), Vector2(36.0f, 47.0f), 8);
 		
 		std::shared_ptr<Texture> Skeleton_DownTex
 			= Resources::Load<Texture>(L"Skeleton_DownTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Move\\Desert_Skeleton_Down_spr35487.png");
-		at->Create(L"Skeleton_Down", Skeleton_DownTex, Vector2(0.0f, 0.0f), Vector2(35.0f, 48.0f), 7);
+		at->Create(L"SkeletonDown", Skeleton_DownTex, Vector2(0.0f, 0.0f), Vector2(35.0f, 48.0f), 7);
 
 		std::shared_ptr<Texture> Skeleton_LeftTex
 			= Resources::Load<Texture>(L"Skeleton_LeftTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Move\\Desert_Skeleton_Left_spr41458.png");
-		at->Create(L"Skeleton_Left", Skeleton_LeftTex, Vector2(0.0f, 0.0f), Vector2(41.0f, 45.0f), 8);
+		at->Create(L"SkeletonLeft", Skeleton_LeftTex, Vector2(0.0f, 0.0f), Vector2(41.0f, 45.0f), 8);
 
 		std::shared_ptr<Texture> Skeleton_RightTex
 			= Resources::Load<Texture>(L"Skeleton_RightTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Move\\Desert_Skeleton_Right_spr41458.png");
-		at->Create(L"Skeleton_Right", Skeleton_RightTex, Vector2(0.0f, 0.0f), Vector2(41.0f, 45.0f), 8);
+		at->Create(L"SkeletonRight", Skeleton_RightTex, Vector2(0.0f, 0.0f), Vector2(41.0f, 45.0f), 8);
 
 		//Attack Ani
 		std::shared_ptr<Texture> Skeleton_UpAtkTex
@@ -59,8 +61,6 @@ namespace ss
 		std::shared_ptr<Texture> Skeleton_LeftAtkTex
 			= Resources::Load<Texture>(L"Skeleton_LeftAtkTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Attack\\Desert_Skeleton_Left_Attack_spr614810.png");
 		at->Create(L"Skeleton_LeftAtk", Skeleton_LeftAtkTex, Vector2(0.0f, 0.0f), Vector2(61.0f, 48.0f), 10);
-
-		at->PlayAnimation(L"Skeleton_Down", true);
 	}
 	DesertSkeleton::~DesertSkeleton()
 	{

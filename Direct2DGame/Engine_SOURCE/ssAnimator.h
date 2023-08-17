@@ -44,10 +44,6 @@ namespace ss
 			, UINT columnLength
 			, Vector2 offset = Vector2::Zero
 			, float duration = 0.1f);
-		/*void CreateFromFolder(const std::wstring& path
-			, Vector2 size
-			, Vector2 offset = Vector2::Zero
-			, float duration = 0.1f);*/
 		Animation* FindAnimation(const std::wstring& name);
 		Events* FindEvents(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop);

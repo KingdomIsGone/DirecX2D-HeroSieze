@@ -15,10 +15,12 @@ namespace ss
 		virtual void Render() override;
 
 		Vector3 GetPos() { return mPos; }
+		Vector3 GetProjPos() { return mprojPos; }
 
 	private:
 		Transform* mTransform;
 		static Vector3 mPos;
+		static Vector3 mprojPos;
 		Vector3 mOffset;
 
 		class MeshRenderer* mMr;

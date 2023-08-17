@@ -13,6 +13,7 @@ namespace ss
 			Idle,
 			Chase,
 			Attack,
+			Dead,
 		};
 
 		enum class eDirState
@@ -32,6 +33,11 @@ namespace ss
 		void Chase();
 		void Attack();
 
+		void PlayMoveAni();
+
+		Vector3 ReverseMove();
+		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
+
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
@@ -40,6 +46,18 @@ namespace ss
 	private:
 		eState mState;
 		eDirState mDirState;
+
+		float mHp;
+		float mSpeed;
+		float mAgroDistance;
+
+		Vector3 mPos;
+		Vector3 mPlayerPos;
+
+		bool mXAccess;
+		bool mYAccess;
+		bool mIsColliding;
 	
+		class Animator* mAnimator;
 	};
 }

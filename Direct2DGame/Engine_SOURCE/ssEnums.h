@@ -24,6 +24,7 @@ namespace ss::enums
 		Grid,
 		Player,
 		Monster,
+		Projectile,
 		Light,
 		UI,
 		End = 16,

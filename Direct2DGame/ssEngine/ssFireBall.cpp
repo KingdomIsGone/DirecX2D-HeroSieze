@@ -4,12 +4,17 @@
 #include "ssAnimator.h"
 #include "ssTime.h"
 #include "ssCollider2D.h"
+#include "ssFireballScript.h"
 
 namespace ss
 {
 	FireBall::FireBall(float Degree)
 		: mDeleteTime(0.0f)
+		, mDamage(500.0f)
 	{
+		AddComponent<FireBallScript>();
+		SetName(L"FireBall");
+
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(Vector3(1.2f, 1.2f, 1.0f));
 
@@ -31,6 +36,7 @@ namespace ss
 		//degree 1.6f당 90도 회전
 		
 		mCollider = AddComponent<Collider2D>();
+		mCollider->SetCollideType(eCollideType::Projectile);
 		mCollider->SetSize(Vector2(0.2f, 0.1f));
 	}
 
@@ -60,7 +66,7 @@ namespace ss
 
 		mDeleteTime += Time::DeltaTime();
 
-		if (mDeleteTime > 5.0f)
+		if (mDeleteTime > 5.0f && mForInstance == false)
 			SetState(eState::Dead);
 	}
 

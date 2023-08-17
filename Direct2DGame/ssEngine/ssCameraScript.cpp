@@ -3,6 +3,8 @@
 #include "ssGameObject.h"
 #include "ssTime.h"
 #include "ssInput.h"
+#include "ssPlayerScript.h"
+#include "ssCamera.h"
 
 namespace ss
 {
@@ -11,8 +13,17 @@ namespace ss
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 
+		mPrevPos = mCurPos;
+		mCurPos = PlayerScript::GetPlayerPos();
 
-		if (Input::GetKey(eKeyCode::W))
+		mDistance = mPrevPos - mCurPos;
+
+		pos.x -= mDistance.x;
+		pos.y -= mDistance.y;
+
+		tr->SetPosition(pos);
+
+		/*if (Input::GetKey(eKeyCode::W))
 		{
 			pos.z += 5.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
@@ -43,5 +54,7 @@ namespace ss
 			tr->SetPosition(pos);
 		}
 
+		tr->SetPosition(pos);*/
 	}
+	
 }

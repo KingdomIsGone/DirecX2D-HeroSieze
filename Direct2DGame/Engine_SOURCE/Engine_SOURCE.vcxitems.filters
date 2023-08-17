@@ -100,6 +100,12 @@
     <Filter Include="Graphics\StructedBuffer">
       <UniqueIdentifier>{270b3255-59fa-4754-8f5d-b4043551bd4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\ParticleSystem">
+      <UniqueIdentifier>{48c64464-d6e1-41f3-942c-058f0e560501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS">
+      <UniqueIdentifier>{12f95a69-ce9a-4ec3-856e-c68ebc73d385}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -205,8 +211,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssStructedBuffer.h">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssPaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleSystem.h">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssPaintShader.h">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -297,8 +311,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssStructedBuffer.cpp">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssPaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleSystem.cpp">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssPaintShader.cpp">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)ssMath.inl">

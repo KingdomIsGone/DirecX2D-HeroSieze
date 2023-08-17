@@ -42,9 +42,12 @@ namespace renderer
 		UINT animationType;
 	};
 
-	CBUFFER(DebugCB, CBSLOT_DEBUG)
+	CBUFFER(ParticleCB, CBSLOT_PARTICLE)
 	{
-		Vector4 debugColor;
+		UINT elementCount;
+		float elpasedTime;
+		int padd;
+		int padd2;
 	};
 
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

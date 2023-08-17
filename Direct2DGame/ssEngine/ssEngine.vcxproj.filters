@@ -53,6 +53,15 @@
     <ClCompile Include="ssMonsterScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
+    <ClCompile Include="ssFireballScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMonsterHpScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ssPlayerCameraScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -108,6 +117,15 @@
       <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
     </ClInclude>
     <ClInclude Include="ssMonsterScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireballScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMonsterHpScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPlayerCameraScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>
