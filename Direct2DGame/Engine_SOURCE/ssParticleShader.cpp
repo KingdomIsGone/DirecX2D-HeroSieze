@@ -18,6 +18,7 @@ namespace ss::graphics
 	void ParticleShader::Binds()
 	{
 		mParticleBuffer->BindUAV(0);
+		mSharedBuffer->BindUAV(1);
 
 		mGroupX = mParticleBuffer->GetStride() / mThreadGroupCountX + 1;
 		mGroupY = 1;
@@ -27,6 +28,7 @@ namespace ss::graphics
 	void ParticleShader::Clear()
 	{
 		mParticleBuffer->Clear();
+		mSharedBuffer->Clear();
 	}
 
 	void ParticleShader::SetParticleBuffer(StructedBuffer* particleBuffer)
@@ -40,7 +42,8 @@ namespace ss::graphics
 
 		renderer::ParticleCB data = {};
 		data.elementCount = mParticleBuffer->GetStride();
-		data.elpasedTime = Time::DeltaTime();
+		data.elpasedTime = elapsedTime;
+		data.deltaTime = Time::DeltaTime();
 
 		cb->SetData(&data);
 		cb->Bind(eShaderStage::CS);

@@ -17,11 +17,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCursor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssFontWrapper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComponent.h" />
@@ -57,11 +62,16 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssAnimator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCursor.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssFmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssFontWrapper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComponent.cpp" />

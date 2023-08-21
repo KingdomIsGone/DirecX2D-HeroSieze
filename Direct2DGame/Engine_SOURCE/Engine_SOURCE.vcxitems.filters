@@ -106,6 +106,15 @@
     <Filter Include="Resource\Shader\CS">
       <UniqueIdentifier>{12f95a69-ce9a-4ec3-856e-c68ebc73d385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{5585cdb3-7577-4903-8dea-182971427334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FontWrapper">
+      <UniqueIdentifier>{6ee2f840-1f48-410a-9a61-261bddd44a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{d9573ede-7b72-4cc5-8556-46ecd68972ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -207,7 +216,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCursor.h">
       <Filter>GameObject\Cursor</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssLight.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssStructedBuffer.h">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
@@ -220,7 +228,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h">
       <Filter>Resource\Shader\CS</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssFmod.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioClip.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssAudioListener.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssFontWrapper.h">
+      <Filter>FontWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssLight.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -307,7 +335,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCursor.cpp">
       <Filter>GameObject\Cursor</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssLight.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssStructedBuffer.cpp">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
@@ -320,7 +347,27 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp">
       <Filter>Resource\Shader\CS</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssFmod.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioClip.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssAudioListener.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssFontWrapper.cpp">
+      <Filter>FontWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)ssMath.inl">

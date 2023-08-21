@@ -310,18 +310,28 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 
+		// Debug Buffer custom
+		constantBuffer[(UINT)eCBType::Debug] = new ConstantBuffer(eCBType::Debug);
+		constantBuffer[(UINT)eCBType::Debug]->Create(sizeof(DebugCB));
+
 		//ParticleCB
 		constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
 		constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
 
+		//NoiseCB
+		constantBuffer[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
+		constantBuffer[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
+
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
-		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr);
+		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);
+
 	}
 
 	void LoadShader()
 	{
 		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
+
 		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
 		ss::Resources::Insert(L"TriangleShader", shader);
@@ -373,6 +383,13 @@ namespace renderer
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
 		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
 		ss::Resources::Insert(L"PaintTexuture", uavTexture);
+
+		std::shared_ptr<Texture> particle = std::make_shared<Texture>();
+		Resources::Load<Texture>(L"CartoonSmoke", L"..\\Resources\\particle\\CartoonSmoke.png");
+
+		Resources::Load<Texture>(L"Noise01", L"..\\Resources\\noise\\noise_01.png");
+		Resources::Load<Texture>(L"Noise02", L"..\\Resources\\noise\\noise_02.png");
+		Resources::Load<Texture>(L"Noise03", L"..\\Resources\\noise\\noise_03.png");
 	}
 
 	void LoadMaterial()
@@ -397,10 +414,10 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", material);
 
-		shader
+		std::shared_ptr<Shader> AnimationShader
 			= Resources::Find<Shader>(L"SpriteAnimationShader");
 		material = std::make_shared<Material>();
-		material->SetShader(shader);
+		material->SetShader(AnimationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimationMaterial", material);
 
@@ -423,6 +440,10 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(shader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
+
+		std::shared_ptr<Texture> particleTexx
+			= Resources::Find<Texture>(L"CartoonSmoke");
+		material->SetTexture(particleTexx);
 		Resources::Insert(L"ParticleMaterial", material);
 
 		//std::shared_ptr<Shader> debugShader
@@ -433,6 +454,9 @@ namespace renderer
 		//Resources::Insert(L"PaintMaterial", material);
 
 		////UI
+		
+		shader
+			= Resources::Find<Shader>(L"SpriteShader");
 		//캐릭터 및 레벨창 z=1.01
 		{
 			{
@@ -579,6 +603,17 @@ namespace renderer
 			spriteMateiral->SetTexture(texture);
 			Resources::Insert(L"TownPortalMater", spriteMateiral);
 		}
+
+		//MonsterHpBar
+		{
+			std::shared_ptr<Texture> EnemyHpBarTex
+				= Resources::Load<Texture>(L"EnemyHpBarTex", L"..\\Resources\\Texture\\UI\\Enemy_HP_Bar_spr_0.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(shader);
+			spriteMateiral->SetTexture(EnemyHpBarTex);
+			Resources::Insert(L"EnemyHpBarMater", spriteMateiral);
+		}
+
 	}
 
 	void Initialize()
@@ -610,8 +645,33 @@ namespace renderer
 		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
+	void BindNoiseTexture()
+	{
+		std::shared_ptr<Texture> texture
+			= Resources::Find<Texture>(L"Noise01");
+
+		texture->BindShaderResource(eShaderStage::VS, 15);
+		texture->BindShaderResource(eShaderStage::HS, 15);
+		texture->BindShaderResource(eShaderStage::DS, 15);
+		texture->BindShaderResource(eShaderStage::GS, 15);
+		texture->BindShaderResource(eShaderStage::PS, 15);
+		texture->BindShaderResource(eShaderStage::CS, 15);
+
+		ConstantBuffer* cb = constantBuffer[(UINT)eCBType::Noise];
+		NoiseCB data = {};
+		data.size.x = texture->GetWidth();
+		data.size.y = texture->GetHeight();
+
+		cb->SetData(&data);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::GS);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
+	}
+
 	void Render()
 	{
+		BindNoiseTexture();
 		BindLights();
 
 		for (Camera* cam : cameras)

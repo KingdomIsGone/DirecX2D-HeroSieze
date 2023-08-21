@@ -51,6 +51,7 @@ namespace ss
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::Player, true);
 			camera->AddComponent<PlayerCameraScript>();
+			//renderer::mainCamera = cameraComp;
 		}
 
 		//UI Camera
@@ -62,9 +63,22 @@ namespace ss
 			renderer::cameras.push_back(cameraComp);
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
+		}
+
+		//Cursor Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::Cursor, true);
 			renderer::mainCamera = cameraComp;
 			camera->AddComponent<PlayerCameraScript>();
 		}
+
+		
 
 		//¶óÀÌÆ®
 		{
@@ -82,14 +96,15 @@ namespace ss
 		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 
 		cursor = new Cursor();
-		AddGameObject(eLayerType::UI, cursor);
+		AddGameObject(eLayerType::Cursor, cursor);
 
 		Indicator* indicator = new Indicator();
-		AddGameObject(eLayerType::UI, indicator);
+		AddGameObject(eLayerType::Cursor, indicator);
 
-		/*DesertSkeleton* deSkeleton = new DesertSkeleton();
+		DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.0f);*/
+		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.0f);
+
 		
 		//TextureSetting();
 		UI_Setting();

@@ -53,6 +53,7 @@ namespace ss::graphics
 		void BindRasterizeState(ID3D11RasterizerState* pRasterizerState);
 		void BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState);
 		void BindBlendState(ID3D11BlendState* pBlendState);
+		void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource);
 
 
 
@@ -66,6 +67,7 @@ namespace ss::graphics
 
 
 		ID3D11Device* GetID3D11Device() { return mDevice.Get(); }
+		ID3D11DeviceContext* GetID3D11DeviceContext() { return mContext.Get(); }
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice; 

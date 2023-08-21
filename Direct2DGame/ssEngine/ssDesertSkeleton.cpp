@@ -61,6 +61,11 @@ namespace ss
 		std::shared_ptr<Texture> Skeleton_LeftAtkTex
 			= Resources::Load<Texture>(L"Skeleton_LeftAtkTex", L"..\\Resources\\Texture\\Monster\\Desert_Skeleton\\Attack\\Desert_Skeleton_Left_Attack_spr614810.png");
 		at->Create(L"Skeleton_LeftAtk", Skeleton_LeftAtkTex, Vector2(0.0f, 0.0f), Vector2(61.0f, 48.0f), 10);
+
+
+
+		
+		
 	}
 	DesertSkeleton::~DesertSkeleton()
 	{

@@ -8,6 +8,8 @@
 #include "..\Engine_SOURCE\ssApplication.h"
 #include "..\Engine_SOURCE\ssRenderer.h"
 #include "..\Engine_SOURCE\ssResources.h"
+#include "..\Engine_SOURCE\ssFmod.h"
+#include "..\Engine_SOURCE\ssFontWrapper.h"
 #include "..\ssEngine\LoadScenes.h"
 #include "guiEditor.h"
 
@@ -81,6 +83,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     renderer::Release();
     ss::SceneManager::Release();
+    ss::Fmod::Release();
+    ss::FontWrapper::Release();
     gui::Editor::Release();
 
     _CrtDumpMemoryLeaks();

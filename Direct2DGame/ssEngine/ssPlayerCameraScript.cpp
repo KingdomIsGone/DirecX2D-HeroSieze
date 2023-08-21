@@ -20,9 +20,8 @@ namespace ss
 		pos.y -= mDistance.y;
 
 		tr->SetPosition(pos);*/
-
-		tr->SetPosition(PlayerScript::GetPlayerPos());
-
-		pos = tr->GetPosition();
+		Vector3 cameraPos = PlayerScript::GetPlayerPos();
+		cameraPos.z = -10.0f;
+		tr->SetPosition(cameraPos);
 	}
 }

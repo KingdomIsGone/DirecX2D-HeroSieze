@@ -15,6 +15,8 @@ namespace ss::enums
 		Script,
 		Light,
 		Camera,
+		AudioListener,
+		AudioSource,
 		End,
 	};
 
@@ -27,6 +29,7 @@ namespace ss::enums
 		Projectile,
 		Light,
 		UI,
+		Cursor,
 		End = 16,
 	};
 
@@ -38,6 +41,7 @@ namespace ss::enums
 		Mesh,
 		Animation,
 		ComputeShader,
+		AudioClip,
 		End,
 	};
 

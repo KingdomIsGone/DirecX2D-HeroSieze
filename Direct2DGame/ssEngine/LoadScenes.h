@@ -31,7 +31,7 @@ namespace ss
 		//SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
 		//SceneManager::CreateScene<DesertTownScene>(L"DesertTownScene");
 		SceneManager::CreateScene<DesertBossRoom>(L"DesertBossRoom");
-		SceneManager::CreateScene<UIScene>(L"UIScene");
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<UIScene>(L"UIScene");
 	}
 }

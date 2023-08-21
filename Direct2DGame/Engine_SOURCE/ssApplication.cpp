@@ -4,7 +4,8 @@
 #include "ssRenderer.h"
 #include "ssSceneManager.h"
 #include "ssCollisionManager.h"
-
+#include "ssFmod.h"
+#include "ssFontWrapper.h"
 
 namespace ss
 {
@@ -34,6 +35,8 @@ namespace ss
 	{
 		Time::Initiailize();
 		Input::Initialize();
+		Fmod::Initialize();
+		FontWrapper::Initialize();
 
 		renderer::Initialize();
 		SceneManager::Initialize();
@@ -54,11 +57,11 @@ namespace ss
 
 	void Application::Render()
 	{
-		Time::Render();
 
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
-		
+		Time::Render();
+		//FontWrapper::DrawFont(L"TEXT", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 		//SceneManager::Render();
 		renderer::Render();
 		//graphicDevice->Draw();

@@ -1,5 +1,6 @@
 #include "ssTime.h"
 #include "ssApplication.h"
+#include "ssFontWrapper.h"
 
 extern ss::Application application;
 
@@ -33,20 +34,23 @@ namespace ss
 
 	void Time::Render()
 	{
-		mSecond += mDeltaTime;
+		//ÆùÆ®
+		//mSecond += mDeltaTime;
+		//wchar_t szFloat[50] = L"BIN";
+		//if (mSecond > 1.0f)
+		//{
+		//	HWND hWnd = application.GetHwnd();
 
-		if (mSecond > 1.0f)
-		{
-			HWND hWnd = application.GetHwnd();
+		//	
+		//	float FPS = 1.0f / (float)mDeltaTime;
+		//	swprintf_s(szFloat, 50, L"FPS : %d", (UINT)FPS);
+		//	//int iLen = wcsnlen_s(szFloat, 50);
+		//	SetWindowText(hWnd, szFloat);
+		//	
+		//	//TextOut(hdc, 0, 0, szFloat, 20);
+		//	mSecond = 0.0f;
+		//}
 
-			wchar_t szFloat[50] = {};
-			float FPS = 1.0f / (float)mDeltaTime;
-			swprintf_s(szFloat, 50, L"FPS : %d", (UINT)FPS);
-			//int iLen = wcsnlen_s(szFloat, 50);
-			SetWindowText(hWnd, szFloat);
-			
-			//TextOut(hdc, 0, 0, szFloat, 20);
-			mSecond = 0.0f;
-		}
+		//FontWrapper::DrawFont(szFloat, 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 	}
 }
