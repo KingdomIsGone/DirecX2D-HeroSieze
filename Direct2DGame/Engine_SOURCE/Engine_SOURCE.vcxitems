@@ -24,7 +24,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssComputeShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ssCursor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssFontWrapper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssGameObject.h" />
@@ -69,7 +68,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssComputeShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ssCursor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssFontWrapper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssGameObject.cpp" />

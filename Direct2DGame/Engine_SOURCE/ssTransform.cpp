@@ -48,6 +48,8 @@ namespace ss
 		mFoward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
 
+
+
 		if (mParent)
 		{
 			mWorld *= mParent->mWorld;
@@ -75,4 +77,27 @@ namespace ss
 		cb->Bind(eShaderStage::PS);
 	}
 
+	Matrix& Transform::GetCenterAppliedMatrix(Vector3 centerApplied)
+	{
+		mWorld = Matrix::Identity;
+
+		Matrix scale = Matrix::CreateScale(mScale);
+
+		Matrix rotation;
+		rotation = Matrix::CreateRotationX(mRotation.x);
+		rotation *= Matrix::CreateRotationY(mRotation.y);
+		rotation *= Matrix::CreateRotationZ(mRotation.z);
+
+		Matrix position;
+		position.Translation(centerApplied);
+
+		Matrix TempWorld = scale * rotation * position;
+
+		if (mParent)
+		{
+			TempWorld *= mParent->mWorld;
+		}
+
+		return TempWorld;
+	}
 }

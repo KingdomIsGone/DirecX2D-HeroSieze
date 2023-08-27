@@ -5,38 +5,40 @@
 
 namespace ss
 {
-	class MonsterScript : public Script
+	class AnubisScript : public Script
 	{
 	public:
 		enum class eState
 		{
+			Sleep,
 			Idle,
-			Chase,
-			Attack,
+			ChargedBolt,
+			ChargedBoltTwin,
+			ChainLight,
+			CreateSarco,
 			Dead,
 		};
-
-		enum class eDirState
-		{
-			Up,
-			Down,
-			Left,
-			Right,
-		};
-		MonsterScript();
-		~MonsterScript();
+	
+		AnubisScript();
+		~AnubisScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 
 		void Idle();
-		void Chase();
-		void Attack();
 
-		void PlayMoveAni();
+		void ChargedBolts(bool isVertical);
+		void ChargedTwinBolts();
+		void ChainLights();
+		void ChainLightsTrifle();
+		void CreateSarco();
 
-		Vector3 ReverseMove();
-		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
+		void ChangeHP(float value) { mHp += value; }
+		float GetHP() { return mHp; }
+
+		void PlayIdleAni() { mAnimator->PlayAnimation(L"Anubis_Down", true); }
+
+		static void SarcoDefeat() { mSarcoCount--; }
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
@@ -45,19 +47,29 @@ namespace ss
 
 	private:
 		eState mState;
-		eDirState mDirState;
 
 		float mHp;
 		float mSpeed;
 		float mAgroDistance;
+		float mCoolTime;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;
 
+		Vector3 mChainPos[12];
+		float mChainTime;
+		UINT mChainStage;
+		UINT mChainCount;
+
 		bool mXAccess;
 		bool mYAccess;
 		bool mIsColliding;
-	
+
+		UINT mPatternCount;
+		float mPatternTime;
+
+		static UINT mSarcoCount;
+
 		class Animator* mAnimator;
 	};
 }

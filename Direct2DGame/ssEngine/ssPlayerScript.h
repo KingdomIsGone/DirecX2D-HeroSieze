@@ -8,6 +8,16 @@ namespace ss
 	class PlayerScript : public Script
 	{
 	public:
+		PlayerScript();
+		~PlayerScript();
+
+		virtual void Initialize() override;
+		virtual void Update() override;
+
+		virtual void OnCollisionEnter(Collider2D* other) override;
+		virtual void OnCollisionStay(Collider2D* other) override;
+		virtual void OnCollisionExit(Collider2D* other) override;
+
 		enum class eState
 		{
 			Idle,
@@ -15,7 +25,7 @@ namespace ss
 			ClickMove,
 			Attack,
 		};
-	
+
 		enum class eDirState
 		{
 			Up,
@@ -23,12 +33,6 @@ namespace ss
 			Left,
 			Right,
 		};
-		PlayerScript();
-		~PlayerScript();
-
-
-		virtual void Initialize() override;
-		virtual void Update() override;
 
 		void Complete();
 
@@ -43,23 +47,19 @@ namespace ss
 		void AttackAni(Vector3 playerpos, Vector3 point);
 		void AttackFireBall(Vector3 playerpos, Vector3 point);
 
-
 		Vector3 ReverseMove(Vector3 playerpos, Vector3 point);
 		float CalculateMoveDegree(Vector3 playerpos, Vector3 point);
 
 		Vector3 Project(Vector3 pos);
 		Vector3 UnProject(Vector3 pos);
 
+		float GetHp() { return mCurHp; }
+		void ChangeHp(float value) { mCurHp += value; }
+
 		static Vector3 GetPlayerPos() { return mPlayerPos; }
 		static void SetPlayerPos(Vector3 pos) { mPlayerPos = pos; }
 		static float GetPlayerSpeed() { return mSpeed; }
 		static Vector3 GetPoint() { return mPoint; }
-
-		virtual void OnCollisionEnter(Collider2D* other) override;
-		virtual void OnCollisionStay(Collider2D* other) override;
-		virtual void OnCollisionExit(Collider2D* other) override;
-		
-
 
 	private:
 		static Vector3 mPlayerPos;
@@ -69,6 +69,8 @@ namespace ss
 
 		eState mState;
 		eDirState mDirState;
+
+		float mCurHp;
 		
 		class Cursor* mCursor;
 		class Indicator* mIndicator;

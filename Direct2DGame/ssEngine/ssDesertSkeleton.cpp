@@ -4,28 +4,31 @@
 #include "ssResources.h"
 #include "ssAnimator.h"
 #include "ssCollider2D.h"
-#include "ssMonsterScript.h"
-#include "ssMonsterHpScript.h"
+#include "ssSkeletonScript.h"
+#include "ssEnemyHpBar.h"
+#include "ssEnemyHpBarFill.h"
 
 namespace ss
 {
 	DesertSkeleton::DesertSkeleton()
+		: mCurHp(1000.0f)
+		, mPrevHp(1000.0f)
 	{
-		AddComponent<MonsterScript>();
-		AddComponent<MonsterHpScript>()->ModifyHp(1000.0f);
+		SetName(L"Skeleton");
+		mMScript = AddComponent<SkeletonScript>();
 
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
 		Collider2D* collider = AddComponent<Collider2D>();
 		collider->SetCollideType(eCollideType::NormalMonster);
 		collider->SetSize(Vector2(0.15f, 0.24f));
+		collider->SetCenter(Vector2(-0.00f, 0.0f));
 
 		//렌더, 애니메이터 세팅
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 
-		Texture* texture = new Texture();
 		Animator* at = AddComponent<Animator>();
 
 		//Move Ani
@@ -65,10 +68,21 @@ namespace ss
 
 
 		
-		
+		//hp바, fill
+		mHpBar = new EnemyHpBar();
+		mTransform = GetComponent<Transform>();
+		mHpBar->GetComponent<Transform>()->SetParent(mTransform);
+		AddOtherGameObject(mHpBar, eLayerType::MonsterUI);
+
+		mHpBarFill = new EnemyHpBarFill();
+		mHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
+		Vector3 tempPos2 = mHpBarFill->GetComponent<Transform>()->GetPosition();
+		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 	}
 	DesertSkeleton::~DesertSkeleton()
 	{
+		mHpBar->SetState(eState::Dead);
+		mHpBarFill->SetState(eState::Dead);
 	}
 	void DesertSkeleton::Initialize()
 	{                              
@@ -77,6 +91,15 @@ namespace ss
 	void DesertSkeleton::Update()
 	{
 		GameObject::Update();
+
+		mCurHp = mMScript->GetHP();
+		if (mCurHp != mPrevHp)
+		{
+			mHpBarFill->ChangeHP(mCurHp);
+
+			mPrevHp = mCurHp;
+		}
+		
 	}
 	void DesertSkeleton::LateUpdate()
 	{

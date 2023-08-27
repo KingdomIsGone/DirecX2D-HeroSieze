@@ -26,6 +26,7 @@ namespace ss
 		, mPrevDegree(0.0f)
 		, mCollideXaxisCount(0)
 		, mCollideYaxisCount(0)
+		, mCurHp(3000.0f)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -49,7 +50,6 @@ namespace ss
 
 	void PlayerScript::Update()
 	{
-		GetOwner()->GetComponent<Transform>()->SetPosition(mPlayerPos);
 		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
 		switch (mState)
@@ -68,6 +68,11 @@ namespace ss
 			break;
 		default:
 			break;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::P))
+		{
+			mCurHp -= 500.0f;
 		}
 	}
 
@@ -284,7 +289,7 @@ namespace ss
 		SetPlayerPos(playerpos);
 		GetOwner()->GetComponent<Transform>()->SetPosition(playerpos);
 
-		if (abs(playerpos.x - point.x) <0.0001f && abs(playerpos.y - point.y) < 0.0001f && mIsColliding == false)
+		if (abs(playerpos.x - point.x) <0.001f && abs(playerpos.y - point.y) < 0.001f && mIsColliding == false)
 		{
 			mState = eState::Idle;
 			mIsMoving = false;

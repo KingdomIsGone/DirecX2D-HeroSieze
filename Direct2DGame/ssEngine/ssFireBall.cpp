@@ -10,7 +10,6 @@ namespace ss
 {
 	FireBall::FireBall(float Degree)
 		: mDeleteTime(0.0f)
-		, mDamage(500.0f)
 	{
 		AddComponent<FireBallScript>();
 		SetName(L"FireBall");

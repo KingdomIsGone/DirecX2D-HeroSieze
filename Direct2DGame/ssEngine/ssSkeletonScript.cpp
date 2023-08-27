@@ -1,64 +1,63 @@
-#include "ssMonsterScript.h"
+#include "ssSkeletonScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
-#include "ssMonsterHpScript.h"
 
 namespace ss
 {
-	MonsterScript::MonsterScript()
-		: mAgroDistance(100.0f)
+	SkeletonScript::SkeletonScript()
+		: mAgroDistance(1.5f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
 	{
 	}
-	MonsterScript::~MonsterScript()
+	SkeletonScript::~SkeletonScript()
 	{
 	}
-	void MonsterScript::Initialize()
+	void SkeletonScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 	}
 
-	void MonsterScript::Update()
+	void SkeletonScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		if (GetOwner()->GetComponent<MonsterHpScript>()->GetHp() <= 0)
+		if (mHp <= 0)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
 		}
 
 		switch (mState)
 		{
-		case ss::MonsterScript::eState::Idle:
+		case ss::SkeletonScript::eState::Idle:
 			Idle();
 			break;
-		case ss::MonsterScript::eState::Chase:
+		case ss::SkeletonScript::eState::Chase:
 			Chase();
 			break;
-		case ss::MonsterScript::eState::Attack:
+		case ss::SkeletonScript::eState::Attack:
 			Attack();
 			break;
-		case ss::MonsterScript::eState::Dead:
+		case ss::SkeletonScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void MonsterScript::Idle()
+	void SkeletonScript::Idle()
 	{
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void MonsterScript::Chase()
+	void SkeletonScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -83,22 +82,22 @@ namespace ss
 			mState = eState::Attack;*/
 	}
 
-	void MonsterScript::Attack()
+	void SkeletonScript::Attack()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		switch (mDirState)
 		{
-		case ss::MonsterScript::eDirState::Up:
+		case ss::SkeletonScript::eDirState::Up:
 			mAnimator->PlayAnimation(L"Skeleton_UpAtk", true);
 			break;
-		case ss::MonsterScript::eDirState::Down:
+		case ss::SkeletonScript::eDirState::Down:
 			mAnimator->PlayAnimation(L"Skeleton_DownAtk", true);
 			break;
-		case ss::MonsterScript::eDirState::Left:
+		case ss::SkeletonScript::eDirState::Left:
 			mAnimator->PlayAnimation(L"Skeleton_LeftAtk", true);
 			break;
-		case ss::MonsterScript::eDirState::Right:
+		case ss::SkeletonScript::eDirState::Right:
 			mAnimator->PlayAnimation(L"Skeleton_RightAtk", true);
 			break;
 		default:
@@ -111,7 +110,7 @@ namespace ss
 			mState = eState::Chase;
 	}
 
-	void MonsterScript::PlayMoveAni()
+	void SkeletonScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -135,16 +134,16 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
 		{
-		case ss::MonsterScript::eDirState::Up:
+		case ss::SkeletonScript::eDirState::Up:
 			mAnimator->PlayAnimation(L"SkeletonUp", true);
 			break;
-		case ss::MonsterScript::eDirState::Down:
+		case ss::SkeletonScript::eDirState::Down:
 			mAnimator->PlayAnimation(L"SkeletonDown", true);
 			break;
-		case ss::MonsterScript::eDirState::Left:
+		case ss::SkeletonScript::eDirState::Left:
 			mAnimator->PlayAnimation(L"SkeletonLeft", true);
 			break;
-		case ss::MonsterScript::eDirState::Right:
+		case ss::SkeletonScript::eDirState::Right:
 			mAnimator->PlayAnimation(L"SkeletonRight", true);
 			break;
 		default:
@@ -152,7 +151,7 @@ namespace ss
 		}
 	}
 
-	Vector3 MonsterScript::ReverseMove()
+	Vector3 SkeletonScript::ReverseMove()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x -= mSpeed * Time::DeltaTime();
@@ -167,14 +166,14 @@ namespace ss
 		return mPos;
 	}
 
-	float MonsterScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float SkeletonScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
 	}
 
-	void MonsterScript::OnCollisionEnter(Collider2D* other)
+	void SkeletonScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
@@ -187,12 +186,12 @@ namespace ss
 			}
 		}*/
 	}
-	void MonsterScript::OnCollisionStay(Collider2D* other)
+	void SkeletonScript::OnCollisionStay(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
 	}
-	void MonsterScript::OnCollisionExit(Collider2D* other)
+	void SkeletonScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

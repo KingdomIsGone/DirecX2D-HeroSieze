@@ -129,8 +129,19 @@ namespace ss
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		Matrix leftMatrix = leftTr->GetMatrix();
-		Matrix rightMatrix = rightTr->GetMatrix();
+		//custom
+		Vector3 leftTempPos = leftTr->GetPosition();
+		leftTempPos.x += left->GetCenter().x;
+		leftTempPos.y += left->GetCenter().y;
+		Vector3 rightTempPos = rightTr->GetPosition();
+		rightTempPos.x += right->GetCenter().x;
+		rightTempPos.y += right->GetCenter().y;
+
+		Matrix leftMatrix = leftTr->GetCenterAppliedMatrix(leftTempPos);
+		Matrix rightMatrix = rightTr->GetCenterAppliedMatrix(rightTempPos);
+
+		//Matrix leftMatrix = leftTr->GetMatrix();
+		//Matrix rightMatrix = rightTr->GetMatrix();
 
 		Vector3 Axis[4] = {};
 
@@ -156,7 +167,9 @@ namespace ss
 		for (size_t i = 0; i < 4; i++)
 			Axis[i].z = 0.0f;
 
-		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		//Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		//cutsom
+		Vector3 vc = leftTempPos - rightTempPos;
 		vc.z = 0.0f;
 
 		Vector3 centerDir = vc;

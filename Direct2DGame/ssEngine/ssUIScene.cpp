@@ -17,6 +17,11 @@
 #include "ssDesertSkeleton.h"
 #include "ssCollisionManager.h"
 #include "ssPlayerCameraScript.h"
+#include "ssAnubis.h"
+#include "ssChargedBolt.h"
+#include "ssChainLightening.h"
+#include "ssMummy.h"
+#include "ssSarcophagus.h"
 
 namespace ss
 {
@@ -101,17 +106,49 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::Cursor, indicator);
 
-		DesertSkeleton* deSkeleton = new DesertSkeleton();
+	/*	DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.0f);
+		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
 
+		Mummy* mummy = new Mummy();
+		AddGameObject(eLayerType::Monster, mummy);
+		mummy->GetComponent<Transform>()->SetPosition(1.0f, -1.0f, 1.02f);
+
+		Sarcophagus* sarco = new Sarcophagus();
+		AddGameObject(eLayerType::Monster, sarco);
+		sarco->GetComponent<Transform>()->SetPosition(1.0f, -1.4f, 1.02f);
+
+		Anubis* anubis = new Anubis();
+		AddGameObject(eLayerType::Monster, anubis);
+		anubis->GetComponent<Transform>()->SetPosition(-2.0f, 0.0f, 1.02f);
+
+		ChargedBolt* bolt = new ChargedBolt(false);
+		AddGameObject(eLayerType::Projectile, bolt);
+		bolt->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.02f);
+
+		ChainLightening* chain = new ChainLightening();
+		AddGameObject(eLayerType::EnemyProjectile, chain);
+		chain->GetComponent<Transform>()->SetPosition(1.0f, 1.0f, 1.02f);
+
+		/*GameObject* obj = new GameObject();
+		obj->AddComponent<Collider2D>();
+		AddGameObject(eLayerType::Monster, obj);*/
+		
 		
 		//TextureSetting();
 		UI_Setting();
 
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon1, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon2, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::EnemyProjectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Summon2, true);
 
 
 		//¹è°æ z=1.1f

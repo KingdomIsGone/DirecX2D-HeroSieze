@@ -5,23 +5,22 @@
 
 namespace ss
 {
-	class MonsterHpScript : public Script
+	class DamageScript : public Script
 	{
 	public:
-		MonsterHpScript();
-		~MonsterHpScript();
+		DamageScript();
+		~DamageScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
+
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
 
-		void ModifyHp(float modifier) { mHp += modifier; }
-		float GetHp() { return mHp; }
 
 	private:
-		float mHp;
+		
 	};
 }

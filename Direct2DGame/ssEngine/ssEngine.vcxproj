@@ -153,8 +153,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine_SOURCE\ssCursor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="ssAnubis.h" />
+    <ClInclude Include="ssAnubisScript.h" />
+    <ClInclude Include="ssChainLightening.h" />
+    <ClInclude Include="ssChargedBolt.h" />
     <ClInclude Include="ssDesertBossRoom.h" />
     <ClInclude Include="ssDesertDungeon1.h" />
     <ClInclude Include="ssDesertDungeon2.h" />
@@ -162,15 +167,21 @@
     <ClInclude Include="ssDesertSkeleton.h" />
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
+    <ClInclude Include="ssEnemyHpBarFill.h" />
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssIndicator.h" />
-    <ClInclude Include="ssMonsterHpScript.h" />
-    <ClInclude Include="ssMonsterScript.h" />
+    <ClInclude Include="ssDamageScript.h" />
+    <ClInclude Include="ssMummy.h" />
+    <ClInclude Include="ssMummyScript.h" />
+    <ClInclude Include="ssSarcophagus.h" />
+    <ClInclude Include="ssSkeletonScript.h" />
     <ClInclude Include="ssPlayer.h" />
     <ClInclude Include="ssPlayerCameraScript.h" />
     <ClInclude Include="ssPlayerScript.h" />
+    <ClInclude Include="ssP_HpSmallBar.h" />
+    <ClInclude Include="ssP_HpSmallBarFill.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
@@ -178,6 +189,11 @@
     <ClInclude Include="ssWoodsField.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp" />
+    <ClCompile Include="ssAnubis.cpp" />
+    <ClCompile Include="ssAnubisScript.cpp" />
+    <ClCompile Include="ssChainLightening.cpp" />
+    <ClCompile Include="ssChargedBolt.cpp" />
     <ClCompile Include="ssDesertBossRoom.cpp" />
     <ClCompile Include="ssDesertDungeon1.cpp" />
     <ClCompile Include="ssDesertDungeon2.cpp" />
@@ -185,15 +201,21 @@
     <ClCompile Include="ssDesertSkeleton.cpp" />
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />
+    <ClCompile Include="ssEnemyHpBarFill.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssIndicator.cpp" />
-    <ClCompile Include="ssMonsterHpScript.cpp" />
-    <ClCompile Include="ssMonsterScript.cpp" />
+    <ClCompile Include="ssDamageScript.cpp" />
+    <ClCompile Include="ssMummy.cpp" />
+    <ClCompile Include="ssMummyScript.cpp" />
+    <ClCompile Include="ssSarcophagus.cpp" />
+    <ClCompile Include="ssSkeletonScript.cpp" />
     <ClCompile Include="ssPlayer.cpp" />
     <ClCompile Include="ssPlayerCameraScript.cpp" />
     <ClCompile Include="ssPlayerScript.cpp" />
+    <ClCompile Include="ssP_HpSmallBar.cpp" />
+    <ClCompile Include="ssP_HpSmallBarFill.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />

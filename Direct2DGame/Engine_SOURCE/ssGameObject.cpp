@@ -30,6 +30,15 @@ namespace ss
 			delete script;
 			script = nullptr;
 		}
+
+		for (OtherGameObject* object : mGameObjects)
+		{
+			if (object == nullptr)
+				continue;
+
+			delete object;
+			object = nullptr;
+		}
 	}
 
 	void GameObject::Initialize()
@@ -48,6 +57,11 @@ namespace ss
 		{
 			script->Update();
 		}
+
+		for (OtherGameObject* object : mGameObjects)
+		{
+			object->gameObject->Update();
+		}
 	}
 
 	void GameObject::LateUpdate()
@@ -60,6 +74,11 @@ namespace ss
 		for (Script* script : mScripts)
 		{
 			script->LateUpdate();
+		}
+
+		for (OtherGameObject* object : mGameObjects)
+		{
+			object->gameObject->LateUpdate();
 		}
 	}
 
@@ -74,6 +93,11 @@ namespace ss
 		for (Script* script : mScripts)
 		{
 			script->Render();
+		}
+
+		for (OtherGameObject* object : mGameObjects)
+		{
+			object->gameObject->Render();
 		}
 	}
 }

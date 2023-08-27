@@ -32,6 +32,8 @@ float4 main(VSOut In) : SV_TARGET
     
     color *= lightColor;
     
+    //if (In.UV.x < 0.5f)
+    //    discard;
     
     return color;
 }

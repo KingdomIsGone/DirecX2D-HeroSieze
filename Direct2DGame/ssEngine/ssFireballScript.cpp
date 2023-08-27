@@ -1,11 +1,13 @@
 #include "ssFireballScript.h"
 #include "ssGameObject.h"
-#include "ssMonsterHpScript.h"
+#include "ssSkeletonScript.h"
+#include "ssMummyScript.h"
+#include "ssSarcophagus.h"
 
 namespace ss
 {
 	FireBallScript::FireBallScript()
-		: mDamage(500.0f)
+		: mDamage(200.0f)
 	{
 	}
 	FireBallScript::~FireBallScript()
@@ -27,7 +29,12 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			other->GetOwner()->GetComponent<MonsterHpScript>()->ModifyHp(-mDamage);
+			if (other->GetOwner()->GetName() == L"Skeleton")
+				other->GetOwner()->GetComponent<SkeletonScript>()->ChangeHP(-mDamage);
+			else if (other->GetOwner()->GetName() == L"Mummy")
+				other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
+			else if (other->GetOwner()->GetName() == L"Sarcophagus")
+				dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
 		}
 
 		if (other->GetCollideType() != eCollideType::Player)

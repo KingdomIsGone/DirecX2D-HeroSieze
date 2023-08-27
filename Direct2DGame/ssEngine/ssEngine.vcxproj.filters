@@ -50,20 +50,53 @@
     <ClCompile Include="ssDesertSkeleton.cpp">
       <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
     </ClCompile>
-    <ClCompile Include="ssMonsterScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="ssFireballScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="ssMonsterHpScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
     <ClCompile Include="ssPlayerCameraScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="ssEnemyHpBar.cpp">
       <Filter>Contents\Object\UI\EnemyHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireballScript.cpp">
+      <Filter>Contents\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ssEnemyHpBarFill.cpp">
+      <Filter>Contents\Object\UI\EnemyHpBarFill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp">
+      <Filter>Contents\Object\UI\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="ssP_HpSmallBar.cpp">
+      <Filter>Contents\Object\UI\PlayerHpSmallBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ssP_HpSmallBarFill.cpp">
+      <Filter>Contents\Object\UI\PlayerHpSmallBarFill</Filter>
+    </ClCompile>
+    <ClCompile Include="ssAnubis.cpp">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClCompile>
+    <ClCompile Include="ssAnubisScript.cpp">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClCompile>
+    <ClCompile Include="ssChargedBolt.cpp">
+      <Filter>Contents\Object\Boss\Anubis\Skill\ChargedBolt</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDamageScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ssChainLightening.cpp">
+      <Filter>Contents\Object\Boss\Anubis\Skill\ChainLightening</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMummy.cpp">
+      <Filter>Contents\Object\Monster\Mummy</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMummyScript.cpp">
+      <Filter>Contents\Object\Monster\Mummy</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSkeletonScript.cpp">
+      <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSarcophagus.cpp">
+      <Filter>Contents\Object\Monster\Sarcophagus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,20 +152,53 @@
     <ClInclude Include="ssDesertSkeleton.h">
       <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
     </ClInclude>
-    <ClInclude Include="ssMonsterScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="ssFireballScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="ssMonsterHpScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
     <ClInclude Include="ssPlayerCameraScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="ssEnemyHpBar.h">
       <Filter>Contents\Object\UI\EnemyHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireballScript.h">
+      <Filter>Contents\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ssEnemyHpBarFill.h">
+      <Filter>Contents\Object\UI\EnemyHpBarFill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine_SOURCE\ssCursor.h">
+      <Filter>Contents\Object\UI\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="ssP_HpSmallBar.h">
+      <Filter>Contents\Object\UI\PlayerHpSmallBar</Filter>
+    </ClInclude>
+    <ClInclude Include="ssP_HpSmallBarFill.h">
+      <Filter>Contents\Object\UI\PlayerHpSmallBarFill</Filter>
+    </ClInclude>
+    <ClInclude Include="ssAnubis.h">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClInclude>
+    <ClInclude Include="ssAnubisScript.h">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClInclude>
+    <ClInclude Include="ssChargedBolt.h">
+      <Filter>Contents\Object\Boss\Anubis\Skill\ChargedBolt</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDamageScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ssChainLightening.h">
+      <Filter>Contents\Object\Boss\Anubis\Skill\ChainLightening</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMummy.h">
+      <Filter>Contents\Object\Monster\Mummy</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMummyScript.h">
+      <Filter>Contents\Object\Monster\Mummy</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSkeletonScript.h">
+      <Filter>Contents\Object\Monster\DesertSkeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSarcophagus.h">
+      <Filter>Contents\Object\Monster\Sarcophagus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +237,39 @@
     </Filter>
     <Filter Include="Contents\Object\UI\EnemyHpBar">
       <UniqueIdentifier>{07f34e6e-e83e-4833-831b-9398af9aa5ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\EnemyHpBarFill">
+      <UniqueIdentifier>{0ff8fdac-329a-4bc9-ae86-edc00fa8474d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Cursor">
+      <UniqueIdentifier>{dab573e5-d019-4cc5-9d9c-c5a03903bb88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\PlayerHpSmallBar">
+      <UniqueIdentifier>{34dc475a-4b83-435f-b94b-50c1fb43bf28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\PlayerHpSmallBarFill">
+      <UniqueIdentifier>{8eb67099-b820-40f7-825d-66b17210864e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss">
+      <UniqueIdentifier>{4f47d233-1624-44a9-867f-9fd43bd155c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Anubis">
+      <UniqueIdentifier>{a7dd9118-2c7b-4de8-8ce8-1f1ce9a838c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Anubis\Skill">
+      <UniqueIdentifier>{b4d18031-9dfb-4ea8-8b12-a52f43fcb4a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Anubis\Skill\ChargedBolt">
+      <UniqueIdentifier>{24c8a862-1494-4a27-beee-cc4f22a6e06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Anubis\Skill\ChainLightening">
+      <UniqueIdentifier>{92c216cd-7623-4c8e-8cda-7c15ec13a660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\Mummy">
+      <UniqueIdentifier>{0e91203a-51a7-4dea-a3c1-00884945499c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\Sarcophagus">
+      <UniqueIdentifier>{e47cbf4d-81d9-4f16-b285-bc3f37110e10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

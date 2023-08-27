@@ -19,5 +19,12 @@ namespace ss
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
+
+		float mCurHp;
+		float mPrevHp;
+
+		class PlayerScript* mScript;
+		class P_HpSmallBar* mSmallHpBar;
+		class P_HpSmallBarFill* mSmallHpBarFill;
 	};
 }

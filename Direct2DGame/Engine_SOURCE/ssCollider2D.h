@@ -24,6 +24,7 @@ namespace ss
 		Vector2 GetSize() { return mSize; }
 		void SetSize(Vector2 size) { mSize = size; }
 		void SetCenter(Vector2 size) { mCenter = size; }
+		Vector2 GetCenter() { return mCenter; }
 		UINT GetColliderID() { return mColliderID; }
 		static bool GetIsCollide() { return mIsCollide; }
 

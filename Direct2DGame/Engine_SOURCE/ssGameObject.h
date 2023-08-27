@@ -96,9 +96,26 @@ namespace ss
 
 		std::vector<Component*> GetComponentVector() { return mComponents; }
 
+		//custom
+		struct OtherGameObject
+		{
+			GameObject* gameObject;
+			eLayerType layerType;
+		};
+
+		void AddOtherGameObject(GameObject* obj, eLayerType type)
+		{
+			OtherGameObject* otherGameobject = new OtherGameObject();
+			otherGameobject->gameObject = obj;
+			otherGameobject->layerType = type;
+			mGameObjects.push_back(otherGameobject);
+		}
+		std::vector<OtherGameObject*> GetOtherGameObjects() { return mGameObjects; }
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
 		std::vector<Script*> mScripts;
+		std::vector<OtherGameObject*> mGameObjects;
 	};
 }

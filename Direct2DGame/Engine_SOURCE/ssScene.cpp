@@ -60,6 +60,13 @@ namespace ss
 	void Scene::AddGameObject(eLayerType type, GameObject* gameObj)
 	{
 		mLayers[(int)type].AddGameObject(gameObj);
+
+		auto gameObjects = gameObj->GetOtherGameObjects();
+		for (auto otherGameObject : gameObjects)
+		{
+			mLayers[(int)otherGameObject->layerType].AddGameObject(otherGameObject->gameObject);
+		}
+		
 	}
 	void Scene::AddGameObjectToActiveScene(eLayerType type, GameObject* gameObj)
 	{

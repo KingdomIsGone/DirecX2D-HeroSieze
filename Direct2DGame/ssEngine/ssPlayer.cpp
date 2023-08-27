@@ -5,13 +5,17 @@
 #include "ssCamera.h"
 #include "ssAnimator.h"
 #include "ssPlayerScript.h"
+#include "ssP_HpSmallBar.h"
+#include "ssP_HpSmallBarFill.h"
 
 namespace ss
 {
 	Player::Player()
+		: mCurHp(3000.0f)
+		, mPrevHp(3000.0f)
 	{
 		mTransform = GetComponent<Transform>();
-		AddComponent<PlayerScript>();
+		mScript = AddComponent<PlayerScript>();
 
 		std::shared_ptr<Shader> spriteShader
 			= Resources::Find<Shader>(L"SpriteShader");
@@ -89,6 +93,17 @@ namespace ss
 				, Vector2(0.0f, -0.02f), 0.05f);
 		}
 	
+		//hp¹Ù, fill
+		mSmallHpBar = new P_HpSmallBar();
+		mTransform = GetComponent<Transform>();
+		mSmallHpBar->GetComponent<Transform>()->SetParent(mTransform);
+		AddOtherGameObject(mSmallHpBar, eLayerType::MonsterUI);
+
+		mSmallHpBarFill = new P_HpSmallBarFill();
+		mSmallHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
+		Vector3 tempPos2 = mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
+		AddOtherGameObject(mSmallHpBarFill, eLayerType::MonsterUI);
+
 	}
 
 	Player::~Player()
@@ -101,6 +116,15 @@ namespace ss
 	void Player::Update()
 	{
 		GameObject::Update();
+
+		mCurHp = mScript->GetHp();
+		if (mCurHp != mPrevHp)
+		{
+			mSmallHpBarFill->ChangeHP(mCurHp);
+
+			mPrevHp = mCurHp;
+		}
+
 	}
 	void Player::LateUpdate()
 	{

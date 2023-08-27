@@ -397,7 +397,6 @@ namespace renderer
 		std::shared_ptr<Shader> shader
 			= Resources::Find<Shader>(L"SpriteShader");
 
-
 		std::shared_ptr<Texture> texture
 			= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
@@ -603,15 +602,54 @@ namespace renderer
 			spriteMateiral->SetTexture(texture);
 			Resources::Insert(L"TownPortalMater", spriteMateiral);
 		}
-
-		//MonsterHpBar
+		std::shared_ptr<Shader> SpShader = Resources::Find<Shader>(L"SpriteShader");
+		//MonsterHpBar, fill
 		{
 			std::shared_ptr<Texture> EnemyHpBarTex
 				= Resources::Load<Texture>(L"EnemyHpBarTex", L"..\\Resources\\Texture\\UI\\Enemy_HP_Bar_spr_0.png");
 			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(shader);
+			spriteMateiral->SetShader(SpShader);
 			spriteMateiral->SetTexture(EnemyHpBarTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"EnemyHpBarMater", spriteMateiral);
+
+			std::shared_ptr<Texture> EnemyHpBarFillRedTex
+				= Resources::Load<Texture>(L"EnemyHpBarFillRedTex", L"..\\Resources\\Texture\\UI\\Small_HP_Fill_red.png");
+			std::shared_ptr<Material> spriteMateiral2 = std::make_shared<Material>();
+			spriteMateiral2->SetShader(SpShader);
+			spriteMateiral2->SetTexture(EnemyHpBarFillRedTex);
+			spriteMateiral2->SetRenderingMode(eRenderingMode::Opaque);
+			Resources::Insert(L"EnemyHpBarFillRedMater", spriteMateiral2);
+		}
+		
+		//PlayerHpSmallBar, fill
+		{
+			std::shared_ptr<Texture> PlayerHpSmallBarTex
+				= Resources::Load<Texture>(L"PlayerHpSmallBarTex", L"..\\Resources\\Texture\\UI\\PlayerSmall_HP_Bar_spr_0.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(PlayerHpSmallBarTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"PlayerHpSmallBarMater", spriteMateiral);
+
+			std::shared_ptr<Texture> PlayerHpSmallBarFillRedTex
+				= Resources::Load<Texture>(L"PlayerHpSmallBarFillRedTex", L"..\\Resources\\Texture\\UI\\Small_HP_Fill_Player_spr_0.png");
+			std::shared_ptr<Material> spriteMateiral2 = std::make_shared<Material>();
+			spriteMateiral2->SetShader(SpShader);
+			spriteMateiral2->SetTexture(PlayerHpSmallBarFillRedTex);
+			spriteMateiral2->SetRenderingMode(eRenderingMode::Opaque);
+			Resources::Insert(L"PlayerHpSmallBarFillRedMater", spriteMateiral2);
+		}
+
+		//¼®°ü
+		{
+			std::shared_ptr<Texture> SarcophagusTex
+				= Resources::Load<Texture>(L"SarcophagusTex", L"..\\Resources\\Texture\\Monster\\Mummy\\Sarkofagus_spr.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(SarcophagusTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"SarcophagusMater", spriteMateiral);
 		}
 
 	}

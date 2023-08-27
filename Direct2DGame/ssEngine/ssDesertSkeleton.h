@@ -17,5 +17,12 @@ namespace ss
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
+
+		class SkeletonScript* mMScript;
+		class EnemyHpBar* mHpBar;
+		class EnemyHpBarFill* mHpBarFill;
+
+		float mPrevHp;
+		float mCurHp;
 	};
 }

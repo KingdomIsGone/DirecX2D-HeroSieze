@@ -148,8 +148,27 @@ namespace ss
 				const std::vector<GameObject*> gameObjs
 					= layer.GetGameObjects();
 				// layer에 있는 게임오브젝트를 들고온다.
-
 				DivideAlphaBlendGameObjects(gameObjs);
+
+
+				//custom
+				for (GameObject* obj : gameObjs)
+				{
+					auto otherObjVector = obj->GetOtherGameObjects();
+					std::vector<GameObject*> otherObjs;
+					if (otherObjVector.size() == 0)
+						continue;
+
+					for (auto otherObj : otherObjVector)
+					{
+						if (mLayerMask[(int)otherObj->layerType] == false)
+							continue;
+
+						otherObjs.push_back(otherObj->gameObject);
+					}
+
+					DivideAlphaBlendGameObjects(otherObjs);
+				}
 			}
 		}
 	}
