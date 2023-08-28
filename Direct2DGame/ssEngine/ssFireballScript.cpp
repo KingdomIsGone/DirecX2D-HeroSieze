@@ -3,6 +3,7 @@
 #include "ssSkeletonScript.h"
 #include "ssMummyScript.h"
 #include "ssSarcophagus.h"
+#include "ssAnubisScript.h"
 
 namespace ss
 {
@@ -35,6 +36,8 @@ namespace ss
 				other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
 			else if (other->GetOwner()->GetName() == L"Sarcophagus")
 				dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
+			else if (other->GetOwner()->GetName() == L"Anubis")
+				other->GetOwner()->GetComponent<AnubisScript>()->ChangeHP(-mDamage);
 		}
 
 		if (other->GetCollideType() != eCollideType::Player)

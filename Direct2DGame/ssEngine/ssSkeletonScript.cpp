@@ -3,13 +3,15 @@
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
+#include "ssPlayerScript.h"
 
 namespace ss
 {
 	SkeletonScript::SkeletonScript()
-		: mAgroDistance(1.5f)
+		: mAgroDistance(1.8f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
+		, mDamage(80.0f)
 	{
 	}
 	SkeletonScript::~SkeletonScript()
@@ -20,6 +22,9 @@ namespace ss
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
+		
+
+
 	}
 
 	void SkeletonScript::Update()
@@ -89,24 +94,30 @@ namespace ss
 		switch (mDirState)
 		{
 		case ss::SkeletonScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"Skeleton_UpAtk", true);
+			mAnimator->PlayAnimation(L"Skeleton_UpAtk", false);
 			break;
 		case ss::SkeletonScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"Skeleton_DownAtk", true);
+			mAnimator->PlayAnimation(L"Skeleton_DownAtk", false);
 			break;
 		case ss::SkeletonScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"Skeleton_LeftAtk", true);
+			mAnimator->PlayAnimation(L"Skeleton_LeftAtk", false);
 			break;
 		case ss::SkeletonScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"Skeleton_RightAtk", true);
+			mAnimator->PlayAnimation(L"Skeleton_RightAtk", false);
 			break;
 		default:
 			break;
 		}
 
+		if (mAnimator->GetActiveAnimation()->IsComplete())
+		{
+			Damage();
+			mAnimator->GetActiveAnimation()->Reset();
+		}
+		
 
 		float distance = math::GetDistance(mPos, mPlayerPos);
-		if (distance > 0.3f && !mIsColliding)
+		if (distance > 0.5f && !mIsColliding)
 			mState = eState::Chase;
 	}
 
@@ -171,6 +182,11 @@ namespace ss
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
+	}
+
+	void SkeletonScript::Damage()
+	{
+		PlayerScript::ChangeHp(-mDamage);
 	}
 
 	void SkeletonScript::OnCollisionEnter(Collider2D* other)

@@ -641,6 +641,28 @@ namespace renderer
 			Resources::Insert(L"PlayerHpSmallBarFillRedMater", spriteMateiral2);
 		}
 
+		//보스HPBar
+		{
+			std::shared_ptr<Texture> BossHpBarTex
+				= Resources::Load<Texture>(L"BossHpBarTex", L"..\\Resources\\Texture\\UI\\Boss_Health_Frame_spr_0.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(BossHpBarTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"BossHpBarMater", spriteMateiral);
+		}
+
+		//blank
+		{
+			std::shared_ptr<Texture> blankTex
+				= Resources::Load<Texture>(L"blankTex", L"..\\Resources\\Texture\\Blank.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(blankTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"BlankMater", spriteMateiral);
+		}
+
 		//석관
 		{
 			std::shared_ptr<Texture> SarcophagusTex
@@ -652,6 +674,16 @@ namespace renderer
 			Resources::Insert(L"SarcophagusMater", spriteMateiral);
 		}
 
+		//이뮨텍스트
+		{
+			std::shared_ptr<Texture> ImmuneTextTex
+				= Resources::Load<Texture>(L"ImmuneTextTex", L"..\\Resources\\Texture\\Text\\Immune.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(ImmuneTextTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ImmuneTextMater", spriteMateiral);
+		}
 	}
 
 	void Initialize()

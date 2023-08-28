@@ -10,13 +10,13 @@ namespace ss
 	public:
 		enum class eState
 		{
+			Dead,
 			Sleep,
 			Idle,
 			ChargedBolt,
 			ChargedBoltTwin,
 			ChainLight,
 			CreateSarco,
-			Dead,
 		};
 	
 		AnubisScript();
@@ -25,6 +25,7 @@ namespace ss
 		virtual void Initialize() override;
 		virtual void Update() override;
 
+		void Awake();
 		void Idle();
 
 		void ChargedBolts(bool isVertical);
@@ -33,10 +34,13 @@ namespace ss
 		void ChainLightsTrifle();
 		void CreateSarco();
 
-		void ChangeHP(float value) { mHp += value; }
+		void ChangeHP(float value); 
 		float GetHP() { return mHp; }
 
 		void PlayIdleAni() { mAnimator->PlayAnimation(L"Anubis_Down", true); }
+
+		void SetBossHpFill(BossHpFill* fill) { mBossHpFill = fill; }
+		void SetImmuneText(ImmuneText* text) { mText = text; }
 
 		static void SarcoDefeat() { mSarcoCount--; }
 
@@ -51,7 +55,6 @@ namespace ss
 		float mHp;
 		float mSpeed;
 		float mAgroDistance;
-		float mCoolTime;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;
@@ -69,7 +72,10 @@ namespace ss
 		float mPatternTime;
 
 		static UINT mSarcoCount;
+		bool mbImmune;
 
 		class Animator* mAnimator;
+		class BossHpFill* mBossHpFill;
+		class ImmuneText* mText;
 	};
 }

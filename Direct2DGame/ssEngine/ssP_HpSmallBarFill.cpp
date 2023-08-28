@@ -21,7 +21,7 @@ namespace ss
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"PlayerHpSmallBarFillRedMater"));
 
-		mWidth = Resources::Find<Texture>(L"PlayerHpSmallBarFillRedTex")->GetWidth() / 6.f;
+		mWidth = Resources::Find<Texture>(L"PlayerHpSmallBarFillRedTex")->GetWidth() / 6.f - 0.03;
 
 		mHpChanged = true;
 	}

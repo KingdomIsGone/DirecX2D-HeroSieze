@@ -4,11 +4,11 @@
 
 namespace ss
 {
-	class UIScene : public Scene
+	class AnubisRoom : public Scene
 	{
 	public:
-		UIScene();
-		virtual ~UIScene();
+		AnubisRoom();
+		virtual ~AnubisRoom();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

@@ -12,6 +12,7 @@ namespace ss
 
 		UP, DOWN, LEFT, RIGHT, SPACE,
 		LBUTTON, RBUTTON,
+		One, two, Three, four,
 		END,
 	};
 

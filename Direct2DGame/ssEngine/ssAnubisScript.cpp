@@ -11,13 +11,16 @@
 #include "ssTexture.h"
 #include "ssChainLightening.h"
 #include "ssSarcophagus.h"
+#include "ssBossHpFill.h"
+#include "ssAnubis.h"
+#include "ssImmuneText.h"
 
 namespace ss
 {
 	UINT AnubisScript::mSarcoCount = 0;
 
 	AnubisScript::AnubisScript()
-		: mHp(100000.0f)
+		: mHp(10000.0f)
 		, mChainStage(0)
 		, mChainTime(0.0f)
 		, mChainCount(0)
@@ -30,24 +33,32 @@ namespace ss
 	}
 	void AnubisScript::Initialize()
 	{
-		mState = eState::Idle;
-		mCoolTime = 0.0f;
+		mState = eState::Sleep;
 		srand((unsigned int)time(NULL));
 
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mAnimator->PlayAnimation(L"Anubis_Down", true);
 
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		
 	}
 	void AnubisScript::Update()
 	{
+		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		mBossHpFill->ChangeHP(mHp);
 		if (mHp <= 0)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
+			dynamic_cast<Anubis*>(GetOwner())->SetDead();
 		}
 
-		mCoolTime += Time::DeltaTime();
+		if (mSarcoCount != 0)
+			mbImmune = true;
+		else
+			mbImmune = false;
 
 		switch (mState)
 		{
@@ -74,55 +85,74 @@ namespace ss
 		//ChainLightsTrifle();
 
 	}
+	void AnubisScript::Awake()
+	{
+		mState = eState::Idle;
+	}
 	void AnubisScript::Idle()
 	{
 		mPatternTime += Time::DeltaTime();
-		if(mAnimator->GetActiveAnimation()->IsComplete())
-			mAnimator->PlayAnimation(L"Anubis_Down", true);
+		
 
-		if (mPatternTime >= 6.0f)
+		if (mPatternTime >= 4.0f)
 		{
-			mPatternTime = 0.0f;
+			
 			mAnimator->PlayAnimation(L"Anubis_Cast", false);
 
-			if (mPatternCount % 7 == 0)
+			if (mAnimator->GetActiveAnimation()->IsComplete())
 			{
-				mState = eState::CreateSarco;
-				mPatternCount++;
+				mPatternTime = 0.0f;
+
+				if (mPatternCount == 10)
+				{
+					mState = eState::CreateSarco;
+					mPatternCount = 0;
+				}
+				else if (mPatternCount == 2)
+				{
+					mState = eState::CreateSarco;
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 0)
+				{
+					mState = eState::ChainLight;
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 1)
+				{
+					ChargedBolts(false);
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 2)
+				{
+					mState = eState::ChainLight;
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 3)
+				{
+					mState = eState::ChargedBoltTwin;
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 4)
+				{
+					ChargedBolts(true);
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 5)
+				{
+					mState = eState::ChainLight;
+					mPatternCount++;
+				}
+				else if (mPatternCount % 7 == 6)
+				{
+					ChargedBolts(false);
+					mPatternCount++;
+				}
 			}
-			else if (mPatternCount % 7 == 1)
-			{
-				ChargedBolts(false);
-				mPatternCount++;
-			}
-			else if (mPatternCount % 7 == 2)
-			{
-				mState = eState::ChainLight;
-				mPatternCount++;
-			}
-			else if (mPatternCount % 7 == 3)
-			{
-				mState = eState::ChargedBoltTwin;
-				mPatternCount++;
-			}
-			else if (mPatternCount % 7 == 4)
-			{
-				ChargedBolts(true);
-				mPatternCount++;
-			}
-			else if (mPatternCount % 7 == 5)
-			{
-				ChargedBolts(false);
-				mPatternCount++;
-			}
-			else if (mPatternCount % 7 == 6)
-			{
-				mState = eState::ChainLight;
-				mPatternCount++;
-			}
-			
 		}
 
+		if (mAnimator->GetActiveAnimation()->IsComplete())
+			mAnimator->PlayAnimation(L"Anubis_Down", true);
 	}
 
 	void AnubisScript::ChargedBolts(bool isVertical)
@@ -136,8 +166,8 @@ namespace ss
 
 			ChargedBolt* bolt = new ChargedBolt(isVertical);
 			Transform* Tr = bolt->GetComponent<Transform>();
-			mPlayerPos = PlayerScript::GetPlayerPos();
-			Vector3 pos = mPlayerPos;
+			
+			Vector3 pos = mPos;
 			if (isVertical)
 			{
 				pos.y -= -4.35f + 0.3f * i;
@@ -146,7 +176,7 @@ namespace ss
 			else
 			{
 				pos.x += -4.35f + 0.3f * i;
-				pos.y += 1.5f;
+				pos.y += 1.1f;
 			}
 
 			Tr->SetPosition(pos);
@@ -239,32 +269,43 @@ namespace ss
 		}
 
 		mSarcoCount = 4;
+		mbImmune = false;
 
 		Sarcophagus* sarco = new Sarcophagus();
 		sarco->SetDir(Sarcophagus::eDir::LeftBottom);
-		sarco->GetComponent<Transform>()->SetPosition(mPos.x - 1.5f, mPos.y - 1.5f, mPos.z);
+		sarco->GetComponent<Transform>()->SetPosition(mPos.x - 1.9f, mPos.y - 2.1f, mPos.z);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Summon1, sarco);
 
 		Sarcophagus* sarco2 = new Sarcophagus();
 		sarco2->SetDir(Sarcophagus::eDir::LeftTop);
-		sarco2->GetComponent<Transform>()->SetPosition(mPos.x - 1.5f, mPos.y + 1.5f, mPos.z);
+		sarco2->GetComponent<Transform>()->SetPosition(mPos.x - 1.9f, mPos.y + 0.9f, mPos.z);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Summon1, sarco2);
 
 		Sarcophagus* sarco3 = new Sarcophagus();
 		sarco3->SetDir(Sarcophagus::eDir::RightTop);
-		sarco3->GetComponent<Transform>()->SetPosition(mPos.x + 1.5f, mPos.y + 1.5f, mPos.z);
+		sarco3->GetComponent<Transform>()->SetPosition(mPos.x + 1.9f, mPos.y + 0.9f, mPos.z);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Summon1, sarco3);
 
 		Sarcophagus* sarco4 = new Sarcophagus();
 		sarco4->SetDir(Sarcophagus::eDir::RightBottom);
-		sarco4->GetComponent<Transform>()->SetPosition(mPos.x + 1.5f, mPos.y - 1.5f, mPos.z);
+		sarco4->GetComponent<Transform>()->SetPosition(mPos.x + 1.9f, mPos.y - 2.1f, mPos.z);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Summon1, sarco4);
 
 		mState = eState::Idle;
 	}
 
+	void AnubisScript::ChangeHP(float value)
+	{
+		if (mbImmune)
+			return;
+
+		mHp += value; 
+	}
+
 	void AnubisScript::OnCollisionEnter(Collider2D* other)
 	{
+		if (other->GetCollideType() == eCollideType::Projectile && mbImmune)
+			mText->SetText();
 	}
 	void AnubisScript::OnCollisionStay(Collider2D* other)
 	{

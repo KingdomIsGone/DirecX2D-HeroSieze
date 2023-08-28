@@ -7,6 +7,9 @@
 #include "ssInput.h"
 #include "ssCollider2D.h"
 #include "ssAnubisScript.h"
+#include "ssBossHpBar.h"
+#include "ssPlayerScript.h"
+#include "ssImmuneText.h"
 
 namespace ss
 {
@@ -18,6 +21,8 @@ namespace ss
 		
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(1.5f, 1.5f, 1.0f);
+
+		mPos = mTransform->GetPosition();
 
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetCollideType(eCollideType::NormalMonster);
@@ -37,7 +42,13 @@ namespace ss
 			= Resources::Load<Texture>(L"Anubis_CastTex", L"..\\Resources\\Texture\\Monster\\Anubis\\AnubisCast126_151.png");
 		mAnimator->Create(L"Anubis_Cast", Anubis_CastTex, Vector2(0.0f, 0.0f), Vector2(126.0f, 151.0f), 30);
 
-		AddComponent<AnubisScript>();
+		mScript = AddComponent<AnubisScript>();
+
+		mText = new ImmuneText();
+		mText->GetComponent<Transform>()->SetParent(mTransform);
+		Vector3 tempPos2 = mText->GetComponent<Transform>()->GetPosition();
+		mScript->SetImmuneText(mText);
+		AddOtherGameObject(mText, eLayerType::MonsterUI);
 	}
 
 	Anubis::~Anubis()
@@ -51,6 +62,11 @@ namespace ss
 	void Anubis::Update()
 	{
 		GameObject::Update();
+
+		mPos = mTransform->GetPosition();
+
+		if (!mbAwake)
+			Sleep();
 	}
 	void Anubis::LateUpdate()
 	{
@@ -60,4 +76,18 @@ namespace ss
 	{
 		GameObject::Render();
 	}
+	void Anubis::Sleep()
+	{
+		Vector3 PlayerPos = PlayerScript::GetPlayerPos();
+		if (math::GetDistance(mPos, PlayerPos) < 1.8f)
+		{
+			mScript->Awake();
+			mbAwake = true;
+		}
+	}
+	void Anubis::SetBossHpFill(BossHpFill* fill)
+	{
+		mScript->SetBossHpFill(fill);
+	}
+	
 }

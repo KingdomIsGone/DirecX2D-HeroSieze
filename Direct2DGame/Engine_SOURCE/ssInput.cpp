@@ -13,6 +13,7 @@ namespace ss
 
 		VK_UP, VK_DOWN, VK_LEFT ,VK_RIGHT, VK_SPACE,
 		VK_LBUTTON, VK_RBUTTON,
+		'1', '2', '3', '4',
 	};
 
 	std::vector<Input::Key> Input::mKeys;

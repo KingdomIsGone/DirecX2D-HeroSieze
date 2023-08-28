@@ -17,7 +17,7 @@ namespace ss
 	Sarcophagus::Sarcophagus()
 		: mCurHp(1000.0f)
 		, mPrevHp(1000.0f)
-		, mSpawnTime(10.0f)
+		, mSpawnTime(2.0f)
 	{
 		SetName(L"Sarcophagus");
 		//mMScript = AddComponent<SkeletonScript>();

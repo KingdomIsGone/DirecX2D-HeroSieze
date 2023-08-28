@@ -14,27 +14,6 @@
     <ClCompile Include="ssGridScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
-    <ClCompile Include="ssDesertTownScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertFieldScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertDungeon1.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertDungeon2.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertBossRoom.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssValkyrieScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ssWoodsField.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ssPlayerScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
@@ -98,6 +77,48 @@
     <ClCompile Include="ssSarcophagus.cpp">
       <Filter>Contents\Object\Monster\Sarcophagus</Filter>
     </ClCompile>
+    <ClCompile Include="ssBossHpBar.cpp">
+      <Filter>Contents\Object\UI\BossHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ssBossHpFill.cpp">
+      <Filter>Contents\Object\UI\BossHpFill</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertBossRoom.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertDungeon1.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertDungeon2.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertFieldScene.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertTownScene.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValkyrieScene.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssWoodsField.cpp">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ssAnubisRoom.cpp">
+      <Filter>Contents\Scene\BossRoomAnubis</Filter>
+    </ClCompile>
+    <ClCompile Include="ssTorchBig.cpp">
+      <Filter>Contents\Object\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ssImmuneText.cpp">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMeteor.cpp">
+      <Filter>Contents\Object\Player\Skill\Meteor</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMeteorScript.cpp">
+      <Filter>Contents\Object\Player\Skill\Meteor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -115,27 +136,6 @@
     </ClInclude>
     <ClInclude Include="ssGridScript.h">
       <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertTownScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertFieldScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertDungeon1.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertDungeon2.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertBossRoom.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssValkyrieScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ssWoodsField.h">
-      <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="ssPlayerScript.h">
       <Filter>Contents\Script</Filter>
@@ -199,6 +199,48 @@
     </ClInclude>
     <ClInclude Include="ssSarcophagus.h">
       <Filter>Contents\Object\Monster\Sarcophagus</Filter>
+    </ClInclude>
+    <ClInclude Include="ssBossHpBar.h">
+      <Filter>Contents\Object\UI\BossHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="ssBossHpFill.h">
+      <Filter>Contents\Object\UI\BossHpFill</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertBossRoom.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertDungeon1.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertDungeon2.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertFieldScene.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertTownScene.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValkyrieScene.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssWoodsField.h">
+      <Filter>Contents\Scene\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ssAnubisRoom.h">
+      <Filter>Contents\Scene\BossRoomAnubis</Filter>
+    </ClInclude>
+    <ClInclude Include="ssTorchBig.h">
+      <Filter>Contents\Object\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ssImmuneText.h">
+      <Filter>Contents\Object\Boss\Anubis</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMeteor.h">
+      <Filter>Contents\Object\Player\Skill\Meteor</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMeteorScript.h">
+      <Filter>Contents\Object\Player\Skill\Meteor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +312,27 @@
     </Filter>
     <Filter Include="Contents\Object\Monster\Sarcophagus">
       <UniqueIdentifier>{e47cbf4d-81d9-4f16-b285-bc3f37110e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\BossHpBar">
+      <UniqueIdentifier>{10f61c1b-0f54-482a-a2a9-369fde39961a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\BossHpFill">
+      <UniqueIdentifier>{a3824e06-84b8-46f8-aec6-1da6152e636c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\BossRoomAnubis">
+      <UniqueIdentifier>{8ce4a93b-4016-46af-8593-3cde6545b1ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\ETC">
+      <UniqueIdentifier>{92f0f540-a87e-4518-a543-8f82e66765d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\MapObject">
+      <UniqueIdentifier>{9d6d232a-306b-417d-995c-eb5aa7b8fe3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill">
+      <UniqueIdentifier>{5ddeff27-5365-47d7-ad1e-3c2e6021a6f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill\Meteor">
+      <UniqueIdentifier>{3a9f60c3-2071-4c31-95b9-1d6f32ff50e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -157,7 +157,10 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
     <ClInclude Include="ssAnubis.h" />
+    <ClInclude Include="ssAnubisRoom.h" />
     <ClInclude Include="ssAnubisScript.h" />
+    <ClInclude Include="ssBossHpBar.h" />
+    <ClInclude Include="ssBossHpFill.h" />
     <ClInclude Include="ssChainLightening.h" />
     <ClInclude Include="ssChargedBolt.h" />
     <ClInclude Include="ssDesertBossRoom.h" />
@@ -171,8 +174,11 @@
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssGridScript.h" />
+    <ClInclude Include="ssImmuneText.h" />
     <ClInclude Include="ssIndicator.h" />
     <ClInclude Include="ssDamageScript.h" />
+    <ClInclude Include="ssMeteor.h" />
+    <ClInclude Include="ssMeteorScript.h" />
     <ClInclude Include="ssMummy.h" />
     <ClInclude Include="ssMummyScript.h" />
     <ClInclude Include="ssSarcophagus.h" />
@@ -182,6 +188,7 @@
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
+    <ClInclude Include="ssTorchBig.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
@@ -191,7 +198,10 @@
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp" />
     <ClCompile Include="ssAnubis.cpp" />
+    <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />
+    <ClCompile Include="ssBossHpBar.cpp" />
+    <ClCompile Include="ssBossHpFill.cpp" />
     <ClCompile Include="ssChainLightening.cpp" />
     <ClCompile Include="ssChargedBolt.cpp" />
     <ClCompile Include="ssDesertBossRoom.cpp" />
@@ -205,8 +215,11 @@
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
+    <ClCompile Include="ssImmuneText.cpp" />
     <ClCompile Include="ssIndicator.cpp" />
     <ClCompile Include="ssDamageScript.cpp" />
+    <ClCompile Include="ssMeteor.cpp" />
+    <ClCompile Include="ssMeteorScript.cpp" />
     <ClCompile Include="ssMummy.cpp" />
     <ClCompile Include="ssMummyScript.cpp" />
     <ClCompile Include="ssSarcophagus.cpp" />
@@ -216,6 +229,7 @@
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
+    <ClCompile Include="ssTorchBig.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />

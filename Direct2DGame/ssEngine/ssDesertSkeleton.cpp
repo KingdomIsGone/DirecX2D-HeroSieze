@@ -68,6 +68,7 @@ namespace ss
 
 
 		
+		at->PlayAnimation(L"SkeletonDown", true);
 		//hp¹Ù, fill
 		mHpBar = new EnemyHpBar();
 		mTransform = GetComponent<Transform>();

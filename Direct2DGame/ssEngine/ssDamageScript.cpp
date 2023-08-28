@@ -2,6 +2,7 @@
 #include "ssGameObject.h"
 #include "ssPlayerScript.h"
 #include "ssChargedBolt.h"
+#include "ssChainLightening.h"
 
 namespace ss
 {
@@ -27,11 +28,15 @@ namespace ss
 				Damage = ChargedBolt::GetDamage();
 			}
 			else if (GetOwner()->GetName() == L"ChainLightening")
-				Damage = ChargedBolt::GetDamage();
+				Damage = ChainLightening::GetDamage();
 
 			other->GetOwner()->GetComponent<PlayerScript>()->ChangeHp(-Damage);
 
 			GetOwner()->SetState(GameObject::eState::Dead);
+		}
+		else if (other->GetCollideType() == eCollideType::NormalMonster)
+		{
+
 		}
 	}
 	void DamageScript::OnCollisionStay(Collider2D* other)

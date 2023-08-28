@@ -1,4 +1,4 @@
-#include "ssUIScene.h"
+#include "ssAnubisRoom.h"
 #include "ssTransform.h"
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
@@ -24,18 +24,214 @@
 #include "ssSarcophagus.h"
 #include "ssBossHpBar.h"
 #include "ssBossHpFill.h"
-#include "ssMeteor.h"
+#include "ssTorchBig.h"
 
 namespace ss
 {
-	UIScene::UIScene()
+	AnubisRoom::AnubisRoom()
 	{
 	}
-	UIScene::~UIScene()
+	AnubisRoom::~AnubisRoom()
 	{
 	}
-	void UIScene::Initialize()
+	void AnubisRoom::Initialize()
 	{
+
+		Player* player = new Player();
+		AddGameObject(eLayerType::Player, player);
+		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 6.43f, 1.0f));
+
+		cursor = new Cursor();
+		AddGameObject(eLayerType::Cursor, cursor);
+
+		Indicator* indicator = new Indicator();
+		AddGameObject(eLayerType::Cursor, indicator);
+
+		
+		//skeleton
+		{
+			DesertSkeleton* deSkeleton = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton);
+			deSkeleton->GetComponent<Transform>()->SetPosition(-0.1f, 4.5f, 1.02f);
+
+			DesertSkeleton* deSkeleton1 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton1);
+			deSkeleton1->GetComponent<Transform>()->SetPosition(-1.5f, 4.5f, 1.02f);
+
+			DesertSkeleton* deSkeleton2 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton2);
+			deSkeleton2->GetComponent<Transform>()->SetPosition(1.5f, 4.3f, 1.02f);
+
+			DesertSkeleton* deSkeleton3 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton3);
+			deSkeleton3->GetComponent<Transform>()->SetPosition(2.7f, 4.8f, 1.02f);
+
+			DesertSkeleton* deSkeleton4 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton4);
+			deSkeleton4->GetComponent<Transform>()->SetPosition(4.7f, 5.13f, 1.02f);
+
+			DesertSkeleton* deSkeleton5 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton5);
+			deSkeleton5->GetComponent<Transform>()->SetPosition(3.5f, 4.2f, 1.02f);
+
+			DesertSkeleton* deSkeleton6 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton6);
+			deSkeleton6->GetComponent<Transform>()->SetPosition(3.06f, 1.72f, 1.02f);
+
+			DesertSkeleton* deSkeleton7 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton7);
+			deSkeleton7->GetComponent<Transform>()->SetPosition(3.86f, 2.1f, 1.02f);
+
+			DesertSkeleton* deSkeleton8 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton8);
+			deSkeleton8->GetComponent<Transform>()->SetPosition(4.9f, 1.8f, 1.02f);
+
+			DesertSkeleton* deSkeleton9 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton9);
+			deSkeleton9->GetComponent<Transform>()->SetPosition(4.57f, 1.f, 1.02f);
+
+			DesertSkeleton* deSkeleton10 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton10);
+			deSkeleton10->GetComponent<Transform>()->SetPosition(4.38f, -0.15f, 1.02f);
+
+			DesertSkeleton* deSkeleton11 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton11);
+			deSkeleton11->GetComponent<Transform>()->SetPosition(4.29f, -2.3f, 1.02f);
+
+			DesertSkeleton* deSkeleton12 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton12);
+			deSkeleton12->GetComponent<Transform>()->SetPosition(0.65f, 1.f, 1.02f);
+
+			DesertSkeleton* deSkeleton13 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton13);
+			deSkeleton13->GetComponent<Transform>()->SetPosition(-0.1f, 0.43f, 1.02f);
+
+			DesertSkeleton* deSkeleton14 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton14);
+			deSkeleton14->GetComponent<Transform>()->SetPosition(-0.82f, 1.6f, 1.02f);
+
+			DesertSkeleton* deSkeleton15 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton15);
+			deSkeleton15->GetComponent<Transform>()->SetPosition(2.76f, 4.68f, 1.02f);
+
+			DesertSkeleton* deSkeleton16 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton16);
+			deSkeleton16->GetComponent<Transform>()->SetPosition(-4.0f, 4.2f, 1.02f);
+
+			DesertSkeleton* deSkeleton17 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton17);
+			deSkeleton17->GetComponent<Transform>()->SetPosition(-5.0f, 5.2f, 1.02f);
+
+			DesertSkeleton* deSkeleton18 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton18);
+			deSkeleton18->GetComponent<Transform>()->SetPosition(-5.1f, 1.8f, 1.02f);
+
+			DesertSkeleton* deSkeleton19 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton19);
+			deSkeleton19->GetComponent<Transform>()->SetPosition(-4.0f, 1.1f, 1.02f);
+
+			DesertSkeleton* deSkeleton20 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton20);
+			deSkeleton20->GetComponent<Transform>()->SetPosition(-4.6f, -0.2f, 1.02f);
+
+			DesertSkeleton* deSkeleton21 = new DesertSkeleton();
+			AddGameObject(eLayerType::Monster, deSkeleton21);
+			deSkeleton21->GetComponent<Transform>()->SetPosition(-4.5f, -2.3f, 1.02f);
+		}
+		
+
+		//boss
+		{
+			mAnubis = new Anubis();
+			AddGameObject(eLayerType::Monster, mAnubis);
+			mAnubis->GetComponent<Transform>()->SetPosition(-0.1f, -3.0f, 1.02f);
+
+			mBossHpBar = new BossHpBar();
+			AddGameObject(eLayerType::UI, mBossHpBar);
+			mBossHpBar->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.9f);
+
+			mBossHpFill = new BossHpFill();
+			AddGameObject(eLayerType::UI, mBossHpFill);
+			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.9f);
+			mAnubis->SetBossHpFill(mBossHpFill);
+		}
+
+		//torch
+		{
+			TorchBig* torch1 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch1);
+			torch1->GetComponent<Transform>()->SetPosition(0.3f, 5.7f, 1.02f);
+			TorchBig* torch2 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch2);
+			torch2->GetComponent<Transform>()->SetPosition(-0.5f, 5.7f, 1.02f);
+
+			TorchBig* torch3 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch3);
+			torch3->GetComponent<Transform>()->SetPosition(0.4f, 2.3f, 1.02f);
+			TorchBig* torch4 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch4);
+			torch4->GetComponent<Transform>()->SetPosition(-0.6f, 2.3f, 1.02f);
+
+			TorchBig* torch5 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch5);
+			torch5->GetComponent<Transform>()->SetPosition(1.25f, -0.1f, 1.02f);
+			TorchBig* torch6 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch6);
+			torch6->GetComponent<Transform>()->SetPosition(-1.45f, -0.1f, 1.02f);
+
+			TorchBig* torch7 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch7);
+			torch7->GetComponent<Transform>()->SetPosition(-5.06f, 0.46f, 1.02f);
+			TorchBig* torch8 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch8);
+			torch8->GetComponent<Transform>()->SetPosition(-4.06f, 0.46f, 1.02f);
+
+			TorchBig* torch9 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch9);
+			torch9->GetComponent<Transform>()->SetPosition(4.84f, 0.46f, 1.02f);
+			TorchBig* torch10 = new TorchBig();
+			AddGameObject(eLayerType::Map, torch10);
+			torch10->GetComponent<Transform>()->SetPosition(3.84f, 0.46f, 1.02f);
+		}
+
+		//TextureSetting();
+		UI_Setting();
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon1, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon2, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Projectile, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::EnemyProjectile, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Summon2, true);
+
+
+		//배경 z=1.1f
+		{
+			std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"AnubisRoomTex", L"..\\Resources\\Texture\\Map\\AnubisRoom.png");
+				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+				spriteMateiral->SetShader(spriteShader);
+				spriteMateiral->SetTexture(texture);
+				Resources::Insert(L"AnubisRoomMater", spriteMateiral);
+			}
+
+			GameObject* obj = new GameObject();
+			obj->SetName(L"AnubisBackground");
+			AddGameObject(eLayerType::Map, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"AnubisRoomMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.1f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(27.0f, 27.0f, 1.0f));
+			//obj->AddComponent<CameraScript>();
+		}
+
 		//Main Camera
 		{
 			GameObject* camera = new GameObject();
@@ -43,7 +239,7 @@ namespace ss
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
-			
+
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			camera->AddComponent<CameraScript>();
@@ -53,7 +249,7 @@ namespace ss
 		{
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f , 0.0f, -10.0f));
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
 			cameraComp->DisableLayerMasks();
@@ -86,8 +282,6 @@ namespace ss
 			camera->AddComponent<PlayerCameraScript>();
 		}
 
-		
-
 		//라이트
 		{
 			GameObject* light = new GameObject();
@@ -98,118 +292,38 @@ namespace ss
 			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		
-		Player* player = new Player();
-		AddGameObject(eLayerType::Player, player);
-		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 
-		cursor = new Cursor();
-		AddGameObject(eLayerType::Cursor, cursor);
-
-		Indicator* indicator = new Indicator();
-		AddGameObject(eLayerType::Cursor, indicator);
-
-	/*	DesertSkeleton* deSkeleton = new DesertSkeleton();
-		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
-
-		//anubis
-		/*Mummy* mummy = new Mummy();
-		AddGameObject(eLayerType::Monster, mummy);
-		mummy->GetComponent<Transform>()->SetPosition(1.0f, -1.0f, 1.02f);
-
-		Sarcophagus* sarco = new Sarcophagus();
-		AddGameObject(eLayerType::Monster, sarco);
-		sarco->GetComponent<Transform>()->SetPosition(1.0f, -1.4f, 1.02f);
-
-		mAnubis = new Anubis();
-		AddGameObject(eLayerType::Monster, mAnubis);
-		mAnubis->GetComponent<Transform>()->SetPosition(-2.0f, 0.0f, 1.02f);
-
-		ChargedBolt* bolt = new ChargedBolt(false);
-		AddGameObject(eLayerType::Projectile, bolt);
-		bolt->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.02f);
-
-		ChainLightening* chain = new ChainLightening();
-		AddGameObject(eLayerType::EnemyProjectile, chain);
-		chain->GetComponent<Transform>()->SetPosition(1.0f, 1.0f, 1.02f);
-
-		mBossHpBar = new BossHpBar();
-		AddGameObject(eLayerType::UI, mBossHpBar);
-		mBossHpBar->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 1.0f);
-
-		mBossHpFill = new BossHpFill();
-		AddGameObject(eLayerType::UI, mBossHpFill);
-		mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 1.0f);
-		mAnubis->SetBossHpFill(mBossHpFill);*/
-
-		/*GameObject* obj = new GameObject();
-		obj->AddComponent<Collider2D>();
-		AddGameObject(eLayerType::Monster, obj);*/
-
-		Meteor* meteor = new Meteor();
-		AddGameObject(eLayerType::Projectile, meteor);
-		meteor->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
-		
-		
-		//TextureSetting();
-		UI_Setting();
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon1, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon2, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Projectile, true);
-		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Projectile, true);
-		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Projectile, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::EnemyProjectile, true);
-		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Summon2, true);
-
-
-		//배경 z=1.1f
-		{
-			std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
-			{
-				std::shared_ptr<Texture> texture
-					= Resources::Load<Texture>(L"TownHallTex", L"..\\Resources\\Texture\\TownHall.png");
-				std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-				spriteMateiral->SetShader(spriteShader);
-				spriteMateiral->SetTexture(texture);
-				Resources::Insert(L"TownHallMater", spriteMateiral);
-			}
-
-			GameObject* obj = new GameObject();
-			obj->SetName(L"TownhallBack");
-			AddGameObject(eLayerType::Map, obj);
-			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"TownHallMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.1f));
-			obj->GetComponent<Transform>()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
-			//obj->AddComponent<CameraScript>();
-		}
 	}
 
-	void UIScene::Update()
+	void AnubisRoom::Update()
 	{
 		Scene::Update();
 
 		Vector3 pos = cursor->GetPos();
-		
-		
+
+		if (mAnubis->GetAwake())
+		{
+			 mBossHpBar->SetHP();
+			 mBossHpFill->SetMater();
+		}
+		else
+			mBossHpBar->SetBlank();
+
+		if (mAnubis->GetDead())
+			mBossHpBar->SetBlank();
 	}
 
-	void UIScene::LateUpdate()
+	void AnubisRoom::LateUpdate()
 	{
 		Scene::LateUpdate();
 	}
 
-	void UIScene::Render()
+	void AnubisRoom::Render()
 	{
 		Scene::Render();
 	}
-	void UIScene::UI_Setting()
+
+	void AnubisRoom::UI_Setting()
 	{
 		//캐릭터 및 레벨창 z=1.01
 		{
@@ -427,9 +541,9 @@ namespace ss
 			//obj->AddComponent<CameraScript>();  
 		}
 
-		
+
 	}
-	void UIScene::TextureSetting()
+	void AnubisRoom::TextureSetting()
 	{
 		//렌더링 LoadMaterial에서 세팅. 사용안하고 기록용
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");

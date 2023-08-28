@@ -13,12 +13,13 @@
 #include "ssSceneManager.h"
 #include "ssIndicator.h"
 #include "ssCollisionManager.h"
+#include "ssMeteor.h"
 
 namespace ss
 {
-	//Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
 	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
 	float ss::PlayerScript::mSpeed = 2.0f;
+	float ss::PlayerScript::mCurHp = 3000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 
 	PlayerScript::PlayerScript()
@@ -26,7 +27,7 @@ namespace ss
 		, mPrevDegree(0.0f)
 		, mCollideXaxisCount(0)
 		, mCollideYaxisCount(0)
-		, mCurHp(3000.0f)
+		, mSpellNum(0)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -41,16 +42,16 @@ namespace ss
 		mCursor = new Cursor();
 
 		mIndicator = new Indicator();
-
-		GetOwner()->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 		
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
-		
 	}
 
 	void PlayerScript::Update()
 	{
 		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		mPlayerPos = pos;
+
+		SpellWaiting();
 
 		switch (mState)
 		{
@@ -79,6 +80,12 @@ namespace ss
 	void PlayerScript::Complete()
 	{
 		int a = 0;
+	}
+
+	void PlayerScript::SpellWaiting()
+	{
+		if (Input::GetKeyDown(eKeyCode::One))
+			mSpellNum = 1;
 	}
 
 	void PlayerScript::Idle()
@@ -260,10 +267,16 @@ namespace ss
 		if (!mIsAttacking)
 			return;
 		
-		if (!mShootOnce)
+		if (!mShootOnce && mSpellNum == 0)
 		{
 			AttackFireBall(mPlayerPos, mCursorPos);
 			mShootOnce = true;
+		}
+		else if (!mShootOnce && mSpellNum == 1)
+		{
+			ShootMeteor(mCursorPos);
+			mShootOnce = true;
+			mSpellNum = 0;
 		}
 		
 		AttackAni(mPlayerPos, mCursorPos);
@@ -430,7 +443,12 @@ namespace ss
 		return pos;
 	}
 
-
+	void PlayerScript::ShootMeteor(Vector3 cursorPos)
+	{
+		Meteor* meteor = new Meteor();
+		meteor->GetComponent<Transform>()->SetPosition(cursorPos);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, meteor);
+	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{

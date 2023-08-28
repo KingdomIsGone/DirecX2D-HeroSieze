@@ -35,6 +35,7 @@ namespace ss
 		};
 
 		void Complete();
+		void SpellWaiting();
 
 		void Idle();
 		void Move();
@@ -54,23 +55,26 @@ namespace ss
 		Vector3 UnProject(Vector3 pos);
 
 		float GetHp() { return mCurHp; }
-		void ChangeHp(float value) { mCurHp += value; }
+		static void ChangeHp(float value) { mCurHp += value; }
 
 		static Vector3 GetPlayerPos() { return mPlayerPos; }
 		static void SetPlayerPos(Vector3 pos) { mPlayerPos = pos; }
 		static float GetPlayerSpeed() { return mSpeed; }
 		static Vector3 GetPoint() { return mPoint; }
 
+		void ShootMeteor(Vector3 cursorPos);
+
 	private:
 		static Vector3 mPlayerPos;
 		static Vector3 mPoint;
 		static float mSpeed;
 		Vector3 mPlayerProjPos;
+		Transform* mTransform;
 
 		eState mState;
 		eDirState mDirState;
 
-		float mCurHp;
+		static float mCurHp;
 		
 		class Cursor* mCursor;
 		class Indicator* mIndicator;
@@ -86,5 +90,7 @@ namespace ss
 		Vector3 mCursorProjPos;
 		float mPrevDegree;
 		Vector3 mColliderPos;
+
+		UINT mSpellNum;
 	};
 }

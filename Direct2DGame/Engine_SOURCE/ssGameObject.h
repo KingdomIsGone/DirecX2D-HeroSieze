@@ -10,9 +10,9 @@ namespace ss
 	public:
 		enum class eState
 		{
+			Dead,
 			Active,
 			Paused,
-			Dead,
 		};
 
 		GameObject();
