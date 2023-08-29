@@ -27,6 +27,7 @@ namespace ss
 
 		void Awake();
 		void Idle();
+		void Dead();
 
 		void ChargedBolts(bool isVertical);
 		void ChargedTwinBolts();

@@ -50,10 +50,7 @@ namespace ss
 
 		mBossHpFill->ChangeHP(mHp);
 		if (mHp <= 0)
-		{
-			GetOwner()->SetState(GameObject::eState::Dead);
-			dynamic_cast<Anubis*>(GetOwner())->SetDead();
-		}
+			mState = eState::Dead;
 
 		if (mSarcoCount != 0)
 			mbImmune = true;
@@ -77,6 +74,7 @@ namespace ss
 			CreateSarco();
 			break;
 		case ss::AnubisScript::eState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -153,6 +151,18 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 			mAnimator->PlayAnimation(L"Anubis_Down", true);
+	}
+
+	void AnubisScript::Dead()
+	{
+		GetOwner()->GetComponent<Transform>()->SetScale(Vector3(3.0f, 3.0f, 1.0f));
+		mAnimator->PlayAnimation(L"AnubisDeadEffect", false);
+
+		if (mAnimator->GetActiveAnimation()->IsComplete())
+		{
+			GetOwner()->SetState(GameObject::eState::Dead);
+			dynamic_cast<Anubis*>(GetOwner())->SetDead();
+		}
 	}
 
 	void AnubisScript::ChargedBolts(bool isVertical)

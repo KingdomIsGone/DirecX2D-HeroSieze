@@ -42,6 +42,10 @@ namespace ss
 			= Resources::Load<Texture>(L"Anubis_CastTex", L"..\\Resources\\Texture\\Monster\\Anubis\\AnubisCast126_151.png");
 		mAnimator->Create(L"Anubis_Cast", Anubis_CastTex, Vector2(0.0f, 0.0f), Vector2(126.0f, 151.0f), 30);
 
+		std::shared_ptr<Texture> AnubisDeadEffectTex
+			= Resources::Load<Texture>(L"AnubisDeadEffectTex", L"..\\Resources\\Texture\\Monster\\Anubis\\SoulExplosion305211.png");
+		mAnimator->Create(L"AnubisDeadEffect", AnubisDeadEffectTex, Vector2(0.0f, 0.0f), Vector2(30.0f, 52.0f), 11);
+
 		mScript = AddComponent<AnubisScript>();
 
 		mText = new ImmuneText();

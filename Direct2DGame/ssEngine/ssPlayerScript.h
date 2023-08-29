@@ -61,6 +61,7 @@ namespace ss
 		static void SetPlayerPos(Vector3 pos) { mPlayerPos = pos; }
 		static float GetPlayerSpeed() { return mSpeed; }
 		static Vector3 GetPoint() { return mPoint; }
+		static UINT GetSpellNum() { return mSpellNum; }
 
 		void ShootMeteor(Vector3 cursorPos);
 
@@ -91,6 +92,6 @@ namespace ss
 		float mPrevDegree;
 		Vector3 mColliderPos;
 
-		UINT mSpellNum;
+		static UINT mSpellNum;
 	};
 }

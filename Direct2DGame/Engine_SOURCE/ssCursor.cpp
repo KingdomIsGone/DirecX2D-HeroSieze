@@ -3,6 +3,7 @@
 #include "ssResources.h"
 #include "ssInput.h"
 #include "ssCamera.h"
+#include "..//ssEngine/ssPlayerScript.h"
 
 
 namespace ss
@@ -36,6 +37,15 @@ namespace ss
 				spriteMaterial->SetShader(spriteShader);
 				spriteMaterial->SetTexture(texture);
 				Resources::Insert(L"Cursor2Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"SpellCursorTex", L"..\\Resources\\Texture\\UI\\Cursor_Spell_spr.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				spriteMaterial->SetShader(spriteShader);
+				spriteMaterial->SetTexture(texture);
+				Resources::Insert(L"CursorSpellMater", spriteMaterial);
 			}
 		}
 
@@ -77,10 +87,20 @@ namespace ss
 
 		mTransform->SetPosition(mPos); //indicator¿ë
 
+		UINT num = PlayerScript::GetSpellNum();
+		if (num != 0)
+		{
+			mMr->SetMaterial(Resources::Find<Material>(L"CursorSpellMater"));
+			mOffset = Vector3(0.0f, 0.0f, 0.0f);
+		}
+
 		if(Input::GetKey(eKeyCode::LBUTTON))
 			mMr->SetMaterial(Resources::Find<Material>(L"Cursor2Mater"));
-		else
+		else if (!Input::GetKey(eKeyCode::LBUTTON) && num == 0)
+		{
 			mMr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));
+			mOffset = Vector3(0.09f, -0.09f, 0.0f);
+		}
 	}
 	void Cursor::LateUpdate()
 	{

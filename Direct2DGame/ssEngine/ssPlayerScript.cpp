@@ -21,13 +21,13 @@ namespace ss
 	float ss::PlayerScript::mSpeed = 2.0f;
 	float ss::PlayerScript::mCurHp = 3000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
+	UINT ss::PlayerScript::mSpellNum = 0;
 
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)
 		, mPrevDegree(0.0f)
 		, mCollideXaxisCount(0)
 		, mCollideYaxisCount(0)
-		, mSpellNum(0)
 	{
 	}
 	PlayerScript::~PlayerScript()

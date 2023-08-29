@@ -4,12 +4,13 @@
 #include "ssAnubisScript.h"
 #include "ssMummyScript.h"
 #include "ssSkeletonScript.h"
+#include "ssSarcophagus.h"
 
 
 namespace ss
 {
 	MeteorScript::MeteorScript()
-		: mDamage(500.0f)
+		: mDamage(800.0f)
 	{
 	}
 	MeteorScript::~MeteorScript()
@@ -43,10 +44,12 @@ namespace ss
 			
 			if (other->GetOwner()->GetName() == L"Anubis")
 				other->GetOwner()->GetComponent<AnubisScript>()->ChangeHP(-mDamage);
-			else if(other->GetOwner()->GetName() == L"Mummy")
+			else if (other->GetOwner()->GetName() == L"Mummy")
 				other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
 			else if (other->GetOwner()->GetName() == L"Skeleton")
 				other->GetOwner()->GetComponent<SkeletonScript>()->ChangeHP(-mDamage);
+			else if (other->GetOwner()->GetName() == L"Sarcophagus")
+				dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
 		}
 	}
 	void MeteorScript::OnCollisionExit(Collider2D* other)
