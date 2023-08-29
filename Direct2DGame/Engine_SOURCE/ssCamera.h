@@ -49,6 +49,7 @@ namespace ss
 		Matrix& GetViewMatrix() { return mView; }
 		Matrix& GetProjectionMatrix() { return mProjection; }
 
+
 	private:
 		static Matrix View;
 		static Matrix Projection;

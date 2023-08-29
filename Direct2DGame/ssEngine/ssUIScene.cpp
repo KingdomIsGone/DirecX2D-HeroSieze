@@ -36,58 +36,7 @@ namespace ss
 	}
 	void UIScene::Initialize()
 	{
-		//Main Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
-			camera->AddComponent<CameraScript>();
-		}
-
-		//Player Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f , 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::Player, true);
-			camera->AddComponent<PlayerCameraScript>();
-			//renderer::mainCamera = cameraComp;
-		}
-
-		//UI Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::UI, true);
-		}
-
-		//Cursor Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::Cursor, true);
-			renderer::mainCamera = cameraComp;
-			camera->AddComponent<PlayerCameraScript>();
-		}
-
 		
-
 		//¶óÀÌÆ®
 		{
 			GameObject* light = new GameObject();
@@ -101,7 +50,7 @@ namespace ss
 		
 		Player* player = new Player();
 		AddGameObject(eLayerType::Player, player);
-		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.02f));
 
 		cursor = new Cursor();
 		AddGameObject(eLayerType::Cursor, cursor);
@@ -109,9 +58,9 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::Cursor, indicator);
 
-	/*	DesertSkeleton* deSkeleton = new DesertSkeleton();
+		DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
+		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
 
 		//anubis
 		/*Mummy* mummy = new Mummy();
@@ -189,6 +138,59 @@ namespace ss
 			obj->GetComponent<Transform>()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
+
+		
+
+		//Main Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+
+			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
+			camera->AddComponent<CameraScript>();
+		}
+
+		//Player Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::Player, true);
+			camera->AddComponent<PlayerCameraScript>();
+			//renderer::mainCamera = cameraComp;
+		}
+
+		//UI Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::UI, true);
+		}
+		//Cursor Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::Cursor, true);
+			renderer::mainCamera = cameraComp;
+			camera->AddComponent<PlayerCameraScript>();
+		}
+		
 	}
 
 	void UIScene::Update()

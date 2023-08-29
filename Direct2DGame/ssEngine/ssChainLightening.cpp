@@ -17,7 +17,7 @@ namespace ss
 		AddComponent<DamageScript>();
 
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(Vector3(1.8f, 1.f, 1.0f));
+		mTransform->SetScale(Vector3(2.0f, 0.7f, 1.0f));
 		mTransform->SetRotation(Vector3(0.0f, 0.0f, 4.7f));
 
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
@@ -34,7 +34,7 @@ namespace ss
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetCollideType(eCollideType::Projectile);
 		mCollider->SetSize(Vector2(0.2f, 0.17f));
-		mCollider->SetCenter(Vector2(0.0f, -0.71f));
+		mCollider->SetCenter(Vector2(0.0f, -0.81f));
 
 	}
 	ChainLightening::~ChainLightening()

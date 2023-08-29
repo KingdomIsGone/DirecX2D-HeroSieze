@@ -242,6 +242,7 @@ namespace ss
 
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
 			camera->AddComponent<CameraScript>();
 		}
 

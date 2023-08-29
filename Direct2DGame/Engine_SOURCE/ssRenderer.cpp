@@ -5,6 +5,7 @@
 #include "ssStructedBuffer.h"
 #include "ssPaintShader.h"
 #include "ssParticleShader.h"
+#include "ssCamera.h"
 
 
 namespace renderer
@@ -684,6 +685,7 @@ namespace renderer
 			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"ImmuneTextMater", spriteMateiral);
 		}
+
 	}
 
 	void Initialize()

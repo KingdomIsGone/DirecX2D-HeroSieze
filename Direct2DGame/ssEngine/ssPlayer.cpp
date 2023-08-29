@@ -125,6 +125,8 @@ namespace ss
 			mPrevHp = mCurHp;
 		}
 
+		Vector3 pos = mTransform->GetPosition();
+
 	}
 	void Player::LateUpdate()
 	{

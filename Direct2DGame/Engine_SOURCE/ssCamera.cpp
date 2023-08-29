@@ -267,4 +267,6 @@ namespace ss
 			= renderer::depthStencilStates[(UINT)eDSType::None];
 		GetDevice()->BindDepthStencilState(dsState.Get());
 	}
+
+	
 }
