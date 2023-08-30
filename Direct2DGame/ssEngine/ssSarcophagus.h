@@ -21,7 +21,6 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void ChangeHp(float value) { mCurHp += value; }
 		void DamageCheck();
 		void SummonMummy();
 

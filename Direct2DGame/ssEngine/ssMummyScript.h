@@ -38,7 +38,6 @@ namespace ss
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 
-		void ChangeHP(float value) { mHp += value; }
 		float GetHP() { return mHp; }
 		void DamageCheck();
 

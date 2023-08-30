@@ -14,7 +14,7 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		
+		void DamageCheck();
 
 	private:
 		Transform* mTransform;

@@ -117,6 +117,7 @@ namespace ss
 	{
 		GameObject::Update();
 
+		DamageCheck();
 		mCurHp = mScript->GetHp();
 		if (mCurHp != mPrevHp)
 		{
@@ -135,6 +136,16 @@ namespace ss
 	void Player::Render()
 	{
 		GameObject::Render();
+	}
+
+	void Player::DamageCheck()
+	{
+		float value = GetChangeHpValue();
+		if (value != 0)
+		{
+			mCurHp += value;
+			SetChangeHpValue(0.f);
+		}
 	}
 
 }

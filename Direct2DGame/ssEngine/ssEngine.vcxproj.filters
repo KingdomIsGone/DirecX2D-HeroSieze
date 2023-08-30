@@ -14,9 +14,6 @@
     <ClCompile Include="ssGridScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
-    <ClCompile Include="ssPlayerScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
     <ClCompile Include="ssPlayer.cpp">
       <Filter>Contents\Object\Player</Filter>
     </ClCompile>
@@ -128,6 +125,9 @@
     <ClCompile Include="ssFireWallPieceScript.cpp">
       <Filter>Contents\Object\Player\Skill\FireWall</Filter>
     </ClCompile>
+    <ClCompile Include="ssPlayerScript.cpp">
+      <Filter>Contents\Object\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -144,9 +144,6 @@
       <Filter>Contents\Load</Filter>
     </ClInclude>
     <ClInclude Include="ssGridScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="ssPlayerScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="ssPlayer.h">
@@ -259,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="ssFireWallPieceScript.h">
       <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPlayerScript.h">
+      <Filter>Contents\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

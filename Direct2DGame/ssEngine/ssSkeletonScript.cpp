@@ -205,13 +205,7 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
 
-		/*if (other->GetCollideType() == eCollideType::Projectile)
-		{
-			if (other->GetOwner()->GetName() == L"FireBall")
-			{
-				mHp -= dynamic_cast<FireBall*>(other)->GetDamage();
-			}
-		}*/
+	
 	}
 	void SkeletonScript::OnCollisionStay(Collider2D* other)
 	{

@@ -30,14 +30,7 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			if (other->GetOwner()->GetName() == L"Skeleton")
-				other->GetOwner()->GetComponent<SkeletonScript>()->ChangeHP(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Mummy")
-				other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Sarcophagus")
-				dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Anubis")
-				other->GetOwner()->GetComponent<AnubisScript>()->ChangeHP(-mDamage);
+			other->GetOwner()->SetChangeHpValue(-mDamage);
 		}
 
 		if (other->GetCollideType() != eCollideType::Player)
