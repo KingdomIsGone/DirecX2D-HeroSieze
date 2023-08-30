@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine_SOURCE\ssCursor.h" />
+    <ClInclude Include="FireWallPiece.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
     <ClInclude Include="ssAnubis.h" />
@@ -173,6 +174,8 @@
     <ClInclude Include="ssEnemyHpBarFill.h" />
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
+    <ClInclude Include="ssFireWall.h" />
+    <ClInclude Include="ssFireWallPieceScript.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssImmuneText.h" />
     <ClInclude Include="ssIndicator.h" />
@@ -197,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp" />
+    <ClCompile Include="FireWallPiece.cpp" />
     <ClCompile Include="ssAnubis.cpp" />
     <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />
@@ -214,6 +218,8 @@
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
+    <ClCompile Include="ssFireWall.cpp" />
+    <ClCompile Include="ssFireWallPieceScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssImmuneText.cpp" />
     <ClCompile Include="ssIndicator.cpp" />

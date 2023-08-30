@@ -119,6 +119,15 @@
     <ClCompile Include="ssMeteorScript.cpp">
       <Filter>Contents\Object\Player\Skill\Meteor</Filter>
     </ClCompile>
+    <ClCompile Include="FireWallPiece.cpp">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireWall.cpp">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireWallPieceScript.cpp">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -242,6 +251,15 @@
     <ClInclude Include="ssMeteorScript.h">
       <Filter>Contents\Object\Player\Skill\Meteor</Filter>
     </ClInclude>
+    <ClInclude Include="FireWallPiece.h">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireWall.h">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireWallPieceScript.h">
+      <Filter>Contents\Object\Player\Skill\FireWall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -333,6 +351,9 @@
     </Filter>
     <Filter Include="Contents\Object\Player\Skill\Meteor">
       <UniqueIdentifier>{3a9f60c3-2071-4c31-95b9-1d6f32ff50e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill\FireWall">
+      <UniqueIdentifier>{4b65de17-4d73-4094-bee2-3f1f0ace091a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

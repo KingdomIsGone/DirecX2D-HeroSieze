@@ -14,7 +14,7 @@
 #include "ssIndicator.h"
 #include "ssCollisionManager.h"
 #include "ssMeteor.h"
-
+#include "ssFireWall.h"
 namespace ss
 {
 	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
@@ -86,6 +86,9 @@ namespace ss
 	{
 		if (Input::GetKeyDown(eKeyCode::One))
 			mSpellNum = 1;
+
+		if (Input::GetKeyDown(eKeyCode::two))
+			mSpellNum = 2;
 	}
 
 	void PlayerScript::Idle()
@@ -278,6 +281,12 @@ namespace ss
 			mShootOnce = true;
 			mSpellNum = 0;
 		}
+		else if (!mShootOnce && mSpellNum == 2)
+		{
+			FireWalls(mCursorPos);
+			mShootOnce = true;
+			mSpellNum = 0;
+		}
 		
 		AttackAni(mPlayerPos, mCursorPos);
 	}
@@ -448,6 +457,13 @@ namespace ss
 		Meteor* meteor = new Meteor();
 		meteor->GetComponent<Transform>()->SetPosition(cursorPos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, meteor);
+	}
+
+	void PlayerScript::FireWalls(Vector3 cursorPos)
+	{
+		FireWall* wall = new FireWall(cursorPos);
+		wall->GetComponent<Transform>()->SetPosition(cursorPos);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::OtherObject, wall);
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)

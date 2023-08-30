@@ -64,6 +64,7 @@ namespace ss
 		static UINT GetSpellNum() { return mSpellNum; }
 
 		void ShootMeteor(Vector3 cursorPos);
+		void FireWalls(Vector3 cursorPos);
 
 	private:
 		static Vector3 mPlayerPos;

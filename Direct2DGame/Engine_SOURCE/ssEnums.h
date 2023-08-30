@@ -26,6 +26,7 @@ namespace ss::enums
 		Grid,
 		Player,
 		Monster,
+		OtherObject,
 		Summon1,
 		Summon2,
 		Projectile,

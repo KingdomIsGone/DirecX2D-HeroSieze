@@ -3,11 +3,11 @@
 
 namespace ss
 {
-	class Meteor : public GameObject
+	class FireWallPiece : public GameObject
 	{
 	public:
-		Meteor();
-		~Meteor();
+		FireWallPiece();
+		~FireWallPiece();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -19,11 +19,8 @@ namespace ss
 		Vector3 mPos;
 
 		float mDamage;
-		float mDelayTime;
-		UINT mStage;
-		float mTargetY;
 
-		class MeteorScript* mMScript;
+		class FireWallPieceScript* mScript;
 		class Animator* mAnimator;
 	};
 }

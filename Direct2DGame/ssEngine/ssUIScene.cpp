@@ -25,6 +25,7 @@
 #include "ssBossHpBar.h"
 #include "ssBossHpFill.h"
 #include "ssMeteor.h"
+#include "FireWallPiece.h"
 
 namespace ss
 {
@@ -96,9 +97,13 @@ namespace ss
 		obj->AddComponent<Collider2D>();
 		AddGameObject(eLayerType::Monster, obj);*/
 
-		Meteor* meteor = new Meteor();
+		/*Meteor* meteor = new Meteor();
 		AddGameObject(eLayerType::Projectile, meteor);
-		meteor->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
+		meteor->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);*/
+
+		FireWallPiece* Fpiece = new FireWallPiece();
+		AddGameObject(eLayerType::Projectile, Fpiece);
+		Fpiece->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
 		
 		
 		//TextureSetting();
