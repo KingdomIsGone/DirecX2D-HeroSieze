@@ -112,10 +112,16 @@ namespace ss
 		}
 		std::vector<OtherGameObject*> GetOtherGameObjects() { return mGameObjects; }
 
+		float GetChangeHpValue() { return mChaingeHpValue; }
+		void SetChangeHpValue(float value) { mChaingeHpValue = value; }
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
 		std::vector<Script*> mScripts;
 		std::vector<OtherGameObject*> mGameObjects;
+
+		//CUSTOM
+		float mChaingeHpValue;
 	};
 }

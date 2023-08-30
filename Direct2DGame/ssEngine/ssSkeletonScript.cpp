@@ -32,6 +32,7 @@ namespace ss
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
+		DamageCheck();
 		if (mHp <= 0)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
@@ -187,6 +188,16 @@ namespace ss
 	void SkeletonScript::Damage()
 	{
 		PlayerScript::ChangeHp(-mDamage);
+	}
+
+	void SkeletonScript::DamageCheck()
+	{
+		float value = GetOwner()->GetChangeHpValue();
+		if (value != 0)
+		{
+			mHp += value;
+			GetOwner()->SetChangeHpValue(0.f);
+		}
 	}
 
 	void SkeletonScript::OnCollisionEnter(Collider2D* other)

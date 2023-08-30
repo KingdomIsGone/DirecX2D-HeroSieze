@@ -49,14 +49,16 @@ namespace ss
 
 			mColIDs.push_back(other->GetColliderID());
 
-			if (other->GetOwner()->GetName() == L"Anubis")
-				other->GetOwner()->GetComponent<AnubisScript>()->ChangeHP(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Mummy")
-				other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Skeleton")
-				other->GetOwner()->GetComponent<SkeletonScript>()->ChangeHP(-mDamage);
-			else if (other->GetOwner()->GetName() == L"Sarcophagus")
-				dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
+			//if (other->GetOwner()->GetName() == L"Anubis")
+			//	other->GetOwner()->GetComponent<AnubisScript>()->ChangeHP(-mDamage);
+			//else if (other->GetOwner()->GetName() == L"Mummy")
+			//	other->GetOwner()->GetComponent<MummyScript>()->ChangeHP(-mDamage);
+			////else if (other->GetOwner()->GetName() == L"Skeleton")
+			////	other->GetOwner()->GetComponent<SkeletonScript>()->ChangeHP(-mDamage);
+			//else if (other->GetOwner()->GetName() == L"Sarcophagus")
+			//	dynamic_cast<Sarcophagus*>(other->GetOwner())->ChangeHp(-mDamage);
+
+			other->GetOwner()->SetChangeHpValue(-mDamage);
 		}
 	}
 	void FireWallPieceScript::OnCollisionExit(Collider2D* other)

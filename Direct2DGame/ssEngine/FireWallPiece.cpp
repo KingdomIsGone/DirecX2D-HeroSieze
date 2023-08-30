@@ -21,7 +21,7 @@ namespace ss
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
 		Collider2D* collider = AddComponent<Collider2D>();
-		collider->SetCollideType(eCollideType::NormalMonster);
+		collider->SetCollideType(eCollideType::Projectile);
 		collider->SetSize(Vector2(0.15f, 0.26f));
 		collider->SetCenter(Vector2(-0.00f, -0.05f));
 

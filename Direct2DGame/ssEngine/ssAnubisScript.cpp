@@ -48,6 +48,7 @@ namespace ss
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
+		DamageCheck();
 		mBossHpFill->ChangeHP(mHp);
 		if (mHp <= 0)
 			mState = eState::Dead;
@@ -312,6 +313,22 @@ namespace ss
 		mHp += value; 
 	}
 
+	void AnubisScript::DamageCheck()
+	{
+		if (mbImmune)
+		{
+			GetOwner()->SetChangeHpValue(0.f);
+			return;
+		}
+			
+		float value = GetOwner()->GetChangeHpValue();
+		if (value != 0)
+		{
+			mHp += value;
+			GetOwner()->SetChangeHpValue(0.f);
+		}
+	}
+
 	void AnubisScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Projectile && mbImmune)
@@ -319,6 +336,8 @@ namespace ss
 	}
 	void AnubisScript::OnCollisionStay(Collider2D* other)
 	{
+		if (other->GetCollideType() == eCollideType::Projectile && mbImmune)
+			mText->SetText();
 	}
 	void AnubisScript::OnCollisionExit(Collider2D* other)
 	{

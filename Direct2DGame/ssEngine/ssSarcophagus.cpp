@@ -69,6 +69,7 @@ namespace ss
 
 		mPos = mTransform->GetPosition();
 
+		DamageCheck();
 		if (mCurHp != mPrevHp)
 		{
 			mHpBarFill->ChangeHP(mCurHp);
@@ -92,6 +93,15 @@ namespace ss
 	void Sarcophagus::Render()
 	{
 		GameObject::Render();
+	}
+	void Sarcophagus::DamageCheck()
+	{
+		float value = GetChangeHpValue();
+		if (value != 0)
+		{
+			mCurHp += value;
+			SetChangeHpValue(0.f);
+		}
 	}
 	void Sarcophagus::SummonMummy()
 	{

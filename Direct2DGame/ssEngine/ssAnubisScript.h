@@ -37,6 +37,7 @@ namespace ss
 
 		void ChangeHP(float value); 
 		float GetHP() { return mHp; }
+		void DamageCheck();
 
 		void PlayIdleAni() { mAnimator->PlayAnimation(L"Anubis_Down", true); }
 

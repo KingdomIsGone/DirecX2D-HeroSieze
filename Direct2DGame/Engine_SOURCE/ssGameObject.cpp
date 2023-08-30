@@ -7,6 +7,7 @@ namespace ss
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
+		, mChaingeHpValue(0.f)
 	{
 		AddComponent<Transform>();
 	}

@@ -42,6 +42,7 @@ namespace ss
 		float GetHP() { return mHp; }
 
 		void Damage();
+		void DamageCheck();
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;

@@ -27,6 +27,7 @@ namespace ss
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
+		DamageCheck();
 		if (mHp <= 0)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
@@ -171,6 +172,16 @@ namespace ss
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
+	}
+
+	void MummyScript::DamageCheck()
+	{
+		float value = GetOwner()->GetChangeHpValue();
+		if (value != 0)
+		{
+			mHp += value;
+			GetOwner()->SetChangeHpValue(0.f);
+		}
 	}
 
 	void MummyScript::OnCollisionEnter(Collider2D* other)
