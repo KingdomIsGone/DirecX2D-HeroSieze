@@ -7,6 +7,14 @@
 #include "guiEditorObject.h"
 #include "guiDebugObject.h"
 
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
+#define IMGUI_DEFINE_MATH_OPERATORS
+#endif
+
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+
 namespace gui
 {
 	class Editor
@@ -26,5 +34,6 @@ namespace gui
 		static std::vector<Widget*> mWidgets;
 		static std::vector<EditorObject*> mEditorObjects;
 		static std::vector<DebugObject*> mDebugObjects;
+		static ImGuiIO mIO;
 	};
 }

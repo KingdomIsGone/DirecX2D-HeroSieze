@@ -1,6 +1,7 @@
 #include "ssCollider2D.h"
 #include "ssGameObject.h"
 #include "ssRenderer.h"
+#include "..\\ssEngine\ssPlayerScript.h"
 
 namespace ss
 {

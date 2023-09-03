@@ -28,6 +28,10 @@ namespace ss
 		, mPrevDegree(0.0f)
 		, mCollideXaxisCount(0)
 		, mCollideYaxisCount(0)
+		, mRightColCount(0)
+		, mLeftColCount(0)
+		, mTopColCount(0)
+		, mBottomColCount(0)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -304,14 +308,14 @@ namespace ss
 		else if (playerpos.y > point.y)
 			playerpos.y -= mSpeed * Time::DeltaTime();
 
-		if (mIsColliding)
-			playerpos = ReverseMove(playerpos, point);
+		
+		playerpos = ReverseMove(playerpos, point);
 
 		//playerpos = UnProject(playerpos);
 		SetPlayerPos(playerpos);
 		GetOwner()->GetComponent<Transform>()->SetPosition(playerpos);
 
-		if (abs(playerpos.x - point.x) <0.001f && abs(playerpos.y - point.y) < 0.001f && mIsColliding == false)
+		if (abs(playerpos.x - point.x) <0.001f && abs(playerpos.y - point.y) < 0.001f)
 		{
 			mState = eState::Idle;
 			mIsMoving = false;
@@ -394,19 +398,27 @@ namespace ss
 		if (mState != eState::ClickMove)
 			return playerpos;
 
-		if (mCollideYaxisCount > 0)
+		if (mLeftColCount > 0)
+		{
+			if(playerpos.x > point.x)
+				playerpos.x += (mSpeed + 0.f) * Time::DeltaTime();
+		}
+
+		if (mRightColCount > 0)
 		{
 			if (playerpos.x < point.x)
 				playerpos.x -= (mSpeed + 0.f) * Time::DeltaTime();
-			else if (playerpos.x > point.x)
-				playerpos.x += (mSpeed + 0.f) * Time::DeltaTime();
 		}
-		
-		if (mCollideXaxisCount > 0)
+
+		if (mTopColCount > 0)
 		{
 			if (playerpos.y < point.y)
 				playerpos.y -= (mSpeed + 0.f) * Time::DeltaTime();
-			else if (playerpos.y > point.y)
+		}
+
+		if (mBottomColCount > 0)
+		{
+			if (playerpos.y > point.y)
 				playerpos.y += (mSpeed + 0.f) * Time::DeltaTime();
 		}
 
@@ -466,25 +478,38 @@ namespace ss
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::OtherObject, wall);
 	}
 
+
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
+		other->SetColIsPlayer(true);
+		other->SetPlayerCol(GetOwner()->GetComponent<Collider2D>());
+
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			mIsColliding = true;
 			mColliderPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
 
 			float degree = math::CalculateDegree(Vector2(mPlayerPos.x, mPlayerPos.y)
 				, Vector2(mColliderPos.x, mColliderPos.y));
 
-			if ((-60.0f <= degree && degree < 60.0f) || (120.0f <= degree || degree < -120.0f))
+			if (-50.0f <= degree && degree < 50.0f)
 			{
-				mCollideYaxisCount++;
-				other->SetAxisX(false);
+				mRightColCount++;
+				other->SetRightCol(true);
+			}
+			else if (130.0f <= degree || degree < -130.0f)
+			{
+				mLeftColCount++;
+				other->SetLeftCol(true);
+			}
+			else if (50.f <= degree && degree < 130.f)
+			{
+				mTopColCount++;
+				other->SetTopCol(true);
 			}
 			else
 			{
-				mCollideXaxisCount++;
-				other->SetAxisX(true);
+				mBottomColCount++;
+				other->SetBottomCol(true);
 			}
 		}
 	}
@@ -498,13 +523,29 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			mIsColliding = false;
-
-			if (other->GetAxisX())
-				mCollideXaxisCount--;
-			else
-				mCollideYaxisCount--;
+			if (other->GetBottomCol())
+			{
+				other->SetBottomCol(false);
+				mBottomColCount--;
+			}
+			else if (other->GetTopCol())
+			{
+				other->SetTopCol(false);
+				mTopColCount--;
+			}
+			else if (other->GetRightCol())
+			{
+				other->SetRightCol(false);
+				mRightColCount--;
+			}
+			else if (other->GetLeftCol())
+			{
+				other->SetLeftCol(false);
+				mLeftColCount--;
+			}
 		}
+
+		other->SetColIsPlayer(false);
 	}
 
 	

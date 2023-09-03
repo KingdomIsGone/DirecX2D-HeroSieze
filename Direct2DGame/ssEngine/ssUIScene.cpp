@@ -146,20 +146,6 @@ namespace ss
 
 		
 
-		//Main Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
-			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
-			camera->AddComponent<CameraScript>();
-		}
-
 		//Player Camera
 		{
 			GameObject* camera = new GameObject();
@@ -183,6 +169,21 @@ namespace ss
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
 		}
+
+		//Main Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+
+			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
+			camera->AddComponent<CameraScript>();
+		}
+	
 		//Cursor Camera
 		{
 			GameObject* camera = new GameObject();

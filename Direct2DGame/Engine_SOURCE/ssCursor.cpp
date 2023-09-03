@@ -53,7 +53,7 @@ namespace ss
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mMr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));
 		mTransform->SetScale(Vector3(0.2f, 0.2f, 1.0f));
-		//mTransform->SetPosition(Vector3::Zero);
+		mTransform->SetPosition(Vector3::Zero);
 		mOffset = Vector3(0.09f, -0.09f, 0.0f);
 	}
 	Cursor::~Cursor()
@@ -94,8 +94,10 @@ namespace ss
 			mOffset = Vector3(0.0f, 0.0f, 0.0f);
 		}
 
-		if(Input::GetKey(eKeyCode::LBUTTON))
+		if (Input::GetKey(eKeyCode::LBUTTON))
+		{
 			mMr->SetMaterial(Resources::Find<Material>(L"Cursor2Mater"));
+		}
 		else if (!Input::GetKey(eKeyCode::LBUTTON) && num == 0)
 		{
 			mMr->SetMaterial(Resources::Find<Material>(L"Cursor1Mater"));

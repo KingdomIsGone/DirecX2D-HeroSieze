@@ -5,6 +5,7 @@
 
 namespace ss
 {
+	class Collider2D;
 	class PlayerScript : public Script
 	{
 	public:
@@ -66,6 +67,7 @@ namespace ss
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);
 
+
 	private:
 		static Vector3 mPlayerPos;
 		static Vector3 mPoint;
@@ -87,6 +89,11 @@ namespace ss
 		bool mIsColliding;
 		UINT mCollideXaxisCount;
 		UINT mCollideYaxisCount;
+
+		UINT mTopColCount;
+		UINT mBottomColCount;
+		UINT mRightColCount;
+		UINT mLeftColCount;
 
 		Vector3 mCursorPos;
 		Vector3 mCursorProjPos;

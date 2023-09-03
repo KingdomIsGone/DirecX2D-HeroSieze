@@ -2,6 +2,8 @@
 #include "ssRenderer.h"
 #include "ssGraphicDevice_Dx11.h"
 #include "ssTransform.h"
+#include "ssCollider2D.h"
+#include "..\\ssEngine\ssPlayerScript.h"
 
 namespace ss
 {
@@ -14,6 +16,15 @@ namespace ss
 
 	GameObject::~GameObject()
 	{
+		Collider2D* col = GetComponent<Collider2D>();
+		if (col != nullptr)
+		{
+			if (col->GetColIsPlayer())
+			{
+				col->GetPlayerCol()->OnCollisionExit(col);
+			}
+		}
+
 		for (Component* comp : mComponents)
 		{
 			if (comp == nullptr)
