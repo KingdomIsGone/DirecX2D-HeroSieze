@@ -351,7 +351,7 @@ namespace renderer
 		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
 		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
 		ss::Resources::Insert(L"GridShader", gridShader);
-
+			
 		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
 		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
@@ -684,6 +684,27 @@ namespace renderer
 			spriteMateiral->SetTexture(ImmuneTextTex);
 			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"ImmuneTextMater", spriteMateiral);
+		}
+
+		//스킬 아이콘 메테오
+		{
+			std::shared_ptr<Texture> MeteorIconTex
+				= Resources::Load<Texture>(L"MeteorIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\MeteorIcon.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(MeteorIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"MeteorIconMater", spriteMaterial);
+		}
+		//스킬 아이콘 파이어월
+		{
+			std::shared_ptr<Texture> FireWallIconTex
+				= Resources::Load<Texture>(L"FireWallIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireWallIcon.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(FireWallIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"FireWallMater", spriteMaterial);
 		}
 
 	}

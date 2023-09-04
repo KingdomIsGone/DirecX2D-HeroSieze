@@ -191,11 +191,13 @@
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
+    <ClInclude Include="ssSkillSlot1.h" />
     <ClInclude Include="ssTorchBig.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
     <ClInclude Include="ssValkyrieScene.h" />
+    <ClInclude Include="ssWallCollider.h" />
     <ClInclude Include="ssWoodsField.h" />
   </ItemGroup>
   <ItemGroup>
@@ -235,12 +237,14 @@
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
+    <ClCompile Include="ssSkillSlot1.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
     <ClCompile Include="ssPlayScene.cpp" />
     <ClCompile Include="ssValkyrieScene.cpp" />
+    <ClCompile Include="ssWallCollider.cpp" />
     <ClCompile Include="ssWoodsField.cpp" />
   </ItemGroup>
   <ItemGroup>

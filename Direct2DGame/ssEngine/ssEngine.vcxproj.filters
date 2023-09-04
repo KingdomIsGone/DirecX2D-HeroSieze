@@ -104,9 +104,6 @@
     <ClCompile Include="ssAnubisRoom.cpp">
       <Filter>Contents\Scene\BossRoomAnubis</Filter>
     </ClCompile>
-    <ClCompile Include="ssTorchBig.cpp">
-      <Filter>Contents\Object\MapObject</Filter>
-    </ClCompile>
     <ClCompile Include="ssImmuneText.cpp">
       <Filter>Contents\Object\Boss\Anubis</Filter>
     </ClCompile>
@@ -127,6 +124,15 @@
     </ClCompile>
     <ClCompile Include="ssPlayerScript.cpp">
       <Filter>Contents\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ssTorchBig.cpp">
+      <Filter>Contents\Object\MapObject\TorchBig</Filter>
+    </ClCompile>
+    <ClCompile Include="ssWallCollider.cpp">
+      <Filter>Contents\Object\MapObject\WallCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSkillSlot1.cpp">
+      <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +242,6 @@
     <ClInclude Include="ssAnubisRoom.h">
       <Filter>Contents\Scene\BossRoomAnubis</Filter>
     </ClInclude>
-    <ClInclude Include="ssTorchBig.h">
-      <Filter>Contents\Object\MapObject</Filter>
-    </ClInclude>
     <ClInclude Include="ssImmuneText.h">
       <Filter>Contents\Object\Boss\Anubis</Filter>
     </ClInclude>
@@ -259,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="ssPlayerScript.h">
       <Filter>Contents\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ssTorchBig.h">
+      <Filter>Contents\Object\MapObject\TorchBig</Filter>
+    </ClInclude>
+    <ClInclude Include="ssWallCollider.h">
+      <Filter>Contents\Object\MapObject\WallCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSkillSlot1.h">
+      <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +366,15 @@
     </Filter>
     <Filter Include="Contents\Object\Player\Skill\FireWall">
       <UniqueIdentifier>{4b65de17-4d73-4094-bee2-3f1f0ace091a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\MapObject\TorchBig">
+      <UniqueIdentifier>{edb5f991-dea2-4892-90a8-d0a452e4997e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\MapObject\WallCollider">
+      <UniqueIdentifier>{8b909a92-45e0-41ea-9de4-01cf916127f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillSlot">
+      <UniqueIdentifier>{88d3eaa1-4556-4c6b-a01f-b94e4703f976}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

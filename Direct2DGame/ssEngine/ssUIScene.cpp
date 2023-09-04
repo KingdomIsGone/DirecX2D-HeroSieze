@@ -26,6 +26,8 @@
 #include "ssBossHpFill.h"
 #include "ssMeteor.h"
 #include "FireWallPiece.h"
+#include "ssWallCollider.h"
+#include "ssSkillSlot1.h"
 
 namespace ss
 {
@@ -105,6 +107,8 @@ namespace ss
 		AddGameObject(eLayerType::Projectile, Fpiece);
 		Fpiece->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
 		
+		//WallCollider* wallCol = new WallCollider();
+
 		
 		//TextureSetting();
 		UI_Setting();
@@ -205,7 +209,6 @@ namespace ss
 
 		Vector3 pos = cursor->GetPos();
 		
-		
 	}
 
 	void UIScene::LateUpdate()
@@ -219,6 +222,10 @@ namespace ss
 	}
 	void UIScene::UI_Setting()
 	{
+		SkillSlot1* skillSlot1 = new SkillSlot1();
+		skillSlot1->GetComponent<Transform>()->SetPosition(-2.01f, -1.54f, 1.0099f);
+		AddGameObject(eLayerType::UI, skillSlot1);
+
 		//캐릭터 및 레벨창 z=1.01
 		{
 			GameObject* obj = new GameObject();
@@ -406,7 +413,6 @@ namespace ss
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
 				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.53f, 1.005f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
-				//obj->AddComponent<CameraScript>();
 			}
 
 			{
@@ -418,7 +424,6 @@ namespace ss
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
 				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.62f, 1.005f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
-				//obj->AddComponent<CameraScript>();
 			}
 		}
 

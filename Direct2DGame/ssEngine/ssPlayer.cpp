@@ -53,7 +53,7 @@ namespace ss
 
 			Animator* at = AddComponent<Animator>();
 			at->Create(L"MoveDown", MoveDownTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 48.0f), 6);
-			at->Create(L"MoveUp", MoveUpTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 48.0f), 6);
+			at->Create(L"MoveUp", MoveUpTex, Vector2(0.0f, 0.0f), Vector2(32.0f, 48.0f), 6);
 			at->Create(L"MoveRight", MoveRightTex, Vector2(0.0f, 0.0f), Vector2(34.0f, 53.0f), 6);
 			at->Create(L"MoveLeft", MoveLeftTex, Vector2(0.0f, 0.0f), Vector2(34.0f, 53.0f), 6);
 
