@@ -12,15 +12,18 @@
 #include "..\\Engine_SOURCE\\ssApplication.h"
 #include "..\\Engine_SOURCE\\ssGraphicDevice_Dx11.h"
 
+#include "guiDockspace.h"
+
 extern ss::Application application;
 
 namespace gui
 {
 	using namespace ss::enums;
-	std::vector<Widget*> Editor::mWidgets = {};
+	std::map<std::wstring, Widget*> Editor::mWidgets = {};
 	std::vector<EditorObject*> Editor::mEditorObjects = {};
 	std::vector<DebugObject*> Editor::mDebugObjects = {};
 	ImGuiIO Editor::mIO = {};
+	Dockspace* Editor::mDockSpace = nullptr;
 
 	void Editor::Initialize()
 	{
@@ -53,6 +56,113 @@ namespace gui
 
 		mEditorObjects.push_back(grid);
 
+		//imguiInit();
+
+		mDockSpace = new Dockspace();
+		//mWidgets.insert(std::make_pair(L"ssDockSpace", mDockSpace));
+		mDockSpace->SetName("ssDockSpace");
+	}
+
+	void Editor::Run()
+	{
+		Update();
+		LateUpdate();
+		Render();
+		//imguiRender();
+		//temporary
+		for (const ss::graphics::DebugMesh& mesh
+			: renderer::debugMeshs)
+		{
+			DebugRender(mesh);
+		}
+		renderer::debugMeshs.clear();
+	}
+	void Editor::Update()
+	{
+
+
+		for (EditorObject* obj : mEditorObjects)
+		{
+			obj->Update();
+		}
+	}
+	void Editor::LateUpdate()
+	{
+		for (EditorObject* obj : mEditorObjects)
+		{
+			obj->LateUpdate();
+		}
+	}
+	void Editor::Render()
+	{
+
+	}
+	void Editor::Release()
+	{
+		for (auto widget : mWidgets)
+		{
+			//delete widget;
+			//widget = nullptr;
+		}
+
+		for (auto editorObj : mEditorObjects)
+		{
+			delete editorObj;
+			editorObj = nullptr;
+		}
+
+		for (auto debugObj : mDebugObjects)
+		{
+			delete debugObj;
+			debugObj = nullptr;
+		}
+
+		imguiRelease();
+	}
+
+	void Editor::DebugRender(const ss::graphics::DebugMesh& mesh)
+	{
+		DebugObject* debugObj = mDebugObjects[(UINT)mesh.type];
+
+		
+		ss::Transform* tr = debugObj->GetComponent<ss::Transform>();
+
+		Vector3 pos = mesh.position;
+		pos.z -= 0.01f;
+
+		tr->SetPosition(pos);
+		tr->SetScale(mesh.scale);
+		tr->SetRotation(mesh.rotation);
+
+		tr->LateUpdate();
+
+		/*ss::MeshRenderer * mr
+			= debugObj->GetComponent<ya::MeshRenderer>();*/
+			// main camera
+
+		ss::graphics::ConstantBuffer* cb
+			= renderer::constantBuffer[(int)eCBType::Debug];
+
+		renderer::DebugCB data;
+		bool is = ss::Collider2D::GetIsCollide();
+		if (is)
+			data.debugColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		else
+			data.debugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+
+		cb->SetData(&data);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::VS);
+
+		ss::Camera* mainCamara = renderer::mainCamera;
+		ss::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());
+		ss::Camera::SetGpuProjectionMatrix(mainCamara->GetProjectionMatrix());
+
+		debugObj->Render();
+	}
+
+	void Editor::imguiInit()
+	{
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -106,98 +216,71 @@ namespace gui
 		bool show_demo_window = true;
 		bool show_another_window = false;
 		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-
 	}
-	void Editor::Run()
+	
+	void Editor::imguiRender()
 	{
-		Update();
-		LateUpdate();
-		Render();
-	}
-	void Editor::Update()
-	{
+		// Start the Dear ImGui frame
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
 
+		bool show_demo_window = true;
 
-		for (EditorObject* obj : mEditorObjects)
+		mDockSpace->Render();
+		for (auto& widget : mWidgets)
 		{
-			obj->Update();
+			widget.second->Render();
 		}
-	}
-	void Editor::LateUpdate()
-	{
-		for (EditorObject* obj : mEditorObjects)
+
+		if (show_demo_window)
+			ImGui::ShowDemoWindow(&show_demo_window);
+
+#pragma region SAMPLE
+		//// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+		//{
+		//	static float f = 0.0f;
+		//	static int counter = 0;
+
+		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		//	ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		//	ImGui::Checkbox("Another Window", &show_another_window);
+
+		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		//	ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		//		counter++;
+		//	ImGui::SameLine();
+		//	ImGui::Text("counter = %d", counter);
+
+		//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+		//	ImGui::End();
+		//}
+
+		//// 3. Show another simple window.
+		//if (show_another_window)
+		//{
+		//	ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		//	ImGui::Text("Hello from another window!");
+		//	if (ImGui::Button("Close Me"))
+		//		show_another_window = false;
+		//	ImGui::End();
+		//}
+#pragma endregion
+
+		// Rendering
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+		// Update and Render additional Platform Windows
+		if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
-			obj->LateUpdate();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
 		}
-	}
-	void Editor::Render()
-	{
-//		// Start the Dear ImGui frame
-//		ImGui_ImplDX11_NewFrame();
-//		ImGui_ImplWin32_NewFrame();
-//		ImGui::NewFrame();
-//
-//		bool show_demo_window = true;
-//
-//		// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-//		if (show_demo_window)
-//			ImGui::ShowDemoWindow(&show_demo_window);
-//
-//		//for (auto& widget : mWidgets)
-//		//{
-//		//	widget.second->Update();
-//		//}
-//		//for (auto& widget : mWidgets)
-//		//{
-//		//	widget.second->Render();
-//		//}
-//
-//#pragma region SAMPLE
-//		//// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-//		//{
-//		//	static float f = 0.0f;
-//		//	static int counter = 0;
-//
-//		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-//
-//		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-//		//	ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-//		//	ImGui::Checkbox("Another Window", &show_another_window);
-//
-//		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-//		//	ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-//
-//		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-//		//		counter++;
-//		//	ImGui::SameLine();
-//		//	ImGui::Text("counter = %d", counter);
-//
-//		//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-//		//	ImGui::End();
-//		//}
-//
-//		//// 3. Show another simple window.
-//		//if (show_another_window)
-//		//{
-//		//	ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-//		//	ImGui::Text("Hello from another window!");
-//		//	if (ImGui::Button("Close Me"))
-//		//		show_another_window = false;
-//		//	ImGui::End();
-//		//}
-//#pragma endregion
-//
-//		// Rendering
-//		ImGui::Render();
-//		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-//
-//		// Update and Render additional Platform Windows
-//		if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-//		{
-//			ImGui::UpdatePlatformWindows();
-//			ImGui::RenderPlatformWindowsDefault();
-//		}
 
 		for (EditorObject* obj : mEditorObjects)
 		{
@@ -211,72 +294,56 @@ namespace gui
 		}
 		renderer::debugMeshs.clear();
 	}
-	void Editor::Release()
+	
+	void Editor::imguiRelease()
 	{
-		for (auto widget : mWidgets)
-		{
-			delete widget;
-			widget = nullptr;
-		}
-
-		for (auto editorObj : mEditorObjects)
-		{
-			delete editorObj;
-			editorObj = nullptr;
-		}
-
-		for (auto debugObj : mDebugObjects)
-		{
-			delete debugObj;
-			debugObj = nullptr;
-		}
-
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 		ImGui::DestroyContext();
 	}
 
-	void Editor::DebugRender(const ss::graphics::DebugMesh& mesh)
-	{
-		DebugObject* debugObj = mDebugObjects[(UINT)mesh.type];
+	//지울지 말지 보자
+	//void Editor::DebugRender(const ss::graphics::DebugMesh& mesh)
+	//{
+	//	DebugObject* debugObj = mDebugObjects[(UINT)mesh.type];
 
-		// 위치 크기 회전 정보를 받아와서
-		// 해당 게임오브젝트위에 그려주면된다.
+	//	// 위치 크기 회전 정보를 받아와서
+	//	// 해당 게임오브젝트위에 그려주면된다.
 
-		ss::Transform* tr = debugObj->GetComponent<ss::Transform>();
+	//	ss::Transform* tr = debugObj->GetComponent<ss::Transform>();
 
-		Vector3 pos = mesh.position;
-		pos.z -= 0.01f;
+	//	Vector3 pos = mesh.position;
+	//	pos.z -= 0.01f;
 
-		tr->SetPosition(pos);
-		tr->SetScale(mesh.scale);
-		tr->SetRotation(mesh.rotation);
+	//	tr->SetPosition(pos);
+	//	tr->SetScale(mesh.scale);
+	//	tr->SetRotation(mesh.rotation);
 
-		tr->LateUpdate();
+	//	tr->LateUpdate();
 
-		/*ss::MeshRenderer * mr
-			= debugObj->GetComponent<ss::MeshRenderer>();*/
-			// main camera
+	//	/*ss::MeshRenderer * mr
+	//		= debugObj->GetComponent<ss::MeshRenderer>();*/
+	//		// main camera
 
-		ss::graphics::ConstantBuffer* cb
-			= renderer::constantBuffer[(int)eCBType::Debug];
+	//	ss::graphics::ConstantBuffer* cb
+	//		= renderer::constantBuffer[(int)eCBType::Debug];
 
-		renderer::DebugCB data;
-		bool is = ss::Collider2D::GetIsCollide();
-		if (is)
-			data.debugColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		else
-			data.debugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+	//	renderer::DebugCB data;
+	//	bool is = ss::Collider2D::GetIsCollide();
+	//	if (is)
+	//		data.debugColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+	//	else
+	//		data.debugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 
-		cb->SetData(&data);
-		cb->Bind(eShaderStage::PS);
-		cb->Bind(eShaderStage::VS);
+	//	cb->SetData(&data);
+	//	cb->Bind(eShaderStage::PS);
+	//	cb->Bind(eShaderStage::VS);
 
-		ss::Camera* mainCamara = renderer::mainCamera;
+	//	ss::Camera* mainCamara = renderer::mainCamera;
 
-		ss::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());
-		ss::Camera::SetGpuProjectionMatrix(mainCamara->GetProjectionMatrix());
+	//	ss::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());
+	//	ss::Camera::SetGpuProjectionMatrix(mainCamara->GetProjectionMatrix());
 
-		debugObj->Render();
-	}
+	//	debugObj->Render();
+	//}
 }

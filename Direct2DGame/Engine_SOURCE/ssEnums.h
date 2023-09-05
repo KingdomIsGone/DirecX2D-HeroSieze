@@ -35,6 +35,7 @@ namespace ss::enums
 		MonsterUI,
 		UI,
 		Cursor,
+		Camera,
 		End = 16,
 	};
 

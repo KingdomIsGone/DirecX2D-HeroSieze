@@ -40,15 +40,7 @@ namespace ss
 	void UIScene::Initialize()
 	{
 		
-		//라이트
-		{
-			GameObject* light = new GameObject();
-			light->SetName(L"Light");
-			AddGameObject(eLayerType::Light, light);
-			Light* lightComp = light->AddComponent<Light>();
-			lightComp->SetType(eLightType::Directional);
-			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-		}
+		
 
 		
 		Player* player = new Player();
@@ -166,7 +158,7 @@ namespace ss
 		//UI Camera
 		{
 			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
+			AddGameObject(eLayerType::UI, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
@@ -191,7 +183,7 @@ namespace ss
 		//Cursor Camera
 		{
 			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
+			AddGameObject(eLayerType::Cursor, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
@@ -201,6 +193,15 @@ namespace ss
 			camera->AddComponent<PlayerCameraScript>();
 		}
 		
+		//라이트
+		{
+			GameObject* light = new GameObject();
+			light->SetName(L"Light");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 
 	void UIScene::Update()

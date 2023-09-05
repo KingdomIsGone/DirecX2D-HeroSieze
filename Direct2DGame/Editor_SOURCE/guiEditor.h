@@ -31,9 +31,16 @@ namespace gui
 		static void DebugRender(const ss::graphics::DebugMesh& mesh);
 
 	private:
-		static std::vector<Widget*> mWidgets;
+		static void imguiInit();
+		static void imguiRender();
+		static void imguiRelease();
+
+	private:
+		static std::map<std::wstring, Widget*> mWidgets;
 		static std::vector<EditorObject*> mEditorObjects;
 		static std::vector<DebugObject*> mDebugObjects;
 		static ImGuiIO mIO;
+
+		static class Dockspace* mDockSpace;
 	};
 }
