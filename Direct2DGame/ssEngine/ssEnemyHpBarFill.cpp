@@ -15,7 +15,7 @@ namespace ss
 		mTransform->SetScale(Vector3(mCurHpScale, 0.018f, 1.0f));
 		Vector3 pos = mTransform->GetPosition();
 		pos.y += 0.174f;
-		pos.z -= 0.02f;
+		pos.z -= 0.002f;
 		mTransform->SetPosition(pos);
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

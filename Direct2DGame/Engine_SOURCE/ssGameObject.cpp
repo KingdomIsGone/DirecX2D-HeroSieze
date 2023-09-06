@@ -70,10 +70,6 @@ namespace ss
 			script->Update();
 		}
 
-		for (OtherGameObject* object : mGameObjects)
-		{
-			object->gameObject->Update();
-		}
 	}
 
 	void GameObject::LateUpdate()
@@ -86,11 +82,6 @@ namespace ss
 		for (Script* script : mScripts)
 		{
 			script->LateUpdate();
-		}
-
-		for (OtherGameObject* object : mGameObjects)
-		{
-			object->gameObject->LateUpdate();
 		}
 	}
 
@@ -105,11 +96,6 @@ namespace ss
 		for (Script* script : mScripts)
 		{
 			script->Render();
-		}
-
-		for (OtherGameObject* object : mGameObjects)
-		{
-			object->gameObject->Render();
 		}
 	}
 }

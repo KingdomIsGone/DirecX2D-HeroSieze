@@ -32,8 +32,12 @@ namespace ss
 		void RegisterCameraInRenderer();
 
 		void TurnLayerMask(eLayerType type, bool enable = true);
+		//custom
+		void TurnLayerRenderMask(eLayerType type, bool enable = true);
+
 		void EnableLayerMasks() { mLayerMask.set(); }
 		void DisableLayerMasks() { mLayerMask.reset(); }
+
 
 		void AlphaSortGameObjects();
 		void ZSortTransparencyGameObjects();
@@ -67,5 +71,8 @@ namespace ss
 		std::vector<GameObject*> mOpaqueGameObjects;
 		std::vector<GameObject*> mCutOutGameObjects;
 		std::vector<GameObject*> mTransparentGameObjects;
+
+		//custom
+		std::bitset<(UINT)eLayerType::End> mLayerRenderMask;
 	};
 }

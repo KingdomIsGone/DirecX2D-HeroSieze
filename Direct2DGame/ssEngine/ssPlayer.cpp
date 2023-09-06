@@ -95,6 +95,7 @@ namespace ss
 	
 		//hp¹Ù, fill
 		mSmallHpBar = new P_HpSmallBar();
+		mSmallHpBar->SetName(L"PlayerSmallHpBar");
 		mTransform = GetComponent<Transform>();
 		mSmallHpBar->GetComponent<Transform>()->SetParent(mTransform);
 		AddOtherGameObject(mSmallHpBar, eLayerType::MonsterUI);

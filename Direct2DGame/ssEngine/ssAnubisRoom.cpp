@@ -39,7 +39,7 @@ namespace ss
 
 		Player* player = new Player();
 		AddGameObject(eLayerType::Player, player);
-		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 6.43f, 1.0f));
+		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 6.43f, 1.02f));
 
 		cursor = new Cursor();
 		AddGameObject(eLayerType::Cursor, cursor);
@@ -235,13 +235,12 @@ namespace ss
 		//Main Camera
 		{
 			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
+			AddGameObject(eLayerType::Map, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
 
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
 			camera->AddComponent<CameraScript>();
 		}

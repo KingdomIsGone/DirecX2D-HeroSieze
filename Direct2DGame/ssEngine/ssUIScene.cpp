@@ -39,11 +39,8 @@ namespace ss
 	}
 	void UIScene::Initialize()
 	{
-		
-		
-
-		
 		Player* player = new Player();
+		player->SetName(L"Player");
 		AddGameObject(eLayerType::Player, player);
 		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.02f));
 
@@ -59,7 +56,7 @@ namespace ss
 
 		//anubis
 		/*Mummy* mummy = new Mummy();
-		AddGameObject(eLayerType::Monster, mummy);
+		//AddGameObject(eLayerType::Monster, mummy);
 		mummy->GetComponent<Transform>()->SetPosition(1.0f, -1.0f, 1.02f);
 
 		Sarcophagus* sarco = new Sarcophagus();
@@ -140,11 +137,24 @@ namespace ss
 			//obj->AddComponent<CameraScript>();
 		}
 
-		
+		//Main Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Map, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(cameraComp);
+
+			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			//cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
+			camera->AddComponent<CameraScript>();
+		}
 
 		//Player Camera
 		{
 			GameObject* camera = new GameObject();
+			camera->SetName(L"PlayerCamera");
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
@@ -163,21 +173,7 @@ namespace ss
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			renderer::cameras.push_back(cameraComp);
 			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::UI, true);
-		}
-
-		//Main Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
-			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
-			camera->AddComponent<CameraScript>();
+			cameraComp->TurnLayerMask(eLayerType::UI, true);                 
 		}
 	
 		//Cursor Camera

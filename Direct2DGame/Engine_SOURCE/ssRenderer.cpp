@@ -619,7 +619,7 @@ namespace renderer
 			std::shared_ptr<Material> spriteMateiral2 = std::make_shared<Material>();
 			spriteMateiral2->SetShader(SpShader);
 			spriteMateiral2->SetTexture(EnemyHpBarFillRedTex);
-			spriteMateiral2->SetRenderingMode(eRenderingMode::Opaque);
+			spriteMateiral2->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"EnemyHpBarFillRedMater", spriteMateiral2);
 		}
 		
@@ -638,7 +638,7 @@ namespace renderer
 			std::shared_ptr<Material> spriteMateiral2 = std::make_shared<Material>();
 			spriteMateiral2->SetShader(SpShader);
 			spriteMateiral2->SetTexture(PlayerHpSmallBarFillRedTex);
-			spriteMateiral2->SetRenderingMode(eRenderingMode::Opaque);
+			spriteMateiral2->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"PlayerHpSmallBarFillRedMater", spriteMateiral2);
 		}
 

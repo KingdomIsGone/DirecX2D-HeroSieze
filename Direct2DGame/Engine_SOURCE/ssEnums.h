@@ -24,7 +24,7 @@ namespace ss::enums
 	{
 		Map,
 		Grid,
-		Player,
+		Player = 2,
 		Monster,
 		OtherObject,
 		Summon1,
@@ -35,7 +35,6 @@ namespace ss::enums
 		MonsterUI,
 		UI,
 		Cursor,
-		Camera,
 		End = 16,
 	};
 

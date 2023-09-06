@@ -66,7 +66,7 @@ namespace ss
 		{
 			mLayers[(int)otherGameObject->layerType].AddGameObject(otherGameObject->gameObject);
 		}
-		
+			
 	}
 	void Scene::AddGameObjectToActiveScene(eLayerType type, GameObject* gameObj)
 	{

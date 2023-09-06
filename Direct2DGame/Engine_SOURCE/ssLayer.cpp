@@ -52,14 +52,14 @@ namespace ss
 	}
 	void Layer::Render()
 	{
-		for (GameObject* gameObj : mGameObjects)
+	/*	for (GameObject* gameObj : mGameObjects)
 		{
 			if (gameObj->GetState()
 				!= GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
-		}
+		}*/
 	}
 
 	void Layer::Destory()
