@@ -46,9 +46,6 @@
     <Filter Include="Scene\Base">
       <UniqueIdentifier>{3c64deb7-de3d-41d6-b5a1-90a85f926966}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Manager">
-      <UniqueIdentifier>{3aa709d5-c253-407d-8069-17d7fd213e28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\MeshRenderer">
       <UniqueIdentifier>{c413d2c4-0c96-48ba-b49d-385d06757959}</UniqueIdentifier>
     </Filter>
@@ -112,6 +109,9 @@
     <Filter Include="Light">
       <UniqueIdentifier>{d9573ede-7b72-4cc5-8556-46ecd68972ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{3aa709d5-c253-407d-8069-17d7fd213e28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -160,7 +160,7 @@
       <Filter>Scene\Base</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssSceneManager.h">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssMeshRenderer.h">
       <Filter>GameObject\Component\MeshRenderer</Filter>
@@ -199,7 +199,7 @@
       <Filter>Common\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollisionManager.h">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ssCollider2D.h">
       <Filter>GameObject\Component\Collider</Filter>
@@ -279,7 +279,7 @@
       <Filter>Scene\Base</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssSceneManager.cpp">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMeshRenderer.cpp">
       <Filter>GameObject\Component\MeshRenderer</Filter>
@@ -315,7 +315,7 @@
       <Filter>GameObject\Component\Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollisionManager.cpp">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssCollider2D.cpp">
       <Filter>GameObject\Component\Collider</Filter>

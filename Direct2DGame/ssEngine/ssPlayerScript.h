@@ -101,5 +101,7 @@ namespace ss
 		Vector3 mColliderPos;
 
 		static UINT mSpellNum;
+
+		std::map<UINT, UINT> mColDirMap;
 	};
 }

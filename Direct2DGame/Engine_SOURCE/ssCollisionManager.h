@@ -26,6 +26,9 @@ namespace ss
 		static void ColliderCollision(Collider2D* left, Collider2D* right);
 		static bool Intersect(Collider2D* left, Collider2D* right);
 
+		static bool Intersect4(Collider2D* left, Collider2D* right);
+		static bool Intersect4_Sub(Matrix* finalLeft, Matrix* finalRight, Vector3 PosArr[4], Vector3 centerDir);
+
 		static void SetLayer(eLayerType left, eLayerType right, bool enable);
 		static void Clear();
 

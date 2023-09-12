@@ -483,66 +483,45 @@ namespace ss
 	{
 		other->SetColIsPlayer(true);
 		other->SetPlayerCol(GetOwner()->GetComponent<Collider2D>());
-
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			mColliderPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
+			UINT colNum = other->GetColDir();
 
-			float degree = math::CalculateDegree(Vector2(mPlayerPos.x, mPlayerPos.y)
-				, Vector2(mColliderPos.x, mColliderPos.y));
-
-			if (-50.0f <= degree && degree < 50.0f)
-			{
-				mRightColCount++;
-				other->SetRightCol(true);
-			}
-			else if (130.0f <= degree || degree < -130.0f)
-			{
-				mLeftColCount++;
-				other->SetLeftCol(true);
-			}
-			else if (50.f <= degree && degree < 130.f)
-			{
-				mTopColCount++;
-				other->SetTopCol(true);
-			}
-			else
-			{
+			if (colNum == 1)
 				mBottomColCount++;
-				other->SetBottomCol(true);
-			}
+			else if (colNum == 2)
+				mTopColCount++;
+			else if (colNum == 3)
+				mRightColCount++;
+			else if (colNum == 4)
+				mLeftColCount++;
+
+			mColDirMap[other->GetColliderID()] = colNum;
 		}
+		
 	}
 
 	void PlayerScript::OnCollisionStay(Collider2D* other)
 	{
-		
+	
 	}
 
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			if (other->GetBottomCol())
-			{
-				other->SetBottomCol(false);
+			UINT colNum = mColDirMap[other->GetColliderID()];
+
+			if (colNum == 1)
 				mBottomColCount--;
-			}
-			else if (other->GetTopCol())
-			{
-				other->SetTopCol(false);
+			else if (colNum == 2)
 				mTopColCount--;
-			}
-			else if (other->GetRightCol())
-			{
-				other->SetRightCol(false);
+			else if (colNum == 3)
 				mRightColCount--;
-			}
-			else if (other->GetLeftCol())
-			{
-				other->SetLeftCol(false);
+			else if (colNum == 4)
 				mLeftColCount--;
-			}
+
+			mColDirMap.erase(other->GetColliderID());
 		}
 
 		other->SetColIsPlayer(false);

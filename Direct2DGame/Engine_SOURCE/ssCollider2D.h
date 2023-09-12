@@ -37,14 +37,8 @@ namespace ss
 		Collider2D* GetPlayerCol() { return mPlayerCol; }
 		void SetPlayerCol(Collider2D* col) { mPlayerCol = col; }
 
-		void SetLeftCol(bool is) { mLeftCol = is; }
-		void SetRightCol(bool is) { mRightCol = is; }
-		void SetTopCol(bool is) { mTopCol = is; }
-		void SetBottomCol(bool is) { mBottomCol = is; }
-		bool GetLeftCol() { return mLeftCol; }
-		bool GetRightCol() { return mRightCol; }
-		bool GetTopCol() { return mTopCol; }
-		bool GetBottomCol() { return mBottomCol; }
+		void SetColDir(UINT num) { mCurColDir = num; }
+		UINT GetColDir() { return mCurColDir; }
 
 	private:
 		static UINT mColliderNumber;
@@ -60,10 +54,6 @@ namespace ss
 		static bool mIsCollide;
 		bool mColIsPlayer;
 		Collider2D* mPlayerCol;
-
-		bool mRightCol;
-		bool mLeftCol;
-		bool mTopCol;
-		bool mBottomCol;
+		UINT mCurColDir; //»óÇÏÁÂ¿ì 1234
 	};
 }
