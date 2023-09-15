@@ -34,6 +34,7 @@ namespace ss::enums
 		Light,
 		MonsterUI,
 		UI,
+		Inventory,
 		Cursor,
 		End = 16,
 	};

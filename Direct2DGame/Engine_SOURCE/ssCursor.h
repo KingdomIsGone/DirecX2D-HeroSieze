@@ -1,3 +1,4 @@
+#pragma once
 #include "ssGameObject.h"
 
 namespace ss

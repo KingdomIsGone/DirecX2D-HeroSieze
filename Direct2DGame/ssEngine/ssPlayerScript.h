@@ -25,6 +25,7 @@ namespace ss
 			Move,
 			ClickMove,
 			Attack,
+			Sleep,
 		};
 
 		enum class eDirState
@@ -42,6 +43,7 @@ namespace ss
 		void Move();
 		void ClickMove();
 		void Attack();
+		void Sleep();
 
 		void MoveToPoint(Vector3 playerpos, Vector3 point);
 		void MoveToPointAni(Vector3 playerpos, Vector3 point);
@@ -67,6 +69,7 @@ namespace ss
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);
 
+		void SetInventory(class Inventory* inven) { mInventory = inven; }
 
 	private:
 		static Vector3 mPlayerPos;

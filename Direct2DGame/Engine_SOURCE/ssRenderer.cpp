@@ -24,6 +24,8 @@ namespace renderer
 	// light
 	std::vector<Light*> lights = {};
 	StructedBuffer* lightsBuffer = nullptr;
+	LightAttribute lightNormalAttribute = {}; //custom
+	
 
 	//
 	ss::Camera* mainCamera = nullptr;
@@ -32,6 +34,8 @@ namespace renderer
 
 	void SetupState()
 	{
+		//custom
+		lightNormalAttribute.color = Vector4(0.5f, .5f, .5f, 1.0f);
 #pragma region InputLayout
 		// Input layout 정점 구조 정보를 넘겨줘야한다.
 		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
@@ -751,6 +755,14 @@ namespace renderer
 		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
+	//custom
+	void BindNormalLights()
+	{
+		lightsBuffer->SetData(&lightNormalAttribute, 1);
+		lightsBuffer->BindSRV(eShaderStage::VS, 13);
+		lightsBuffer->BindSRV(eShaderStage::PS, 13);
+	}
+
 	void BindNoiseTexture()
 	{
 		std::shared_ptr<Texture> texture
@@ -780,16 +792,36 @@ namespace renderer
 		BindNoiseTexture();
 		BindLights();
 
+		Camera* inventoryCamera = nullptr;
+		Camera* CursorCamera = nullptr;
 		for (Camera* cam : cameras)
 		{
 			if (cam == nullptr)
 				continue;
+			//custom
+			if (cam->GetName() == L"InventoryCamera")
+			{
+				inventoryCamera = cam;
+				continue;
+			}
+			else if (cam->GetName() == L"CursorCamera")
+			{
+				CursorCamera = cam;
+				continue;
+			}
 
 			cam->Render();
 		}
-
-		cameras.clear();
 		lights.clear();
+		BindNormalLights();
+
+		if(inventoryCamera != nullptr)
+			inventoryCamera->Render();
+		if (CursorCamera != nullptr)
+			CursorCamera->Render();
+
+		lights.clear();
+		cameras.clear();
 	}
 
 	void Release()

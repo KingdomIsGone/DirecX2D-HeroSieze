@@ -15,6 +15,8 @@ namespace ss
 		virtual void Render() override;
 
 		void TurnOnOff(bool is) { mOn = is; }
+		bool GetOnOff() { return mOn; }
+		void SetLight(class Light* light) { mLight = light; }
 
 	private:
 		Transform* mTransform;
@@ -22,5 +24,6 @@ namespace ss
 		bool mOn;
 
 		class MeshRenderer* mRenderer;
+		class Light* mLight;
 	};
 }

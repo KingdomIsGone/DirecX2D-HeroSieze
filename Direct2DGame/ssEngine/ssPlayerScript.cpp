@@ -56,6 +56,9 @@ namespace ss
 		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 		mPlayerPos = pos;
 
+		if (mInventory->GetOnOff())
+			return;
+
 		SpellWaiting();
 
 		switch (mState)
@@ -71,6 +74,9 @@ namespace ss
 			break;
 		case ss::PlayerScript::eState::Attack:
 			Attack();
+			break;
+		case ss::PlayerScript::eState::Sleep:
+			Sleep();
 			break;
 		default:
 			break;
@@ -296,6 +302,11 @@ namespace ss
 		}
 		
 		AttackAni(mPlayerPos, mCursorPos);
+	}
+
+	void PlayerScript::Sleep()
+	{
+		
 	}
 
 	void PlayerScript::MoveToPoint(Vector3 playerpos, Vector3 point)

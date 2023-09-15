@@ -8,6 +8,7 @@
 #include "ssP_HpSmallBar.h"
 #include "ssP_HpSmallBarFill.h"
 #include "Inventory.h"
+#include "ssLight.h"
 
 namespace ss
 {
@@ -107,11 +108,22 @@ namespace ss
 		Vector3 tempPos2 = mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mSmallHpBarFill, eLayerType::MonsterUI);
 
-		//인벤토리
-		//Inventory* inventory = new Inventory();
-		//inventory->SetName(L"Inventory");
-		//AddOtherGameObject(inventory, eLayerType::UI);
+		//라이트
+		GameObject* light = new GameObject();
+		light->SetName(L"LightInPlayer");
+		AddOtherGameObject(light, eLayerType::Light);
+		Light* lightComp = light->AddComponent<Light>();
+		lightComp->SetType(eLightType::Directional);
+		lightComp->SetColor(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
 
+		//인벤토리
+		Inventory* inventory = new Inventory();
+		inventory->SetName(L"Inventory");
+		AddOtherGameObject(inventory, eLayerType::Inventory);
+		mScript->SetInventory(inventory);
+		inventory->SetLight(lightComp);
+
+		
 	}
 
 	Player::~Player()

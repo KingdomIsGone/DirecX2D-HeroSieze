@@ -1,6 +1,8 @@
 #include "Inventory.h"
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
+#include "ssInput.h"
+#include "ssLight.h"
 
 namespace ss
 {
@@ -14,9 +16,9 @@ namespace ss
 
 		mRenderer = AddComponent<MeshRenderer>();
 		mRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
 		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 
+		mLight = nullptr;
 		mOn = true;
 	}
 
@@ -31,6 +33,20 @@ namespace ss
 	void Inventory::Update()
 	{
 		GameObject::Update();
+
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			if (mOn)
+			{
+				mOn = false;
+				mLight->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+			}
+			else
+			{
+				mOn = true;
+				mLight->SetColor(Vector4(-0.7f, -0.7f, -0.7f, 1.f));
+			}
+		}
 
 		if(mOn)
 			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));

@@ -148,6 +148,7 @@ namespace ss
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			//cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
+			cameraComp->TurnLayerMask(eLayerType::Inventory, false);
 			camera->AddComponent<CameraScript>();
 		}
 
@@ -179,14 +180,28 @@ namespace ss
 		//Cursor Camera
 		{
 			GameObject* camera = new GameObject();
+			camera->SetName(L"CursorCamera");
 			AddGameObject(eLayerType::Cursor, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
+			cameraComp->SetName(L"CursorCamera");
 			renderer::cameras.push_back(cameraComp);
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::Cursor, true);
 			renderer::mainCamera = cameraComp;
 			camera->AddComponent<PlayerCameraScript>();
+		}
+
+		//Inventory Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Inventory, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			cameraComp->SetName(L"InventoryCamera");
+			renderer::cameras.push_back(cameraComp);
+			cameraComp->DisableLayerMasks();
+			cameraComp->TurnLayerMask(eLayerType::Inventory, true);
 		}
 		
 		//¶óÀÌÆ®
@@ -196,7 +211,7 @@ namespace ss
 			AddGameObject(eLayerType::Light, light);
 			Light* lightComp = light->AddComponent<Light>();
 			lightComp->SetType(eLightType::Directional);
-			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
 		}
 	}
 
