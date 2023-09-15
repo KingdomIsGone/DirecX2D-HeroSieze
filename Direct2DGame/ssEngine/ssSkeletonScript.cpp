@@ -75,8 +75,7 @@ namespace ss
 		else
 			mPos.y -= mSpeed * Time::DeltaTime();
 
-		if (mIsColliding)
-			mPos = ReverseMove();
+		mPos = ReverseMove();
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
@@ -165,15 +164,29 @@ namespace ss
 
 	Vector3 SkeletonScript::ReverseMove()
 	{
-		if (mPos.x < mPlayerPos.x)
-			mPos.x -= mSpeed * Time::DeltaTime();
-		else
-			mPos.x += mSpeed * Time::DeltaTime();
+		if (mLeftColCount > 0)
+		{
+			if (mPos.x > mPlayerPos.x)
+				mPos.x += (mSpeed + 0.f) * Time::DeltaTime();
+		}
 
-		if (mPos.y < mPlayerPos.y)
-			mPos.y += mSpeed * Time::DeltaTime();
-		else
-			mPos.y -= mSpeed * Time::DeltaTime();
+		if (mRightColCount > 0)
+		{
+			if (mPos.x < mPlayerPos.x)
+				mPos.x -= (mSpeed + 0.f) * Time::DeltaTime();
+		}
+
+		if (mTopColCount > 0)
+		{
+			if (mPos.y < mPlayerPos.y)
+				mPos.y -= (mSpeed + 0.f) * Time::DeltaTime();
+		}
+
+		if (mBottomColCount > 0)
+		{
+			if (mPos.y > mPlayerPos.y)
+				mPos.y += (mSpeed + 0.f) * Time::DeltaTime();
+		}
 
 		return mPos;
 	}
@@ -205,6 +218,26 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
 
+		if (other->GetCollideType() == eCollideType::Player 
+			|| other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			UINT colNum = other->GetColDir();
+			UINT colID = other->GetColliderID();
+
+			if (mColDirMap.find(colID) != mColDirMap.end())
+				return;
+
+			if (colNum == 1)
+				mBottomColCount++;
+			else if (colNum == 2)
+				mTopColCount++;
+			else if (colNum == 3)
+				mRightColCount++;
+			else if (colNum == 4)
+				mLeftColCount++;
+
+			mColDirMap[colID] = colNum;
+		}
 	
 	}
 	void SkeletonScript::OnCollisionStay(Collider2D* other)
@@ -216,5 +249,22 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;
+
+		if (other->GetCollideType() == eCollideType::Player
+			|| other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			UINT colNum = mColDirMap[other->GetColliderID()];
+
+			if (colNum == 1)
+				mBottomColCount--;
+			else if (colNum == 2)
+				mTopColCount--;
+			else if (colNum == 3)
+				mRightColCount--;
+			else if (colNum == 4)
+				mLeftColCount--;
+
+			mColDirMap.erase(other->GetColliderID());
+		}
 	}
 }

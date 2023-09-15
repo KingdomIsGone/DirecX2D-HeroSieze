@@ -82,6 +82,7 @@ namespace ss
 		
 		class Cursor* mCursor;
 		class Indicator* mIndicator;
+		class Inventory* mInventory;
 
 		bool mIsMoving;
 		bool mIsAttacking;

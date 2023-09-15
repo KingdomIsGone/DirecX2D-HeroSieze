@@ -156,6 +156,7 @@
     <ClInclude Include="..\Engine_SOURCE\ssCursor.h" />
     <ClInclude Include="FireWallPiece.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="LoadScenes.h" />
     <ClInclude Include="ssAnubis.h" />
     <ClInclude Include="ssAnubisRoom.h" />
@@ -203,6 +204,7 @@
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp" />
     <ClCompile Include="FireWallPiece.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ssAnubis.cpp" />
     <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />

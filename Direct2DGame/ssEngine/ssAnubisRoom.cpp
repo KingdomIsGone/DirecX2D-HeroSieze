@@ -207,6 +207,7 @@ namespace ss
 		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Summon2, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Monster, true);
 
 
 		//¹è°æ z=1.1f

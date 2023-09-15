@@ -63,7 +63,13 @@ namespace ss
 		bool mXAccess;
 		bool mYAccess;
 		bool mIsColliding;
-	
+		
 		class Animator* mAnimator;
+
+		UINT mTopColCount;
+		UINT mBottomColCount;
+		UINT mRightColCount;
+		UINT mLeftColCount;
+		std::map<UINT, UINT> mColDirMap;
 	};
 }

@@ -213,13 +213,13 @@ namespace ss
 		{
 			Vector3{-0.45f, 0.5f, 0.0f}
 			,Vector3{0.45f, 0.5f, 0.0f}
-			,Vector3{0.45f, 0.45f, 0.0f}
-			,Vector3{-0.45f, 0.45f, 0.0f}
+			,Vector3{0.45f, 0.46f, 0.0f}
+			,Vector3{-0.45f, 0.46f, 0.0f}
 		};
 		Vector3 downLocalPos[4] =  
 		{
-			Vector3{-0.45f, -0.45f, 0.0f}
-			,Vector3{0.45f, -0.45f, 0.0f}
+			Vector3{-0.45f, -0.46f, 0.0f}
+			,Vector3{0.45f, -0.46f, 0.0f}
 			,Vector3{0.45f, -0.5f, 0.0f}
 			,Vector3{-0.45f, -0.5f, 0.0f}
 		};
@@ -239,8 +239,8 @@ namespace ss
 		};
 		Vector3 CenterLocalPos[4] //»óÇÏÁÂ¿ì
 		{
-			Vector3(0.0f, 0.475f, 0.0f)
-			, Vector3(0.0f, -0.475f, 0.0f)
+			Vector3(0.0f, 0.48f, 0.0f)
+			, Vector3(0.0f, -0.48f, 0.0f)
 			, Vector3(-0.475f, 0.0f, 0.0f)
 			, Vector3(0.475f, 0.0f, 0.0f)
 		};

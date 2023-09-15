@@ -707,6 +707,19 @@ namespace renderer
 			Resources::Insert(L"FireWallMater", spriteMaterial);
 		}
 
+		//인벤토리
+		{
+			std::shared_ptr<Texture> InventoryTex
+				= Resources::Load<Texture>(L"InventoryTex", L"..\\Resources\\Texture\\Inventory\\totalinventory.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(InventoryTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"InventoryMater", spriteMaterial);
+		}
+
+
+
 	}
 
 	void Initialize()

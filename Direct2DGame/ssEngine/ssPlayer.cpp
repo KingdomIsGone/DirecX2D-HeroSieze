@@ -7,6 +7,7 @@
 #include "ssPlayerScript.h"
 #include "ssP_HpSmallBar.h"
 #include "ssP_HpSmallBarFill.h"
+#include "Inventory.h"
 
 namespace ss
 {
@@ -20,6 +21,7 @@ namespace ss
 		std::shared_ptr<Shader> spriteShader
 			= Resources::Find<Shader>(L"SpriteShader");
 
+		//애니메이션
 		{
 			SetName(L"Player");
 			Collider2D* cd = AddComponent<Collider2D>();
@@ -104,6 +106,11 @@ namespace ss
 		mSmallHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
 		Vector3 tempPos2 = mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mSmallHpBarFill, eLayerType::MonsterUI);
+
+		//인벤토리
+		//Inventory* inventory = new Inventory();
+		//inventory->SetName(L"Inventory");
+		//AddOtherGameObject(inventory, eLayerType::UI);
 
 	}
 

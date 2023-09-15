@@ -15,10 +15,12 @@
 #include "ssCollisionManager.h"
 #include "ssMeteor.h"
 #include "ssFireWall.h"
+#include "Inventory.h"
+
 namespace ss
 {
 	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
-	float ss::PlayerScript::mSpeed = 2.0f;
+	float ss::PlayerScript::mSpeed = 1.5f;
 	float ss::PlayerScript::mCurHp = 3000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 	UINT ss::PlayerScript::mSpellNum = 0;
@@ -44,7 +46,6 @@ namespace ss
 
 		Animator* at = GetOwner()->GetComponent<Animator>();
 		mCursor = new Cursor();
-
 		mIndicator = new Indicator();
 		
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
@@ -255,7 +256,9 @@ namespace ss
 		
 		mPlayerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		MoveToPointAni(mPlayerPos, mCursorPos);
+		if(math::GetDistance(mPlayerPos, mCursorPos) > 0.1f)
+			MoveToPointAni(mPlayerPos, mCursorPos);
+
 		MoveToPoint(mPlayerPos, mCursorPos);
 	}
 
@@ -298,12 +301,12 @@ namespace ss
 	void PlayerScript::MoveToPoint(Vector3 playerpos, Vector3 point)
 	{
 		mPoint = point;
-		if (playerpos.x < point.x)
+		if (playerpos.x < point.x && abs(playerpos.x - point.x) >= 0.05f)
 			playerpos.x += mSpeed * Time::DeltaTime();
 		else if(playerpos.x > point.x)
 			playerpos.x -= mSpeed * Time::DeltaTime();
 
-		if (playerpos.y < point.y)
+		if (playerpos.y < point.y && abs(playerpos.y - point.y) >= 0.05f)
 			playerpos.y += mSpeed * Time::DeltaTime();
 		else if (playerpos.y > point.y)
 			playerpos.y -= mSpeed * Time::DeltaTime();
@@ -315,7 +318,7 @@ namespace ss
 		SetPlayerPos(playerpos);
 		GetOwner()->GetComponent<Transform>()->SetPosition(playerpos);
 
-		if (abs(playerpos.x - point.x) <0.001f && abs(playerpos.y - point.y) < 0.001f)
+		if (abs(playerpos.x - point.x) <0.05f && abs(playerpos.y - point.y) < 0.05f)
 		{
 			mState = eState::Idle;
 			mIsMoving = false;
@@ -486,6 +489,10 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
 			UINT colNum = other->GetColDir();
+			UINT colID = other->GetColliderID();
+
+			if (mColDirMap.find(colID) != mColDirMap.end())
+				return;
 
 			if (colNum == 1)
 				mBottomColCount++;
@@ -496,7 +503,7 @@ namespace ss
 			else if (colNum == 4)
 				mLeftColCount++;
 
-			mColDirMap[other->GetColliderID()] = colNum;
+			mColDirMap[colID] = colNum;
 		}
 		
 	}

@@ -134,6 +134,9 @@
     <ClCompile Include="ssSkillSlot1.cpp">
       <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Contents\Object\UI\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -272,6 +275,9 @@
     <ClInclude Include="ssSkillSlot1.h">
       <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Contents\Object\UI\Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -375,6 +381,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\SkillSlot">
       <UniqueIdentifier>{88d3eaa1-4556-4c6b-a01f-b94e4703f976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory">
+      <UniqueIdentifier>{5ebbb9ca-5a18-4aff-b35e-1ff8466e7d50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

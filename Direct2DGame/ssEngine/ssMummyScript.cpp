@@ -189,7 +189,26 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
 
-	
+		if (other->GetCollideType() == eCollideType::Player
+			|| other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			UINT colNum = other->GetColDir();
+			UINT colID = other->GetColliderID();
+
+			if (mColDirMap.find(colID) != mColDirMap.end())
+				return;
+
+			if (colNum == 1)
+				mBottomColCount++;
+			else if (colNum == 2)
+				mTopColCount++;
+			else if (colNum == 3)
+				mRightColCount++;
+			else if (colNum == 4)
+				mLeftColCount++;
+
+			mColDirMap[colID] = colNum;
+		}
 	}
 	void MummyScript::OnCollisionStay(Collider2D* other)
 	{
@@ -200,5 +219,22 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;
+
+		if (other->GetCollideType() == eCollideType::Player
+			|| other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			UINT colNum = mColDirMap[other->GetColliderID()];
+
+			if (colNum == 1)
+				mBottomColCount--;
+			else if (colNum == 2)
+				mTopColCount--;
+			else if (colNum == 3)
+				mRightColCount--;
+			else if (colNum == 4)
+				mLeftColCount--;
+
+			mColDirMap.erase(other->GetColliderID());
+		}
 	}
 }
