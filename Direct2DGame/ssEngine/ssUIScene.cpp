@@ -29,6 +29,7 @@
 #include "ssWallCollider.h"
 #include "ssSkillSlot1.h"
 
+
 namespace ss
 {
 	UIScene::UIScene()
@@ -53,6 +54,7 @@ namespace ss
 		DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
 		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
+
 
 		//anubis
 		/*Mummy* mummy = new Mummy();

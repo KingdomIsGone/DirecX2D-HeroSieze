@@ -173,6 +173,7 @@
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
     <ClInclude Include="ssEnemyHpBarFill.h" />
+    <ClInclude Include="ssEquipmentSlot.h" />
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssFireWall.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
+    <ClCompile Include="ssEquipmentSlot.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssFireWall.cpp" />

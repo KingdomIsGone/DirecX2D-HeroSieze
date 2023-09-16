@@ -9,6 +9,7 @@
 #include "ssP_HpSmallBarFill.h"
 #include "Inventory.h"
 #include "ssLight.h"
+#include "ssEquipmentSlot.h"
 
 namespace ss
 {
@@ -116,14 +117,76 @@ namespace ss
 		lightComp->SetType(eLightType::Directional);
 		lightComp->SetColor(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
 
-		//인벤토리
-		Inventory* inventory = new Inventory();
-		inventory->SetName(L"Inventory");
-		AddOtherGameObject(inventory, eLayerType::Inventory);
-		mScript->SetInventory(inventory);
-		inventory->SetLight(lightComp);
+		{
+			//장비슬롯
+			EquipmentSlot* WeaponSlot = new EquipmentSlot();
+			WeaponSlot->SetMaterialName(L"WeaponSlotMater");
+			WeaponSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+			Vector3 WeaponPos = WeaponSlot->GetComponent<Transform>()->GetPosition();
+			WeaponPos.x += -2.05f;
+			WeaponPos.y += 0.2f;
+			WeaponSlot->GetComponent<Transform>()->SetPosition(WeaponPos);
+			AddOtherGameObject(WeaponSlot, eLayerType::Inventory);
 
-		
+			EquipmentSlot* ArmorSlot = new EquipmentSlot();
+			ArmorSlot->SetMaterialName(L"ArmorSlotMater");
+			ArmorSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+			Vector3 ArmorPos = ArmorSlot->GetComponent<Transform>()->GetPosition();
+			ArmorPos.x += -1.55f;
+			ArmorPos.y += 0.26f;
+			ArmorSlot->GetComponent<Transform>()->SetPosition(ArmorPos);
+			AddOtherGameObject(ArmorSlot, eLayerType::Inventory);
+
+			EquipmentSlot* ShieldSlot = new EquipmentSlot();
+			ShieldSlot->SetMaterialName(L"ShieldSlotMater");
+			ShieldSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+			Vector3 ShieldPos = ShieldSlot->GetComponent<Transform>()->GetPosition();
+			ShieldPos.x += -1.05f;
+			ShieldPos.y += 0.2f;
+			ShieldSlot->GetComponent<Transform>()->SetPosition(ShieldPos);
+			AddOtherGameObject(ShieldSlot, eLayerType::Inventory);
+
+			EquipmentSlot* HelmetSlot = new EquipmentSlot();
+			HelmetSlot->SetMaterialName(L"HelmetSlotMater");
+			HelmetSlot->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
+			Vector3 HelmetPos = HelmetSlot->GetComponent<Transform>()->GetPosition();
+			HelmetPos.x += -1.55f;
+			HelmetPos.y += 0.85f;
+			HelmetSlot->GetComponent<Transform>()->SetPosition(HelmetPos);
+			AddOtherGameObject(HelmetSlot, eLayerType::Inventory);
+
+			EquipmentSlot* BeltSlot = new EquipmentSlot();
+			BeltSlot->SetMaterialName(L"BeltSlotMater");
+			BeltSlot->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
+			Vector3 BeltPos = BeltSlot->GetComponent<Transform>()->GetPosition();
+			BeltPos.x += -1.55f;
+			BeltPos.y += -0.3f;
+			BeltSlot->GetComponent<Transform>()->SetPosition(BeltPos);
+			AddOtherGameObject(BeltSlot, eLayerType::Inventory);
+
+			EquipmentSlot* ShoesSlot = new EquipmentSlot();
+			ShoesSlot->SetMaterialName(L"ShoesSlotMater");
+			ShoesSlot->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+			Vector3 ShoesPos = ShoesSlot->GetComponent<Transform>()->GetPosition();
+			ShoesPos.x += -1.55f;
+			ShoesPos.y += -0.76f;
+			ShoesSlot->GetComponent<Transform>()->SetPosition(ShoesPos);
+			AddOtherGameObject(ShoesSlot, eLayerType::Inventory);
+
+			//인벤토리
+			Inventory* inventory = new Inventory();
+			inventory->SetName(L"Inventory");
+			AddOtherGameObject(inventory, eLayerType::Inventory);
+			mScript->SetInventory(inventory);
+			inventory->SetLight(lightComp);
+			inventory->PushBackEquipSlot(WeaponSlot);
+			inventory->PushBackEquipSlot(ArmorSlot);
+			inventory->PushBackEquipSlot(ShieldSlot);
+			inventory->PushBackEquipSlot(HelmetSlot);
+			inventory->PushBackEquipSlot(BeltSlot);
+			inventory->PushBackEquipSlot(ShoesSlot);
+		}
+
 	}
 
 	Player::~Player()

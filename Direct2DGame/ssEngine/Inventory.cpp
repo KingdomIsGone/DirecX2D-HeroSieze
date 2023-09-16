@@ -3,6 +3,7 @@
 #include "ssResources.h"
 #include "ssInput.h"
 #include "ssLight.h"
+#include "ssEquipmentSlot.h"
 
 namespace ss
 {
@@ -19,7 +20,9 @@ namespace ss
 		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 
 		mLight = nullptr;
-		mOn = true;
+		mOn = false;
+
+		
 	}
 
 	Inventory::~Inventory()
@@ -34,24 +37,8 @@ namespace ss
 	{
 		GameObject::Update();
 
-		if (Input::GetKeyDown(eKeyCode::C))
-		{
-			if (mOn)
-			{
-				mOn = false;
-				mLight->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
-			}
-			else
-			{
-				mOn = true;
-				mLight->SetColor(Vector4(-0.7f, -0.7f, -0.7f, 1.f));
-			}
-		}
-
-		if(mOn)
-			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
-		else
-			mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		OnOffCheck();
+		
 	}
 	void Inventory::LateUpdate()
 	{
@@ -63,5 +50,40 @@ namespace ss
 		GameObject::Render();
 	}
 
+	void Inventory::OnOffCheck()
+	{
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			if (mOn)
+			{
+				mOn = false;
+				mLight->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+			}
+			else
+			{
+				mOn = true;
+				mLight->SetColor(Vector4(-1.0f, -1.0f, -1.0f, 1.f));
+			}
+		}
+
+		if (mOn)
+		{
+			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
+
+			for (EquipmentSlot* slot : mEquipSlots)
+			{
+				slot->SetMater();
+			}
+		}
+		else
+		{
+			mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+
+			for (EquipmentSlot* slot : mEquipSlots)
+			{
+				slot->SetBlank();
+			}
+		}
+	}
 
 }

@@ -35,7 +35,7 @@ namespace renderer
 	void SetupState()
 	{
 		//custom
-		lightNormalAttribute.color = Vector4(0.5f, .5f, .5f, 1.0f);
+		lightNormalAttribute.color = Vector4(0.0f, .0f, .0f, 1.0f);
 #pragma region InputLayout
 		// Input layout 정점 구조 정보를 넘겨줘야한다.
 		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
@@ -721,7 +721,72 @@ namespace renderer
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"InventoryMater", spriteMaterial);
 		}
-
+		//인벤토리 장비슬롯
+		{
+			{
+				std::shared_ptr<Texture> ArmorSlotTex
+					= Resources::Load<Texture>(L"ArmorSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\ArmorSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(ArmorSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"ArmorSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> BeltSlotTex
+					= Resources::Load<Texture>(L"BeltSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\BeltSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(BeltSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"BeltSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> HelmetSlotTex
+					= Resources::Load<Texture>(L"HelmetSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\HelmetSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(HelmetSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"HelmetSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> PortionSlotTex
+					= Resources::Load<Texture>(L"PortionSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\PortionSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(PortionSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"PortionSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> ShieldSlotTex
+					= Resources::Load<Texture>(L"ShieldSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\ShieldSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(ShieldSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"ShieldSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> ShoesSlotTex
+					= Resources::Load<Texture>(L"ShoesSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\ShoesSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(ShoesSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"ShoesSlotMater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> WeaponSlotTex
+					= Resources::Load<Texture>(L"WeaponSlotTex", L"..\\Resources\\Texture\\Inventory\\ItemSlot\\WeaponSlot.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(WeaponSlotTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"WeaponSlotMater", spriteMaterial);
+			}
+		}
 
 
 	}
