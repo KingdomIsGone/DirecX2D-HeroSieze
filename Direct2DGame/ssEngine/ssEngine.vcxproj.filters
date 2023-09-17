@@ -140,6 +140,12 @@
     <ClCompile Include="ssEquipmentSlot.cpp">
       <Filter>Contents\Object\UI\Inventory\Slot</Filter>
     </ClCompile>
+    <ClCompile Include="ssItemList.cpp">
+      <Filter>Contents\Object\UI\Inventory\List</Filter>
+    </ClCompile>
+    <ClCompile Include="ssItemBackground.cpp">
+      <Filter>Contents\Object\UI\Inventory\List\ItemBackground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -284,6 +290,12 @@
     <ClInclude Include="ssEquipmentSlot.h">
       <Filter>Contents\Object\UI\Inventory\Slot</Filter>
     </ClInclude>
+    <ClInclude Include="ssItemList.h">
+      <Filter>Contents\Object\UI\Inventory\List</Filter>
+    </ClInclude>
+    <ClInclude Include="ssItemBackground.h">
+      <Filter>Contents\Object\UI\Inventory\List\ItemBackground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -393,6 +405,15 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Inventory\Slot">
       <UniqueIdentifier>{12680ba0-738b-493d-91c4-86117632d545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory\List">
+      <UniqueIdentifier>{82102256-d851-4095-94e2-8c5f6362ec12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item">
+      <UniqueIdentifier>{82c948e2-95c4-4fba-b8c9-0f5838cfceae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory\List\ItemBackground">
+      <UniqueIdentifier>{94c368c7-3a72-495b-a78e-72aa90a15dbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

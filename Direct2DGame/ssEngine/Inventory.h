@@ -6,7 +6,7 @@ namespace ss
 	class Inventory : public GameObject
 	{
 	public:
-		Inventory();
+		Inventory(GameObject* obj);
 		~Inventory();
 
 		virtual void Initialize() override;
@@ -29,5 +29,10 @@ namespace ss
 		class Light* mLight;
 
 		std::vector<EquipmentSlot*> mEquipSlots;
+
+		class ItemList* mList1;
+		class ItemList* mList2;
+		class ItemList* mList3;
+		std::vector<ItemList*> mItemLists;
 	};
 }

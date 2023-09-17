@@ -788,6 +788,49 @@ namespace renderer
 			}
 		}
 
+		//inventoryItemList
+		{
+			std::shared_ptr<Texture> ItemListTex
+				= Resources::Load<Texture>(L"ItemListTex", L"..\\Resources\\Texture\\Inventory\\ItemList.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(ItemListTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ItemListMater", spriteMaterial);
+		}
+
+		//itemBackground Normal
+		{
+			std::shared_ptr<Texture> ItemBackNormalTex
+				= Resources::Load<Texture>(L"ItemBackNormalTex", L"..\\Resources\\Texture\\Inventory\\NormalItemBack.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(ItemBackNormalTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ItemBackNormalMater", spriteMaterial);
+		}
+
+		//itemBackground Magic
+		{
+			std::shared_ptr<Texture> ItemBackMagicTex
+				= Resources::Load<Texture>(L"ItemBackMagicTex", L"..\\Resources\\Texture\\Inventory\\MagicItemBack.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(ItemBackMagicTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ItemBackMagicMater", spriteMaterial);
+		}
+
+		//itemBackground Legend
+		{
+			std::shared_ptr<Texture> ItemBackLegendTex
+				= Resources::Load<Texture>(L"ItemBackLegendTex", L"..\\Resources\\Texture\\Inventory\\LegendItemBack.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(ItemBackLegendTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ItemBackLegendMater", spriteMaterial);
+		}
 
 	}
 

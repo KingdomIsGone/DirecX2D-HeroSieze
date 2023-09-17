@@ -10,6 +10,7 @@
 #include "Inventory.h"
 #include "ssLight.h"
 #include "ssEquipmentSlot.h"
+#include "ssItemList.h"
 
 namespace ss
 {
@@ -174,7 +175,7 @@ namespace ss
 			AddOtherGameObject(ShoesSlot, eLayerType::Inventory);
 
 			//인벤토리
-			Inventory* inventory = new Inventory();
+			Inventory* inventory = new Inventory(this);
 			inventory->SetName(L"Inventory");
 			AddOtherGameObject(inventory, eLayerType::Inventory);
 			mScript->SetInventory(inventory);
@@ -185,6 +186,14 @@ namespace ss
 			inventory->PushBackEquipSlot(HelmetSlot);
 			inventory->PushBackEquipSlot(BeltSlot);
 			inventory->PushBackEquipSlot(ShoesSlot);
+
+			/*ItemList* list1 = new ItemList();
+			list1->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+			Vector3 List1Pos = list1->GetComponent<Transform>()->GetPosition();
+			List1Pos.x += -0.55f;
+			List1Pos.y += -0.76f;
+			list1->GetComponent<Transform>()->SetPosition(List1Pos);
+			AddOtherGameObject(list1, eLayerType::Inventory);*/
 		}
 
 	}

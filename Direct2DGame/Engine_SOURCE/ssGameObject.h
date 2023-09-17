@@ -108,12 +108,29 @@ namespace ss
 			OtherGameObject* otherGameobject = new OtherGameObject();
 			otherGameobject->gameObject = obj;
 			otherGameobject->layerType = type;
-			mGameObjects.push_back(otherGameobject);
+
+			if (obj->GetParent() == nullptr)
+				mGameObjects.push_back(otherGameobject);
+			else
+			{
+				GameObject* parent = obj->GetParent();
+				GameObject* lastChild = parent;
+				while (parent != nullptr)
+				{
+					lastChild = parent;
+					parent = parent->GetParent();
+				}
+				lastChild->PushBackOtherGameObject(otherGameobject);
+			}
 		}
 		std::vector<OtherGameObject*> GetOtherGameObjects() { return mGameObjects; }
 
 		float GetChangeHpValue() { return mChaingeHpValue; }
 		void SetChangeHpValue(float value) { mChaingeHpValue = value; }
+		
+		GameObject* GetParent() { return mParent; }
+		void SetParent(GameObject* obj) { mParent = obj; }
+		void PushBackOtherGameObject(OtherGameObject* otherObj) { mGameObjects.push_back(otherObj); }
 
 	private:
 		eState mState;
@@ -123,5 +140,7 @@ namespace ss
 
 		//CUSTOM
 		float mChaingeHpValue;
+		bool mIsChild;
+		GameObject* mParent;
 	};
 }
