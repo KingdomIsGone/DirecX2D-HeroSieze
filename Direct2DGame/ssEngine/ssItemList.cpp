@@ -4,12 +4,14 @@
 #include "ssItemBackground.h"
 #include "ssItem.h"
 #include "ssItemImage.h"
+#include "ssITemlistSelectEffect.h"
 
 namespace ss
 {
 	ItemList::ItemList(GameObject* parent)
 		: mItem(nullptr)
 		, mItemImage(nullptr)
+		, mSelected(false)
 	{
 		SetParent(parent);
 		mTransform = GetComponent<Transform>();
@@ -27,6 +29,7 @@ namespace ss
 		mItemImage = new ItemImage(this);
 		AddOtherGameObject(mItemImage, eLayerType::Inventory);
 
+		
 	}
 
 	ItemList::~ItemList()
@@ -56,14 +59,26 @@ namespace ss
 			mMaterName = mItem->GetMaterName();
 			mItemImage->SetItemIn(true);
 			mItemImage->SetMaterName(mItem->GetMaterName());
+			mSelectEffect->SetItemIn(true);
 		}
 		else
 		{
 			mItemBack->SetItemIn(false);
 			mItemImage->SetItemIn(false);
+			mSelectEffect->SetItemIn(false);
 		}
 
+		if (mSelected)
+		{
+			mSelectEffect->SetSelected(true);
+
+		}
+		else
+		{
+			mSelectEffect->SetSelected(false);
+		}
 	}
+
 	void ItemList::LateUpdate()
 	{
 		GameObject::LateUpdate();

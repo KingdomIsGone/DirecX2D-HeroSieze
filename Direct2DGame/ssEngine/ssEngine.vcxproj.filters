@@ -155,6 +155,9 @@
     <ClCompile Include="ssItemImage.cpp">
       <Filter>Contents\Object\UI\Inventory\List\ItemImage</Filter>
     </ClCompile>
+    <ClCompile Include="ssITemlistSelectEffect.cpp">
+      <Filter>Contents\Object\UI\Inventory\List\SelectEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -314,6 +317,9 @@
     <ClInclude Include="ssItemImage.h">
       <Filter>Contents\Object\UI\Inventory\List\ItemImage</Filter>
     </ClInclude>
+    <ClInclude Include="ssITemlistSelectEffect.h">
+      <Filter>Contents\Object\UI\Inventory\List\SelectEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -438,6 +444,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Inventory\List\ItemImage">
       <UniqueIdentifier>{8be0b518-643c-4447-a587-f3bba2a50c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory\List\SelectEffect">
+      <UniqueIdentifier>{d6e239d6-4474-431f-bdaa-4bc8e1534c9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

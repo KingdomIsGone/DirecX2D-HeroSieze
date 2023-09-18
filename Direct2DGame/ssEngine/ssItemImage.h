@@ -6,7 +6,7 @@ namespace ss
 	class ItemImage : public GameObject
 	{
 	public:
-		ItemImage(GameObject* obj);
+		ItemImage(GameObject* parent);
 		~ItemImage();
 
 		virtual void Initialize() override;

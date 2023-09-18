@@ -11,7 +11,7 @@ namespace ss
 			Normal,
 			Magic,
 			Legend,
-		};
+		};	
 		ItemBackground(GameObject* parent);
 		~ItemBackground();
 

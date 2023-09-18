@@ -186,6 +186,7 @@
     <ClInclude Include="ssItemBackground.h" />
     <ClInclude Include="ssItemImage.h" />
     <ClInclude Include="ssItemList.h" />
+    <ClInclude Include="ssITemlistSelectEffect.h" />
     <ClInclude Include="ssLegendStaff1.h" />
     <ClInclude Include="ssMeteor.h" />
     <ClInclude Include="ssMeteorScript.h" />
@@ -239,6 +240,7 @@
     <ClCompile Include="ssItemBackground.cpp" />
     <ClCompile Include="ssItemImage.cpp" />
     <ClCompile Include="ssItemList.cpp" />
+    <ClCompile Include="ssITemlistSelectEffect.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
     <ClCompile Include="ssMeteor.cpp" />
     <ClCompile Include="ssMeteorScript.cpp" />

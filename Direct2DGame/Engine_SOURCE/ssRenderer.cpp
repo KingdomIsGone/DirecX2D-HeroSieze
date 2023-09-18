@@ -800,6 +800,17 @@ namespace renderer
 				Resources::Insert(L"ItemListMater", spriteMaterial);
 			}
 
+			//inventoryItemListSelectEffect
+			{
+				std::shared_ptr<Texture> ItemListSelectEffectTex
+					= Resources::Load<Texture>(L"ItemListSelectEffectTex", L"..\\Resources\\Texture\\Inventory\\Inventory_List_Chosen_spr_0.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(ItemListSelectEffectTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"ItemListSelectEffectMater", spriteMaterial);
+			}
+
 			//itemBackground Normal
 			{
 				std::shared_ptr<Texture> ItemBackNormalTex

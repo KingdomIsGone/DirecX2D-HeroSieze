@@ -18,11 +18,17 @@ namespace ss
 		void SetMater();
 		void SetBlank();
 
+		void SetItemBack(class ItemBackground* back) { mBackGround = back; }
+		ItemBackground* GetItemBack() { return mBackGround; }
+		void SetItemImage(class ItemImage* image) { mItemImage = image; }
+
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
 		std::wstring mMaterName;
 
 		class MeshRenderer* mRenderer;
+		class ItemBackground* mBackGround;
+		class ItemImage* mItemImage;
 	};
 }

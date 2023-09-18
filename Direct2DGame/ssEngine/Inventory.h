@@ -31,7 +31,9 @@ namespace ss
 		void SetLight(class Light* light) { mLight = light; }
 		void PushBackEquipSlot(class EquipmentSlot* slot) { mEquipSlots.push_back(slot); }
 		void OnOffCheck();
-		void CusorOnEquipCheck();
+		void CursorOnEquipCheck();
+
+		void CursorOnListCheck();
 		void ActivateItemList(UINT num);
 
 		static void PushbackItem(class Item* item);

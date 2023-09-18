@@ -22,6 +22,9 @@ namespace ss
 		void SetItemIn(bool is) { mItemIn = is; }
 
 		void SetItem(class Item* item) { mItem = item; }
+		void SetSelected(bool is) { mSelected = is; }
+		void SetEffect(class ITemlistSelectEffect* effect) { mSelectEffect = effect; }
+		class ITemlistSelectEffect* GetEffect() { return mSelectEffect; }
 
 	private:
 		Transform* mTransform;
@@ -32,7 +35,9 @@ namespace ss
 		class ItemBackground* mItemBack;
 		class ItemImage* mItemImage;
 		class Item* mItem;
+		class ITemlistSelectEffect* mSelectEffect;
 
 		bool mItemIn;
+		bool mSelected;
 	};
 }
