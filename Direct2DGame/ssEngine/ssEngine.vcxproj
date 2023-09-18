@@ -182,8 +182,11 @@
     <ClInclude Include="ssImmuneText.h" />
     <ClInclude Include="ssIndicator.h" />
     <ClInclude Include="ssDamageScript.h" />
+    <ClInclude Include="ssItem.h" />
     <ClInclude Include="ssItemBackground.h" />
+    <ClInclude Include="ssItemImage.h" />
     <ClInclude Include="ssItemList.h" />
+    <ClInclude Include="ssLegendStaff1.h" />
     <ClInclude Include="ssMeteor.h" />
     <ClInclude Include="ssMeteorScript.h" />
     <ClInclude Include="ssMummy.h" />
@@ -232,8 +235,11 @@
     <ClCompile Include="ssImmuneText.cpp" />
     <ClCompile Include="ssIndicator.cpp" />
     <ClCompile Include="ssDamageScript.cpp" />
+    <ClCompile Include="ssItem.cpp" />
     <ClCompile Include="ssItemBackground.cpp" />
+    <ClCompile Include="ssItemImage.cpp" />
     <ClCompile Include="ssItemList.cpp" />
+    <ClCompile Include="ssLegendStaff1.cpp" />
     <ClCompile Include="ssMeteor.cpp" />
     <ClCompile Include="ssMeteorScript.cpp" />
     <ClCompile Include="ssMummy.cpp" />

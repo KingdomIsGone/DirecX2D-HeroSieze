@@ -14,7 +14,7 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		Vector3 GetPos() { return mPos; }
+		static Vector3 GetPos() { return mPos; }
 		Vector3 GetProjPos() { return mprojPos; }
 
 	private:

@@ -137,7 +137,7 @@ namespace gui
 		tr->LateUpdate();
 
 		/*ss::MeshRenderer * mr
-			= debugObj->GetComponent<ya::MeshRenderer>();*/
+			= debugObj->GetComponent<ss::MeshRenderer>();*/
 			// main camera
 
 		ss::graphics::ConstantBuffer* cb

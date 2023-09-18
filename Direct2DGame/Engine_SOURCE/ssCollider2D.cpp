@@ -65,6 +65,9 @@ namespace ss
 			script->OnCollisionEnter(other);
 		}
 
+		GameObject* gameObject = GetOwner();
+		gameObject->OnCollisionEnter(other);
+
 		mIsCollide = true;
 	}
 	void Collider2D::OnCollisionStay(Collider2D* other)
@@ -76,6 +79,9 @@ namespace ss
 		{
 			script->OnCollisionStay(other);
 		}
+
+		GameObject* gameObject = GetOwner();
+		gameObject->OnCollisionStay(other);
 	}
 	void Collider2D::OnCollisionExit(Collider2D* other)
 	{
@@ -86,6 +92,9 @@ namespace ss
 		{
 			script->OnCollisionExit(other);
 		}
+
+		GameObject* gameObject = GetOwner();
+		gameObject->OnCollisionExit(other);
 
 		mIsCollide = false;
 	}

@@ -146,6 +146,15 @@
     <ClCompile Include="ssItemBackground.cpp">
       <Filter>Contents\Object\UI\Inventory\List\ItemBackground</Filter>
     </ClCompile>
+    <ClCompile Include="ssItem.cpp">
+      <Filter>Contents\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ssLegendStaff1.cpp">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClCompile>
+    <ClCompile Include="ssItemImage.cpp">
+      <Filter>Contents\Object\UI\Inventory\List\ItemImage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -296,6 +305,15 @@
     <ClInclude Include="ssItemBackground.h">
       <Filter>Contents\Object\UI\Inventory\List\ItemBackground</Filter>
     </ClInclude>
+    <ClInclude Include="ssItem.h">
+      <Filter>Contents\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ssLegendStaff1.h">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClInclude>
+    <ClInclude Include="ssItemImage.h">
+      <Filter>Contents\Object\UI\Inventory\List\ItemImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -414,6 +432,12 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Inventory\List\ItemBackground">
       <UniqueIdentifier>{94c368c7-3a72-495b-a78e-72aa90a15dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item\Staff">
+      <UniqueIdentifier>{15779be8-cd39-4c04-97f4-e3f6f0a7b705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory\List\ItemImage">
+      <UniqueIdentifier>{8be0b518-643c-4447-a587-f3bba2a50c90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

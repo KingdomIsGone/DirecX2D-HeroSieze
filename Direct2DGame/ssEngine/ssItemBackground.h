@@ -6,7 +6,13 @@ namespace ss
 	class ItemBackground : public GameObject
 	{
 	public:
-		ItemBackground(GameObject* obj);
+		enum class eGrade
+		{
+			Normal,
+			Magic,
+			Legend,
+		};
+		ItemBackground(GameObject* parent);
 		~ItemBackground();
 
 		virtual void Initialize() override;
@@ -20,13 +26,7 @@ namespace ss
 		void SetBlank();
 
 		void SetItemIn(bool is) { mItemIn = is; }
-
-		enum class eGrade
-		{
-			Normal,
-			Magic,
-			Legend,
-		};
+		void SetItemGrade(UINT grade) { mGrade = (eGrade)grade; }
 
 	private:
 		Transform* mTransform;
@@ -34,7 +34,7 @@ namespace ss
 		std::wstring mMaterName;
 
 		class MeshRenderer* mRenderer;
-
+		
 		bool mItemIn;
 		eGrade mGrade;
 	};

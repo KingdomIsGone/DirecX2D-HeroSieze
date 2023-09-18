@@ -118,6 +118,7 @@ namespace ss
 		lightComp->SetType(eLightType::Directional);
 		lightComp->SetColor(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
 
+		//inventory
 		{
 			//¿Â∫ÒΩΩ∑‘
 			EquipmentSlot* WeaponSlot = new EquipmentSlot();

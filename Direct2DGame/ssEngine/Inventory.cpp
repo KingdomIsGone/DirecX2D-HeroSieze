@@ -5,9 +5,19 @@
 #include "ssLight.h"
 #include "ssEquipmentSlot.h"
 #include "ssItemList.h"
+#include "ssItem.h"
+#include "ssCursor.h"
+#include "ssPlayerScript.h"
 
 namespace ss
 {
+	std::vector<class Item*> ss::Inventory::mWeapons = {};
+	std::vector<Item*> ss::Inventory::mArmors = {};
+	std::vector<Item*> ss::Inventory::mShields = {};
+	std::vector<Item*> ss::Inventory::mHelmets = {};
+	std::vector<Item*> ss::Inventory::mBelts = {};
+	std::vector<Item*> ss::Inventory::mShoes = {};
+
 	Inventory::Inventory(GameObject* obj)
 	{
 		SetName(L"Inventory");
@@ -33,7 +43,7 @@ namespace ss
 		mList1->GetComponent<Transform>()->SetPosition(List1Pos);
 		AddOtherGameObject(mList1, eLayerType::Inventory);
 
-		ItemList* mList2 = new ItemList(this);
+		mList2 = new ItemList(this);
 		mList2->GetComponent<Transform>()->SetScale(1.42f, 0.6f, 1.0f);
 		Vector3 List2Pos = mList2->GetComponent<Transform>()->GetPosition();
 		List2Pos.x += 0.39f;
@@ -41,7 +51,7 @@ namespace ss
 		mList2->GetComponent<Transform>()->SetPosition(List2Pos);
 		AddOtherGameObject(mList2, eLayerType::Inventory);
 
-		ItemList* mList3 = new ItemList(this);
+		mList3 = new ItemList(this);
 		mList3->GetComponent<Transform>()->SetScale(1.42f, 0.6f, 1.0f);
 		Vector3 List3Pos = mList3->GetComponent<Transform>()->GetPosition();
 		List3Pos.x += 0.39f;
@@ -52,6 +62,8 @@ namespace ss
 		mItemLists.push_back(mList1);
 		mItemLists.push_back(mList2);
 		mItemLists.push_back(mList3);
+
+		mItemKindMask.reset();
 	}
 
 	Inventory::~Inventory()
@@ -67,6 +79,7 @@ namespace ss
 		GameObject::Update();
 
 		OnOffCheck();
+		CusorOnEquipCheck();
 		
 		Vector3 pos = mTransform->GetPosition();
 	}
@@ -125,8 +138,101 @@ namespace ss
 			for (ItemList* list : mItemLists)
 			{
 				list->SetBlank();
+				list->SetItemIn(false);
 			}
 		}
 	}
+
+	void Inventory::CusorOnEquipCheck()
+	{
+		if (!mOn)
+			return;
+
+		Vector3 cursorPos = Cursor::GetPos();
+		Vector3 playerPos = PlayerScript::GetPlayerPos();
+		cursorPos -= playerPos;
+
+		for (size_t i = 0; i < (UINT)eKind::End; i++)
+		{
+			Transform* tr = mEquipSlots[i]->GetComponent<Transform>();
+			Vector2 LBpos = tr->GetWorldLeftBottom();
+			Vector2 RTpos = tr->GetWorldRightUp();
+
+			if (LBpos.x <= cursorPos.x && cursorPos.x <= RTpos.x
+				&& LBpos.y <= cursorPos.y && cursorPos.y <= RTpos.y)
+			{
+				if (Input::GetKeyDown(eKeyCode::LBUTTON))
+				{
+					mItemKindMask.reset();
+					mItemKindMask.set(i, true);
+					ActivateItemList(i);
+				}
+			}
+		}
+		
+	}
+
+	void Inventory::ActivateItemList(UINT num)
+	{
+		std::vector<Item*> items;
+
+		eKind kind = (eKind)num;
+
+		switch (kind)
+		{
+		case ss::Inventory::eKind::Weapon:
+			items = mWeapons;
+			break;
+		case ss::Inventory::eKind::Armor:
+			items = mArmors;
+			break;
+		case ss::Inventory::eKind::Shield:
+			items = mShields;
+			break;
+		case ss::Inventory::eKind::Helmet:
+			items = mHelmets;
+			break;
+		case ss::Inventory::eKind::Belt:
+			items = mBelts;
+			break;
+		case ss::Inventory::eKind::Shoes:
+			items = mShoes;
+			break;
+		case ss::Inventory::eKind::End:
+			break;
+		default:
+			break;
+		}
+
+		for (size_t i = 0; i < mItemLists.size(); i++)
+		{
+			mItemLists[i]->SetItemIn(false);
+			mItemLists[i]->SetItem(nullptr);
+		}
+
+		for (int i = 0; i < items.size(); i++)
+		{
+			mItemLists[i]->SetItemIn(true);
+			mItemLists[i]->SetItem(items[i]);
+		}
+	}
+
+	void Inventory::PushbackItem(Item* item)
+	{
+		UINT kind = (UINT)item->GetItemKind();
+		if (kind == 0)
+			mWeapons.push_back(item);
+		else if(kind == 1)
+			mArmors.push_back(item);
+		else if (kind == 2)
+			mShields.push_back(item);
+		else if (kind == 3)
+			mHelmets.push_back(item);
+		else if (kind == 4)
+			mBelts.push_back(item);
+		else if (kind == 5)
+			mShoes.push_back(item);
+	}
+
 
 }

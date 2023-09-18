@@ -28,6 +28,7 @@
 #include "FireWallPiece.h"
 #include "ssWallCollider.h"
 #include "ssSkillSlot1.h"
+#include "ssLegendStaff1.h"
 
 
 namespace ss
@@ -55,44 +56,11 @@ namespace ss
 		AddGameObject(eLayerType::Monster, deSkeleton);
 		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
 
+		LegendStaff1* staff = new LegendStaff1();
+		AddGameObject(eLayerType::Item, staff);
+		staff->GetComponent<Transform>()->SetPosition(-1.0f, 0.0f, 1.02f);
 
-		//anubis
-		/*Mummy* mummy = new Mummy();
-		//AddGameObject(eLayerType::Monster, mummy);
-		mummy->GetComponent<Transform>()->SetPosition(1.0f, -1.0f, 1.02f);
-
-		Sarcophagus* sarco = new Sarcophagus();
-		AddGameObject(eLayerType::Monster, sarco);
-		sarco->GetComponent<Transform>()->SetPosition(1.0f, -1.4f, 1.02f);
-
-		mAnubis = new Anubis();
-		AddGameObject(eLayerType::Monster, mAnubis);
-		mAnubis->GetComponent<Transform>()->SetPosition(-2.0f, 0.0f, 1.02f);
-
-		ChargedBolt* bolt = new ChargedBolt(false);
-		AddGameObject(eLayerType::Projectile, bolt);
-		bolt->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.02f);
-
-		ChainLightening* chain = new ChainLightening();
-		AddGameObject(eLayerType::EnemyProjectile, chain);
-		chain->GetComponent<Transform>()->SetPosition(1.0f, 1.0f, 1.02f);
-
-		mBossHpBar = new BossHpBar();
-		AddGameObject(eLayerType::UI, mBossHpBar);
-		mBossHpBar->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 1.0f);
-
-		mBossHpFill = new BossHpFill();
-		AddGameObject(eLayerType::UI, mBossHpFill);
-		mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 1.0f);
-		mAnubis->SetBossHpFill(mBossHpFill);*/
-
-		/*GameObject* obj = new GameObject();
-		obj->AddComponent<Collider2D>();
-		AddGameObject(eLayerType::Monster, obj);*/
-
-		/*Meteor* meteor = new Meteor();
-		AddGameObject(eLayerType::Projectile, meteor);
-		meteor->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);*/
+		
 
 		FireWallPiece* Fpiece = new FireWallPiece();
 		AddGameObject(eLayerType::Projectile, Fpiece);
@@ -115,6 +83,7 @@ namespace ss
 		CollisionManager::SetLayer(eLayerType::Summon2, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Summon1, eLayerType::Summon2, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 
 		//¹è°æ z=1.1f
 		{

@@ -37,6 +37,17 @@ namespace ss
 		Matrix& GetMatrix() { return mWorld; }
 		Matrix& GetCenterAppliedMatrix(Vector3 centerApplied);
 
+		Vector2 GetWorldCenterUp() const { return Vector2(mPosition.x, mPosition.y + mScale.y * 0.5f); }
+		Vector2 GetWorldCenterBottom() const { return Vector2(mPosition.x, mPosition.y - mScale.y * 0.5f); }
+		Vector2 GetWorldLeftUp() const { return Vector2(mPosition.x - mScale.x * 0.5f, mPosition.y + mScale.y * 0.5f); }
+		Vector2 GetWorldLeftCenter() const { return Vector2(mPosition.x - mScale.x * 0.5f, mPosition.y); }
+		Vector2 GetWorldLeftBottom() const { return Vector2(mPosition.x - mScale.x * 0.5f, mPosition.y - mScale.y * 0.5f); }
+		Vector2 GetWorldRightUp() const { return Vector2(mPosition.x + mScale.x * 0.5f, mPosition.y + mScale.y * 0.5f); }
+		Vector2 GetWorldRightCenter() const { return Vector2(mPosition.x + mScale.x * 0.5f, mPosition.y); }
+		Vector2 GetWorldRightBottom() const { return Vector2(mPosition.x + mScale.x * 0.5f, mPosition.y - mScale.y * 0.5f); }
+		Vector4 GetWorldLTRB() const { return Vector4(mPosition.x - mScale.x * 0.5f, mPosition.y + mScale.y * 0.5f, mPosition.x + mScale.x * 0.5f, mPosition.y - mScale.y * 0.5f);
+		}
+
 	private:
 		Vector3 mPosition;
 		Vector3 mRotation;

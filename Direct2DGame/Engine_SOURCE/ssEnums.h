@@ -34,6 +34,7 @@ namespace ss::enums
 		Light,
 		MonsterUI,
 		UI,
+		Item,
 		Inventory,
 		Cursor,
 		End = 16,
@@ -74,5 +75,6 @@ namespace ss::enums
 		Player,
 		NormalMonster,
 		Projectile,
+		Item,
 	};
 }

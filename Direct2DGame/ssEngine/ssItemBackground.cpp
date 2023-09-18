@@ -4,9 +4,9 @@
 
 namespace ss
 {
-	ItemBackground::ItemBackground(GameObject* obj)
+	ItemBackground::ItemBackground(GameObject* parent)
 	{
-		SetParent(obj);
+		SetParent(parent);
 		mTransform = GetComponent<Transform>();
 		Vector3 pos = mTransform->GetPosition();
 		pos.z -= 0.12f;

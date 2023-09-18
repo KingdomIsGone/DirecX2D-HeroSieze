@@ -2,12 +2,16 @@
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
 #include "ssItemBackground.h"
+#include "ssItem.h"
+#include "ssItemImage.h"
 
 namespace ss
 {
-	ItemList::ItemList(GameObject* obj)
+	ItemList::ItemList(GameObject* parent)
+		: mItem(nullptr)
+		, mItemImage(nullptr)
 	{
-		SetParent(obj);
+		SetParent(parent);
 		mTransform = GetComponent<Transform>();
 		mPos = mTransform->GetPosition();
 		mPos.z -= 0.11f;
@@ -19,6 +23,9 @@ namespace ss
 
 		mItemBack = new ItemBackground(this);
 		AddOtherGameObject(mItemBack, eLayerType::Inventory);
+
+		mItemImage = new ItemImage(this);
+		AddOtherGameObject(mItemImage, eLayerType::Inventory);
 
 	}
 
@@ -38,11 +45,24 @@ namespace ss
 		ItemBackPos.z -= 0.01f;
 		ItemBackPos.x -= 0.42f;
 		mItemBack->GetComponent<Transform>()->SetPosition(ItemBackPos);
+		ItemBackPos.z -= 0.02f;
+		mItemImage->GetComponent<Transform>()->SetPosition(ItemBackPos);
 
 		if (mItemIn)
+		{
 			mItemBack->SetItemIn(true);
+			UINT grade = (UINT)mItem->GetItemGrade();
+			mItemBack->SetItemGrade(grade);
+			mMaterName = mItem->GetMaterName();
+			mItemImage->SetItemIn(true);
+			mItemImage->SetMaterName(mItem->GetMaterName());
+		}
 		else
+		{
 			mItemBack->SetItemIn(false);
+			mItemImage->SetItemIn(false);
+		}
+
 	}
 	void ItemList::LateUpdate()
 	{
