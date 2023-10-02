@@ -31,7 +31,7 @@ namespace ss
 	{
 		GameObject::Update();
 
-		if (mItemIn)
+		if (mOnList || mOnEquip)
 		{
 			switch (mGrade)
 			{
@@ -64,22 +64,26 @@ namespace ss
 
 	void ItemBackground::SetMaterNormal()
 	{
+		mRenderer->SetNoRender(false);
 		mRenderer->SetMaterial(Resources::Find<Material>(L"ItemBackNormalMater"));
 	}
 
 	void ItemBackground::SetMaterMagic()
 	{
+		mRenderer->SetNoRender(false);
 		mRenderer->SetMaterial(Resources::Find<Material>(L"ItemBackMagicMater"));
 	}
 
 	void ItemBackground::SetMaterLegend()
 	{
+		mRenderer->SetNoRender(false);
 		mRenderer->SetMaterial(Resources::Find<Material>(L"ItemBackLegendMater"));
 	}
 
 	void ItemBackground::SetBlank()
 	{
-		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		//mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		mRenderer->SetNoRender(true);
 	}
 }
 

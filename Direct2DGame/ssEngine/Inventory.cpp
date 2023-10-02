@@ -11,6 +11,8 @@
 #include "ssItemBackground.h"
 #include "ssItemImage.h"
 #include "ssITemlistSelectEffect.h"
+#include "ssEquipIndicator.h"
+#include "ssRightInfo.h"
 
 namespace ss
 {
@@ -22,6 +24,8 @@ namespace ss
 	std::vector<Item*> ss::Inventory::mShoes = {};
 
 	Inventory::Inventory(GameObject* obj)
+		: mSelectedNum(-1)
+		, mSelectedEquip(-1)
 	{
 		SetName(L"Inventory");
 		SetParent(obj);
@@ -88,6 +92,16 @@ namespace ss
 		mItemLists.push_back(mList3);
 
 		mItemKindMask.reset();
+
+		//RightInfo
+		mRightInfo = new RightInfo(this);
+		mRightInfo->GetComponent<Transform>()->SetPosition(Vector3(1.46f, 1.0f, List1Pos.z - 0.1f));
+		AddOtherGameObject(mRightInfo, eLayerType::Inventory);
+
+		ItemBackground* rightBack = new ItemBackground(this);
+		rightBack->GetComponent<Transform>()->SetPosition(Vector3(1.46f, 1.0f, List1Pos.z - 0.09f));
+		AddOtherGameObject(rightBack, eLayerType::Inventory);
+		mRightInfo->SetItemBack(rightBack);
 	}
 
 	Inventory::~Inventory()
@@ -105,6 +119,8 @@ namespace ss
 		OnOffCheck();
 		CursorOnEquipCheck();
 		CursorOnListCheck();
+		EquipItem();
+		OnRightView();
 		
 		Vector3 pos = mTransform->GetPosition();
 	}
@@ -159,12 +175,21 @@ namespace ss
 			{
 				slot->SetBlank(); 
 				slot->GetItemBack()->SetBlank();
+				slot->GetItemImage()->SetBlank();
 			}
 
 			for (ItemList* list : mItemLists)
 			{
 				list->SetBlank();
 				list->SetItemIn(false);
+			}
+
+			mSelectedNum = -1;
+			mSelectedEquip = -1;
+
+			for (EquipmentSlot* slot : mEquipSlots)
+			{
+				slot->GetEquipSelect()->SetSelected(false);
 			}
 		}
 	}
@@ -192,6 +217,14 @@ namespace ss
 					mItemKindMask.reset();
 					mItemKindMask.set(i, true);
 					ActivateItemList(i);
+
+					for (EquipmentSlot* slot : mEquipSlots)
+					{
+						slot->GetEquipSelect()->SetSelected(false);
+					}
+
+					mEquipSlots[i]->GetEquipSelect()->SetSelected(true);
+					mSelectedEquip = i;
 				}
 			}
 		}
@@ -226,6 +259,7 @@ namespace ss
 						mItemLists[i]->SetSelected(false);
 					}
 					mItemLists[i]->SetSelected(true);
+					mSelectedNum = i;
 				}
 			}
 		}
@@ -275,6 +309,118 @@ namespace ss
 		{
 			mItemLists[i]->SetItemIn(true);
 			mItemLists[i]->SetItem(items[i]);
+		}
+	}
+
+	void Inventory::EquipItem()
+	{
+		if (mSelectedNum == -1)
+			return;
+
+		if (Input::GetKeyDown(eKeyCode::F))
+		{
+			Item* item = mItemLists[mSelectedNum]->GetItem();
+			eItemKind kind = item->GetItemKind();
+			eItemGrade grade = item->GetItemGrade();
+			mEquipSlots[(UINT)kind]->GetItemBack()->SetItemGrade((UINT)grade);
+			mEquipSlots[(UINT)kind]->GetItemBack()->SetOnEquip(true);
+			mEquipSlots[(UINT)kind]->GetItemImage()->SetMaterName(item->GetMaterName());
+			mEquipSlots[(UINT)kind]->GetItemImage()->SetOnEquip(true);
+
+			EraseItemList(kind);
+			
+			if (mEquipmentsRight[(UINT)kind] != nullptr)
+			{
+				Item* temperItem = mEquipmentsRight[(UINT)kind];
+				RestoreItemList(kind, temperItem);
+			}
+
+
+			mEquipmentsRight[(UINT)kind] = item;
+
+		}
+	}
+
+	void Inventory::EraseItemList(eItemKind kind)
+	{
+		std::vector<Item*>* items = nullptr;
+
+		switch (kind)
+		{
+		case ss::eItemKind::Weapon:
+			items = &mWeapons;
+			break;
+		case ss::eItemKind::Armor:
+			items = &mArmors;
+			break;
+		case ss::eItemKind::Shield:
+			items = &mShields;
+			break;
+		case ss::eItemKind::Helmet:
+			items = &mHelmets;
+			break;
+		case ss::eItemKind::Belt:
+			items = &mBelts;
+			break;
+		case ss::eItemKind::Shoes:
+			items = &mShoes;
+			break;
+		default:
+			break;
+		}
+		items->erase(items->begin() + mSelectedNum);
+		mSelectedNum = -1;
+		ActivateItemList((UINT)kind);
+	}
+
+	void Inventory::RestoreItemList(eItemKind kind, Item* item)
+	{
+		std::vector<Item*>* items = nullptr;
+
+		switch (kind)
+		{
+		case ss::eItemKind::Weapon:
+			items = &mWeapons;
+			break;
+		case ss::eItemKind::Armor:
+			items = &mArmors;
+			break;
+		case ss::eItemKind::Shield:
+			items = &mShields;
+			break;
+		case ss::eItemKind::Helmet:
+			items = &mHelmets;
+			break;
+		case ss::eItemKind::Belt:
+			items = &mBelts;
+			break;
+		case ss::eItemKind::Shoes:
+			items = &mShoes;
+			break;
+		default:
+			break;
+		}
+
+		items->push_back(item);
+		ActivateItemList((UINT)kind);
+	}
+
+	void Inventory::OnRightView()
+	{
+		if (mSelectedEquip == -1)
+		{
+			mRightInfo->TurnOnOff(false);
+			return;
+		}
+
+		if (mEquipmentsRight[mSelectedEquip] != nullptr)
+		{
+			mRightInfo->TurnOnOff(true);
+			mRightInfo->SetItem(mEquipmentsRight[mSelectedEquip]);
+		}
+		else
+		{
+			mRightInfo->TurnOnOff(false);
 		}
 	}
 

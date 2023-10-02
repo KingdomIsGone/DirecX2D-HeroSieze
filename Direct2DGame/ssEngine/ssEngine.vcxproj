@@ -173,6 +173,7 @@
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
     <ClInclude Include="ssEnemyHpBarFill.h" />
+    <ClInclude Include="ssEquipIndicator.h" />
     <ClInclude Include="ssEquipmentSlot.h" />
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
@@ -188,10 +189,12 @@
     <ClInclude Include="ssItemList.h" />
     <ClInclude Include="ssITemlistSelectEffect.h" />
     <ClInclude Include="ssLegendStaff1.h" />
+    <ClInclude Include="ssMagicStaff.h" />
     <ClInclude Include="ssMeteor.h" />
     <ClInclude Include="ssMeteorScript.h" />
     <ClInclude Include="ssMummy.h" />
     <ClInclude Include="ssMummyScript.h" />
+    <ClInclude Include="ssRightInfo.h" />
     <ClInclude Include="ssSarcophagus.h" />
     <ClInclude Include="ssSkeletonScript.h" />
     <ClInclude Include="ssPlayer.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="ssValkyrieScene.h" />
     <ClInclude Include="ssWallCollider.h" />
     <ClInclude Include="ssWoodsField.h" />
+    <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\ssCursor.cpp" />
@@ -227,6 +231,7 @@
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
+    <ClCompile Include="ssEquipIndicator.cpp" />
     <ClCompile Include="ssEquipmentSlot.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
@@ -242,10 +247,12 @@
     <ClCompile Include="ssItemList.cpp" />
     <ClCompile Include="ssITemlistSelectEffect.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
+    <ClCompile Include="ssMagicStaff.cpp" />
     <ClCompile Include="ssMeteor.cpp" />
     <ClCompile Include="ssMeteorScript.cpp" />
     <ClCompile Include="ssMummy.cpp" />
     <ClCompile Include="ssMummyScript.cpp" />
+    <ClCompile Include="ssRightInfo.cpp" />
     <ClCompile Include="ssSarcophagus.cpp" />
     <ClCompile Include="ssSkeletonScript.cpp" />
     <ClCompile Include="ssPlayer.cpp" />
@@ -262,6 +269,7 @@
     <ClCompile Include="ssValkyrieScene.cpp" />
     <ClCompile Include="ssWallCollider.cpp" />
     <ClCompile Include="ssWoodsField.cpp" />
+    <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Pss_Programing\DirectX2D\DirectX2D\Direct2DGame\Engine_SOURCE\ssMath.inl">

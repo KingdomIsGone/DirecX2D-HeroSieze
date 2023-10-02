@@ -23,20 +23,18 @@ float4 main(VSOut In) : SV_TARGET
     // -540 + 1200 
     color = albedoTexture.Sample(anisotropicSampler, In.UV);
     
-    float4 lightColor = float4(0.2f, 0.2f, 0.2f, 1.0f);
+    float4 lightColor = float4(0.2f, 0.2f, 0.2f, 1.f);
     
     for (int i = 0; i < 2; i++)
     {
         CalculateLight2D(lightColor, In.WorldPos, i);
     }
     
+    
     color *= lightColor;
     
-    //if(color.a >= 0.0f)
-    //{
-    //    float4 dimColor = float4(-0.3f, -0.3f, -0.3f, 0.0f);
-    //    color += dimColor;
-    //}
+    //if(color.a < 1.f)
+    //    color.a *= 0.1f;
     
     //if (In.UV.x < 0.5f)
     //    discard;

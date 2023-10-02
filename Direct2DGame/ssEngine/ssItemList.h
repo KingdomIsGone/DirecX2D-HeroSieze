@@ -22,7 +22,9 @@ namespace ss
 		void SetItemIn(bool is) { mItemIn = is; }
 
 		void SetItem(class Item* item) { mItem = item; }
+		class Item* GetItem() { return mItem; }
 		void SetSelected(bool is) { mSelected = is; }
+		bool GetSelected() { return mSelected; }
 		void SetEffect(class ITemlistSelectEffect* effect) { mSelectEffect = effect; }
 		class ITemlistSelectEffect* GetEffect() { return mSelectEffect; }
 

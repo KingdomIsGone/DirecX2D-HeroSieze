@@ -30,11 +30,18 @@ namespace ss
 
 		void SetLight(class Light* light) { mLight = light; }
 		void PushBackEquipSlot(class EquipmentSlot* slot) { mEquipSlots.push_back(slot); }
+
 		void OnOffCheck();
+
 		void CursorOnEquipCheck();
 
 		void CursorOnListCheck();
 		void ActivateItemList(UINT num);
+		void EquipItem();
+
+		void EraseItemList(eItemKind kind);
+		void RestoreItemList(eItemKind kind, class Item* item);
+		void OnRightView();
 
 		static void PushbackItem(class Item* item);
 
@@ -60,6 +67,13 @@ namespace ss
 		static std::vector<Item*> mBelts;
 		static std::vector<Item*> mShoes;
 
+		Item* mEquipmentsRight[6];
+
 		std::bitset<(UINT)eKind::End> mItemKindMask;
+
+		int mSelectedNum;
+		int mSelectedEquip;
+
+		class RightInfo* mRightInfo;
 	};
 }

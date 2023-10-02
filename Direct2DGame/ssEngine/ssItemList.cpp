@@ -28,8 +28,6 @@ namespace ss
 
 		mItemImage = new ItemImage(this);
 		AddOtherGameObject(mItemImage, eLayerType::Inventory);
-
-		
 	}
 
 	ItemList::~ItemList()
@@ -48,23 +46,23 @@ namespace ss
 		ItemBackPos.z -= 0.01f;
 		ItemBackPos.x -= 0.42f;
 		mItemBack->GetComponent<Transform>()->SetPosition(ItemBackPos);
-		ItemBackPos.z -= 0.02f;
+		ItemBackPos.z -= 0.03f;
 		mItemImage->GetComponent<Transform>()->SetPosition(ItemBackPos);
 
 		if (mItemIn)
 		{
-			mItemBack->SetItemIn(true);
+			mItemBack->SetOnList(true);
 			UINT grade = (UINT)mItem->GetItemGrade();
 			mItemBack->SetItemGrade(grade);
 			mMaterName = mItem->GetMaterName();
-			mItemImage->SetItemIn(true);
+			mItemImage->SetOnList(true);
 			mItemImage->SetMaterName(mItem->GetMaterName());
 			mSelectEffect->SetItemIn(true);
 		}
 		else
 		{
-			mItemBack->SetItemIn(false);
-			mItemImage->SetItemIn(false);
+			mItemBack->SetOnList(false);
+			mItemImage->SetOnList(false);
 			mSelectEffect->SetItemIn(false);
 		}
 
@@ -96,11 +94,13 @@ namespace ss
 
 	void ItemList::SetMater()
 	{
+		mRenderer->SetNoRender(false);
 		mRenderer->SetMaterial(Resources::Find<Material>(L"ItemListMater"));
 	}
 
 	void ItemList::SetBlank()
 	{
-		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		//mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		mRenderer->SetNoRender(true);
 	}
 }

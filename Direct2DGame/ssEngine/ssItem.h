@@ -19,22 +19,6 @@ namespace ss
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
 
-
-		enum class eItemGrade
-		{
-			Normal,
-			Magic,
-			Legend,
-		};
-		enum class eKind
-		{
-			Weapon,
-			Armor,
-			Shield,
-			Helmet,
-			Belt,
-			Shoes,
-		};
 		enum class eItemState
 		{
 			Inventory,
@@ -46,8 +30,8 @@ namespace ss
 
 		eItemGrade GetItemGrade() { return mGrade; }
 		void SetItemGrade(eItemGrade grade) { mGrade = grade; }
-		eKind GetItemKind() { return mKind; }
-		void SetItemKind(eKind kind) { mKind = kind; }
+		eItemKind GetItemKind() { return mKind; }
+		void SetItemKind(eItemKind kind) { mKind = kind; }
 		eItemState GetItemState() { return mState; }
 		void SetItemState(eItemState state) { mState = state; }
 
@@ -62,7 +46,7 @@ namespace ss
 		class MeshRenderer* mRenderer;
 
 		eItemState mState;
-		eKind mKind;
+		eItemKind mKind;
 		eItemGrade mGrade;
 
 		bool mImageOn;

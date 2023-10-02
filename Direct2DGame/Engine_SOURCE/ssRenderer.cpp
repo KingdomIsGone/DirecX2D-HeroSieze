@@ -789,6 +789,17 @@ namespace renderer
 				}
 			}
 
+			//EquipSelectIndicator
+			{
+				std::shared_ptr<Texture> EquipSelectTex
+					= Resources::Load<Texture>(L"EquipSelectTex", L"..\\Resources\\Texture\\Inventory\\EquipSelect.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(EquipSelectTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"EquipSelectMater", spriteMaterial);
+			}
+
 			//inventoryItemList
 			{
 				std::shared_ptr<Texture> ItemListTex
@@ -857,6 +868,28 @@ namespace renderer
 				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				Resources::Insert(L"LegendStaff1Mater", spriteMaterial);
 			}
+
+			//MagicStaff
+			{
+				std::shared_ptr<Texture> MagicStaffTex
+					= Resources::Load<Texture>(L"MagicStaffTex", L"..\\Resources\\Texture\\Item\\MagicStaff.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(MagicStaffTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"MagicStaffMater", spriteMaterial);
+			}
+		}
+
+		//testAlphaPng
+		{
+			std::shared_ptr<Texture> TestAlphaTex
+				= Resources::Load<Texture>(L"TestAlphaTex", L"..\\Resources\\Texture\\test2.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(TestAlphaTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"TestAlphaMater", spriteMaterial);
 		}
 	}
 

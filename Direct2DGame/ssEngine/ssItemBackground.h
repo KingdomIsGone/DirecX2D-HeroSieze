@@ -25,7 +25,8 @@ namespace ss
 		void SetMaterLegend();
 		void SetBlank();
 
-		void SetItemIn(bool is) { mItemIn = is; }
+		void SetOnList(bool is) { mOnList = is; }
+		void SetOnEquip(bool is) { mOnEquip = is; }
 		void SetItemGrade(UINT grade) { mGrade = (eGrade)grade; }
 
 	private:
@@ -35,7 +36,8 @@ namespace ss
 
 		class MeshRenderer* mRenderer;
 		
-		bool mItemIn;
+		bool mOnList;
+		bool mOnEquip;
 		eGrade mGrade;
 	};
 }

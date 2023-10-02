@@ -29,6 +29,8 @@
 #include "ssWallCollider.h"
 #include "ssSkillSlot1.h"
 #include "ssLegendStaff1.h"
+#include "TestObject.h"
+#include "ssMagicStaff.h"
 
 
 namespace ss
@@ -60,14 +62,19 @@ namespace ss
 		AddGameObject(eLayerType::Item, staff);
 		staff->GetComponent<Transform>()->SetPosition(-1.0f, 0.0f, 1.02f);
 
+		MagicStaff* magicStaff = new MagicStaff();
+		AddGameObject(eLayerType::Item, magicStaff);
+		magicStaff->GetComponent<Transform>()->SetPosition(-1.0f, 0.5f, 1.02f);
+
 		
 
 		FireWallPiece* Fpiece = new FireWallPiece();
 		AddGameObject(eLayerType::Projectile, Fpiece);
 		Fpiece->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
 		
-		//WallCollider* wallCol = new WallCollider();
-
+		TestObject* TestObj = new TestObject(nullptr);
+		AddGameObject(eLayerType::Projectile, TestObj);
+		TestObj->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.01f);
 		
 		//TextureSetting();
 		UI_Setting();

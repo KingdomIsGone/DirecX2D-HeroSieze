@@ -21,6 +21,9 @@ namespace ss
 		void SetItemBack(class ItemBackground* back) { mBackGround = back; }
 		ItemBackground* GetItemBack() { return mBackGround; }
 		void SetItemImage(class ItemImage* image) { mItemImage = image; }
+		ItemImage* GetItemImage() { return mItemImage; }
+		void SetEquipSelect(class EquipIndicator* select) { mEquipSelect = select; }
+		EquipIndicator* GetEquipSelect() { return mEquipSelect; }
 
 	private:
 		Transform* mTransform;
@@ -30,5 +33,6 @@ namespace ss
 		class MeshRenderer* mRenderer;
 		class ItemBackground* mBackGround;
 		class ItemImage* mItemImage;
+		class EquipIndicator* mEquipSelect;
 	};
 }

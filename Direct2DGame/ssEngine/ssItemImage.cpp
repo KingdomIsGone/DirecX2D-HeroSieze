@@ -31,8 +31,9 @@ namespace ss
 	{
 		GameObject::Update();
 
-		if (mItemIn)
+		if (mOnList || mOnEquip)
 		{
+			mRenderer->SetNoRender(false);
 			mRenderer->SetMaterial(Resources::Find<Material>(mMaterName));
 		}
 		else
@@ -51,6 +52,7 @@ namespace ss
 
 	void ItemImage::SetBlank()
 	{
-		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		//mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		mRenderer->SetNoRender(true);
 	}
 }

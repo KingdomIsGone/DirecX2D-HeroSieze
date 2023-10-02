@@ -15,6 +15,7 @@ namespace ss
 
 		mRenderer = AddComponent<MeshRenderer>();
 		mRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 		mMaterName = L"ItemListSelectEffectMater";
 	}
 
@@ -37,6 +38,9 @@ namespace ss
 		}
 		else
 			SetBlank();
+		
+		if(!mSelected)
+			SetBlank();
 
 	}
 	void ITemlistSelectEffect::LateUpdate()
@@ -51,10 +55,12 @@ namespace ss
 
 	void ITemlistSelectEffect::SetBlank()
 	{
-		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		//mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
+		mRenderer->SetNoRender(true);
 	}
 	void ITemlistSelectEffect::SetMater()
 	{
+		mRenderer->SetNoRender(false);
 		mRenderer->SetMaterial(Resources::Find<Material>(mMaterName));
 	}
 }

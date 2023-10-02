@@ -24,6 +24,8 @@ namespace ss
 	}
 	void MeshRenderer::Render()
 	{
+		if (mNoRender)
+			return;
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		tr->BindConstantBuffer();

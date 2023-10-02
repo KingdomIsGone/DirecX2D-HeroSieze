@@ -77,4 +77,20 @@ namespace ss::enums
 		Projectile,
 		Item,
 	};
+
+	enum class eItemGrade
+	{
+		Normal,
+		Magic,
+		Legend,
+	};
+	enum class eItemKind
+	{
+		Weapon,
+		Armor,
+		Shield,
+		Helmet,
+		Belt,
+		Shoes,
+	};
 }

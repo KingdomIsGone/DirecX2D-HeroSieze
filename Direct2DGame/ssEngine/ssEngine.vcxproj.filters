@@ -158,6 +158,18 @@
     <ClCompile Include="ssITemlistSelectEffect.cpp">
       <Filter>Contents\Object\UI\Inventory\List\SelectEffect</Filter>
     </ClCompile>
+    <ClCompile Include="ssEquipIndicator.cpp">
+      <Filter>Contents\Object\UI\Inventory\Slot</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>Contents\Object\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="ssRightInfo.cpp">
+      <Filter>Contents\Object\UI\Inventory\RightInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMagicStaff.cpp">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -320,6 +332,18 @@
     <ClInclude Include="ssITemlistSelectEffect.h">
       <Filter>Contents\Object\UI\Inventory\List\SelectEffect</Filter>
     </ClInclude>
+    <ClInclude Include="ssEquipIndicator.h">
+      <Filter>Contents\Object\UI\Inventory\Slot</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Contents\Object\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="ssRightInfo.h">
+      <Filter>Contents\Object\UI\Inventory\RightInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMagicStaff.h">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -447,6 +471,12 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Inventory\List\SelectEffect">
       <UniqueIdentifier>{d6e239d6-4474-431f-bdaa-4bc8e1534c9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Test">
+      <UniqueIdentifier>{1de243ac-61c7-4025-95be-1f45ed0643bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Inventory\RightInfo">
+      <UniqueIdentifier>{efa03f87-bda1-4c38-90b2-d02f19ea76da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

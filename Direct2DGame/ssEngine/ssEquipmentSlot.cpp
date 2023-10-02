@@ -16,7 +16,6 @@ namespace ss
 		mRenderer = AddComponent<MeshRenderer>();
 		mRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
-
 	}
 
 	EquipmentSlot::~EquipmentSlot()
@@ -30,6 +29,7 @@ namespace ss
 	void EquipmentSlot::Update()
 	{
 		GameObject::Update();
+
 
 	}
 	void EquipmentSlot::LateUpdate()

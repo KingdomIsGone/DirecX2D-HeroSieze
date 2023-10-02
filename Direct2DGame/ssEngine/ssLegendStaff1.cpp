@@ -11,7 +11,7 @@ namespace ss
 	LegendStaff1::LegendStaff1()
 	{
 		SetMaterialName(L"LegendStaff1Mater");
-		SetItemKind(eKind::Weapon);
+		SetItemKind(eItemKind::Weapon);
 		SetItemGrade(eItemGrade::Legend);
 		SetItemState(eItemState::Field);
 		SetImageOn(true);
