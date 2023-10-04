@@ -38,10 +38,48 @@ namespace ss
 		bool GetImageOn() { return mImageOn; }
 		void SetImageOn(bool is) { mImageOn = is; }
 
+		void SetItemName(const wchar_t name[]) 
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				mItemName[i] = name[i];
+			}
+		}
+		wchar_t* GetItemName()
+		{
+			wchar_t* name = new wchar_t[20];
+			for (int i = 0; i < 20; i++)
+			{
+				name[i] = mItemName[i];
+			}
+			
+			return name;
+		}
+		void SetItemText(const wchar_t text[]) 
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				mItemText[i] = text[i];
+			}
+		}
+		wchar_t* GetItemText()
+		{
+			wchar_t* text = new wchar_t[20];
+			for (int i = 0; i < 20; i++)
+			{
+				text[i] = mItemText[i];
+			}
+
+			return text;
+		}
+
+
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
 		std::wstring mMaterName;
+		wchar_t mItemName[20];
+		wchar_t mItemText[20];
 
 		class MeshRenderer* mRenderer;
 

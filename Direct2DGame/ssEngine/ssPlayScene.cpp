@@ -64,7 +64,7 @@ namespace ss
 			//at->CompleteEvent(L"Idle") = std::bind();
 
 			at->PlayAnimation(L"Idle", true);
-			player->AddComponent<PlayerScript>();
+			//player->AddComponent<PlayerScript>();
 			//player->GetComponent<Transform>()->SetScale(Vector3(50.2f, 50.2f, 50.2f));
 		}
 

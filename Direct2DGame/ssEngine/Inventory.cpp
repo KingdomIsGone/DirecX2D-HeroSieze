@@ -44,6 +44,7 @@ namespace ss
 
 		//list1
 		mList1 = new ItemList(this);
+		mList1->SetListNum(1);
 		mList1->GetComponent<Transform>()->SetScale(1.42f, 0.6f, 1.0f);
 		Vector3 List1Pos = mList1->GetComponent<Transform>()->GetPosition();
 		List1Pos.x += 0.39f;
@@ -59,6 +60,7 @@ namespace ss
 
 		//list2
 		mList2 = new ItemList(this);
+		mList2->SetListNum(2);
 		mList2->GetComponent<Transform>()->SetScale(1.42f, 0.6f, 1.0f);
 		Vector3 List2Pos = mList2->GetComponent<Transform>()->GetPosition();
 		List2Pos.x += 0.39f;
@@ -74,6 +76,7 @@ namespace ss
 
 		//list3
 		mList3 = new ItemList(this);
+		mList3->SetListNum(3);
 		mList3->GetComponent<Transform>()->SetScale(1.42f, 0.6f, 1.0f);
 		Vector3 List3Pos = mList3->GetComponent<Transform>()->GetPosition();
 		List3Pos.x += 0.39f;
@@ -95,11 +98,11 @@ namespace ss
 
 		//RightInfo
 		mRightInfo = new RightInfo(this);
-		mRightInfo->GetComponent<Transform>()->SetPosition(Vector3(1.46f, 1.0f, List1Pos.z - 0.1f));
+		mRightInfo->GetComponent<Transform>()->SetPosition(Vector3(1.52f, 1.0f, List1Pos.z - 0.1f));
 		AddOtherGameObject(mRightInfo, eLayerType::Inventory);
 
 		ItemBackground* rightBack = new ItemBackground(this);
-		rightBack->GetComponent<Transform>()->SetPosition(Vector3(1.46f, 1.0f, List1Pos.z - 0.09f));
+		rightBack->GetComponent<Transform>()->SetPosition(Vector3(1.52f, 1.0f, List1Pos.z - 0.09f));
 		AddOtherGameObject(rightBack, eLayerType::Inventory);
 		mRightInfo->SetItemBack(rightBack);
 	}

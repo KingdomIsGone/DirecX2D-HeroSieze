@@ -15,6 +15,11 @@ namespace ss
 		SetItemGrade(eItemGrade::Magic);
 		SetItemState(eItemState::Field);
 		SetImageOn(true);
+		wchar_t itemName[20] = L"MagicStaff";
+		SetItemName(itemName);
+		wchar_t itemText[20] = L"°ø°Ý·Â: 100";
+		SetItemText(itemText);
+		
 
 		mTransform = GetComponent<Transform>();
 		mPos = mTransform->GetPosition();

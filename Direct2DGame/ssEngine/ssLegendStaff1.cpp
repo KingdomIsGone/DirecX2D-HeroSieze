@@ -15,6 +15,10 @@ namespace ss
 		SetItemGrade(eItemGrade::Legend);
 		SetItemState(eItemState::Field);
 		SetImageOn(true);
+		wchar_t itemName[20] = L"LegendStaff";
+		SetItemName(itemName);
+		wchar_t itemText[20] = L"°ø°Ý·Â: 200";
+		SetItemText(itemText);
 
 		mTransform = GetComponent<Transform>();
 		mPos = mTransform->GetPosition();

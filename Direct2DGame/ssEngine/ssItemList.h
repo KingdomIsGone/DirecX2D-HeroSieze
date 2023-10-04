@@ -18,6 +18,7 @@ namespace ss
 		void SetMater();
 		void SetBlank();
 
+		void SetListNum(UINT num) { mListNum = num; }
 		bool GetItemIn() { return mItemIn; }
 		void SetItemIn(bool is) { mItemIn = is; }
 
@@ -41,5 +42,7 @@ namespace ss
 
 		bool mItemIn;
 		bool mSelected;
+
+		UINT mListNum;
 	};
 }

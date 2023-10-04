@@ -31,6 +31,7 @@
 #include "ssLegendStaff1.h"
 #include "TestObject.h"
 #include "ssMagicStaff.h"
+#include "ssFontWrapper.h"
 
 
 namespace ss
@@ -191,6 +192,8 @@ namespace ss
 			lightComp->SetType(eLightType::Directional);
 			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
 		}
+
+		
 	}
 
 	void UIScene::Update()
@@ -198,7 +201,6 @@ namespace ss
 		Scene::Update();
 
 		Vector3 pos = cursor->GetPos();
-		
 	}
 
 	void UIScene::LateUpdate()
@@ -209,6 +211,7 @@ namespace ss
 	void UIScene::Render()
 	{
 		Scene::Render();
+		//FontWrapper::DrawFont(L"TEXT", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 	}
 	void UIScene::UI_Setting()
 	{

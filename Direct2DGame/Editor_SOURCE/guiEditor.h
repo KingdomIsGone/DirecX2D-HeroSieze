@@ -11,10 +11,6 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #endif
 
-#include "imgui.h"
-#include "imgui_impl_win32.h"
-#include "imgui_impl_dx11.h"
-
 namespace gui
 {
 	class Editor
@@ -30,17 +26,10 @@ namespace gui
 
 		static void DebugRender(const ss::graphics::DebugMesh& mesh);
 
-	private:
-		static void imguiInit();
-		static void imguiRender();
-		static void imguiRelease();
 
 	private:
-		static std::map<std::wstring, Widget*> mWidgets;
+		static std::vector<Widget*> mWidgets;
 		static std::vector<EditorObject*> mEditorObjects;
 		static std::vector<DebugObject*> mDebugObjects;
-		static ImGuiIO mIO;
-
-		static class Dockspace* mDockSpace;
 	};
 }

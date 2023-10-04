@@ -14,37 +14,15 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)guiConsole.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiDebugObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)guiDockSpace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditorObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)guiHierarchy.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)guiInspector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiWidget.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imconfig.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imgui.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imgui_impl_dx11.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imgui_impl_win32.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imgui_internal.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)guiProject.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)guiConsole.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiDebugObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)guiDockSpace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditorObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)guiHierarchy.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)guiInspector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiWidget.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_demo.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_draw.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_impl_dx11.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_impl_win32.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_tables.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)imgui_widgets.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)guiProject.cpp" />
   </ItemGroup>
 </Project>
