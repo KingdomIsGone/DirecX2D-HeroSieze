@@ -203,6 +203,8 @@
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
     <ClInclude Include="ssSkillSlot1.h" />
+    <ClInclude Include="ssStartBtn.h" />
+    <ClInclude Include="ssTitleScene.h" />
     <ClInclude Include="ssTorchBig.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
@@ -261,6 +263,8 @@
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
     <ClCompile Include="ssSkillSlot1.cpp" />
+    <ClCompile Include="ssStartBtn.cpp" />
+    <ClCompile Include="ssTitleScene.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />

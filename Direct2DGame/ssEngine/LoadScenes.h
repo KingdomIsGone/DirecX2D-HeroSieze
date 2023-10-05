@@ -10,6 +10,7 @@
 #include "ssWoodsField.h"
 #include "ssValkyrieScene.h"
 #include "ssAnubisRoom.h"
+#include "ssTitleScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\ssEngine.lib")
@@ -32,8 +33,9 @@ namespace ss
 		//SceneManager::CreateScene<DesertTownScene>(L"DesertTownScene");
 		//SceneManager::CreateScene<DesertDungeon2>(L"DesertDungeon2");
 		//SceneManager::CreateScene<DesertBossRoom>(L"DesertBossRoom");
-		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<UIScene>(L"UIScene");
+		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 	}
 }

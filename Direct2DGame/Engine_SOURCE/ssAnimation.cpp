@@ -75,6 +75,33 @@ namespace ss
 		}
 	}
 
+	void Animation::CreateLarge(std::wstring name
+		, std::shared_ptr<graphics::Texture> atlas
+		, Vector2 leftTop
+		, Vector2 size
+		, UINT columnLength, Vector2 offset, float duration)
+	{
+		SetKey(name);
+		mAtlas = atlas;
+
+		float width = (float)atlas->GetWidth();
+		float height = (float)atlas->GetHeight();
+
+		for (size_t i = 0; i < columnLength; i++)
+		{
+			Sprite sprite = {};
+			sprite.leftTop.x = leftTop.x + (i * size.x) / width;
+			sprite.leftTop.y = leftTop.y / height;
+			sprite.size.x = size.x / width;
+			sprite.size.y = size.y / height;
+			sprite.offset = offset;
+			sprite.atlasSize = Vector2(2000.0f / width, 2000.0f / height);
+			sprite.duration = duration;
+
+			mSprites.push_back(sprite);
+		}
+	}
+
 	void Animation::Binds()
 	{
 		// texture bind

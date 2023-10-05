@@ -66,13 +66,26 @@ namespace ss
 		animation = new Animation();
 		animation->SetKey(name);
 
-		animation->Create(name
-			, atlas
-			, leftTop
-			, size
-			, columnLength
-			, offset
-			, duration);
+		if (mLarge)
+		{
+			animation->CreateLarge(name
+				, atlas
+				, leftTop
+				, size
+				, columnLength
+				, offset
+				, duration);
+		}
+		else
+		{
+			animation->Create(name
+				, atlas
+				, leftTop
+				, size
+				, columnLength
+				, offset
+				, duration);
+		}
 
 		mAnimations.insert(std::make_pair(name, animation));
 

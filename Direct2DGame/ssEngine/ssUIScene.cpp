@@ -121,13 +121,13 @@ namespace ss
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Map, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
+			mMainCamera = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(mMainCamera);
 
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			mMainCamera->TurnLayerMask(eLayerType::UI, false);
 			//cameraComp->TurnLayerMask(eLayerType::Player, false);
-			cameraComp->TurnLayerMask(eLayerType::Cursor, false);
-			cameraComp->TurnLayerMask(eLayerType::Inventory, false);
+			mMainCamera->TurnLayerMask(eLayerType::Cursor, false);
+			mMainCamera->TurnLayerMask(eLayerType::Inventory, false);
 			camera->AddComponent<CameraScript>();
 		}
 
@@ -137,10 +137,10 @@ namespace ss
 			camera->SetName(L"PlayerCamera");
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::Player, true);
+			mPlayerCamera = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(mPlayerCamera);
+			mPlayerCamera->DisableLayerMasks();
+			mPlayerCamera->TurnLayerMask(eLayerType::Player, true);
 			camera->AddComponent<PlayerCameraScript>();
 			//renderer::mainCamera = cameraComp;
 		}
@@ -150,10 +150,10 @@ namespace ss
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::UI, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::UI, true);                 
+			mUICamera = camera->AddComponent<Camera>();
+			renderer::cameras.push_back(mUICamera);
+			mUICamera->DisableLayerMasks();
+			mUICamera->TurnLayerMask(eLayerType::UI, true);
 		}
 	
 		//Cursor Camera
@@ -162,12 +162,12 @@ namespace ss
 			camera->SetName(L"CursorCamera");
 			AddGameObject(eLayerType::Cursor, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			cameraComp->SetName(L"CursorCamera");
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::Cursor, true);
-			renderer::mainCamera = cameraComp;
+			mCursorCamera = camera->AddComponent<Camera>();
+			mCursorCamera->SetName(L"CursorCamera");
+			renderer::cameras.push_back(mCursorCamera);
+			mCursorCamera->DisableLayerMasks();
+			mCursorCamera->TurnLayerMask(eLayerType::Cursor, true);
+			renderer::mainCamera = mCursorCamera;
 			camera->AddComponent<PlayerCameraScript>();
 		}
 
@@ -176,11 +176,11 @@ namespace ss
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Inventory, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			cameraComp->SetName(L"InventoryCamera");
-			renderer::cameras.push_back(cameraComp);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::Inventory, true);
+			mInventoryCamera = camera->AddComponent<Camera>();
+			mInventoryCamera->SetName(L"InventoryCamera");
+			renderer::cameras.push_back(mInventoryCamera);
+			mInventoryCamera->DisableLayerMasks();
+			mInventoryCamera->TurnLayerMask(eLayerType::Inventory, true);
 		}
 		
 		//∂Û¿Ã∆Æ
@@ -211,7 +211,17 @@ namespace ss
 	void UIScene::Render()
 	{
 		Scene::Render();
-		//FontWrapper::DrawFont(L"TEXT", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
+	}
+	void UIScene::OnEnter()
+	{
+		renderer::cameras.push_back(mMainCamera);
+		renderer::cameras.push_back(mPlayerCamera);
+		renderer::cameras.push_back(mUICamera);
+		renderer::cameras.push_back(mCursorCamera);
+		renderer::mainCamera = mCursorCamera;
+	}
+	void UIScene::OnExit()
+	{
 	}
 	void UIScene::UI_Setting()
 	{

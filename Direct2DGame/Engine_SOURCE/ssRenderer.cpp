@@ -891,6 +891,32 @@ namespace renderer
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"TestAlphaMater", spriteMaterial);
 		}
+
+		//start Button0
+		{
+			std::shared_ptr<Texture> StartBtn0Tex
+				= Resources::Load<Texture>(L"StartBtn0Tex"
+					, L"..\\Resources\\Texture\\TitleMenu\\Menu_Button_spr\\Menu_Button_spr_0.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(StartBtn0Tex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"StartBtn0Mater", spriteMaterial);
+		}
+		//start Button1
+		{
+			std::shared_ptr<Texture> StartBtn1Tex
+				= Resources::Load<Texture>(L"StartBtn1Tex"
+					, L"..\\Resources\\Texture\\TitleMenu\\Menu_Button_spr\\Menu_Button_spr_1.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(StartBtn1Tex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"StartBtn1Mater", spriteMaterial);
+		}
+
+
+
 	}
 
 	void Initialize()

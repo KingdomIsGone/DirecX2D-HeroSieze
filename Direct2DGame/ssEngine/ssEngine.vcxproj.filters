@@ -170,6 +170,12 @@
     <ClCompile Include="ssMagicStaff.cpp">
       <Filter>Contents\Object\Item\Staff</Filter>
     </ClCompile>
+    <ClCompile Include="ssTitleScene.cpp">
+      <Filter>Contents\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ssStartBtn.cpp">
+      <Filter>Contents\Scene\TitleScene\Btn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -344,6 +350,12 @@
     <ClInclude Include="ssMagicStaff.h">
       <Filter>Contents\Object\Item\Staff</Filter>
     </ClInclude>
+    <ClInclude Include="ssTitleScene.h">
+      <Filter>Contents\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ssStartBtn.h">
+      <Filter>Contents\Scene\TitleScene\Btn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -477,6 +489,12 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Inventory\RightInfo">
       <UniqueIdentifier>{efa03f87-bda1-4c38-90b2-d02f19ea76da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\TitleScene">
+      <UniqueIdentifier>{0b8feb9f-c120-4d00-9667-2c56807bfb7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\TitleScene\Btn">
+      <UniqueIdentifier>{78fa235b-a134-46e2-b2e4-cad6a372dc1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

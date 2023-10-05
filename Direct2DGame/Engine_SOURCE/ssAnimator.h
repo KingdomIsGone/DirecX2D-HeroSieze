@@ -55,11 +55,16 @@ namespace ss
 
 		Animation* GetActiveAnimation() { return mActiveAnimation; }
 
+		//custom
+		void SetLarge(bool is) { mLarge = is; }
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Events*> mEvents;
 		Animation* mActiveAnimation;
 
 		bool mbLoop;
+		
+		bool mLarge;
 	};
 }

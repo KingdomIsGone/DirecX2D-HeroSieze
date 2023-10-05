@@ -15,6 +15,9 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		virtual void OnEnter() override;
+		virtual void OnExit() override;
+
 		void UI_Setting();
 		void TextureSetting();
 
@@ -24,5 +27,11 @@ namespace ss
 		class Anubis* mAnubis;
 		class BossHpBar* mBossHpBar;
 		class BossHpFill* mBossHpFill;
+
+		class Camera* mMainCamera;
+		class Camera* mPlayerCamera;
+		class Camera* mUICamera;
+		class Camera* mCursorCamera;
+		class Camera* mInventoryCamera;
 	};
 }

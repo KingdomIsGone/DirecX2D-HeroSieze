@@ -21,7 +21,6 @@ namespace ss
 		
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(1.5f, 1.5f, 1.0f);
-
 		mPos = mTransform->GetPosition();
 
 		mCollider = AddComponent<Collider2D>();
