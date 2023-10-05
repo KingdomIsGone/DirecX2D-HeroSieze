@@ -879,6 +879,95 @@ namespace renderer
 				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				Resources::Insert(L"MagicStaffMater", spriteMaterial);
 			}
+
+			//NormalStaff
+			{
+				std::shared_ptr<Texture> NormalStaffTex
+					= Resources::Load<Texture>(L"NormalStaffTex", L"..\\Resources\\Texture\\Item\\NormalStaff.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(NormalStaffTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"NormalStaffMater", spriteMaterial);
+			}
+
+			//MagicHat
+			{
+				std::shared_ptr<Texture> MagicHatTex
+					= Resources::Load<Texture>(L"MagicHatTex", L"..\\Resources\\Texture\\Item\\MagicHat.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(MagicHatTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"MagicHatMater", spriteMaterial);
+			}
+
+			//NormalHat
+			{
+				std::shared_ptr<Texture> NormalHatTex
+					= Resources::Load<Texture>(L"NormalHatTex", L"..\\Resources\\Texture\\Item\\NormalHat.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(NormalHatTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"NormalHatMater", spriteMaterial);
+			}
+			
+			//NormalBoots
+			{
+				std::shared_ptr<Texture> NormalBootsTex
+					= Resources::Load<Texture>(L"NormalBootsTex", L"..\\Resources\\Texture\\Item\\NormalBoots.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(NormalBootsTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"NormalBootsMater", spriteMaterial);
+			}
+
+			//LegendBoots
+			{
+				std::shared_ptr<Texture> LegendBootsTex
+					= Resources::Load<Texture>(L"LegendBootsTex", L"..\\Resources\\Texture\\Item\\LegendBoots.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(LegendBootsTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"LegendBootsMater", spriteMaterial);
+			}
+
+			//NormalRobe
+			{
+				std::shared_ptr<Texture> NormalRobeTex
+					= Resources::Load<Texture>(L"NormalRobeTex", L"..\\Resources\\Texture\\Item\\NormalRobe.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(NormalRobeTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"NormalRobeMater", spriteMaterial);
+			}
+
+			//MagicRobe
+			{
+				std::shared_ptr<Texture> MagicRobeTex
+					= Resources::Load<Texture>(L"MagicRobeTex", L"..\\Resources\\Texture\\Item\\MagicRobe.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(MagicRobeTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"MagicRobeMater", spriteMaterial);
+			}
+
+			//NormalBelt
+			{
+				std::shared_ptr<Texture> NormalBeltTex
+					= Resources::Load<Texture>(L"NormalBeltTex", L"..\\Resources\\Texture\\Item\\NormalBelt.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(NormalBeltTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"NormalBeltMater", spriteMaterial);
+			}
+
 		}
 
 		//testAlphaPng
@@ -915,6 +1004,7 @@ namespace renderer
 			Resources::Insert(L"StartBtn1Mater", spriteMaterial);
 		}
 
+		
 
 
 	}

@@ -28,10 +28,20 @@
 #include "FireWallPiece.h"
 #include "ssWallCollider.h"
 #include "ssSkillSlot1.h"
-#include "ssLegendStaff1.h"
 #include "TestObject.h"
-#include "ssMagicStaff.h"
 #include "ssFontWrapper.h"
+
+#include "ssLegendStaff1.h"
+#include "ssMagicStaff.h"
+#include "ssMagicHat.h"
+#include "ssNormalStaff.h"
+#include "ssNormalRobe.h"
+#include "ssMagicRobe.h"
+#include "ssNormalBelt.h"
+#include "ssLegendBoots.h"
+#include "ssNormalBoots.h"
+#include "ssNormalHat.h"
+
 
 
 namespace ss
@@ -67,7 +77,38 @@ namespace ss
 		AddGameObject(eLayerType::Item, magicStaff);
 		magicStaff->GetComponent<Transform>()->SetPosition(-1.0f, 0.5f, 1.02f);
 
-		
+		MagicHat* magicHat = new MagicHat();
+		AddGameObject(eLayerType::Item, magicHat);
+		magicHat->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		NormalStaff* normalStaff = new NormalStaff();
+		AddGameObject(eLayerType::Item, normalStaff);
+		normalStaff->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		NormalRobe* normalRobe = new NormalRobe();
+		AddGameObject(eLayerType::Item, normalRobe);
+		normalRobe->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		MagicRobe* magicRobe = new MagicRobe();
+		AddGameObject(eLayerType::Item, magicRobe);
+		magicRobe->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		NormalBelt* normalBelt = new NormalBelt();
+		AddGameObject(eLayerType::Item, normalBelt);
+		normalBelt->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		LegendBoots* legendBoots = new LegendBoots();
+		AddGameObject(eLayerType::Item, legendBoots);
+		legendBoots->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		NormalBoots* normalBoots = new NormalBoots();
+		AddGameObject(eLayerType::Item, normalBoots);
+		normalBoots->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
+		NormalHat* normalHat = new NormalHat();
+		AddGameObject(eLayerType::Item, normalHat);
+		normalHat->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
+
 
 		FireWallPiece* Fpiece = new FireWallPiece();
 		AddGameObject(eLayerType::Projectile, Fpiece);

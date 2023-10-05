@@ -24,6 +24,8 @@ namespace ss
 		class Animator* mTornadoAni;
 		class MeshRenderer* mBtnMr;
 		class StartBtn* mStBtn;
+		class AudioSource* mAs;
+
 		UINT mTornadoNum;
 	};
 }

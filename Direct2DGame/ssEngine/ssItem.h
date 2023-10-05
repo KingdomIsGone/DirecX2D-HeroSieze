@@ -23,6 +23,7 @@ namespace ss
 		{
 			Inventory,
 			Field,
+			Monster,
 		};
 
 		void SetMaterialName(std::wstring name);

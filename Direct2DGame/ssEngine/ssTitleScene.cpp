@@ -12,6 +12,9 @@
 #include "ssStartBtn.h"
 #include "ssInput.h"
 #include "ssSceneManager.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+#include "ssAudioListener.h"
 
 namespace ss
 {
@@ -214,7 +217,13 @@ namespace ss
 			lightComp->SetType(eLightType::Directional);
 			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
 		}
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"TitleSound", L"..\\Resources\\Sound\\Hero_Siege_Menu_mus.ogg"));
+		mAs->Play();
 	}
+
 	void TitleScene::Update()
 	{
 		Scene::Update();
@@ -271,5 +280,6 @@ namespace ss
 	void TitleScene::OnExit()
 	{
 		renderer::cameras.clear();
+		mAs->Stop();
 	}
 }

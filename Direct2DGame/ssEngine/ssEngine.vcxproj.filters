@@ -176,6 +176,30 @@
     <ClCompile Include="ssStartBtn.cpp">
       <Filter>Contents\Scene\TitleScene\Btn</Filter>
     </ClCompile>
+    <ClCompile Include="ssMagicHat.cpp">
+      <Filter>Contents\Object\Item\Helmet</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNormalHat.cpp">
+      <Filter>Contents\Object\Item\Helmet</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNormalStaff.cpp">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMagicRobe.cpp">
+      <Filter>Contents\Object\Item\Robe</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNormalRobe.cpp">
+      <Filter>Contents\Object\Item\Robe</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNormalBoots.cpp">
+      <Filter>Contents\Object\Item\Boots</Filter>
+    </ClCompile>
+    <ClCompile Include="ssLegendBoots.cpp">
+      <Filter>Contents\Object\Item\Boots</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNormalBelt.cpp">
+      <Filter>Contents\Object\Item\Belt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -356,6 +380,30 @@
     <ClInclude Include="ssStartBtn.h">
       <Filter>Contents\Scene\TitleScene\Btn</Filter>
     </ClInclude>
+    <ClInclude Include="ssMagicHat.h">
+      <Filter>Contents\Object\Item\Helmet</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNormalHat.h">
+      <Filter>Contents\Object\Item\Helmet</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNormalStaff.h">
+      <Filter>Contents\Object\Item\Staff</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMagicRobe.h">
+      <Filter>Contents\Object\Item\Robe</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNormalRobe.h">
+      <Filter>Contents\Object\Item\Robe</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNormalBoots.h">
+      <Filter>Contents\Object\Item\Boots</Filter>
+    </ClInclude>
+    <ClInclude Include="ssLegendBoots.h">
+      <Filter>Contents\Object\Item\Boots</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNormalBelt.h">
+      <Filter>Contents\Object\Item\Belt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -495,6 +543,18 @@
     </Filter>
     <Filter Include="Contents\Scene\TitleScene\Btn">
       <UniqueIdentifier>{78fa235b-a134-46e2-b2e4-cad6a372dc1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item\Helmet">
+      <UniqueIdentifier>{c2b12437-d400-456b-924f-4cde90ea2a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item\Robe">
+      <UniqueIdentifier>{0aa91e41-75e6-43e5-aa51-eec2a4e82d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item\Boots">
+      <UniqueIdentifier>{48083240-6ca6-4ce2-a629-28f3a356edd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Item\Belt">
+      <UniqueIdentifier>{b1a503e1-a8c4-4111-9631-b5ea4a5fc052}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
