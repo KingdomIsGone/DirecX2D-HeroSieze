@@ -202,6 +202,8 @@
     <ClInclude Include="ssNormalHat.h" />
     <ClInclude Include="ssNormalRobe.h" />
     <ClInclude Include="ssNormalStaff.h" />
+    <ClInclude Include="ssPlayerHpBarFill.h" />
+    <ClInclude Include="ssPlayerMpBarFill.h" />
     <ClInclude Include="ssRightInfo.h" />
     <ClInclude Include="ssSarcophagus.h" />
     <ClInclude Include="ssSkeletonScript.h" />
@@ -270,6 +272,8 @@
     <ClCompile Include="ssNormalHat.cpp" />
     <ClCompile Include="ssNormalRobe.cpp" />
     <ClCompile Include="ssNormalStaff.cpp" />
+    <ClCompile Include="ssPlayerHpBarFill.cpp" />
+    <ClCompile Include="ssPlayerMpBarFill.cpp" />
     <ClCompile Include="ssRightInfo.cpp" />
     <ClCompile Include="ssSarcophagus.cpp" />
     <ClCompile Include="ssSkeletonScript.cpp" />

@@ -646,6 +646,17 @@ namespace renderer
 			Resources::Insert(L"PlayerHpSmallBarFillRedMater", spriteMateiral2);
 		}
 
+		//mpBar
+		{
+			std::shared_ptr<Texture> MpBarTex
+				= Resources::Load<Texture>(L"MpBarTex", L"..\\Resources\\Texture\\UI\\BlueBar.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(SpShader);
+			spriteMateiral->SetTexture(MpBarTex);
+			spriteMateiral->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"MpBarMater", spriteMateiral);
+		}
+
 		//º¸½ºHPBar
 		{
 			std::shared_ptr<Texture> BossHpBarTex

@@ -22,6 +22,7 @@ namespace ss
 	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
 	float ss::PlayerScript::mSpeed = 1.5f;
 	float ss::PlayerScript::mCurHp = 3000.0f;
+	float ss::PlayerScript::mCurMp = 1000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 	UINT ss::PlayerScript::mSpellNum = 0;
 
@@ -34,6 +35,7 @@ namespace ss
 		, mLeftColCount(0)
 		, mTopColCount(0)
 		, mBottomColCount(0)
+		, mFullMp(1000.0f)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -59,6 +61,7 @@ namespace ss
 		if (mInventory->GetOnOff())
 			return;
 
+		MpRecovery();
 		SpellWaiting();
 
 		switch (mState)
@@ -90,7 +93,6 @@ namespace ss
 
 	void PlayerScript::Complete()
 	{
-		int a = 0;
 	}
 
 	void PlayerScript::SpellWaiting()
@@ -480,6 +482,10 @@ namespace ss
 
 	void PlayerScript::ShootMeteor(Vector3 cursorPos)
 	{
+		if (mCurMp < 250.f)
+			return;
+		mCurMp -= 250.f;
+
 		Meteor* meteor = new Meteor();
 		meteor->GetComponent<Transform>()->SetPosition(cursorPos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, meteor);
@@ -487,11 +493,25 @@ namespace ss
 
 	void PlayerScript::FireWalls(Vector3 cursorPos)
 	{
+		if (mCurMp < 200.f)
+			return;
+		mCurMp -= 200.f;
+
 		FireWall* wall = new FireWall(cursorPos);
 		wall->GetComponent<Transform>()->SetPosition(cursorPos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::OtherObject, wall);
 	}
 
+	void PlayerScript::MpRecovery()
+	{
+		if (mCurMp < mFullMp)
+		{
+			mCurMp += 100.f * Time::DeltaTime();
+
+			if (mCurMp > mFullMp)
+				mCurMp = mFullMp;
+		}
+	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{

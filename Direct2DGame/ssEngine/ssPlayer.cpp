@@ -7,6 +7,7 @@
 #include "ssPlayerScript.h"
 #include "ssP_HpSmallBar.h"
 #include "ssP_HpSmallBarFill.h"
+#include "ssPlayerHpBarFill.h"
 #include "Inventory.h"
 #include "ssLight.h"
 #include "ssEquipmentSlot.h"
@@ -14,12 +15,15 @@
 #include "ssItemBackground.h"
 #include "ssItemImage.h"
 #include "ssEquipIndicator.h"
+#include "ssPlayerMpBarFill.h"
 
 namespace ss
 {
 	Player::Player()
 		: mCurHp(3000.0f)
 		, mPrevHp(3000.0f)
+		, mCurMp(1000.0f)
+		, mPrevMp(1000.0f)
 	{
 		mTransform = GetComponent<Transform>();
 		mScript = AddComponent<PlayerScript>();
@@ -110,8 +114,14 @@ namespace ss
 
 		mSmallHpBarFill = new P_HpSmallBarFill();
 		mSmallHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
-		Vector3 tempPos2 = mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
+		mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mSmallHpBarFill, eLayerType::MonsterUI);
+
+		mHpBarFill = new PlayerHpBarFill();
+		AddOtherGameObject(mHpBarFill, eLayerType::UI);
+
+		mMpBarFill = new PlayerMpBarFill();
+		AddOtherGameObject(mMpBarFill, eLayerType::UI);
 
 		//¶óÀÌÆ®
 		GameObject* light = new GameObject();
@@ -358,13 +368,8 @@ namespace ss
 		GameObject::Update();
 
 		DamageCheck();
-		mCurHp = mScript->GetHp();
-		if (mCurHp != mPrevHp)
-		{
-			mSmallHpBarFill->ChangeHP(mCurHp);
-
-			mPrevHp = mCurHp;
-		}
+		HpCheck();
+		MpCheck();
 
 		Vector3 pos = mTransform->GetPosition();
 
@@ -385,6 +390,29 @@ namespace ss
 		{
 			mCurHp += value;
 			SetChangeHpValue(0.f);
+		}
+	}
+
+	void Player::HpCheck()
+	{
+		mCurHp = mScript->GetHp();
+		if (mCurHp != mPrevHp)
+		{
+			mSmallHpBarFill->ChangeHP(mCurHp);
+			mHpBarFill->ChangeHP(mCurHp);
+
+			mPrevHp = mCurHp;
+		}
+	}
+
+	void Player::MpCheck()
+	{
+		mCurMp = mScript->GetMp();
+		if (mCurMp != mPrevMp)
+		{
+			mMpBarFill->ChangeMP(mCurMp);
+
+			mPrevMp = mCurMp;
 		}
 	}
 

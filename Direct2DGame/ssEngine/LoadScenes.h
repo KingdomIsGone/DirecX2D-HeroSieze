@@ -35,7 +35,7 @@ namespace ss
 		//SceneManager::CreateScene<DesertBossRoom>(L"DesertBossRoom");
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
-		SceneManager::CreateScene<UIScene>(L"UIScene");
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
+		SceneManager::CreateScene<UIScene>(L"UIScene");
 	}
 }

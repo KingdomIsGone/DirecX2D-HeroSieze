@@ -15,6 +15,8 @@ namespace ss
 		virtual void Render() override;
 
 		void DamageCheck();
+		void HpCheck();
+		void MpCheck();
 
 	private:
 		Transform* mTransform;
@@ -22,9 +24,13 @@ namespace ss
 
 		float mCurHp;
 		float mPrevHp;
+		float mCurMp;
+		float mPrevMp;
 
 		class PlayerScript* mScript;
 		class P_HpSmallBar* mSmallHpBar;
 		class P_HpSmallBarFill* mSmallHpBarFill;
+		class PlayerHpBarFill* mHpBarFill;
+		class PlayerMpBarFill* mMpBarFill;
 	};
 }

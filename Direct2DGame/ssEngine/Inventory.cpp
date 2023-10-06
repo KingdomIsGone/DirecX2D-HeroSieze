@@ -155,6 +155,7 @@ namespace ss
 
 		if (mOn)
 		{
+			mTransform->SetPosition(Vector3(0.0f, 0.0f, -0.1f));
 			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
 
 			for (EquipmentSlot* slot : mEquipSlots)
@@ -172,6 +173,7 @@ namespace ss
 		}
 		else
 		{
+			mTransform->SetPosition(Vector3(-6.0f, 0.0f, -0.1f));
 			mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 
 			for (EquipmentSlot* slot : mEquipSlots)

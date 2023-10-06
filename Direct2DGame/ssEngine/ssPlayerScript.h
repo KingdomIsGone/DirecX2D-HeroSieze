@@ -58,6 +58,7 @@ namespace ss
 		Vector3 UnProject(Vector3 pos);
 
 		float GetHp() { return mCurHp; }
+		float GetMp() { return mCurMp; }
 		static void ChangeHp(float value) { mCurHp += value; }
 
 		static Vector3 GetPlayerPos() { return mPlayerPos; }
@@ -68,6 +69,8 @@ namespace ss
 
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);
+
+		void MpRecovery();
 
 		void SetInventory(class Inventory* inven) { mInventory = inven; }
 
@@ -82,6 +85,8 @@ namespace ss
 		eDirState mDirState;
 
 		static float mCurHp;
+		static float mCurMp;
+		float mFullMp;
 		
 		class Cursor* mCursor;
 		class Indicator* mIndicator;

@@ -42,10 +42,10 @@
       <Filter>Contents\Object\UI\Cursor</Filter>
     </ClCompile>
     <ClCompile Include="ssP_HpSmallBar.cpp">
-      <Filter>Contents\Object\UI\PlayerHpSmallBar</Filter>
+      <Filter>Contents\Object\UI\Bar\PlayerHpSmallBar</Filter>
     </ClCompile>
     <ClCompile Include="ssP_HpSmallBarFill.cpp">
-      <Filter>Contents\Object\UI\PlayerHpSmallBarFill</Filter>
+      <Filter>Contents\Object\UI\Bar\PlayerHpSmallBarFill</Filter>
     </ClCompile>
     <ClCompile Include="ssAnubis.cpp">
       <Filter>Contents\Object\Boss\Anubis</Filter>
@@ -200,6 +200,12 @@
     <ClCompile Include="ssNormalBelt.cpp">
       <Filter>Contents\Object\Item\Belt</Filter>
     </ClCompile>
+    <ClCompile Include="ssPlayerHpBarFill.cpp">
+      <Filter>Contents\Object\UI\Bar\PlayerHpBarFill</Filter>
+    </ClCompile>
+    <ClCompile Include="ssPlayerMpBarFill.cpp">
+      <Filter>Contents\Object\UI\Bar\PlayerMpBarFill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -246,10 +252,10 @@
       <Filter>Contents\Object\UI\Cursor</Filter>
     </ClInclude>
     <ClInclude Include="ssP_HpSmallBar.h">
-      <Filter>Contents\Object\UI\PlayerHpSmallBar</Filter>
+      <Filter>Contents\Object\UI\Bar\PlayerHpSmallBar</Filter>
     </ClInclude>
     <ClInclude Include="ssP_HpSmallBarFill.h">
-      <Filter>Contents\Object\UI\PlayerHpSmallBarFill</Filter>
+      <Filter>Contents\Object\UI\Bar\PlayerHpSmallBarFill</Filter>
     </ClInclude>
     <ClInclude Include="ssAnubis.h">
       <Filter>Contents\Object\Boss\Anubis</Filter>
@@ -404,6 +410,12 @@
     <ClInclude Include="ssNormalBelt.h">
       <Filter>Contents\Object\Item\Belt</Filter>
     </ClInclude>
+    <ClInclude Include="ssPlayerHpBarFill.h">
+      <Filter>Contents\Object\UI\Bar\PlayerHpBarFill</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPlayerMpBarFill.h">
+      <Filter>Contents\Object\UI\Bar\PlayerMpBarFill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -447,12 +459,6 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Cursor">
       <UniqueIdentifier>{dab573e5-d019-4cc5-9d9c-c5a03903bb88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Object\UI\PlayerHpSmallBar">
-      <UniqueIdentifier>{34dc475a-4b83-435f-b94b-50c1fb43bf28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Object\UI\PlayerHpSmallBarFill">
-      <UniqueIdentifier>{8eb67099-b820-40f7-825d-66b17210864e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object\Boss">
       <UniqueIdentifier>{4f47d233-1624-44a9-867f-9fd43bd155c5}</UniqueIdentifier>
@@ -555,6 +561,21 @@
     </Filter>
     <Filter Include="Contents\Object\Item\Belt">
       <UniqueIdentifier>{b1a503e1-a8c4-4111-9631-b5ea4a5fc052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Bar">
+      <UniqueIdentifier>{56ba1c2b-9e5c-42c1-9e35-9b18bc442133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Bar\PlayerHpBarFill">
+      <UniqueIdentifier>{df85664c-8f1b-4a56-9367-9b945b962e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Bar\PlayerHpSmallBar">
+      <UniqueIdentifier>{34dc475a-4b83-435f-b94b-50c1fb43bf28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Bar\PlayerHpSmallBarFill">
+      <UniqueIdentifier>{8eb67099-b820-40f7-825d-66b17210864e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Bar\PlayerMpBarFill">
+      <UniqueIdentifier>{abb548db-dac9-4124-ba70-81e521e81e9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
