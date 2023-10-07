@@ -29,6 +29,24 @@ cbuffer Animator : register(b3)
     float3 pad;
 }
 
+cbuffer CoolTime : register(b10) //custom
+{
+    float CoolTimePercent;
+}
+cbuffer CoolTime2 : register(b11) //custom
+{
+    float CoolTimePercent2;
+}
+cbuffer CoolTime3 : register(b12) //custom
+{
+    float CoolTimePercent3;
+}
+cbuffer CoolTime4 : register(b13) //custom
+{
+    float CoolTimePercent4;
+}
+
+
 cbuffer DebugMeshColor : register(b9)  //custom
 {
     float4 DebugColor;

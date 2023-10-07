@@ -52,8 +52,18 @@ float4 main(VSOut In) : SV_TARGET
     //if(color.a > 0.0f)
     //    color.a = 0.5f;
     
-        if (color.w <= 0.0f)
-            discard;
+    if (color.x <= 0.18f && color.y <= 0.18f && color.z <= 0.18f)
+        color.w = 0.0f;
+    else
+    {
+        color.x += 0.1f;
+        color.y += 0.1f;
+        color.z += 0.1f;
+        color.w = 0.8f;
+    }
+    
+    if (color.w <= 0.0f)
+        discard;
     
     
     return color;

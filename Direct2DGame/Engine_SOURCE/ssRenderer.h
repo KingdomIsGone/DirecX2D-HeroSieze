@@ -60,6 +60,24 @@ namespace renderer
 		Vector4 debugColor;
 	};
 
+	CBUFFER(CoolTimeCB, CBSLOT_COOLTIME)  //custom
+	{
+		float coolTimePercent;
+	};
+	CBUFFER(CoolTimeCB2, CBSLOT_COOLTIME)  //custom
+	{
+		float coolTimePercent;
+	};
+	CBUFFER(CoolTimeCB3, CBSLOT_COOLTIME)  //custom
+	{
+		float coolTimePercent;
+	};
+	CBUFFER(CoolTimeCB4, CBSLOT_COOLTIME)  //custom
+	{
+		float coolTimePercent;
+	};
+
+
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState[];

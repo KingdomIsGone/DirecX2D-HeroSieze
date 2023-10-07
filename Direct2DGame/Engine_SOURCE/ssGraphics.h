@@ -18,6 +18,11 @@
 #define CBSLOT_PARTICLE			4
 #define CBSLOT_NOISE			5
 #define CBSLOT_DEBUG            9
+#define CBSLOT_COOLTIME         10
+#define CBSLOT_COOLTIME2        11
+#define CBSLOT_COOLTIME2        12
+#define CBSLOT_COOLTIME2        13
+
 //#define CBSLOT_PARTICLE			1
 
 namespace ss::graphics
@@ -42,6 +47,10 @@ namespace ss::graphics
 		Particle,
 		Noise,
 		Debug = 9,
+		CoolTime = 10,
+		CoolTime2 = 11,
+		CoolTime3 = 12,
+		CoolTime4 = 13,
 		End,
 	};
 

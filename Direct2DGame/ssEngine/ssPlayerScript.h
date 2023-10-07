@@ -69,10 +69,13 @@ namespace ss
 
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);
+		void FireAuraCast();
 
 		void MpRecovery();
 
 		void SetInventory(class Inventory* inven) { mInventory = inven; }
+
+		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 
 	private:
 		static Vector3 mPlayerPos;
@@ -112,5 +115,6 @@ namespace ss
 		static UINT mSpellNum;
 
 		std::map<UINT, UINT> mColDirMap;
+		std::vector<class SkillSlot*> mSkillSlots;
 	};
 }

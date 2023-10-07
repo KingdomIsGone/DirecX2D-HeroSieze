@@ -3,20 +3,26 @@
 
 namespace ss
 {
-	class SkillSlot1 : public GameObject
+	class FireAura : public GameObject
 	{
 	public:
-		SkillSlot1();
-		~SkillSlot1();
+		FireAura();
+		~FireAura();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
+
+		float mDamage;
+		float mDuration;
+		UINT mStage;
+
+		class FireAuraScript* mMScript;
+		class Animator* mAnimator;
 	};
 }

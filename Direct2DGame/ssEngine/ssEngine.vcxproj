@@ -175,6 +175,8 @@
     <ClInclude Include="ssEnemyHpBarFill.h" />
     <ClInclude Include="ssEquipIndicator.h" />
     <ClInclude Include="ssEquipmentSlot.h" />
+    <ClInclude Include="ssFireAura.h" />
+    <ClInclude Include="ssFireAuraScript.h" />
     <ClInclude Include="ssFireBall.h" />
     <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssFireWall.h" />
@@ -212,7 +214,7 @@
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
-    <ClInclude Include="ssSkillSlot1.h" />
+    <ClInclude Include="ssSkillSlot.h" />
     <ClInclude Include="ssStartBtn.h" />
     <ClInclude Include="ssTitleScene.h" />
     <ClInclude Include="ssTorchBig.h" />
@@ -245,6 +247,8 @@
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
     <ClCompile Include="ssEquipIndicator.cpp" />
     <ClCompile Include="ssEquipmentSlot.cpp" />
+    <ClCompile Include="ssFireAura.cpp" />
+    <ClCompile Include="ssFireAuraScript.cpp" />
     <ClCompile Include="ssFireBall.cpp" />
     <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssFireWall.cpp" />
@@ -282,7 +286,7 @@
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
-    <ClCompile Include="ssSkillSlot1.cpp" />
+    <ClCompile Include="ssSkillSlot.cpp" />
     <ClCompile Include="ssStartBtn.cpp" />
     <ClCompile Include="ssTitleScene.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />

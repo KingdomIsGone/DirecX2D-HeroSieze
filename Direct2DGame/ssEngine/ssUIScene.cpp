@@ -27,7 +27,6 @@
 #include "ssMeteor.h"
 #include "FireWallPiece.h"
 #include "ssWallCollider.h"
-#include "ssSkillSlot1.h"
 #include "TestObject.h"
 #include "ssFontWrapper.h"
 
@@ -41,7 +40,7 @@
 #include "ssLegendBoots.h"
 #include "ssNormalBoots.h"
 #include "ssNormalHat.h"
-
+#include "ssFireAura.h"
 
 
 namespace ss
@@ -69,6 +68,7 @@ namespace ss
 		AddGameObject(eLayerType::Monster, deSkeleton);
 		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
 
+		//item
 		LegendStaff1* staff = new LegendStaff1();
 		AddGameObject(eLayerType::Item, staff);
 		staff->GetComponent<Transform>()->SetPosition(-1.0f, 0.0f, 1.02f);
@@ -266,9 +266,7 @@ namespace ss
 	}
 	void UIScene::UI_Setting()
 	{
-		SkillSlot1* skillSlot1 = new SkillSlot1();
-		skillSlot1->GetComponent<Transform>()->SetPosition(-2.01f, -1.54f, 1.0099f);
-		AddGameObject(eLayerType::UI, skillSlot1);
+		
 
 		//캐릭터 및 레벨창 z=1.01
 		{

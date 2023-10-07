@@ -15,7 +15,9 @@
 #include "ssCollisionManager.h"
 #include "ssMeteor.h"
 #include "ssFireWall.h"
+#include "ssFireAura.h"
 #include "Inventory.h"
+#include "ssSkillSlot.h"
 
 namespace ss
 {
@@ -99,9 +101,13 @@ namespace ss
 	{
 		if (Input::GetKeyDown(eKeyCode::One))
 			mSpellNum = 1;
-
-		if (Input::GetKeyDown(eKeyCode::two))
+		else if (Input::GetKeyDown(eKeyCode::two))
 			mSpellNum = 2;
+		else if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			mSpellNum = 3;
+			FireAuraCast();
+		}
 	}
 
 	void PlayerScript::Idle()
@@ -485,6 +491,7 @@ namespace ss
 		if (mCurMp < 250.f)
 			return;
 		mCurMp -= 250.f;
+		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
 		Meteor* meteor = new Meteor();
 		meteor->GetComponent<Transform>()->SetPosition(cursorPos);
@@ -496,10 +503,23 @@ namespace ss
 		if (mCurMp < 200.f)
 			return;
 		mCurMp -= 200.f;
+		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
 		FireWall* wall = new FireWall(cursorPos);
 		wall->GetComponent<Transform>()->SetPosition(cursorPos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::OtherObject, wall);
+	}
+
+	void PlayerScript::FireAuraCast()
+	{
+		if (mCurMp < 150.f)
+			return;
+		mCurMp -= 150.f;
+		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
+
+		FireAura* aura = new FireAura();
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, aura);
+		mSpellNum = 0;
 	}
 
 	void PlayerScript::MpRecovery()

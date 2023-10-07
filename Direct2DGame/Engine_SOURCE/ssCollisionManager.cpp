@@ -320,7 +320,14 @@ namespace ss
 			right->SetColDir(3);
 		}
 
-		if (RightCol || LeftCol || BottomCol || TopCol)
+		leftTempPos = Vector3::Transform(Vector3(0.0f, 0.0f, 0.0f), finalLeft);
+		vc = leftTempPos - rightTempPos;
+		vc.z = 0.0f;
+		centerDir = vc;
+
+		bool CenterCol = Intersect4_Sub(&finalLeft, &finalRight, arrLocalPos, centerDir);
+
+		if (RightCol || LeftCol || BottomCol || TopCol || CenterCol)
 			return true;
 
 		return false;

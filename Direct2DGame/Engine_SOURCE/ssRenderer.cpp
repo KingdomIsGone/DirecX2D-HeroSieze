@@ -90,6 +90,32 @@ namespace renderer
 		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"CoolTimeShader1");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"CoolTimeShader2");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"CoolTimeShader3");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"CoolTimeShader4");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"EffectAnimationShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region Sampler State
 		//Sampler State
@@ -315,10 +341,6 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 
-		// Debug Buffer custom
-		constantBuffer[(UINT)eCBType::Debug] = new ConstantBuffer(eCBType::Debug);
-		constantBuffer[(UINT)eCBType::Debug]->Create(sizeof(DebugCB));
-
 		//ParticleCB
 		constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
 		constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
@@ -331,6 +353,25 @@ namespace renderer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);
 
+		// Debug Buffer custom
+		constantBuffer[(UINT)eCBType::Debug] = new ConstantBuffer(eCBType::Debug);
+		constantBuffer[(UINT)eCBType::Debug]->Create(sizeof(DebugCB));
+
+		// CoolTime Buffer custom
+		constantBuffer[(UINT)eCBType::CoolTime] = new ConstantBuffer(eCBType::CoolTime);
+		constantBuffer[(UINT)eCBType::CoolTime]->Create(sizeof(CoolTimeCB));
+
+		// CoolTime Buffer custom
+		constantBuffer[(UINT)eCBType::CoolTime2] = new ConstantBuffer(eCBType::CoolTime2);
+		constantBuffer[(UINT)eCBType::CoolTime2]->Create(sizeof(CoolTimeCB2));
+
+		// CoolTime Buffer custom
+		constantBuffer[(UINT)eCBType::CoolTime3] = new ConstantBuffer(eCBType::CoolTime3);
+		constantBuffer[(UINT)eCBType::CoolTime3]->Create(sizeof(CoolTimeCB3));
+
+		// CoolTime Buffer custom
+		constantBuffer[(UINT)eCBType::CoolTime4] = new ConstantBuffer(eCBType::CoolTime4);
+		constantBuffer[(UINT)eCBType::CoolTime4]->Create(sizeof(CoolTimeCB4));
 	}
 
 	void LoadShader()
@@ -370,6 +411,31 @@ namespace renderer
 		std::shared_ptr<ParticleShader> psSystemShader = std::make_shared<ParticleShader>();
 		psSystemShader->Create(L"ParticleCS.hlsl", "main");
 		ss::Resources::Insert(L"ParticleSystemShader", psSystemShader);
+
+		shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"CoolTimePS.hlsl", "main");
+		ss::Resources::Insert(L"CoolTimeShader1", shader);
+
+		shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"CoolTimePS2.hlsl", "main");
+		ss::Resources::Insert(L"CoolTimeShader2", shader);
+
+		shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"CoolTimePS3.hlsl", "main");
+		ss::Resources::Insert(L"CoolTimeShader3", shader);
+
+		shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"CoolTimePS4.hlsl", "main");
+		ss::Resources::Insert(L"CoolTimeShader4", shader);
+
+		std::shared_ptr<Shader> effectAniShader = std::make_shared<Shader>();
+		effectAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		effectAniShader->Create(eShaderStage::PS, L"EffectAnimationPS.hlsl", "main");
+		ss::Resources::Insert(L"EffectAnimationShader", effectAniShader);
 
 		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
 		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
@@ -424,6 +490,13 @@ namespace renderer
 		material->SetShader(AnimationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimationMaterial", material);
+
+		std::shared_ptr<Shader> EffectAnimationShader
+			= Resources::Find<Shader>(L"EffectAnimationShader");
+		material = std::make_shared<Material>();
+		material->SetShader(EffectAnimationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"EffectAnimationMaterial", material);
 
 		std::shared_ptr<Shader> gridShader
 			= Resources::Find<Shader>(L"GridShader");
@@ -701,12 +774,16 @@ namespace renderer
 			Resources::Insert(L"ImmuneTextMater", spriteMateiral);
 		}
 
+		std::shared_ptr<Shader> CoolTimeShader1 = Resources::Find<Shader>(L"CoolTimeShader1");
+		std::shared_ptr<Shader> CoolTimeShader2 = Resources::Find<Shader>(L"CoolTimeShader2");
+		std::shared_ptr<Shader> CoolTimeShader3 = Resources::Find<Shader>(L"CoolTimeShader3");
+		std::shared_ptr<Shader> CoolTimeShader4 = Resources::Find<Shader>(L"CoolTimeShader4");
 		//스킬 아이콘 메테오
 		{
 			std::shared_ptr<Texture> MeteorIconTex
 				= Resources::Load<Texture>(L"MeteorIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\MeteorIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetShader(CoolTimeShader1);
 			spriteMaterial->SetTexture(MeteorIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"MeteorIconMater", spriteMaterial);
@@ -716,7 +793,7 @@ namespace renderer
 			std::shared_ptr<Texture> FireWallIconTex
 				= Resources::Load<Texture>(L"FireWallIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireWallIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetShader(CoolTimeShader2);
 			spriteMaterial->SetTexture(FireWallIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"FireWallMater", spriteMaterial);
@@ -1014,10 +1091,6 @@ namespace renderer
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"StartBtn1Mater", spriteMaterial);
 		}
-
-		
-
-
 	}
 
 	void Initialize()

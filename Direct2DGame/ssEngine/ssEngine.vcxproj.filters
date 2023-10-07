@@ -131,7 +131,7 @@
     <ClCompile Include="ssWallCollider.cpp">
       <Filter>Contents\Object\MapObject\WallCollider</Filter>
     </ClCompile>
-    <ClCompile Include="ssSkillSlot1.cpp">
+    <ClCompile Include="ssSkillSlot.cpp">
       <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
@@ -205,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="ssPlayerMpBarFill.cpp">
       <Filter>Contents\Object\UI\Bar\PlayerMpBarFill</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireAura.cpp">
+      <Filter>Contents\Object\Player\Skill\FireAura</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFireAuraScript.cpp">
+      <Filter>Contents\Object\Player\Skill\FireAura</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,7 +347,7 @@
     <ClInclude Include="ssWallCollider.h">
       <Filter>Contents\Object\MapObject\WallCollider</Filter>
     </ClInclude>
-    <ClInclude Include="ssSkillSlot1.h">
+    <ClInclude Include="ssSkillSlot.h">
       <Filter>Contents\Object\UI\SkillSlot</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
@@ -415,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="ssPlayerMpBarFill.h">
       <Filter>Contents\Object\UI\Bar\PlayerMpBarFill</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireAura.h">
+      <Filter>Contents\Object\Player\Skill\FireAura</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFireAuraScript.h">
+      <Filter>Contents\Object\Player\Skill\FireAura</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +588,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Bar\PlayerMpBarFill">
       <UniqueIdentifier>{abb548db-dac9-4124-ba70-81e521e81e9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill\FireAura">
+      <UniqueIdentifier>{a300ab67-f502-4b6c-a3fc-be8aa79d57dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
