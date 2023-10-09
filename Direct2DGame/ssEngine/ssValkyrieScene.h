@@ -14,7 +14,14 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-	private:
+		virtual void OnEnter() override;
+		virtual void OnExit() override;
 
+	private:
+		class Camera* mMainCamera;
+		class Camera* mPlayerCamera;
+		class Camera* mUICamera;
+		class Camera* mCursorCamera;
+		class Camera* mInventoryCamera;
 	};
 }

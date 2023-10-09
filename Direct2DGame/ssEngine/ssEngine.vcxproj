@@ -224,7 +224,9 @@
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
+    <ClInclude Include="ssValkyrie.h" />
     <ClInclude Include="ssValkyrieScene.h" />
+    <ClInclude Include="ssValkyrieScript.h" />
     <ClInclude Include="ssWallCollider.h" />
     <ClInclude Include="ssWoodsField.h" />
     <ClInclude Include="TestObject.h" />
@@ -300,7 +302,9 @@
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
     <ClCompile Include="ssPlayScene.cpp" />
+    <ClCompile Include="ssValkyrie.cpp" />
     <ClCompile Include="ssValkyrieScene.cpp" />
+    <ClCompile Include="ssValkyrieScript.cpp" />
     <ClCompile Include="ssWallCollider.cpp" />
     <ClCompile Include="ssWoodsField.cpp" />
     <ClCompile Include="TestObject.cpp" />

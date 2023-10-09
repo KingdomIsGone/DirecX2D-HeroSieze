@@ -95,9 +95,6 @@
     <ClCompile Include="ssDesertTownScene.cpp">
       <Filter>Contents\Scene\ETC</Filter>
     </ClCompile>
-    <ClCompile Include="ssValkyrieScene.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
     <ClCompile Include="ssWoodsField.cpp">
       <Filter>Contents\Scene\ETC</Filter>
     </ClCompile>
@@ -221,6 +218,15 @@
     <ClCompile Include="ssHydraScript.cpp">
       <Filter>Contents\Object\Player\Skill\Hydra</Filter>
     </ClCompile>
+    <ClCompile Include="ssValkyrie.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValkyrieScene.cpp">
+      <Filter>Contents\Scene\BossRoomValkyrie</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValkyrieScript.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -318,9 +324,6 @@
       <Filter>Contents\Scene\ETC</Filter>
     </ClInclude>
     <ClInclude Include="ssDesertTownScene.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssValkyrieScene.h">
       <Filter>Contents\Scene\ETC</Filter>
     </ClInclude>
     <ClInclude Include="ssWoodsField.h">
@@ -445,6 +448,15 @@
     </ClInclude>
     <ClInclude Include="ssHydraScript.h">
       <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValkyrie.h">
+      <Filter>Contents\Object\Boss\Valkyrie</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValkyrieScene.h">
+      <Filter>Contents\Scene\BossRoomValkyrie</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValkyrieScript.h">
+      <Filter>Contents\Object\Boss\Valkyrie</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -612,6 +624,12 @@
     </Filter>
     <Filter Include="Contents\Object\Player\Skill\Hydra">
       <UniqueIdentifier>{8ef9d5ae-f0c0-439e-97c1-238ffee4bace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie">
+      <UniqueIdentifier>{7204153d-59ab-4f1b-b523-097ff0ff2155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\BossRoomValkyrie">
+      <UniqueIdentifier>{dc2de3a8-9b33-44bf-be04-8658542076f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

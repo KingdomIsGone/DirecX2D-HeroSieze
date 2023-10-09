@@ -29,7 +29,6 @@ namespace ss
 		//SceneManager::CreateScene<DesertFieldScene>(L"DesertFieldScene");
 		//SceneManager::CreateScene<DesertDungeon1>(L"DesertDungeon1");
 		//SceneManager::CreateScene<WoodsField>(L"WoodsField");
-		//SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
 		//SceneManager::CreateScene<DesertTownScene>(L"DesertTownScene");
 		//SceneManager::CreateScene<DesertDungeon2>(L"DesertDungeon2");
 		//SceneManager::CreateScene<DesertBossRoom>(L"DesertBossRoom");
@@ -37,5 +36,6 @@ namespace ss
 		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<UIScene>(L"UIScene");
+		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
 	}
 }

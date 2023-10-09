@@ -69,6 +69,7 @@ namespace ss
 		AddGameObject(eLayerType::Monster, deSkeleton);
 		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
 
+
 		//item
 		LegendStaff1* staff = new LegendStaff1();
 		AddGameObject(eLayerType::Item, staff);
