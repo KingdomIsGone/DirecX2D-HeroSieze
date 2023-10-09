@@ -8,6 +8,7 @@ namespace ss
 {
 	SkillSlot::SkillSlot()
 		: mCoolPercent(0.f)
+		, mCoolSpeed(1.f)
 	{
 		mMeshRenderer = AddComponent<MeshRenderer>();
 		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -28,7 +29,7 @@ namespace ss
 
 		if (mOnCool)
 		{
-			mCoolPercent -= 1.f * Time::DeltaTime();
+			mCoolPercent -= mCoolSpeed * Time::DeltaTime();
 
 			if (mCoolPercent <= 0.f)
 			{

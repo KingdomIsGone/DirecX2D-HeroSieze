@@ -33,7 +33,9 @@ namespace ss
 			other->GetOwner()->SetChangeHpValue(-mDamage);
 		}
 
-		if (other->GetCollideType() != eCollideType::Player)
+		if (other->GetCollideType() != eCollideType::Player 
+			&& other->GetCollideType() != eCollideType::SpecialMonster
+			&& other->GetCollideType() != eCollideType::Sensor)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
 		}

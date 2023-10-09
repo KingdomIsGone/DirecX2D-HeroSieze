@@ -70,6 +70,7 @@ namespace ss
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);
 		void FireAuraCast();
+		void HydraCast(Vector3 cursorPos);
 
 		void MpRecovery();
 

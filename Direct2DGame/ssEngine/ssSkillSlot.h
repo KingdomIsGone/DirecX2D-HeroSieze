@@ -20,6 +20,7 @@ namespace ss
 		
 		void SetMater(std::wstring name);
 		void SetSlotNum(UINT num) { mSlotNum = num; }
+		void SetCoolSpeed(float speed) { mCoolSpeed = speed; }
 
 	private:
 		Transform* mTransform;
@@ -27,6 +28,7 @@ namespace ss
 		class MeshRenderer* mMeshRenderer;
 
 		float mCoolPercent;
+		float mCoolSpeed;
 		bool mOnCool;
 		std::wstring mMaterName;
 		UINT mSlotNum;

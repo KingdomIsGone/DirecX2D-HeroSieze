@@ -74,8 +74,10 @@ namespace ss::enums
 	{
 		Player,
 		NormalMonster,
+		SpecialMonster,
 		Projectile,
 		Item,
+		Sensor,
 	};
 
 	enum class eItemGrade

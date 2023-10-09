@@ -799,6 +799,27 @@ namespace renderer
 			Resources::Insert(L"FireWallMater", spriteMaterial);
 		}
 
+		//스킬 icon FireAura
+		{
+			std::shared_ptr<Texture>FireAuraIconTex
+				= Resources::Load<Texture>(L"FireAuraIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireAuraIcon.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(CoolTimeShader3);
+			spriteMaterial->SetTexture(FireAuraIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"FireAuraIconMater", spriteMaterial);
+		}
+		//스킬 icon Hydra
+		{
+			std::shared_ptr<Texture>HydraIconTex
+				= Resources::Load<Texture>(L"HydraIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\HydraIcon.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetTexture(HydraIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"HydraIconMater", spriteMaterial);
+		}
+
 		//인벤토리
 		{
 			{

@@ -56,11 +56,12 @@ float4 main(VSOut In) : SV_TARGET
         color.w = 0.0f;
     else
     {
-        color.x += 0.1f;
+        color.x += 0.5f;
         color.y += 0.1f;
         color.z += 0.1f;
         color.w = 0.8f;
     }
+    
     
     if (color.w <= 0.0f)
         discard;

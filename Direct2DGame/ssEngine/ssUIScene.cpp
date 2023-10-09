@@ -41,6 +41,7 @@
 #include "ssNormalBoots.h"
 #include "ssNormalHat.h"
 #include "ssFireAura.h"
+#include "ssHydra.h"
 
 
 namespace ss
@@ -113,7 +114,11 @@ namespace ss
 		FireWallPiece* Fpiece = new FireWallPiece();
 		AddGameObject(eLayerType::Projectile, Fpiece);
 		Fpiece->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
-		
+
+		Hydra* hydra = new Hydra();
+		AddGameObject(eLayerType::Monster, hydra);
+		hydra->GetComponent<Transform>()->SetPosition(1.5f, 0.0f, 1.01f);
+
 		TestObject* TestObj = new TestObject(nullptr);
 		AddGameObject(eLayerType::Projectile, TestObj);
 		TestObj->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.01f);

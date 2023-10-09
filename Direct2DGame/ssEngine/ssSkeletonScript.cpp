@@ -219,7 +219,8 @@ namespace ss
 			mState = eState::Attack;
 
 		if (other->GetCollideType() == eCollideType::Player 
-			|| other->GetCollideType() == eCollideType::NormalMonster)
+			|| other->GetCollideType() == eCollideType::NormalMonster
+			|| other->GetCollideType() == eCollideType::SpecialMonster)
 		{
 			UINT colNum = other->GetColDir();
 			UINT colID = other->GetColliderID();
@@ -251,7 +252,8 @@ namespace ss
 			mState = eState::Chase;
 
 		if (other->GetCollideType() == eCollideType::Player
-			|| other->GetCollideType() == eCollideType::NormalMonster)
+			|| other->GetCollideType() == eCollideType::NormalMonster
+			|| other->GetCollideType() == eCollideType::SpecialMonster)
 		{
 			UINT colNum = mColDirMap[other->GetColliderID()];
 

@@ -182,6 +182,9 @@
     <ClInclude Include="ssFireWall.h" />
     <ClInclude Include="ssFireWallPieceScript.h" />
     <ClInclude Include="ssGridScript.h" />
+    <ClInclude Include="ssHydra.h" />
+    <ClInclude Include="ssHydraScript.h" />
+    <ClInclude Include="ssHydraSensor.h" />
     <ClInclude Include="ssImmuneText.h" />
     <ClInclude Include="ssIndicator.h" />
     <ClInclude Include="ssDamageScript.h" />
@@ -254,6 +257,9 @@
     <ClCompile Include="ssFireWall.cpp" />
     <ClCompile Include="ssFireWallPieceScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
+    <ClCompile Include="ssHydra.cpp" />
+    <ClCompile Include="ssHydraScript.cpp" />
+    <ClCompile Include="ssHydraSensor.cpp" />
     <ClCompile Include="ssImmuneText.cpp" />
     <ClCompile Include="ssIndicator.cpp" />
     <ClCompile Include="ssDamageScript.cpp" />

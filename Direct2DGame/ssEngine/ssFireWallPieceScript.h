@@ -1,9 +1,4 @@
 #pragma once
-class FireWallPieceScript
-{
-};
-
-#pragma once
 //#include "ssScript.h"
 #include "..\Engine_SOURCE\ssScript.h"
 #include "..\Engine_SOURCE\ssAnimator.h"

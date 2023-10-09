@@ -212,6 +212,15 @@
     <ClCompile Include="ssFireAuraScript.cpp">
       <Filter>Contents\Object\Player\Skill\FireAura</Filter>
     </ClCompile>
+    <ClCompile Include="ssHydra.cpp">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClCompile>
+    <ClCompile Include="ssHydraSensor.cpp">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClCompile>
+    <ClCompile Include="ssHydraScript.cpp">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -428,6 +437,15 @@
     <ClInclude Include="ssFireAuraScript.h">
       <Filter>Contents\Object\Player\Skill\FireAura</Filter>
     </ClInclude>
+    <ClInclude Include="ssHydra.h">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClInclude>
+    <ClInclude Include="ssHydraSensor.h">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClInclude>
+    <ClInclude Include="ssHydraScript.h">
+      <Filter>Contents\Object\Player\Skill\Hydra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -591,6 +609,9 @@
     </Filter>
     <Filter Include="Contents\Object\Player\Skill\FireAura">
       <UniqueIdentifier>{a300ab67-f502-4b6c-a3fc-be8aa79d57dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill\Hydra">
+      <UniqueIdentifier>{8ef9d5ae-f0c0-439e-97c1-238ffee4bace}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

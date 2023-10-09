@@ -3,16 +3,20 @@
 
 namespace ss
 {
-	class FireAura : public GameObject
+	class Hydra : public GameObject
 	{
 	public:
-		FireAura();
-		~FireAura();
+		Hydra();
+		~Hydra();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
+
+		
+
+		class Animator* GetAnimator() { return mAnimator; }
 
 	private:
 		Transform* mTransform;
@@ -20,8 +24,10 @@ namespace ss
 
 		float mDamage;
 		float mDuration;
+		UINT mStage;
 
 		class FireAuraScript* mMScript;
 		class Animator* mAnimator;
+		class HydraSensor* mSensor;
 	};
 }

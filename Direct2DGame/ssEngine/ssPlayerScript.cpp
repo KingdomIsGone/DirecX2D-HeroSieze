@@ -18,6 +18,7 @@
 #include "ssFireAura.h"
 #include "Inventory.h"
 #include "ssSkillSlot.h"
+#include "ssHydra.h"
 
 namespace ss
 {
@@ -108,6 +109,8 @@ namespace ss
 			mSpellNum = 3;
 			FireAuraCast();
 		}
+		else if (Input::GetKeyDown(eKeyCode::four))
+			mSpellNum = 4;
 	}
 
 	void PlayerScript::Idle()
@@ -305,6 +308,12 @@ namespace ss
 		else if (!mShootOnce && mSpellNum == 2)
 		{
 			FireWalls(mCursorPos);
+			mShootOnce = true;
+			mSpellNum = 0;
+		}
+		else if (!mShootOnce && mSpellNum == 4)
+		{
+			HydraCast(mCursorPos);
 			mShootOnce = true;
 			mSpellNum = 0;
 		}
@@ -522,6 +531,18 @@ namespace ss
 		mSpellNum = 0;
 	}
 
+	void PlayerScript::HydraCast(Vector3 cursorPos)
+	{
+		if (mCurMp < 300.f)
+			return;
+		mCurMp -= 300.f;
+		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
+
+		Hydra* hydra = new Hydra();
+		hydra->GetComponent<Transform>()->SetPosition(cursorPos);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Monster, hydra);
+	}
+
 	void PlayerScript::MpRecovery()
 	{
 		if (mCurMp < mFullMp)
@@ -537,7 +558,8 @@ namespace ss
 	{
 		other->SetColIsPlayer(true);
 		other->SetPlayerCol(GetOwner()->GetComponent<Collider2D>());
-		if (other->GetCollideType() == eCollideType::NormalMonster)
+		if (other->GetCollideType() == eCollideType::NormalMonster
+			|| other->GetCollideType() == eCollideType::SpecialMonster)
 		{
 			UINT colNum = other->GetColDir();
 			UINT colID = other->GetColliderID();
@@ -566,7 +588,8 @@ namespace ss
 
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
-		if (other->GetCollideType() == eCollideType::NormalMonster)
+		if (other->GetCollideType() == eCollideType::NormalMonster
+			|| other->GetCollideType() == eCollideType::SpecialMonster)
 		{
 			UINT colNum = mColDirMap[other->GetColliderID()];
 

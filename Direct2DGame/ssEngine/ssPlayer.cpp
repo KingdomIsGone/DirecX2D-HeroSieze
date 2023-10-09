@@ -361,24 +361,28 @@ namespace ss
 			skillSlot1->SetMater(L"MeteorIconMater");
 			skillSlot1->SetSlotNum(0);
 			skillSlot1->GetComponent<Transform>()->SetPosition(-2.02f, -1.54f, 1.0099f);
+			skillSlot1->SetCoolSpeed(0.2f);
 			AddOtherGameObject(skillSlot1, eLayerType::UI);
 
 			SkillSlot* skillSlot2 = new SkillSlot();
 			skillSlot2->SetMater(L"FireWallMater");
 			skillSlot2->SetSlotNum(1);
 			skillSlot2->GetComponent<Transform>()->SetPosition(-1.76f, -1.54f, 1.0099f);
+			skillSlot2->SetCoolSpeed(0.3f);
 			AddOtherGameObject(skillSlot2, eLayerType::UI);
 
 			SkillSlot* skillSlot3 = new SkillSlot();
-			skillSlot3->SetMater(L"FireWallMater");
+			skillSlot3->SetMater(L"FireAuraIconMater");
 			skillSlot3->SetSlotNum(2);
 			skillSlot3->GetComponent<Transform>()->SetPosition(-1.50f, -1.54f, 1.0099f);
+			skillSlot3->SetCoolSpeed(0.6f);
 			AddOtherGameObject(skillSlot3, eLayerType::UI);
 
 			SkillSlot* skillSlot4 = new SkillSlot();
-			skillSlot4->SetMater(L"FireWallMater");
+			skillSlot4->SetMater(L"HydraIconMater");
 			skillSlot4->SetSlotNum(3);
 			skillSlot4->GetComponent<Transform>()->SetPosition(-1.24f, -1.54f, 1.0099f);
+			skillSlot4->SetCoolSpeed(0.2f);
 			AddOtherGameObject(skillSlot4, eLayerType::UI);
 
 			mScript->PushBackSkillSlot(skillSlot1);

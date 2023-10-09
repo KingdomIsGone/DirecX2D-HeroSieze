@@ -6,14 +6,12 @@
 #include "ssCollider2D.h"
 #include "ssTime.h"
 #include "ssFireAuraScript.h"
-//#include "ssPlayerScript.h"
 
 namespace ss
 {
 	FireAura::FireAura()
 		: mDamage(500.0f)
 		, mDuration(6.5f)
-		, mStage(0)
 	{
 		SetName(L"FireAura");
 		mMScript = AddComponent<FireAuraScript>();
@@ -39,7 +37,7 @@ namespace ss
 		mAnimator->Create(L"FireAura", FireAuraTex, Vector2(0.0f, 0.0f), Vector2(85.f, 85.f), 15);
 	
 
-		mTransform->SetScale(Vector3(5.f, 5.f, 1.0));
+		mTransform->SetScale(Vector3(6.f, 6.f, 1.0));
 
 		mAnimator->PlayAnimation(L"FireAura", true);
 	}
