@@ -5,6 +5,7 @@
 #include "ssAnimator.h"
 #include "ssCollider2D.h"
 #include "ssValkyrieScript.h"
+#include "ssValEffector.h"
 
 namespace ss
 {
@@ -14,6 +15,8 @@ namespace ss
 		, mTransformAniStage(0)
 	{
 		SetName(L"Valkyrie");
+
+		mTransform = GetComponent<Transform>();
 
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
@@ -125,6 +128,11 @@ namespace ss
 		//mAnimator->PlayAnimation(L"ValkThrowUpRight", true);
 
 		mScript = AddComponent<ValkyrieScript>();
+
+		/*ValEffector* effector = new ValEffector();
+		effector->GetComponent<Transform>()->SetParent(mTransform);
+		AddOtherGameObject(effector, eLayerType::Projectile);*/
+
 	}
 
 	Valkyrie::~Valkyrie()

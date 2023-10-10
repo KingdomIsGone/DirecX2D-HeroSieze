@@ -20,8 +20,9 @@
 #define CBSLOT_DEBUG            9
 #define CBSLOT_COOLTIME         10
 #define CBSLOT_COOLTIME2        11
-#define CBSLOT_COOLTIME2        12
-#define CBSLOT_COOLTIME2        13
+#define CBSLOT_COOLTIME3        12
+#define CBSLOT_COOLTIME4        13
+#define CBSLOT_BOSSEFFECT       14
 
 //#define CBSLOT_PARTICLE			1
 
@@ -51,6 +52,7 @@ namespace ss::graphics
 		CoolTime2 = 11,
 		CoolTime3 = 12,
 		CoolTime4 = 13,
+		BossEffect = 14,
 		End,
 	};
 

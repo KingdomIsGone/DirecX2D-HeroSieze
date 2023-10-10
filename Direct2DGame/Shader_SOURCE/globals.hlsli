@@ -45,6 +45,13 @@ cbuffer CoolTime4 : register(b13) //custom
 {
     float CoolTimePercent4;
 }
+cbuffer BossEffect : register(b14) //custom
+{
+    float Radd;
+    float Gadd;
+    float Badd;
+    float A;
+}
 
 
 cbuffer DebugMeshColor : register(b9)  //custom

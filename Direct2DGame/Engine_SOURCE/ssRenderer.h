@@ -76,7 +76,13 @@ namespace renderer
 	{
 		float coolTimePercent;
 	};
-
+	CBUFFER(BossEffectCB, CBSLOT_COOLTIME)  //custom
+	{
+		float Radd;
+		float Gadd;
+		float Badd;
+		float A;
+	};
 
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 

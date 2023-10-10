@@ -225,7 +225,10 @@
       <Filter>Contents\Scene\BossRoomValkyrie</Filter>
     </ClCompile>
     <ClCompile Include="ssValkyrieScript.cpp">
-      <Filter>Contents\Object\Boss\Valkyrie</Filter>
+      <Filter>Contents\Object\Boss\Valkyrie\ValScript</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValEffector.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -456,7 +459,10 @@
       <Filter>Contents\Scene\BossRoomValkyrie</Filter>
     </ClInclude>
     <ClInclude Include="ssValkyrieScript.h">
-      <Filter>Contents\Object\Boss\Valkyrie</Filter>
+      <Filter>Contents\Object\Boss\Valkyrie\ValScript</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValEffector.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -630,6 +636,12 @@
     </Filter>
     <Filter Include="Contents\Scene\BossRoomValkyrie">
       <UniqueIdentifier>{dc2de3a8-9b33-44bf-be04-8658542076f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffector">
+      <UniqueIdentifier>{810dc9b9-6247-407c-9aa6-5e8f7c0d1174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValScript">
+      <UniqueIdentifier>{7b640eaf-4425-48da-87b6-e262c47d98a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
