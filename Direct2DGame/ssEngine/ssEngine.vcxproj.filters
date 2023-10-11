@@ -230,11 +230,17 @@
     <ClCompile Include="ssValEffector.cpp">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClCompile>
-    <ClCompile Include="ssValThunderEffect.cpp">
-      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
-    </ClCompile>
     <ClCompile Include="ssThunderPiece.cpp">
-      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\Assault</Filter>
+    </ClCompile>
+    <ClCompile Include="ssValThunderEffect.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\Assault</Filter>
+    </ClCompile>
+    <ClCompile Include="ssBigLightning.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
+    </ClCompile>
+    <ClCompile Include="ssBigLightningScript.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -470,11 +476,17 @@
     <ClInclude Include="ssValEffector.h">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClInclude>
-    <ClInclude Include="ssValThunderEffect.h">
-      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
-    </ClInclude>
     <ClInclude Include="ssThunderPiece.h">
-      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\Assault</Filter>
+    </ClInclude>
+    <ClInclude Include="ssValThunderEffect.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\Assault</Filter>
+    </ClInclude>
+    <ClInclude Include="ssBigLightning.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
+    </ClInclude>
+    <ClInclude Include="ssBigLightningScript.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -657,6 +669,12 @@
     </Filter>
     <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect">
       <UniqueIdentifier>{2449a06d-f95b-44cf-af11-25af44f90f5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\Assault">
+      <UniqueIdentifier>{d64eb76a-ee34-4438-a1b5-35e06be4c84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\BigLightning">
+      <UniqueIdentifier>{e64742ee-0b93-4017-8980-28b217aafd7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

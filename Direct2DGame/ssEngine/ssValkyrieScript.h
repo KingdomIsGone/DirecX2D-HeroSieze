@@ -53,6 +53,7 @@ namespace ss
 		void WalkAni();
 		void LightningRush();
 		void LightningAssault();
+		void BigLightningCast();
 
 		void SetBossHpFill(BossHpFill* fill) { mBossHpFill = fill; }
 
@@ -72,6 +73,7 @@ namespace ss
 		float mSpeed;
 		float mAgroDistance;
 
+		Transform* mTransform;
 		Vector3 mPos;
 		Vector3 mPlayerPos;
 
@@ -87,6 +89,10 @@ namespace ss
 
 		//Assault
 		UINT mEffectCount;
+
+		//BigLightning
+		UINT mBigStage;
+		bool mBigOnce;
 
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;

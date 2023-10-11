@@ -52,6 +52,13 @@ cbuffer BossEffect : register(b8) //custom
     float Badd;
     float A;
 }
+cbuffer BossEffect2 : register(b7) //custom
+{
+    float Radd2;
+    float Gadd2;
+    float Badd2;
+    float A2;
+}
 
 
 cbuffer DebugMeshColor : register(b9)  //custom

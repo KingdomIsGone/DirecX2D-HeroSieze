@@ -19,6 +19,8 @@
 #include "ssPlayerCameraScript.h"
 #include "ssValkyrie.h"
 
+#include "ssBigLightning.h"
+
 namespace ss
 {
 	ValkyrieScene::ValkyrieScene()
@@ -162,6 +164,10 @@ namespace ss
 		Valkyrie* Boss = new Valkyrie();
 		Boss->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 1.0f, 1.0f));
 		AddGameObject(eLayerType::Monster, Boss);
+
+		BigLightning* big = new BigLightning();
+		big->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 0.0f, 1.f));
+		AddGameObject(eLayerType::EnemyProjectile, big);
 
 	}
 

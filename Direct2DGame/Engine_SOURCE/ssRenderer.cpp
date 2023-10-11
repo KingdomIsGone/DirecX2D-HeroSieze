@@ -121,6 +121,11 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = ss::Resources::Find<Shader>(L"BossEffectShader2");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region Sampler State
 		//Sampler State
@@ -381,6 +386,10 @@ namespace renderer
 		// BossEffect Buffer custom
 		constantBuffer[(UINT)eCBType::BossEffect] = new ConstantBuffer(eCBType::BossEffect);
 		constantBuffer[(UINT)eCBType::BossEffect]->Create(sizeof(BossEffectCB));
+
+		// BossEffect2 Buffer custom
+		constantBuffer[(UINT)eCBType::BossEffect2] = new ConstantBuffer(eCBType::BossEffect2);
+		constantBuffer[(UINT)eCBType::BossEffect2]->Create(sizeof(BossEffectCB2));
 	}
 
 	void LoadShader()
@@ -451,6 +460,11 @@ namespace renderer
 		bossEffectShader->Create(eShaderStage::PS, L"BossEffectPS.hlsl", "main");
 		ss::Resources::Insert(L"BossEffectShader", bossEffectShader);
 
+		std::shared_ptr<Shader> bossEffectShader2 = std::make_shared<Shader>();
+		bossEffectShader2->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		bossEffectShader2->Create(eShaderStage::PS, L"BossEffectPS2.hlsl", "main");
+		ss::Resources::Insert(L"BossEffectShader2", bossEffectShader2);
+
 		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
 		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
 		paritcleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
@@ -518,6 +532,13 @@ namespace renderer
 		material->SetShader(BossEffectShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BossEffectMaterial", material);
+
+		std::shared_ptr<Shader> BossEffectShader2
+			= Resources::Find<Shader>(L"BossEffectShader2");
+		material = std::make_shared<Material>();
+		material->SetShader(BossEffectShader2);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BossEffectMaterial2", material);
 
 		std::shared_ptr<Shader> gridShader
 			= Resources::Find<Shader>(L"GridShader");

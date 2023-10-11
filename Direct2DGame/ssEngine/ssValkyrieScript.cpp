@@ -15,6 +15,7 @@
 #include "ssValThunderEffect.h"
 #include "ssValkyrie.h"
 #include "ssPlayer.h"
+#include "ssBigLightning.h"
 
 namespace ss
 {
@@ -28,6 +29,7 @@ namespace ss
 		, mRushDistRow(4.6f)
 		, mRushSpeed(4.5f)
 		, mEffectCount(0)
+		, mBigStage(0)
 	{
 	}
 	ValkyrieScript::~ValkyrieScript()
@@ -40,8 +42,9 @@ namespace ss
 
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+		mTransform = GetOwner()->GetComponent<Transform>();
 
-		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		mPos = mTransform->GetPosition();
 
 		mDirState = eDirState::Down;
 	}
@@ -66,7 +69,7 @@ namespace ss
 
 		if (Input::GetKey(eKeyCode::P))
 		{
-			LightningAssault();
+			BigLightningCast();
 		}
 
 	}
@@ -652,6 +655,54 @@ namespace ss
 			}
 
 		}
+	}
+
+	void ValkyrieScript::BigLightningCast()
+	{
+		if (mBigStage == 0)
+		{
+			CalDir(mPlayerPos);
+			WalkAni();
+
+			Vector3 CastPos = Vector3(mPlayerPos.x, mPlayerPos.y + 1.f, mPlayerPos.z);
+			float Distance = math::GetDistance(mPos, CastPos);
+
+			if (Distance > 0.05f)
+			{
+				if (mPos.x < CastPos.x)
+					mPos.x += 4.f * Time::DeltaTime();
+				else
+					mPos.x -= 4.f * Time::DeltaTime();
+
+				if (mPos.y < CastPos.y)
+					mPos.y += 4.f * Time::DeltaTime();
+				else
+					mPos.y -= 4.f * Time::DeltaTime();
+
+				mTransform->SetPosition(mPos);
+			}
+			else
+				mBigStage = 1;
+
+		}
+		else if (mBigStage == 1)
+		{
+			mAnimator->PlayAnimation(L"ValkCast", true);
+			mPlayerPos = PlayerScript::GetPlayerPos();
+			BigLightning* big = new BigLightning();
+			big->SetPosition(mPlayerPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, big);
+
+			mBigStage = 2;
+		}
+		else if (mBigStage == 2)
+		{
+			mBigStage = 3;
+			//mState=
+		}
+
+		
+		
 	}
 
 	

@@ -34,6 +34,8 @@ namespace ss
 			std::shared_ptr<Texture> LightningBlankTex
 				= Resources::Load<Texture>(L"LightningBlankTex", L"..\\Resources\\Texture\\Blank.png");
 			mAnimator->Create(L"LightningBlank", LightningBlankTex, Vector2(0.0f, 0.0f), Vector2(1.f, 1.f), 1);
+
+			
 		}
 
 		
@@ -50,11 +52,13 @@ namespace ss
 	{
 		GameObject::Update();
 
-		mValkPos = mValk->GetComponent<Transform>()->GetPosition();
+		/*mValkPos = mValk->GetComponent<Transform>()->GetPosition();
 		mValkPos.z -= 0.01f;
 		mValkPos += mOffset;
 		mTransform->SetPosition(mValkPos);
-		
+		*/
+		mTransform->SetPosition(Vector3(0.0f, 0.0f, -11.f));
+
 		if (mAnimator->GetActiveAnimation() != nullptr 
 			&& mAnimator->GetActiveAnimation()->IsComplete())
 			mAnimator->PlayAnimation(L"LightningBlank", true);
