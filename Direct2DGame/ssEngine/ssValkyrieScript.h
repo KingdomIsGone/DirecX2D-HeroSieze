@@ -32,6 +32,7 @@ namespace ss
 		{
 			Normal,
 			Rush,
+			Assault,
 		};
 
 		ValkyrieScript();
@@ -51,6 +52,7 @@ namespace ss
 		void Chase();
 		void WalkAni();
 		void LightningRush();
+		void LightningAssault();
 
 		void SetBossHpFill(BossHpFill* fill) { mBossHpFill = fill; }
 
@@ -58,6 +60,8 @@ namespace ss
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
 
+		void SetEffector(class ValEffector* effector) { mEffector = effector; }
+		void SetValk(class Valkyrie* valk) { mValk = valk; }
 
 	private:
 		eState mState;
@@ -81,9 +85,14 @@ namespace ss
 		float mRushDistCol;
 		float mRushSpeed;
 
+		//Assault
+		UINT mEffectCount;
 
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;
 		class Collider2D* mCollider;
+		class ValEffector* mEffector;
+		class Valkyrie* mValk;
+		class ValThunderEffect* mThunderEffect;
 	};
 }

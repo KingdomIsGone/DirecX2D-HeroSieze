@@ -28,5 +28,6 @@ namespace ss
 
 		float mPrevHp;
 		float mCurHp;
+
 	};
 }

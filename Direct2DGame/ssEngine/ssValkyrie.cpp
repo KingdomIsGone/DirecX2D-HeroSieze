@@ -7,6 +7,7 @@
 #include "ssValkyrieScript.h"
 #include "ssValEffector.h"
 
+
 namespace ss
 {
 	Valkyrie::Valkyrie()
@@ -76,19 +77,19 @@ namespace ss
 			//Melee
 			std::shared_ptr<Texture> ValkAtkDownTex
 				= Resources::Load<Texture>(L"ValkAtkDownTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkDown.png");
-			mAnimator->Create(L"ValkAtkDown", ValkAtkDownTex, Vector2(0.0f, 0.0f), Vector2(92.f, 107.0f), 6);
+			mAnimator->Create(L"ValkAtkDown", ValkAtkDownTex, Vector2(0.0f, 0.0f), Vector2(92.f, 107.0f), 6, Vector2::Zero, 0.02f);
 
 			std::shared_ptr<Texture> ValkAtkLeftTex
 				= Resources::Load<Texture>(L"ValkAtkLeftTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkLeft.png");
-			mAnimator->Create(L"ValkAtkLeft", ValkAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6);
+			mAnimator->Create(L"ValkAtkLeft", ValkAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
 
 			std::shared_ptr<Texture> ValkAtkRightTex
 				= Resources::Load<Texture>(L"ValkAtkRightTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkRight.png");
-			mAnimator->Create(L"ValkAtkRight", ValkAtkRightTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6);
+			mAnimator->Create(L"ValkAtkRight", ValkAtkRightTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
 
 			std::shared_ptr<Texture> ValkAtkUpTex
 				= Resources::Load<Texture>(L"ValkAtkUpTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkUp.png");
-			mAnimator->Create(L"ValkAtkUp", ValkAtkUpTex, Vector2(0.0f, 0.0f), Vector2(105.f, 92.0f), 6);
+			mAnimator->Create(L"ValkAtkUp", ValkAtkUpTex, Vector2(0.0f, 0.0f), Vector2(105.f, 92.0f), 6, Vector2::Zero, 0.02f);
 
 			//Throw
 			std::shared_ptr<Texture> ValkThrowDownTex
@@ -125,14 +126,15 @@ namespace ss
 		
 		}
 
-		//mAnimator->PlayAnimation(L"ValkThrowUpRight", true);
+		mAnimator->PlayAnimation(L"ValkAtkLeft", true);
+
+		ValEffector* effector = new ValEffector();
+		effector->SetValkyrie(this);
+		AddOtherGameObject(effector, eLayerType::Projectile);
 
 		mScript = AddComponent<ValkyrieScript>();
-
-		/*ValEffector* effector = new ValEffector();
-		effector->GetComponent<Transform>()->SetParent(mTransform);
-		AddOtherGameObject(effector, eLayerType::Projectile);*/
-
+		mScript->SetEffector(effector);
+		mScript->SetValk(this);
 	}
 
 	Valkyrie::~Valkyrie()
@@ -155,6 +157,16 @@ namespace ss
 
 			mPrevHp = mCurHp;
 		}*/
+
+
+		/*if (ThOnce)
+		{
+			ValThunderEffect* thEffect = new ValThunderEffect();
+			thEffect->SetValkyrie(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, thEffect);
+			ThOnce = false;
+		}*/
+
 	}
 	void Valkyrie::LateUpdate()
 	{

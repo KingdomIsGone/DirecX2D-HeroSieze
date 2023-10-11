@@ -11,6 +11,10 @@
 #include "ssBossHpFill.h"
 #include "ssInput.h"
 #include "ssCollider2D.h"
+#include "ssValEffector.h"
+#include "ssValThunderEffect.h"
+#include "ssValkyrie.h"
+#include "ssPlayer.h"
 
 namespace ss
 {
@@ -23,6 +27,7 @@ namespace ss
 		, mRushDistCol(3.2f)
 		, mRushDistRow(4.6f)
 		, mRushSpeed(4.5f)
+		, mEffectCount(0)
 	{
 	}
 	ValkyrieScript::~ValkyrieScript()
@@ -57,6 +62,11 @@ namespace ss
 		if (Input::GetKey(eKeyCode::O))
 		{
 			LightningRush();
+		}
+
+		if (Input::GetKey(eKeyCode::P))
+		{
+			LightningAssault();
 		}
 
 	}
@@ -301,6 +311,9 @@ namespace ss
 				|| mDirState == eDirState::UpLeft)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkUp", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+					mEffector->PlayNormalRushEffect(e4Direction::Up);
+
 				distance = abs(mPos.y - mRushBeforePos.y);
 
 				if (distance < mRushDistCol)
@@ -311,6 +324,9 @@ namespace ss
 				|| mDirState == eDirState::DownLeft)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkDown", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+					mEffector->PlayNormalRushEffect(e4Direction::Down);
+
 				distance = abs(mPos.y - mRushBeforePos.y);
 
 				if (distance < mRushDistCol)
@@ -319,6 +335,9 @@ namespace ss
 			else if (mDirState == eDirState::Right)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkRight", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+					mEffector->PlayNormalRushEffect(e4Direction::Right);
+
 				distance = abs(mPos.x - mRushBeforePos.x);
 
 				if (distance < mRushDistRow)
@@ -327,6 +346,9 @@ namespace ss
 			else if (mDirState == eDirState::Left)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkLeft", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+					mEffector->PlayNormalRushEffect(e4Direction::Left);
+
 				distance = abs(mPos.x - mRushBeforePos.x);
 
 				if (distance < mRushDistRow)
@@ -359,6 +381,277 @@ namespace ss
 
 		}
 
+	}
+
+	void ValkyrieScript::LightningAssault()
+	{
+		if (mRushStage == 0)
+		{
+			CalDir(mPlayerPos);
+			float xDiff = abs(mPos.x - mPlayerPos.x);
+			float yDiff = abs(mPos.y - mPlayerPos.y);
+
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::UpLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Down:
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::DownLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Right:
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+				break;
+			default:
+				break;
+			}
+
+			WalkAni();
+			mRushStage = 1;
+		}
+		else if (mRushStage == 1)
+		{
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance <= mRushAxisDist)
+			{
+				mRushStage = 2;
+				mRushBeforePos = mPos;
+			}
+		}
+		else if (mRushStage == 2)
+		{
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushBackDist)
+					mPos.y -= 2.f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushBackDist)
+					mPos.y += 2.f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushBackDist)
+					mPos.x -= 2.f * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushBackDist)
+					mPos.x += 2.f * Time::DeltaTime();
+			}
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance >= mRushBackDist)
+			{
+				mRushStage = 3;
+				mRushBeforePos = mPos;
+			}
+		}
+		else if (mRushStage == 3)
+		{
+			mColState = eColideState::Assault;
+			ChangeColSetting();
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkUp", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetUp();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+					}
+				}
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y += mRushSpeed * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkDown", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetDown();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+					}
+				}
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y -= mRushSpeed * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkRight", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetRight();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+					}
+				}
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushDistRow)
+					mPos.x += mRushSpeed * Time::DeltaTime();
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkLeft", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetLeft();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+					}
+				}
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushDistRow)
+					mPos.x -= mRushSpeed * Time::DeltaTime();
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance >= mRushDistCol
+				&& (mDirState == eDirState::Up
+					|| mDirState == eDirState::UpRight
+					|| mDirState == eDirState::UpLeft
+					|| mDirState == eDirState::Down
+					|| mDirState == eDirState::DownRight
+					|| mDirState == eDirState::DownLeft))
+			{
+				mRushStage = 0;
+				mEffectCount = 0;
+				mThunderEffect->SetDead();
+				mThunderEffect = nullptr;
+				mColState = eColideState::Normal;
+				ChangeColSetting();
+				//mState = 
+			}
+			else if (distance >= mRushDistRow
+				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
+			{
+				mRushStage = 0;
+				mEffectCount = 0;
+				mThunderEffect->SetDead();
+				mThunderEffect = nullptr;
+				mColState = eColideState::Normal;
+				ChangeColSetting();
+				//mState = 
+			}
+
+		}
 	}
 
 	
@@ -420,7 +713,12 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::Player
 			&& mColState == eColideState::Rush)
 		{
-
+			dynamic_cast<Player*>(other->GetOwner())->GetScript()->ChangeHp(-300.f);
+		}
+		else if (other->GetCollideType() == eCollideType::Player
+			&& mColState == eColideState::Assault)
+		{
+			dynamic_cast<Player*>(other->GetOwner())->GetScript()->ChangeHp(-550.f);
 		}
 	}
 	void ValkyrieScript::OnCollisionStay(Collider2D* other)

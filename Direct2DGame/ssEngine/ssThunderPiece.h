@@ -3,11 +3,11 @@
 
 namespace ss
 {
-	class ValEffector : public GameObject
+	class ThunderPiece : public GameObject
 	{
 	public:
-		ValEffector();
-		~ValEffector();
+		ThunderPiece(GameObject* parent);
+		~ThunderPiece();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,9 +16,10 @@ namespace ss
 
 		void BindCB(float Radd, float Gadd, float Badd, float A);
 
-		void SetValkyrie(class Valkyrie* valk) { mValk = valk; }
 		void SetOffset(Vector3 offset) { mOffset = offset; }
-		void PlayNormalRushEffect(e4Direction dir);
+		Vector3 GetOffset() { return mOffset; }
+		void SetPosition(Vector3 pos);
+		void SetRotation(Vector3 degree);
 
 	private:
 		Transform* mTransform;
@@ -26,8 +27,7 @@ namespace ss
 		Vector3 mOffset;
 		Vector3 mValkPos;
 
-		class Valkyrie* mValk;
-		class ValkyrieScript* mScript;
+
 		class Animator* mAnimator;
 
 	};

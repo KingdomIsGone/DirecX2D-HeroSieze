@@ -95,4 +95,12 @@ namespace ss::enums
 		Belt,
 		Shoes,
 	};
+	enum class e4Direction
+	{
+		Up,
+		Down,
+		Right,
+		Left,
+	};
+
 }

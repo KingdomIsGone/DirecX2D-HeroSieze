@@ -18,6 +18,8 @@ namespace ss
 		void HpCheck();
 		void MpCheck();
 
+		class PlayerScript* GetScript() { return mScript; }
+
 	private:
 		Transform* mTransform;
 		Vector3 mPos;

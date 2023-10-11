@@ -6,19 +6,17 @@
 #include "ssCollider2D.h"
 #include "ssValkyrieScript.h"
 #include "ssRenderer.h"
+#include "ssValkyrie.h"
 
 namespace ss
 {
 	ValEffector::ValEffector()
+		: mOffset(Vector3::Zero)
 	{
 		SetName(L"ValEffector");
 
-		//콜라이더 세팅
-		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
-		Collider2D* collider = AddComponent<Collider2D>();
-		collider->SetCollideType(eCollideType::NormalMonster);
-		collider->SetSize(Vector2(0.15f, 0.24f));
-		collider->SetCenter(Vector2(-0.00f, 0.0f));
+		mTransform = GetComponent<Transform>();
+
 
 		mAnimator = AddComponent<Animator>();
 		//렌더, 애니메이터 세팅
@@ -28,15 +26,17 @@ namespace ss
 
 
 		//ani setting
-		/*{
+		{
 			std::shared_ptr<Texture> LightningEffectTex
 				= Resources::Load<Texture>(L"LightningEffectTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\LightningImpact.png");
 			mAnimator->Create(L"LightningEffect", LightningEffectTex, Vector2(0.0f, 0.0f), Vector2(70.f, 70.f), 8);
-
+			
+			std::shared_ptr<Texture> LightningBlankTex
+				= Resources::Load<Texture>(L"LightningBlankTex", L"..\\Resources\\Texture\\Blank.png");
+			mAnimator->Create(L"LightningBlank", LightningBlankTex, Vector2(0.0f, 0.0f), Vector2(1.f, 1.f), 1);
 		}
 
-		mAnimator->PlayAnimation(L"LightningEffect", true);
-		BindCB(0.f, 0.f, 0.f, 1.f);*/
+		
 	}
 
 	ValEffector::~ValEffector()
@@ -50,8 +50,15 @@ namespace ss
 	{
 		GameObject::Update();
 
+		mValkPos = mValk->GetComponent<Transform>()->GetPosition();
+		mValkPos.z -= 0.01f;
+		mValkPos += mOffset;
+		mTransform->SetPosition(mValkPos);
 		
-		
+		if (mAnimator->GetActiveAnimation() != nullptr 
+			&& mAnimator->GetActiveAnimation()->IsComplete())
+			mAnimator->PlayAnimation(L"LightningBlank", true);
+
 	}
 	void ValEffector::LateUpdate()
 	{
@@ -78,6 +85,31 @@ namespace ss
 
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::VS);
+	}
+
+	void ValEffector::PlayNormalRushEffect(e4Direction dir)
+	{
+		BindCB(0.4f, 0.4f, 0.f, .9f);
+
+		switch (dir)
+		{
+		case ss::enums::e4Direction::Up:
+			mOffset = Vector3(0.08f, 0.29f, 0.0f); //up
+			break;
+		case ss::enums::e4Direction::Down:
+			mOffset = Vector3(-0.03f, -0.3f, 0.0f); //down
+			break;
+		case ss::enums::e4Direction::Right:
+			mOffset = Vector3(0.4f, -0.04f, 0.0f); //right
+			break;
+		case ss::enums::e4Direction::Left:
+			mOffset = Vector3(-0.33f, -0.037f, 0.0f); //left
+			break;
+		default:
+			break;
+		}
+		
+		mAnimator->PlayAnimation(L"LightningEffect", false);
 	}
 
 }

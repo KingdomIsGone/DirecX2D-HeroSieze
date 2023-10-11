@@ -219,6 +219,7 @@
     <ClInclude Include="ssP_HpSmallBarFill.h" />
     <ClInclude Include="ssSkillSlot.h" />
     <ClInclude Include="ssStartBtn.h" />
+    <ClInclude Include="ssThunderPiece.h" />
     <ClInclude Include="ssTitleScene.h" />
     <ClInclude Include="ssTorchBig.h" />
     <ClInclude Include="ssUIScene.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="ssValkyrie.h" />
     <ClInclude Include="ssValkyrieScene.h" />
     <ClInclude Include="ssValkyrieScript.h" />
+    <ClInclude Include="ssValThunderEffect.h" />
     <ClInclude Include="ssWallCollider.h" />
     <ClInclude Include="ssWoodsField.h" />
     <ClInclude Include="TestObject.h" />
@@ -297,6 +299,7 @@
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
     <ClCompile Include="ssSkillSlot.cpp" />
     <ClCompile Include="ssStartBtn.cpp" />
+    <ClCompile Include="ssThunderPiece.cpp" />
     <ClCompile Include="ssTitleScene.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
@@ -307,6 +310,7 @@
     <ClCompile Include="ssValkyrie.cpp" />
     <ClCompile Include="ssValkyrieScene.cpp" />
     <ClCompile Include="ssValkyrieScript.cpp" />
+    <ClCompile Include="ssValThunderEffect.cpp" />
     <ClCompile Include="ssWallCollider.cpp" />
     <ClCompile Include="ssWoodsField.cpp" />
     <ClCompile Include="TestObject.cpp" />

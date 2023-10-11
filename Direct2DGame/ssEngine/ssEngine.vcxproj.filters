@@ -230,6 +230,12 @@
     <ClCompile Include="ssValEffector.cpp">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClCompile>
+    <ClCompile Include="ssValThunderEffect.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ssThunderPiece.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -464,6 +470,12 @@
     <ClInclude Include="ssValEffector.h">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffector</Filter>
     </ClInclude>
+    <ClInclude Include="ssValThunderEffect.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ssThunderPiece.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -642,6 +654,9 @@
     </Filter>
     <Filter Include="Contents\Object\Boss\Valkyrie\ValScript">
       <UniqueIdentifier>{7b640eaf-4425-48da-87b6-e262c47d98a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect">
+      <UniqueIdentifier>{2449a06d-f95b-44cf-af11-25af44f90f5b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
