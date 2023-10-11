@@ -17,12 +17,12 @@
 #define CBSLOT_ANIMATION2D		3
 #define CBSLOT_PARTICLE			4
 #define CBSLOT_NOISE			5
+#define CBSLOT_BOSSEFFECT       8
 #define CBSLOT_DEBUG            9
 #define CBSLOT_COOLTIME         10
 #define CBSLOT_COOLTIME2        11
 #define CBSLOT_COOLTIME3        12
 #define CBSLOT_COOLTIME4        13
-#define CBSLOT_BOSSEFFECT       14
 
 //#define CBSLOT_PARTICLE			1
 
@@ -47,12 +47,12 @@ namespace ss::graphics
 		Animator,
 		Particle,
 		Noise,
+		BossEffect = 8,
 		Debug = 9,
 		CoolTime = 10,
 		CoolTime2 = 11,
 		CoolTime3 = 12,
 		CoolTime4 = 13,
-		BossEffect = 14,
 		End,
 	};
 

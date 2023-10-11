@@ -45,7 +45,7 @@ cbuffer CoolTime4 : register(b13) //custom
 {
     float CoolTimePercent4;
 }
-cbuffer BossEffect : register(b14) //custom
+cbuffer BossEffect : register(b8) //custom
 {
     float Radd;
     float Gadd;
