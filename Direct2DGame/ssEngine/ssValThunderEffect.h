@@ -22,6 +22,7 @@ namespace ss
 		void SetOffset(Vector3 offset) { mOffset = offset; }
 		void SetPosition(Vector3 pos) { mPos = pos; }
 		void SetValkyrie(class Valkyrie* valk) { mValk = valk; }
+		void SetClone(class CloneAssault* clone) { mClone = clone; mIsClone = true; SetName(L"cloneTh"); }
 		void SetDead();
 		void SetDown();
 		void SetUp();
@@ -34,7 +35,9 @@ namespace ss
 		Vector3 mOffset;
 		Vector3 mValkPos;
 
+		bool mIsClone;
 		class Valkyrie* mValk;
+		class CloneAssault* mClone;
 		class Animator* mAnimator;
 
 		class ThunderPiece* mLeftPiece;

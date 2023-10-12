@@ -167,6 +167,8 @@
     <ClInclude Include="ssBossHpFill.h" />
     <ClInclude Include="ssChainLightening.h" />
     <ClInclude Include="ssChargedBolt.h" />
+    <ClInclude Include="ssCloneAssault.h" />
+    <ClInclude Include="ssCloneScript.h" />
     <ClInclude Include="ssDesertBossRoom.h" />
     <ClInclude Include="ssDesertDungeon1.h" />
     <ClInclude Include="ssDesertDungeon2.h" />
@@ -249,6 +251,8 @@
     <ClCompile Include="ssBossHpFill.cpp" />
     <ClCompile Include="ssChainLightening.cpp" />
     <ClCompile Include="ssChargedBolt.cpp" />
+    <ClCompile Include="ssCloneAssault.cpp" />
+    <ClCompile Include="ssCloneScript.cpp" />
     <ClCompile Include="ssDesertBossRoom.cpp" />
     <ClCompile Include="ssDesertDungeon1.cpp" />
     <ClCompile Include="ssDesertDungeon2.cpp" />

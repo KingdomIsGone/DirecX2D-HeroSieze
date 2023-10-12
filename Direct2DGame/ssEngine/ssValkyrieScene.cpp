@@ -19,7 +19,7 @@
 #include "ssPlayerCameraScript.h"
 #include "ssValkyrie.h"
 
-#include "ssBigLightning.h"
+#include "ssCloneAssault.h"
 
 namespace ss
 {
@@ -162,13 +162,13 @@ namespace ss
 		}
 		
 		Valkyrie* Boss = new Valkyrie();
-		Boss->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 1.0f, 1.0f));
+		Boss->GetComponent<Transform>()->SetPosition(Vector3(0.0f, -1.0f, 1.0f));
 		AddGameObject(eLayerType::Monster, Boss);
 
-		BigLightning* big = new BigLightning();
-		big->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 0.0f, 1.f));
-		AddGameObject(eLayerType::EnemyProjectile, big);
-
+		CloneAssault* assault = new CloneAssault(e4Direction::Down);
+		assault->GetComponent<Transform>()->SetPosition(0.f, 1.f, 1.f);
+		assault->SetStart();
+		AddGameObject(eLayerType::EnemyProjectile, assault);
 	}
 
 	void ValkyrieScene::Update()
@@ -178,20 +178,7 @@ namespace ss
 
 	void ValkyrieScene::LateUpdate()
 	{
-		//윈도우 좌표계에서 월드 좌표계로 바꾸기 viewPort.Unproject
-		Vector3 pos(600, 350, 0.0f);
-		Vector3 pos2(600, 350, 1000.0f);
-		Viewport viewport;
-		viewport.width = 1200.0f;
-		viewport.height = 700.0f;
-		viewport.x = 0;
-		viewport.y = 0;
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-
-		pos = viewport.Unproject(pos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
-		pos2 = viewport.Unproject(pos2, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
-		//pos, pos2를 잇는 선분으로 ray cast로 마우스 피킹 구현(3D)
+		
 
 		Scene::LateUpdate();
 	}

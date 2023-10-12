@@ -52,7 +52,7 @@ float4 main(VSOut In) : SV_TARGET
     //if(color.a > 0.0f)
     //    color.a = 0.5f;
     
-    if (color.x <= 0.22f && color.y <= 0.22f && color.z <= 0.22f)
+    if (color.x <= DiscardLight && color.y <= DiscardLight && color.z <= DiscardLight)
         color.w = 0.0f;
     else
     {

@@ -242,6 +242,12 @@
     <ClCompile Include="ssBigLightningScript.cpp">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
     </ClCompile>
+    <ClCompile Include="ssCloneAssault.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault</Filter>
+    </ClCompile>
+    <ClCompile Include="ssCloneScript.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -488,6 +494,12 @@
     <ClInclude Include="ssBigLightningScript.h">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffect\BigLightning</Filter>
     </ClInclude>
+    <ClInclude Include="ssCloneAssault.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault</Filter>
+    </ClInclude>
+    <ClInclude Include="ssCloneScript.h">
+      <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -675,6 +687,12 @@
     </Filter>
     <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\BigLightning">
       <UniqueIdentifier>{e64742ee-0b93-4017-8980-28b217aafd7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault">
+      <UniqueIdentifier>{e3a84eb7-2555-4fab-beea-be401b1c1dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script">
+      <UniqueIdentifier>{21d9474c-a4e6-46db-845a-ad23ad14fbee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

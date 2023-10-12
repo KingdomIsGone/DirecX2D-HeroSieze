@@ -7,6 +7,7 @@
 #include "ssValkyrieScript.h"
 #include "ssRenderer.h"
 #include "ssValkyrie.h"
+#include "ssCloneAssault.h"
 #include "ssThunderPiece.h"
 
 namespace ss
@@ -43,11 +44,22 @@ namespace ss
 	{
 		GameObject::Update();
 
-		mValkPos = mValk->GetComponent<Transform>()->GetPosition();
-		mValkPos.z -= 0.3f;
-		mValkPos += mOffset;
-		mTransform->SetPosition(mValkPos);
-		mPos = mTransform->GetPosition();
+		if (mIsClone)
+		{
+			mValkPos = mClone->GetComponent<Transform>()->GetPosition();
+			mValkPos.z -= 0.3f;
+			mValkPos += mOffset;
+			mTransform->SetPosition(mValkPos);
+			mPos = mTransform->GetPosition();
+		}
+		else
+		{
+			mValkPos = mValk->GetComponent<Transform>()->GetPosition();
+			mValkPos.z -= 0.3f;
+			mValkPos += mOffset;
+			mTransform->SetPosition(mValkPos);
+			mPos = mTransform->GetPosition();
+		}
 
 		Vector3 leftPos = mPos + mLeftPiece->GetOffset();
 		mLeftPiece->GetComponent<Transform>()->SetPosition(leftPos);

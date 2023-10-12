@@ -495,6 +495,7 @@ namespace ss
 		return pos;
 	}
 
+
 	void PlayerScript::ShootMeteor(Vector3 cursorPos)
 	{
 		if (mCurMp < 250.f)

@@ -58,6 +58,7 @@ cbuffer BossEffect2 : register(b7) //custom
     float Gadd2;
     float Badd2;
     float A2;
+    float DiscardLight;
 }
 
 

@@ -27,6 +27,7 @@ namespace ss
 
 		//ani setting
 		{
+			//lightning
 			std::shared_ptr<Texture> LightningEffectTex
 				= Resources::Load<Texture>(L"LightningEffectTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\LightningImpact.png");
 			mAnimator->Create(L"LightningEffect", LightningEffectTex, Vector2(0.0f, 0.0f), Vector2(70.f, 70.f), 8);
@@ -35,7 +36,22 @@ namespace ss
 				= Resources::Load<Texture>(L"LightningBlankTex", L"..\\Resources\\Texture\\Blank.png");
 			mAnimator->Create(L"LightningBlank", LightningBlankTex, Vector2(0.0f, 0.0f), Vector2(1.f, 1.f), 1);
 
-			
+			//melee
+			std::shared_ptr<Texture> ValkAtkDownTex
+				= Resources::Load<Texture>(L"ValkAtkDownTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkDown.png");
+			mAnimator->Create(L"ValkAtkDown", ValkAtkDownTex, Vector2(0.0f, 0.0f), Vector2(92.f, 107.0f), 6, Vector2::Zero, 0.02f);
+
+			std::shared_ptr<Texture> ValkAtkLeftTex
+				= Resources::Load<Texture>(L"ValkAtkLeftTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkLeft.png");
+			mAnimator->Create(L"ValkAtkLeft", ValkAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
+
+			std::shared_ptr<Texture> ValkAtkRightTex
+				= Resources::Load<Texture>(L"ValkAtkRightTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkRight.png");
+			mAnimator->Create(L"ValkAtkRight", ValkAtkRightTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
+
+			std::shared_ptr<Texture> ValkAtkUpTex
+				= Resources::Load<Texture>(L"ValkAtkUpTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkUp.png");
+			mAnimator->Create(L"ValkAtkUp", ValkAtkUpTex, Vector2(0.0f, 0.0f), Vector2(105.f, 92.0f), 6, Vector2::Zero, 0.02f);
 		}
 
 		
@@ -52,17 +68,14 @@ namespace ss
 	{
 		GameObject::Update();
 
-		/*mValkPos = mValk->GetComponent<Transform>()->GetPosition();
+		mValkPos = mValk->GetComponent<Transform>()->GetPosition();
 		mValkPos.z -= 0.01f;
 		mValkPos += mOffset;
 		mTransform->SetPosition(mValkPos);
-		*/
-		mTransform->SetPosition(Vector3(0.0f, 0.0f, -11.f));
 
-		if (mAnimator->GetActiveAnimation() != nullptr 
+		if (mAnimator->GetActiveAnimation() != nullptr
 			&& mAnimator->GetActiveAnimation()->IsComplete())
 			mAnimator->PlayAnimation(L"LightningBlank", true);
-
 	}
 	void ValEffector::LateUpdate()
 	{

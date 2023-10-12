@@ -89,6 +89,7 @@ namespace renderer
 		float Gadd;
 		float Badd;
 		float A;
+		float DiscardLight;
 	};
 
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

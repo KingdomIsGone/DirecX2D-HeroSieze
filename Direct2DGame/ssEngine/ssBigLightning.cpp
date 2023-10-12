@@ -87,6 +87,7 @@ namespace ss
 		data.Gadd = Gadd;
 		data.Badd = Badd;
 		data.A = A;
+		data.DiscardLight = 0.22;
 
 		cb->SetData(&data);
 

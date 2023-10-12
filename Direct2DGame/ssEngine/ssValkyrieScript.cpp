@@ -16,6 +16,8 @@
 #include "ssValkyrie.h"
 #include "ssPlayer.h"
 #include "ssBigLightning.h"
+#include "ssCloneAssault.h"
+#include "ssCloneScript.h"
 
 namespace ss
 {
@@ -69,9 +71,19 @@ namespace ss
 
 		if (Input::GetKey(eKeyCode::P))
 		{
-			BigLightningCast();
+			On = true;
 		}
+		if(On)
+			CloneAssaultCast();
+	}
 
+	void ValkyrieScript::Render()
+	{
+		if (mCloneOnce)//클론 동기화
+		{
+			mClone->SetStart();
+			mRushStage = 3;
+		}
 	}
 
 	void ValkyrieScript::Dead()
@@ -388,7 +400,7 @@ namespace ss
 
 	void ValkyrieScript::LightningAssault()
 	{
-		if (mRushStage == 0)
+		if (mRushStage == 0) //플레이어와 오/열 맞추기 전 방향 정하기
 		{
 			CalDir(mPlayerPos);
 			float xDiff = abs(mPos.x - mPlayerPos.x);
@@ -443,7 +455,7 @@ namespace ss
 			WalkAni();
 			mRushStage = 1;
 		}
-		else if (mRushStage == 1)
+		else if (mRushStage == 1) // 플레이어와 오/열 맞추기
 		{
 			float distance;
 			if (mDirState == eDirState::Up
@@ -451,36 +463,48 @@ namespace ss
 				|| mDirState == eDirState::UpLeft)
 			{
 				distance = abs(mPos.x - mPlayerPos.x);
+
 				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
 					mPos.x += 2.5f * Time::DeltaTime();
 				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
 					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
 			}
 			else if (mDirState == eDirState::Down
 				|| mDirState == eDirState::DownRight
 				|| mDirState == eDirState::DownLeft)
 			{
 				distance = abs(mPos.x - mPlayerPos.x);
+
 				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
 					mPos.x += 2.5f * Time::DeltaTime();
 				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
 					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
 			}
 			else if (mDirState == eDirState::Right)
 			{
 				distance = abs(mPos.y - mPlayerPos.y);
+
 				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
 					mPos.y += 2.5f * Time::DeltaTime();
 				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
 					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
 			}
 			else if (mDirState == eDirState::Left)
 			{
 				distance = abs(mPos.y - mPlayerPos.y);
+
 				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
 					mPos.y += 2.5f * Time::DeltaTime();
 				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
 					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
 			}
 
 			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
@@ -491,7 +515,7 @@ namespace ss
 				mRushBeforePos = mPos;
 			}
 		}
-		else if (mRushStage == 2)
+		else if (mRushStage == 2) //러쉬전 뒤로 잠깐 빼기
 		{
 			float distance;
 			if (mDirState == eDirState::Up
@@ -502,6 +526,8 @@ namespace ss
 
 				if (distance < mRushBackDist)
 					mPos.y -= 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
 			}
 			else if (mDirState == eDirState::Down
 				|| mDirState == eDirState::DownRight
@@ -511,6 +537,8 @@ namespace ss
 
 				if (distance < mRushBackDist)
 					mPos.y += 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
 			}
 			else if (mDirState == eDirState::Right)
 			{
@@ -518,6 +546,8 @@ namespace ss
 
 				if (distance < mRushBackDist)
 					mPos.x -= 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
 			}
 			else if (mDirState == eDirState::Left)
 			{
@@ -525,6 +555,8 @@ namespace ss
 
 				if (distance < mRushBackDist)
 					mPos.x += 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
 			}
 			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
@@ -534,14 +566,12 @@ namespace ss
 				mRushBeforePos = mPos;
 			}
 		}
-		else if (mRushStage == 3)
+		else if (mRushStage == 3) //썬더이펙트 만들기
 		{
 			mColState = eColideState::Assault;
 			ChangeColSetting();
-			float distance;
-			if (mDirState == eDirState::Up
-				|| mDirState == eDirState::UpRight
-				|| mDirState == eDirState::UpLeft)
+			
+			if (mDirState == eDirState::Up)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkUp", false);
 				if (mAnimator->GetActiveAnimation()->IsComplete())
@@ -553,17 +583,12 @@ namespace ss
 						mThunderEffect->SetUp();
 						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
 						mEffectCount++;
+						mRushStage = 4;
 					}
 				}
-
-				distance = abs(mPos.y - mRushBeforePos.y);
-
-				if (distance < mRushDistCol)
-					mPos.y += mRushSpeed * Time::DeltaTime();
+				
 			}
-			else if (mDirState == eDirState::Down
-				|| mDirState == eDirState::DownRight
-				|| mDirState == eDirState::DownLeft)
+			else if (mDirState == eDirState::Down)
 			{
 				mAnimator->PlayAnimation(L"ValkAtkDown", false);
 				if (mAnimator->GetActiveAnimation()->IsComplete())
@@ -575,13 +600,10 @@ namespace ss
 						mThunderEffect->SetDown();
 						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
 						mEffectCount++;
+						mRushStage = 4;
 					}
 				}
-
-				distance = abs(mPos.y - mRushBeforePos.y);
-
-				if (distance < mRushDistCol)
-					mPos.y -= mRushSpeed * Time::DeltaTime();
+				
 			}
 			else if (mDirState == eDirState::Right)
 			{
@@ -595,13 +617,9 @@ namespace ss
 						mThunderEffect->SetRight();
 						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
 						mEffectCount++;
+						mRushStage = 4;
 					}
 				}
-
-				distance = abs(mPos.x - mRushBeforePos.x);
-
-				if (distance < mRushDistRow)
-					mPos.x += mRushSpeed * Time::DeltaTime();
 			}
 			else if (mDirState == eDirState::Left)
 			{
@@ -615,24 +633,58 @@ namespace ss
 						mThunderEffect->SetLeft();
 						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
 						mEffectCount++;
+						mRushStage = 4;
 					}
 				}
 
+			}
+
+		}
+		else if (mRushStage == 4) //돌진
+		{
+			float distance;
+			if (mDirState == eDirState::Up)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y += mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Down)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y -= mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushDistRow)
+					mPos.x += mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+			}
+			else if (mDirState == eDirState::Left)
+			{
 				distance = abs(mPos.x - mRushBeforePos.x);
 
 				if (distance < mRushDistRow)
 					mPos.x -= mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
 			}
 
 			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
 			if (distance >= mRushDistCol
 				&& (mDirState == eDirState::Up
-					|| mDirState == eDirState::UpRight
-					|| mDirState == eDirState::UpLeft
-					|| mDirState == eDirState::Down
-					|| mDirState == eDirState::DownRight
-					|| mDirState == eDirState::DownLeft))
+					|| mDirState == eDirState::Down))
 			{
 				mRushStage = 0;
 				mEffectCount = 0;
@@ -653,7 +705,6 @@ namespace ss
 				ChangeColSetting();
 				//mState = 
 			}
-
 		}
 	}
 
@@ -700,12 +751,375 @@ namespace ss
 			mBigStage = 3;
 			//mState=
 		}
-
-		
 		
 	}
 
-	
+	void ValkyrieScript::CloneAssaultCast()
+	{
+		if (mRushStage == 0) //플레이어와 오/열 맞추기 전 방향 정하기
+		{
+			CalDir(mPlayerPos);
+			float xDiff = abs(mPos.x - mPlayerPos.x);
+			float yDiff = abs(mPos.y - mPlayerPos.y);
+
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::UpLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Down:
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::DownLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Right:
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+				break;
+			default:
+				break;
+			}
+
+			WalkAni();
+			mRushStage = 1;
+		}
+		else if (mRushStage == 1) // 플레이어와 오/열 맞추기
+		{
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance <= mRushAxisDist)
+			{
+				mRushStage++;
+				mRushBeforePos = mPos;
+			}
+		}
+		else if (mRushStage == 2) // 클론 생성
+		{
+			if (mDirState == eDirState::Up)
+			{
+				if (!mCloneOnce)
+				{
+					mClone = new CloneAssault(e4Direction::Down);
+					Vector3 clonePos = GetOwner()->GetComponent<Transform>()->GetPosition();
+					clonePos.y += abs(PlayerScript::GetPlayerPos().y - clonePos.y) * 2.f;
+					mClone->GetComponent<Transform>()->SetPosition(clonePos);
+					mClone->GetComponent<CloneScript>()->SetBeforePos(clonePos);
+					SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mClone);
+					mCloneOnce = true;
+				}
+			}
+			else if (mDirState == eDirState::Down)
+			{
+				if (!mCloneOnce)
+				{
+					mClone = new CloneAssault(e4Direction::Up);
+					Vector3 clonePos = GetOwner()->GetComponent<Transform>()->GetPosition();
+					clonePos.y -= abs(PlayerScript::GetPlayerPos().y - clonePos.y) * 2.f;
+					mClone->GetComponent<Transform>()->SetPosition(clonePos);
+					mClone->GetComponent<CloneScript>()->SetBeforePos(clonePos);
+					SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mClone);
+					mCloneOnce = true;
+				}
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				if (!mCloneOnce)
+				{
+					mClone = new CloneAssault(e4Direction::Left);
+					Vector3 clonePos = GetOwner()->GetComponent<Transform>()->GetPosition();
+					clonePos.x += abs(PlayerScript::GetPlayerPos().x - clonePos.x) * 2.f;
+					mClone->GetComponent<Transform>()->SetPosition(clonePos);
+					mClone->GetComponent<CloneScript>()->SetBeforePos(clonePos);
+					SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mClone);
+					mCloneOnce = true;
+				}
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				if (!mCloneOnce)
+				{
+					mClone = new CloneAssault(e4Direction::Right);
+					Vector3 clonePos = GetOwner()->GetComponent<Transform>()->GetPosition();
+					clonePos.x -= abs(PlayerScript::GetPlayerPos().x - clonePos.x) * 2.f;
+					mClone->GetComponent<Transform>()->SetPosition(clonePos);
+					mClone->GetComponent<CloneScript>()->SetBeforePos(clonePos);
+					SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mClone);
+					mCloneOnce = true;
+				}
+			}
+		}
+		else if (mRushStage == 3) //러쉬전 뒤로 잠깐 빼기
+		{
+			mCloneOnce = false;
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushBackDist)
+					mPos.y -= 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushBackDist)
+					mPos.y += 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushBackDist)
+					mPos.x -= 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushBackDist)
+					mPos.x += 2.f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+			}
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance >= mRushBackDist)
+			{
+				mRushStage++;
+				mRushBeforePos = mPos;
+			}
+		}
+		else if (mRushStage == 4) //썬더이펙트 만들기
+		{
+			mColState = eColideState::Assault;
+			ChangeColSetting();
+
+			if (mDirState == eDirState::Up)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkUp", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetUp();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+						mRushStage++;
+					}
+				}
+
+			}
+			else if (mDirState == eDirState::Down)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkDown", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetDown();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+						mRushStage++;
+					}
+				}
+
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkRight", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetRight();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+						mRushStage++;
+					}
+				}
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				mAnimator->PlayAnimation(L"ValkAtkLeft", false);
+				if (mAnimator->GetActiveAnimation()->IsComplete())
+				{
+					if (mEffectCount == 0)
+					{
+						mThunderEffect = new ValThunderEffect();
+						mThunderEffect->SetValkyrie(mValk);
+						mThunderEffect->SetLeft();
+						SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mThunderEffect);
+						mEffectCount++;
+						mRushStage++;
+					}
+				}
+
+			}
+
+		}
+		else if (mRushStage == 5) //돌진
+		{
+			float distance;
+			if (mDirState == eDirState::Up)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y += mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Down)
+			{
+				distance = abs(mPos.y - mRushBeforePos.y);
+
+				if (distance < mRushDistCol)
+					mPos.y -= mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.y - mRushBeforePos.y);
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushDistRow)
+					mPos.x += mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.x - mRushBeforePos.x);
+
+				if (distance < mRushDistRow)
+					mPos.x -= mRushSpeed * Time::DeltaTime();
+
+				distance = abs(mPos.x - mRushBeforePos.x);
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance >= mRushDistCol
+				&& (mDirState == eDirState::Up
+					|| mDirState == eDirState::Down))
+			{
+				mRushStage = 0;
+				mEffectCount = 0;
+				mThunderEffect->SetDead();
+				mThunderEffect = nullptr;
+				mColState = eColideState::Normal;
+				ChangeColSetting();
+				//mState = 
+			}
+			else if (distance >= mRushDistRow
+				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
+			{
+				mRushStage = 0;
+				mEffectCount = 0;
+				mThunderEffect->SetDead();
+				mThunderEffect = nullptr;
+				mColState = eColideState::Normal;
+				ChangeColSetting();
+				//mState = 
+			}
+		}
+
+	}
 
 	void ValkyrieScript::ChangeHP(float value)
 	{

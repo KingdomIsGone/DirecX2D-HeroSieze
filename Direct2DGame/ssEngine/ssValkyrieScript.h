@@ -40,7 +40,7 @@ namespace ss
 
 		virtual void Initialize() override;
 		virtual void Update() override;
-
+		virtual void Render() override;
 
 		void ChangeHP(float value);
 		float GetHP() { return mHp; }
@@ -54,6 +54,7 @@ namespace ss
 		void LightningRush();
 		void LightningAssault();
 		void BigLightningCast();
+		void CloneAssaultCast();
 
 		void SetBossHpFill(BossHpFill* fill) { mBossHpFill = fill; }
 
@@ -89,6 +90,12 @@ namespace ss
 
 		//Assault
 		UINT mEffectCount;
+
+		//Clone Assault
+		bool mCloneOnce;
+		class CloneAssault* mClone;
+		bool mStart;
+		bool On;
 
 		//BigLightning
 		UINT mBigStage;
