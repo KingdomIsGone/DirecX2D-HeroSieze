@@ -16,11 +16,15 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetTexture(std::shared_ptr<Texture> tex);
+		void BindCB();
+
 	private:
-		graphics::StructedBuffer* mBuffer;
+		graphics::StructedBuffer* mParticleStructBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
 
-		std::shared_ptr<ParticleShader> mCS;
+		std::shared_ptr<ParticleShader> mParticleShader;
+		std::shared_ptr<Texture>mParticleTexture;
 
 		UINT    mCount;
 		Vector4 mStartSize;
@@ -31,5 +35,7 @@ namespace ss
 		float	mFrequency;
 
 		float mTime;
+
+		float mAlpha;
 	};
 }

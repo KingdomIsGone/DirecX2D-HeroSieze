@@ -10,13 +10,16 @@ struct GSOut
 
 float4 main(GSOut In) : SV_TARGET
 {
-    float4 Out = (float4) 0.0f;
+    float4 Color = (float4) 0.0f;
     
-    Out = albedoTexture.Sample(anisotropicSampler, In.UV);
+    Color = albedoTexture.Sample(anisotropicSampler, In.UV);
     
-    if (Out.a <= 0.0f)
+    if (Color.w <= 0.0f)
         discard;
     
-    return Out;
+    //Color.w = ParticleAlpha;
+    Color.w = 1.f;
+    
+    return Color;
 
 }

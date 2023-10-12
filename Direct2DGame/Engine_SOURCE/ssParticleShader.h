@@ -19,5 +19,7 @@ namespace ss::graphics
 	private:
 		StructedBuffer* mParticleBuffer;
 		StructedBuffer* mSharedBuffer;
+		
+		float mInitialAlpha;
 	};
 }

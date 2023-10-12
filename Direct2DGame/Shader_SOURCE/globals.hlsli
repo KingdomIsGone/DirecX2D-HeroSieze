@@ -29,6 +29,42 @@ cbuffer Animator : register(b3)
     float3 pad;
 }
 
+cbuffer ParticleSystem : register(b4)
+{
+    uint elementCount;
+    float elapsedTime;
+    float deltaTime;
+    int padd2;
+    float ParticleAlpha;
+}
+
+cbuffer Noise : register(b5)
+{
+    float4 noiseTextureSize;
+}
+
+
+cbuffer BossEffect2 : register(b7) //custom
+{
+    float Radd2;
+    float Gadd2;
+    float Badd2;
+    float A2;
+    float DiscardLight;
+}
+cbuffer BossEffect : register(b8) //custom
+{
+    float Radd;
+    float Gadd;
+    float Badd;
+    float A;
+}
+
+cbuffer DebugMeshColor : register(b9) //custom
+{
+    float4 DebugColor;
+}
+
 cbuffer CoolTime : register(b10) //custom
 {
     float CoolTimePercent;
@@ -45,40 +81,9 @@ cbuffer CoolTime4 : register(b13) //custom
 {
     float CoolTimePercent4;
 }
-cbuffer BossEffect : register(b8) //custom
-{
-    float Radd;
-    float Gadd;
-    float Badd;
-    float A;
-}
-cbuffer BossEffect2 : register(b7) //custom
-{
-    float Radd2;
-    float Gadd2;
-    float Badd2;
-    float A2;
-    float DiscardLight;
-}
 
 
-cbuffer DebugMeshColor : register(b9)  //custom
-{
-    float4 DebugColor;
-}
 
-cbuffer ParticleSystem : register(b4)
-{
-    uint elementCount;
-    float elapsedTime;
-    float deltaTime;
-    int padd2;
-}
-
-cbuffer Noise : register(b5)
-{
-    float4 noiseTextureSize;
-}
 
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);

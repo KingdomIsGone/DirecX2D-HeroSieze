@@ -11,6 +11,7 @@
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
+#include <random>
 #endif
 
 #define XM_CONSTEXPR
@@ -21,6 +22,20 @@ using namespace DirectX::PackedVector;
 
 namespace ss::math
 {
+    template <typename T>
+    T RandomUniDist(T minNum, T maxNum) 
+    {
+        // Create a random number generator
+        std::random_device rd;
+        std::mt19937 Gen(rd());
+      
+
+        // Create a uniform distribution for the specified range
+        std::uniform_real_distribution<T> dist(minNum, maxNum);
+
+        // Generate and return a random value
+        return dist(Gen);
+    }
     struct Vector2;
     struct Vector4;
     struct Matrix;

@@ -48,6 +48,7 @@ namespace renderer
 		float elpasedTime;
 		float deltaTime;
 		int padd2;
+		float ParticleAlpha;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)
