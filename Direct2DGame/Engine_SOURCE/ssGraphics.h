@@ -154,7 +154,6 @@ namespace ss::graphics
 		float time;
 		float speed;
 		UINT active;
-		float alpha;
 	};
 
 	struct ParticleShared

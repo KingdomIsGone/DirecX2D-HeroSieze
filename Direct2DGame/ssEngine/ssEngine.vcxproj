@@ -203,6 +203,7 @@
     <ClInclude Include="ssITemlistSelectEffect.h" />
     <ClInclude Include="ssLegendBoots.h" />
     <ClInclude Include="ssLegendStaff1.h" />
+    <ClInclude Include="ssLightBall.h" />
     <ClInclude Include="ssMagicHat.h" />
     <ClInclude Include="ssMagicRobe.h" />
     <ClInclude Include="ssMagicStaff.h" />
@@ -226,6 +227,8 @@
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
     <ClInclude Include="ssSkillSlot.h" />
+    <ClInclude Include="ssSpearPiece.h" />
+    <ClInclude Include="ssSpearRain.h" />
     <ClInclude Include="ssStartBtn.h" />
     <ClInclude Include="ssThunderPiece.h" />
     <ClInclude Include="ssTitleScene.h" />
@@ -287,6 +290,7 @@
     <ClCompile Include="ssITemlistSelectEffect.cpp" />
     <ClCompile Include="ssLegendBoots.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
+    <ClCompile Include="ssLightBall.cpp" />
     <ClCompile Include="ssMagicHat.cpp" />
     <ClCompile Include="ssMagicRobe.cpp" />
     <ClCompile Include="ssMagicStaff.cpp" />
@@ -310,6 +314,8 @@
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
     <ClCompile Include="ssSkillSlot.cpp" />
+    <ClCompile Include="ssSpearPiece.cpp" />
+    <ClCompile Include="ssSpearRain.cpp" />
     <ClCompile Include="ssStartBtn.cpp" />
     <ClCompile Include="ssThunderPiece.cpp" />
     <ClCompile Include="ssTitleScene.cpp" />

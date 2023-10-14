@@ -55,6 +55,7 @@ float4 main(VSOut In) : SV_TARGET
     if (color.w <= 0.0f)
         discard;
     
+    color.w = TransAlpha;
     
     return color;
 }

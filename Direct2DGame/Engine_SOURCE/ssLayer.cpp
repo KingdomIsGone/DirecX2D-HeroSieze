@@ -30,12 +30,14 @@ namespace ss
 	}
 	void Layer::Update()
 	{
+		int count = 0;
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if (gameObj->GetState()
 				!= GameObject::eState::Active)
 				continue;
 
+			count++;
 			gameObj->Update();
 		}
 	}

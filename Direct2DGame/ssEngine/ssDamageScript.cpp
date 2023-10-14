@@ -3,6 +3,8 @@
 #include "ssPlayerScript.h"
 #include "ssChargedBolt.h"
 #include "ssChainLightening.h"
+#include "ssLightBall.h"
+#include "ssSpearPiece.h"
 
 namespace ss
 {
@@ -29,6 +31,11 @@ namespace ss
 			}
 			else if (GetOwner()->GetName() == L"ChainLightening")
 				Damage = ChainLightening::GetDamage();
+			else if (GetOwner()->GetName() == L"LightBall")
+				Damage = LightBall::GetDamage();
+			else if (GetOwner()->GetName() == L"SpearPiece")
+				Damage = SpearPiece::GetDamage();
+
 
 			other->GetOwner()->GetComponent<PlayerScript>()->ChangeHp(-Damage);
 
@@ -36,11 +43,12 @@ namespace ss
 		}
 		else if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-
+			
 		}
 	}
 	void DamageScript::OnCollisionStay(Collider2D* other)
 	{
+		
 	}
 	void DamageScript::OnCollisionExit(Collider2D* other)
 	{

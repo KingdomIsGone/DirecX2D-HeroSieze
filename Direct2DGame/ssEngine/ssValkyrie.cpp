@@ -126,7 +126,7 @@ namespace ss
 		
 		}
 
-		mAnimator->PlayAnimation(L"ValkAtkLeft", true);
+		mAnimator->PlayAnimation(L"ValkThrowLeft", true);
 
 		ValEffector* effector = new ValEffector();
 		effector->SetValkyrie(this);

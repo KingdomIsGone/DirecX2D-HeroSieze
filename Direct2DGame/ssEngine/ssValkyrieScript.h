@@ -13,9 +13,13 @@ namespace ss
 			Dead,
 			Sleep,
 			Transform,
-			Chase,
-			MeleeAtk,
-		
+			Chase,  //Idle
+			LightningRush,
+			LightningAssault,
+			CloneAssault,
+			BigLightning,
+			ThrowRightBall,
+			SpearRainCast,
 		};
 		enum class eDirState
 		{
@@ -55,6 +59,8 @@ namespace ss
 		void LightningAssault();
 		void BigLightningCast();
 		void CloneAssaultCast();
+		void ThrowLightBall();
+		void SpearRainCast();
 
 		void SetBossHpFill(BossHpFill* fill) { mBossHpFill = fill; }
 
@@ -100,6 +106,16 @@ namespace ss
 		//BigLightning
 		UINT mBigStage;
 		bool mBigOnce;
+		
+		//ThrowLightBall
+		UINT mBallStage;
+
+		//SpearRain
+		UINT mRainStage;
+		Vector3 mRainTargetPos;
+		float mInterval;
+		UINT mPieceCount;
+		class SpearRain* mRain;
 
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;

@@ -63,7 +63,7 @@ float4 main(VSOut In) : SV_TARGET
     }
     
     
-    if (color.w <= 0.0f)
+    if (color.a <= 0.0f)
         discard;
     
     

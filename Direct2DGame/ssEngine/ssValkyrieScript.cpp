@@ -18,6 +18,9 @@
 #include "ssBigLightning.h"
 #include "ssCloneAssault.h"
 #include "ssCloneScript.h"
+#include "ssLightBall.h"
+#include "ssSpearRain.h"
+#include "ssSpearPiece.h"
 
 namespace ss
 {
@@ -32,6 +35,10 @@ namespace ss
 		, mRushSpeed(4.5f)
 		, mEffectCount(0)
 		, mBigStage(0)
+		, mBallStage(0)
+		, mRainStage(0)
+		, mInterval(0.f)
+		, mPieceCount(0)
 	{
 	}
 	ValkyrieScript::~ValkyrieScript()
@@ -61,7 +68,38 @@ namespace ss
 		if (mHp <= 0)
 			mState = eState::Dead;
 
-		//Chase();
+		switch (mState)
+		{
+		case ss::ValkyrieScript::eState::Dead:
+			break;
+		case ss::ValkyrieScript::eState::Sleep:
+			break;
+		case ss::ValkyrieScript::eState::Transform:
+			break;
+		case ss::ValkyrieScript::eState::Chase:
+			Chase();
+			break;
+		case ss::ValkyrieScript::eState::LightningRush:
+			LightningRush();
+			break;
+		case ss::ValkyrieScript::eState::LightningAssault:
+			LightningAssault();
+			break;
+		case ss::ValkyrieScript::eState::CloneAssault:
+			CloneAssaultCast();
+			break;
+		case ss::ValkyrieScript::eState::BigLightning:
+			BigLightningCast();
+			break;
+		case ss::ValkyrieScript::eState::ThrowRightBall:
+			ThrowLightBall();
+			break;
+		case ss::ValkyrieScript::eState::SpearRainCast:
+			SpearRainCast();
+			break;
+		default:
+			break;
+		}
 		
 
 		if (Input::GetKey(eKeyCode::O))
@@ -71,10 +109,9 @@ namespace ss
 
 		if (Input::GetKey(eKeyCode::P))
 		{
-			On = true;
+			mState = eState::SpearRainCast;
 		}
-		if(On)
-			CloneAssaultCast();
+		
 	}
 
 	void ValkyrieScript::Render()
@@ -383,7 +420,7 @@ namespace ss
 				mRushStage = 0;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
@@ -391,7 +428,7 @@ namespace ss
 				mRushStage = 0;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 
 		}
@@ -692,7 +729,7 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
@@ -703,7 +740,7 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 		}
 	}
@@ -749,7 +786,7 @@ namespace ss
 		else if (mBigStage == 2)
 		{
 			mBigStage = 3;
-			//mState=
+			mState = eState::Chase;
 		}
 		
 	}
@@ -1104,7 +1141,7 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
@@ -1115,10 +1152,312 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
-				//mState = 
+				mState = eState::Chase;
 			}
 		}
 
+	}
+
+	void ValkyrieScript::ThrowLightBall()
+	{
+		CalDir(mPlayerPos);
+		
+		if (mBallStage == 0) //방향정하기
+		{
+			CalDir(mPlayerPos);
+			float xDiff = abs(mPos.x - mPlayerPos.x);
+			float yDiff = abs(mPos.y - mPlayerPos.y);
+
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::UpLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Up;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Down:
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Right;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::DownLeft:
+			{
+				if (xDiff <= yDiff)
+					mDirState = eDirState::Down;
+				else
+					mDirState = eDirState::Left;
+				break;
+			}
+			case ss::ValkyrieScript::eDirState::Right:
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+				break;
+			default:
+				break;
+			}
+
+			WalkAni();
+			mBallStage = 1;
+		}
+		else if (mBallStage == 1) //오/열 맞추기
+		{
+			float distance;
+			if (mDirState == eDirState::Up
+				|| mDirState == eDirState::UpRight
+				|| mDirState == eDirState::UpLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
+			}
+			else if (mDirState == eDirState::Down
+				|| mDirState == eDirState::DownRight
+				|| mDirState == eDirState::DownLeft)
+			{
+				distance = abs(mPos.x - mPlayerPos.x);
+
+				if (mPos.x < mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x += 2.5f * Time::DeltaTime();
+				else if (mPos.x > mPlayerPos.x && distance > mRushAxisDist)
+					mPos.x -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.x - mPlayerPos.x);
+			}
+			else if (mDirState == eDirState::Right)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
+			}
+			else if (mDirState == eDirState::Left)
+			{
+				distance = abs(mPos.y - mPlayerPos.y);
+
+				if (mPos.y < mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y += 2.5f * Time::DeltaTime();
+				else if (mPos.y > mPlayerPos.y && distance > mRushAxisDist)
+					mPos.y -= 2.5f * Time::DeltaTime();
+
+				distance = abs(mPos.y - mPlayerPos.y);
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+			if (distance <= mRushAxisDist)
+			{
+				mBallStage = 2;
+				mRushBeforePos = mPos;
+			}
+		}
+		else if (mBallStage == 2)
+		{
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+				break;
+			case ss::ValkyrieScript::eDirState::UpLeft:
+				break;
+			case ss::ValkyrieScript::eDirState::Down:
+				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+				break;
+			case ss::ValkyrieScript::eDirState::DownLeft:
+				break;
+			case ss::ValkyrieScript::eDirState::Right:
+				mAnimator->PlayAnimation(L"ValkThrowRight", false);
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+				mAnimator->PlayAnimation(L"ValkThrowLeft", false);
+				break;
+			default:
+				break;
+			}
+
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mBallStage = 3;
+		}
+		else if (mBallStage == 3)
+		{
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+			{
+				LightBall* ball = new LightBall(e4Direction::Up);
+				Vector3 pos = mPos;
+				pos.y += 0.5f;
+				ball->GetComponent<Transform>()->SetPosition(pos);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, ball);
+			}
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+				break;
+			case ss::ValkyrieScript::eDirState::UpLeft:
+				break;
+			case ss::ValkyrieScript::eDirState::Down:
+			{
+				LightBall* ball = new LightBall(e4Direction::Down);
+				Vector3 pos = mPos;
+				pos.y -= 0.5f;
+				ball->GetComponent<Transform>()->SetPosition(pos);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, ball);
+			}
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+				break;
+			case ss::ValkyrieScript::eDirState::DownLeft:
+				break;
+			case ss::ValkyrieScript::eDirState::Right:
+			{
+				LightBall* ball = new LightBall(e4Direction::Right);
+				Vector3 pos = mPos;
+				pos.x += 0.5f;
+				ball->GetComponent<Transform>()->SetPosition(pos);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, ball);
+			}
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+			{
+				LightBall* ball = new LightBall(e4Direction::Left);
+				Vector3 pos = mPos;
+				pos.x -= 0.5f;
+				ball->GetComponent<Transform>()->SetPosition(pos);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, ball);
+			}
+				break;
+			default:
+				break;
+			}
+
+			mBallStage = 4;
+		}
+		else if (mBallStage == 4)
+		{
+			mBallStage = 0;
+			mState = eState::Chase;
+		}
+	}
+
+	void ValkyrieScript::SpearRainCast()
+	{
+		if (mRainStage == 0)
+		{
+			mRainTargetPos = mPlayerPos;
+			mRainTargetPos.z += 0.01f;
+			mRainStage++;
+		}
+		else if (mRainStage == 1)
+		{
+			CalDir(mPlayerPos);
+			
+			switch (mDirState)
+			{
+			case ss::ValkyrieScript::eDirState::Up:
+				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				break;
+			case ss::ValkyrieScript::eDirState::UpRight:
+				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				break;
+			case ss::ValkyrieScript::eDirState::UpLeft:
+				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				break;
+			case ss::ValkyrieScript::eDirState::Down:
+				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				break;
+			case ss::ValkyrieScript::eDirState::DownRight:
+				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				break;
+			case ss::ValkyrieScript::eDirState::DownLeft:
+				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				break;
+			case ss::ValkyrieScript::eDirState::Right:
+				mAnimator->PlayAnimation(L"ValkThrowRight", false);
+				break;
+			case ss::ValkyrieScript::eDirState::Left:
+				mAnimator->PlayAnimation(L"ValkThrowLeft", false);
+				break;
+			default:
+				break;
+			}
+
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+			{
+				mRainStage++;
+				WalkAni();
+			}
+		}
+		else if (mRainStage == 2)
+		{
+			mRain = new SpearRain();
+			mRain->GetComponent<Transform>()->SetPosition(mRainTargetPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, mRain);
+			mRainStage++;
+			
+		}
+		else if (mRainStage == 3)
+		{
+			if (mRain->GetAniComplete())
+				mRainStage++;
+		}
+		else if (mRainStage == 4)
+		{
+			mInterval -= Time::DeltaTime();
+			if (mInterval > 0.f)
+				return;
+
+			mInterval = math::RandomUniDist(0.005f, 0.01f);
+
+			SpearPiece* piece = new SpearPiece();
+			Vector3 piecePos;
+			piecePos.y = mRainTargetPos.y + 2.5f + math::RandomUniDist(-0.5f, 0.5f);
+			piecePos.x = mRainTargetPos.x + math::RandomUniDist(-0.5f, 0.5f);
+			piece->GetComponent<Transform>()->SetPosition(piecePos);
+
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, piece);
+
+			mPieceCount++;
+			if (mPieceCount >= 100)
+			{
+				mRainStage++;
+				mPieceCount = 0;
+			}
+		}
+		else if (mRainStage == 5)
+		{
+			mRainStage = 0;
+			mState = eState::Chase;
+		}
 	}
 
 	void ValkyrieScript::ChangeHP(float value)

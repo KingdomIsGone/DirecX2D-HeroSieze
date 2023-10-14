@@ -126,6 +126,12 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = ss::Resources::Find<Shader>(L"AlphaAnimationShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+		
+
 #pragma endregion
 #pragma region Sampler State
 		//Sampler State
@@ -465,6 +471,11 @@ namespace renderer
 		bossEffectShader2->Create(eShaderStage::PS, L"BossEffectPS2.hlsl", "main");
 		ss::Resources::Insert(L"BossEffectShader2", bossEffectShader2);
 
+		std::shared_ptr<Shader> alphaAnimationShader = std::make_shared<Shader>();
+		alphaAnimationShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		alphaAnimationShader->Create(eShaderStage::PS, L"TransParentPS.hlsl", "main");
+		ss::Resources::Insert(L"AlphaAnimationShader", alphaAnimationShader);
+
 		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
 		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
 		paritcleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
@@ -539,6 +550,13 @@ namespace renderer
 		material->SetShader(BossEffectShader2);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BossEffectMaterial2", material);
+
+		std::shared_ptr<Shader> AlphaAnimationShader
+			= Resources::Find<Shader>(L"AlphaAnimationShader");
+		material = std::make_shared<Material>();
+		material->SetShader(AlphaAnimationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"AlphaAnimationMaterial", material);
 
 		std::shared_ptr<Shader> gridShader
 			= Resources::Find<Shader>(L"GridShader");

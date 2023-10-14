@@ -43,6 +43,8 @@
 #include "ssFireAura.h"
 #include "ssHydra.h"
 
+#include "ssSpearRain.h"
+
 
 namespace ss
 {
@@ -119,6 +121,10 @@ namespace ss
 		Hydra* hydra = new Hydra();
 		AddGameObject(eLayerType::Monster, hydra);
 		hydra->GetComponent<Transform>()->SetPosition(1.5f, 0.0f, 1.01f);
+
+		SpearRain* rain = new SpearRain();
+		AddGameObject(eLayerType::Projectile, rain);
+		rain->GetComponent<Transform>()->SetPosition(0.0f, 0.0f, 1.02f);
 
 		TestObject* TestObj = new TestObject(nullptr);
 		AddGameObject(eLayerType::Projectile, TestObj);

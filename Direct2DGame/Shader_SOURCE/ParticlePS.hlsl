@@ -14,11 +14,11 @@ float4 main(GSOut In) : SV_TARGET
     
     Color = albedoTexture.Sample(anisotropicSampler, In.UV);
     
-    if (Color.w <= 0.0f)
+    if (Color.a <= 0.0f)
         discard;
     
-    //Color.w = ParticleAlpha;
-    Color.w = 1.f;
+    Color.w = ParticleAlpha;
+   
     
     return Color;
 

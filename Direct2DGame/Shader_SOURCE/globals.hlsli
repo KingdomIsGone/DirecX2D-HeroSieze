@@ -51,6 +51,8 @@ cbuffer BossEffect2 : register(b7) //custom
     float Badd2;
     float A2;
     float DiscardLight;
+    //TransparentPS
+    float TransAlpha;
 }
 cbuffer BossEffect : register(b8) //custom
 {

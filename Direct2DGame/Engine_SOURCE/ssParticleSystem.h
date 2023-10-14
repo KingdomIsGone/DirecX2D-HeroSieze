@@ -16,8 +16,6 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetTexture(std::shared_ptr<Texture> tex);
-		void BindCB();
 
 	private:
 		graphics::StructedBuffer* mParticleStructBuffer;

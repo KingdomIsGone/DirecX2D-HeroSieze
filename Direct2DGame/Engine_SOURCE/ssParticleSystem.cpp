@@ -5,8 +5,6 @@
 #include "ssResources.h"
 #include "ssTransform.h"
 #include "ssGameObject.h"
-#include "ssConstantBuffer.h"
-#include "ssRenderer.h"
 
 namespace ss
 {
@@ -53,7 +51,6 @@ namespace ss
 		mSharedBuffer = new graphics::StructedBuffer();
 		mSharedBuffer->Create(sizeof(ParticleShared), 1, eViewType::UAV, nullptr, true);
 
-		SetTexture(Resources::Find<Texture>(L"..\\Resources\\particle\\CartoonSmoke.png"));
 	}
 	ParticleSystem::~ParticleSystem()
 	{
@@ -71,19 +68,17 @@ namespace ss
 		float AliveTime = 0.2f / 1.0f;
 		mTime += Time::DeltaTime();
 
-		mAlpha -= 0.6f * Time::DeltaTime();
+		//mAlpha -= 0.6f * Time::DeltaTime();
 
 		if (mTime > AliveTime)
 		{
 			float f = (mTime / AliveTime);
-			//UINT AliveCount = (UINT)f;
+			UINT AliveCount = (UINT)f;
 			mTime = f - floor(f);
 
 			ParticleShared shareData = {};
 			shareData.sharedActiveCount = 2;
 			mSharedBuffer->SetData(&shareData, 1);
-
-			mAlpha = 1.f;
 		}
 		else
 		{
@@ -92,7 +87,6 @@ namespace ss
 			mSharedBuffer->SetData(&shareData, 1);
 		}
 
-		BindCB();
 
 		mParticleShader->SetParticleBuffer(mParticleStructBuffer);
 		mParticleShader->SetSharedBuffer(mSharedBuffer);
@@ -105,28 +99,11 @@ namespace ss
 		mParticleStructBuffer->BindSRV(eShaderStage::GS, 14);
 		mParticleStructBuffer->BindSRV(eShaderStage::PS, 14);
 
-		GetMaterial()->SetTexture(mParticleTexture);
 		GetMaterial()->Binds();
 		GetMesh()->RenderInstanced(1000);
 
 		mParticleStructBuffer->Clear();
-		GetMaterial()->Clear();
 	}
 
-	void ParticleSystem::SetTexture(std::shared_ptr<Texture> tex)
-	{
-		mParticleTexture = tex;
-		GetMaterial()->SetTexture(tex);
-	}
-	void ParticleSystem::BindCB()
-	{
-		ConstantBuffer* cb = renderer::constantBuffer[(int)eCBType::Particle];
-
-		renderer::ParticleCB data = {};
-
-		//data.ParticleAlpha = mAlpha;
-		data.ParticleAlpha = 1.f;
-
-		cb->Bind(eShaderStage::PS);
-	}
+	
 }

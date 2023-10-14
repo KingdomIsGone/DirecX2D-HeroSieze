@@ -248,6 +248,15 @@
     <ClCompile Include="ssCloneScript.cpp">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script</Filter>
     </ClCompile>
+    <ClCompile Include="ssLightBall.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\LightBall</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSpearRain.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSpearPiece.cpp">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -500,6 +509,15 @@
     <ClInclude Include="ssCloneScript.h">
       <Filter>Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script</Filter>
     </ClInclude>
+    <ClInclude Include="ssLightBall.h">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\LightBall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSpearRain.h">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSpearPiece.h">
+      <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -693,6 +711,18 @@
     </Filter>
     <Filter Include="Contents\Object\Boss\Valkyrie\ValEffect\CloneAssault\Script">
       <UniqueIdentifier>{21d9474c-a4e6-46db-845a-ad23ad14fbee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\Skill">
+      <UniqueIdentifier>{12706d8c-6ea8-4819-9d42-e19634cf2be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\Skill\LightBall">
+      <UniqueIdentifier>{f2a142e2-1feb-4e13-b0cd-d1a76c0a8caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\Skill\SpearRain">
+      <UniqueIdentifier>{f9a3dd39-23cd-4733-b95c-8d7162dd3531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece">
+      <UniqueIdentifier>{cf3d9eaa-da86-4a82-927a-285ad50dc57b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
