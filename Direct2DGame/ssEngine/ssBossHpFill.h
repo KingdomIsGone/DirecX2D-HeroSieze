@@ -16,6 +16,7 @@ namespace ss
 
 		void setPos(Vector3 pos) { mPos = pos; }
 
+		void SetIniHp(float hp) { mCurHP = hp; mPrevHP = hp; mFullHP = hp; }
 		void ChangeHP(float hp) {  mCurHP = hp; }
 		void SetBlank();
 		void SetMater();

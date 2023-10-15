@@ -19,7 +19,6 @@ namespace ss
 		mTransform = GetComponent<Transform>();
 
 		//콜라이더 세팅
-		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
 		Collider2D* collider = AddComponent<Collider2D>();
 		collider->SetCollideType(eCollideType::Projectile);
 		collider->SetSize(Vector2(0.25f, 0.25f));
@@ -33,11 +32,11 @@ namespace ss
 		mAnimator = AddComponent<Animator>();
 
 		std::shared_ptr<Texture> FireAuraTex
-			= Resources::Load<Texture>(L"FireAuraTex", L"..\\Resources\\Texture\\Skill\\FireAura\\FireAura.png");
-		mAnimator->Create(L"FireAura", FireAuraTex, Vector2(0.0f, 0.0f), Vector2(85.f, 85.f), 15);
+			= Resources::Load<Texture>(L"FireAuraTex", L"..\\Resources\\Texture\\Skill\\FireAura\\FireAuraV2.png");
+		mAnimator->Create(L"FireAura", FireAuraTex, Vector2(0.0f, 0.0f), Vector2(116.f, 109.f), 12);
 	
 
-		mTransform->SetScale(Vector3(6.f, 6.f, 1.0));
+		mTransform->SetScale(Vector3(3.5f, 3.5f, 1.0));
 
 		mAnimator->PlayAnimation(L"FireAura", true);
 	}

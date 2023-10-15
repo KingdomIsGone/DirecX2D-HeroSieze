@@ -176,6 +176,7 @@ namespace ss
 			mBossHpFill = new BossHpFill();
 			AddGameObject(eLayerType::UI, mBossHpFill);
 			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.89f);
+			mBossHpFill->SetIniHp(20000.f);
 			mValkyrie->SetBossHpFill(mBossHpFill);
 		}
 

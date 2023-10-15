@@ -250,6 +250,7 @@ namespace ss
 			mBossHpFill = new BossHpFill();
 			AddGameObject(eLayerType::UI, mBossHpFill);
 			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.89f);
+			mBossHpFill->SetIniHp(10000.f);
 			mAnubis->SetBossHpFill(mBossHpFill);
 
 			mBossName = new BossName();
@@ -356,6 +357,19 @@ namespace ss
 	void AnubisRoom::Render()
 	{
 		Scene::Render();
+	}
+
+	void AnubisRoom::OnEnter()
+	{
+		renderer::cameras.push_back(mMainCamera);
+		renderer::cameras.push_back(mPlayerCamera);
+		renderer::cameras.push_back(mUICamera);
+		renderer::cameras.push_back(mCursorCamera);
+		renderer::mainCamera = mCursorCamera;
+	}
+
+	void AnubisRoom::OnExit()
+	{
 	}
 
 }

@@ -70,6 +70,7 @@ namespace ss
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
 		DamageCheck();
+		mBossHpFill->ChangeHP(mHp);
 
 		if (!mAwake && mValk->GetAwake())
 		{
@@ -1439,13 +1440,13 @@ namespace ss
 
 	void ValkyrieScript::SpearRainCast()
 	{
-		if (mRainStage == 0)
+		if (mRainStage == 1)
 		{
 			mRainTargetPos = mPlayerPos;
 			mRainTargetPos.z += 0.01f;
 			mRainStage++;
 		}
-		else if (mRainStage == 1)
+		else if (mRainStage == 0)
 		{
 			CalDir(mPlayerPos);
 			
