@@ -263,6 +263,9 @@
     <ClCompile Include="ssAwakerScript.cpp">
       <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
     </ClCompile>
+    <ClCompile Include="ssBossName.cpp">
+      <Filter>Contents\Object\UI\BossName</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -530,6 +533,9 @@
     <ClInclude Include="ssAwakerScript.h">
       <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
     </ClInclude>
+    <ClInclude Include="ssBossName.h">
+      <Filter>Contents\Object\UI\BossName</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -738,6 +744,9 @@
     </Filter>
     <Filter Include="Contents\Scene\BossRoomValkyrie\Awaker">
       <UniqueIdentifier>{cfa9f8ff-4ef0-4f1b-ac98-33f1aaf59f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\BossName">
+      <UniqueIdentifier>{48249838-d302-4704-a7b8-cfd35cb2a3b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -170,6 +170,7 @@
     <ClInclude Include="ssBigLightningScript.h" />
     <ClInclude Include="ssBossHpBar.h" />
     <ClInclude Include="ssBossHpFill.h" />
+    <ClInclude Include="ssBossName.h" />
     <ClInclude Include="ssChainLightening.h" />
     <ClInclude Include="ssChargedBolt.h" />
     <ClInclude Include="ssCloneAssault.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="ssBigLightningScript.cpp" />
     <ClCompile Include="ssBossHpBar.cpp" />
     <ClCompile Include="ssBossHpFill.cpp" />
+    <ClCompile Include="ssBossName.cpp" />
     <ClCompile Include="ssChainLightening.cpp" />
     <ClCompile Include="ssChargedBolt.cpp" />
     <ClCompile Include="ssCloneAssault.cpp" />

@@ -21,6 +21,7 @@
 #include "ssBossHpBar.h"
 #include "ssBossHpFill.h"
 #include "ssValAwaker.h"
+#include "ssBossName.h"
 
 namespace ss
 {
@@ -174,13 +175,19 @@ namespace ss
 
 			mBossHpFill = new BossHpFill();
 			AddGameObject(eLayerType::UI, mBossHpFill);
-			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.9f);
+			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.89f);
 			mValkyrie->SetBossHpFill(mBossHpFill);
 		}
 
 		mValAwaker = new ValAwaker();
 		AddGameObject(eLayerType::Monster, mValAwaker);
 		mValAwaker->GetComponent<Transform>()->SetPosition(0.0f, 2.5f, 1.f);
+		
+		mBossName = new BossName();
+		mBossName->SetBossName(L"¹ßÅ°¸®");
+		mBossName->SetFontPos(560.f, 20.f);
+		AddGameObject(eLayerType::UI, mBossName);
+		mBossName->GetComponent<Transform>()->SetPosition(0.0f, 0.f, 0.9f);
 		
 	}
 
@@ -195,24 +202,30 @@ namespace ss
 		{
 			mBossHpBar->SetHP();
 			mBossHpFill->SetMater();
+			mBossName->SetOnOff(true);
 		}
 		else
+		{
 			mBossHpBar->SetBlank();
+			mBossName->SetOnOff(false);
+		}
 
 		if (mValkyrie->GetDead())
+		{
 			mBossHpBar->SetBlank();
+			mBossName->SetOnOff(false);
+		}
 	}
 
 	void ValkyrieScene::LateUpdate()
 	{
-		
-
 		Scene::LateUpdate();
 	}
 
 	void ValkyrieScene::Render()
 	{
 		Scene::Render();
+
 	}
 	void ValkyrieScene::OnEnter()
 	{

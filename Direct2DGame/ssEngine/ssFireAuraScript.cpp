@@ -6,6 +6,7 @@
 namespace ss
 {
 	FireAuraScript::FireAuraScript()
+		: mDamage(80.f)
 	{
 	}
 	FireAuraScript::~FireAuraScript()
@@ -38,9 +39,6 @@ namespace ss
 
 			Vector3 targetPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
 			Vector3 playerPos = PlayerScript::GetPlayerPos();
-
-			if (math::GetDistance(targetPos, playerPos) > 1.2f)
-				return;
 
 			UINT colID = other->GetColliderID();
 			for (UINT id : mColIDs)

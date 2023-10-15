@@ -28,5 +28,8 @@ namespace ss
 		class BossHpFill* mBossHpFill;
 		class Valkyrie* mValkyrie;
 		class ValAwaker* mValAwaker;
+		class BossName* mBossName;
+
+		bool mbFont;
 	};
 }

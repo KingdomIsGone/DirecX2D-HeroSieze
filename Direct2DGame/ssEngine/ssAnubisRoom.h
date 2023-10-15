@@ -15,8 +15,6 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void UI_Setting();
-		void TextureSetting();
 
 	private:
 		class Cursor* cursor;
@@ -24,5 +22,12 @@ namespace ss
 		class Anubis* mAnubis;
 		class BossHpBar* mBossHpBar;
 		class BossHpFill* mBossHpFill;
+		class BossName* mBossName;
+
+		class Camera* mMainCamera;
+		class Camera* mPlayerCamera;
+		class Camera* mUICamera;
+		class Camera* mCursorCamera;
+		class Camera* mInventoryCamera;
 	};
 }
