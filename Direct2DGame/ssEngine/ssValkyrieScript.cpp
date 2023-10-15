@@ -25,7 +25,7 @@
 namespace ss
 {
 	ValkyrieScript::ValkyrieScript()
-		: mHp(10000.0f)
+		: mHp(20000.0f)
 		, mSpeed(1.f)
 		, mRushStage(0)
 		, mRushAxisDist(0.01f)
@@ -39,6 +39,11 @@ namespace ss
 		, mRainStage(0)
 		, mInterval(0.f)
 		, mPieceCount(0)
+		, mPatternNum(0)
+		, mPatternTime(0.f)
+		, mDeadStage(0)
+		, mAlpha(1.f)
+		, mTransformAniStage(0)
 	{
 	}
 	ValkyrieScript::~ValkyrieScript()
@@ -55,6 +60,7 @@ namespace ss
 
 		mPos = mTransform->GetPosition();
 
+		mState = eState::Sleep;
 		mDirState = eDirState::Down;
 	}
 
@@ -65,16 +71,24 @@ namespace ss
 
 		DamageCheck();
 
+		if (!mAwake && mValk->GetAwake())
+		{
+			mAwake = true;
+			mState = eState::Transform;
+		}
+
 		if (mHp <= 0)
 			mState = eState::Dead;
 
 		switch (mState)
 		{
 		case ss::ValkyrieScript::eState::Dead:
+			Dead();
 			break;
 		case ss::ValkyrieScript::eState::Sleep:
 			break;
 		case ss::ValkyrieScript::eState::Transform:
+			PlayTransform();
 			break;
 		case ss::ValkyrieScript::eState::Chase:
 			Chase();
@@ -102,14 +116,11 @@ namespace ss
 		}
 		
 
-		if (Input::GetKey(eKeyCode::O))
-		{
-			LightningRush();
-		}
+		
 
 		if (Input::GetKey(eKeyCode::P))
 		{
-			mState = eState::SpearRainCast;
+			mState = eState::BigLightning;
 		}
 		
 	}
@@ -125,14 +136,30 @@ namespace ss
 
 	void ValkyrieScript::Dead()
 	{
-		/*GetOwner()->GetComponent<Transform>()->SetScale(Vector3(3.0f, 3.0f, 1.0f));
-		mAnimator->PlayAnimation(L"AnubisDeadEffect", false);
+		if (mDeadStage == 0)
+		{
+			mValk->SetDead();
+			mDirState = eDirState::Down;
+			WalkAni();
+			mEffector->PlayDeathEffect();
 
-		if (mAnimator->GetActiveAnimation()->IsComplete())
+			if (mEffector->GetDeathAniPlayed())
+				mDeadStage++;
+		}
+		else if (mDeadStage == 1)
+		{
+			mAlpha -= 1.f * Time::DeltaTime();
+
+			mValk->SetAhlphaMater(mAlpha);
+
+			if (mAlpha < 0)
+				mDeadStage++;
+		}
+		else if (mDeadStage == 2)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
-			dynamic_cast<Anubis*>(GetOwner())->SetDead();
-		}*/
+		}
+		
 	}
 
 	void ValkyrieScript::Chase()
@@ -170,6 +197,12 @@ namespace ss
 		
 		GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
+		if(mHp > 14000.f)
+			Pattern();
+		else
+		{
+			Pattern2();
+		}
 	}
 
 	void ValkyrieScript::WalkAni()
@@ -202,6 +235,32 @@ namespace ss
 			break;
 		default:
 			break;
+		}
+	}
+
+	void ValkyrieScript::PlayTransform()
+	{
+		if (mTransformAniStage == 0)
+		{
+			mAnimator->PlayAnimation(L"ValkTurn", false);
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mTransformAniStage = 1;
+		}
+		else if (mTransformAniStage == 1)
+		{
+			mAnimator->PlayAnimation(L"ValkAfterTurn", false);
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mTransformAniStage = 2;
+		}
+		else if (mTransformAniStage == 2)
+		{
+			mAnimator->PlayAnimation(L"ValkTransform", false);
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mTransformAniStage = 3;
+		}
+		else if (mTransformAniStage == 3)
+		{
+			mState = eState::Chase;
 		}
 	}
 
@@ -777,16 +836,25 @@ namespace ss
 		{
 			mAnimator->PlayAnimation(L"ValkCast", true);
 			mPlayerPos = PlayerScript::GetPlayerPos();
-			BigLightning* big = new BigLightning();
-			big->SetPosition(mPlayerPos);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, big);
+			mBig = new BigLightning();
+			mBig->SetPosition(mPlayerPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, mBig);
 
-			mBigStage = 2;
+			mBigStage++;
 		}
 		else if (mBigStage == 2)
 		{
-			mBigStage = 3;
-			mState = eState::Chase;
+			if (mEffector->PlayChargeNewAndMiddle()
+				&& mBig->GetStage() >= 1)
+				mBigStage++;
+		}
+		else if (mBigStage == 3)
+		{
+			if (mEffector->PlayChargeEffectEnd())
+			{
+				mBigStage = 0;
+				mState = eState::Chase;
+			}
 		}
 		
 	}
@@ -1509,6 +1577,86 @@ namespace ss
 			break;
 		default:
 			break;
+		}
+	}
+
+	void ValkyrieScript::Pattern()
+	{
+		mPatternTime += Time::DeltaTime();
+		if (mPatternTime < 1.f)
+			return;
+
+		mPatternTime = 0.f;
+
+		if (mPatternNum == 0)
+		{
+			mState = eState::LightningRush;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 1)
+		{
+			mState = eState::ThrowRightBall;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 2)
+		{
+			mState = eState::LightningAssault;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 3)
+		{
+			mState = eState::LightningRush;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 4)
+		{
+			mState = eState::SpearRainCast;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 5)
+		{
+			mState = eState::ThrowRightBall;
+			mPatternNum = 0;
+		}
+	}
+
+	void ValkyrieScript::Pattern2()
+	{
+		mPatternTime += Time::DeltaTime();
+		if (mPatternTime < 1.f)
+			return;
+
+		mPatternTime = 0.f;
+
+		if (mPatternNum == 0)
+		{
+			mState = eState::LightningAssault;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 1)
+		{
+			mState = eState::ThrowRightBall;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 2)
+		{
+			mState = eState::CloneAssault;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 3)
+		{
+			mState = eState::BigLightning;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 4)
+		{
+			mState = eState::CloneAssault;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 5)
+		{
+			mState = eState::SpearRainCast;
+			mPatternNum = 0;
 		}
 	}
 

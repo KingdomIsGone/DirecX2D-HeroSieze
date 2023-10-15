@@ -19,6 +19,13 @@ namespace ss
 		void SetValkyrie(class Valkyrie* valk) { mValk = valk; }
 		void SetOffset(Vector3 offset) { mOffset = offset; }
 		void PlayNormalRushEffect(e4Direction dir);
+		void PlayDeathEffect();
+		void PlayChargeEffectNew();
+		void PlayChargeEffectMiddle();
+		bool PlayChargeNewAndMiddle();
+		bool PlayChargeEffectEnd();
+
+		bool GetDeathAniPlayed() { return mDeathAniPlayed; }
 
 	private:
 		Transform* mTransform;
@@ -30,5 +37,9 @@ namespace ss
 		class ValkyrieScript* mScript;
 		class Animator* mAnimator;
 
+		UINT mChargeStage;
+
+		UINT mDeathStage;
+		bool mDeathAniPlayed;
 	};
 }

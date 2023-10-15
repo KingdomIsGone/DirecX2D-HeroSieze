@@ -19,6 +19,7 @@ namespace ss
 		void SetOffset(Vector3 offset) { mOffset = offset; }
 		void PlayAni();
 		void SetPosition(Vector3 pos) { mPos = pos; }
+		UINT GetStage() { return mStage; }
 
 	private:
 		Transform* mTransform;

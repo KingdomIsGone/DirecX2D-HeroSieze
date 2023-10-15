@@ -52,9 +52,13 @@ namespace ss
 		void CalDir(Vector3 targetPos);
 		void ChangeColSetting();
 
+		void Pattern();
+		void Pattern2();
+
 		void Dead();
 		void Chase();
 		void WalkAni();
+		void PlayTransform();
 		void LightningRush();
 		void LightningAssault();
 		void BigLightningCast();
@@ -84,6 +88,13 @@ namespace ss
 		Vector3 mPos;
 		Vector3 mPlayerPos;
 
+		UINT mPatternNum;
+		float mPatternTime;
+		
+		//Transform
+		bool mAwake;
+		UINT mTransformAniStage;
+
 		//Rush
 		UINT mRushStage;
 		float mRushReadySpeed;
@@ -106,6 +117,7 @@ namespace ss
 		//BigLightning
 		UINT mBigStage;
 		bool mBigOnce;
+		class BigLightning* mBig;
 		
 		//ThrowLightBall
 		UINT mBallStage;
@@ -116,6 +128,10 @@ namespace ss
 		float mInterval;
 		UINT mPieceCount;
 		class SpearRain* mRain;
+
+		//Dead
+		UINT mDeadStage;
+		float mAlpha;
 
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;

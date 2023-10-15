@@ -257,6 +257,12 @@
     <ClCompile Include="ssSpearPiece.cpp">
       <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece</Filter>
     </ClCompile>
+    <ClCompile Include="ssValAwaker.cpp">
+      <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
+    </ClCompile>
+    <ClCompile Include="ssAwakerScript.cpp">
+      <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -518,6 +524,12 @@
     <ClInclude Include="ssSpearPiece.h">
       <Filter>Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece</Filter>
     </ClInclude>
+    <ClInclude Include="ssValAwaker.h">
+      <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
+    </ClInclude>
+    <ClInclude Include="ssAwakerScript.h">
+      <Filter>Contents\Scene\BossRoomValkyrie\Awaker</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -723,6 +735,9 @@
     </Filter>
     <Filter Include="Contents\Object\Boss\Valkyrie\Skill\SpearRain\Piece">
       <UniqueIdentifier>{cf3d9eaa-da86-4a82-927a-285ad50dc57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\BossRoomValkyrie\Awaker">
+      <UniqueIdentifier>{cfa9f8ff-4ef0-4f1b-ac98-33f1aaf59f7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

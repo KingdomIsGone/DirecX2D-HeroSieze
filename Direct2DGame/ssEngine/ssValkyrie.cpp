@@ -6,13 +6,13 @@
 #include "ssCollider2D.h"
 #include "ssValkyrieScript.h"
 #include "ssValEffector.h"
-
+#include "ssRenderer.h"
 
 namespace ss
 {
 	Valkyrie::Valkyrie()
-		: mCurHp(500.0f)
-		, mPrevHp(500.0f)
+		: mCurHp(20000.0f)
+		, mPrevHp(20000.0f)
 		, mTransformAniStage(0)
 	{
 		SetName(L"Valkyrie");
@@ -27,9 +27,9 @@ namespace ss
 		collider->SetCenter(Vector2(-0.00f, 0.0f));
 
 		//렌더, 애니메이터 세팅
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		mMr = AddComponent<MeshRenderer>();
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mMr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 
 		mAnimator = AddComponent<Animator>();
 
@@ -128,17 +128,18 @@ namespace ss
 
 		mAnimator->PlayAnimation(L"ValkThrowLeft", true);
 
-		ValEffector* effector = new ValEffector();
-		effector->SetValkyrie(this);
-		AddOtherGameObject(effector, eLayerType::Projectile);
+		mEffector = new ValEffector();
+		mEffector->SetValkyrie(this);
+		AddOtherGameObject(mEffector, eLayerType::Projectile);
 
 		mScript = AddComponent<ValkyrieScript>();
-		mScript->SetEffector(effector);
+		mScript->SetEffector(mEffector);
 		mScript->SetValk(this);
 	}
 
 	Valkyrie::~Valkyrie()
 	{
+		mEffector->SetState(eState::Dead);
 	}
 	void Valkyrie::Initialize()
 	{
@@ -148,7 +149,6 @@ namespace ss
 	{
 		GameObject::Update();
 
-		//PlayTransformAni();
 
 		/*mCurHp = mScript->GetHP();
 		if (mCurHp != mPrevHp)
@@ -159,13 +159,6 @@ namespace ss
 		}*/
 
 
-		/*if (ThOnce)
-		{
-			ValThunderEffect* thEffect = new ValThunderEffect();
-			thEffect->SetValkyrie(this);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, thEffect);
-			ThOnce = false;
-		}*/
 
 	}
 	void Valkyrie::LateUpdate()
@@ -177,28 +170,28 @@ namespace ss
 		GameObject::Render();
 	}
 
-	void Valkyrie::PlayTransformAni()
+
+	void Valkyrie::SetAhlphaMater(float alpha)
 	{
-		if (mTransformAniStage == 0)
-		{
-			mAnimator->PlayAnimation(L"ValkTurn", false);
-			if (mAnimator->GetActiveAnimation()->IsComplete())
-				mTransformAniStage = 1;
-		}
-		else if (mTransformAniStage == 1)
-		{
-			mAnimator->PlayAnimation(L"ValkAfterTurn", false);
-			if (mAnimator->GetActiveAnimation()->IsComplete())
-				mTransformAniStage = 2;
-		}
-		else if (mTransformAniStage == 2)
-		{
-			mAnimator->PlayAnimation(L"ValkTransform", false);
-			if (mAnimator->GetActiveAnimation()->IsComplete())
-				mTransformAniStage = 3;
-		}
+		mMr->SetMaterial(Resources::Find<Material>(L"AlphaAnimationMaterial"));
 
+		ss::graphics::ConstantBuffer* cb
+			= renderer::constantBuffer[(int)eCBType::BossEffect2];
 
+		renderer::BossEffectCB2 data;
+
+		data.A = 0.5f;
+
+		data.TransAlpha = alpha;
+
+		cb->SetData(&data);
+
+		cb->Bind(eShaderStage::PS);
+	}
+
+	void Valkyrie::SetBossHpFill(BossHpFill* fill)
+	{
+		mScript->SetBossHpFill(fill);
 	}
 	
 }

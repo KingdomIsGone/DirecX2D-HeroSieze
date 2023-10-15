@@ -12,6 +12,8 @@ namespace ss
 {
 	ValEffector::ValEffector()
 		: mOffset(Vector3::Zero)
+		, mDeathStage(0)
+		, mChargeStage(0)
 	{
 		SetName(L"ValEffector");
 
@@ -30,28 +32,34 @@ namespace ss
 			//lightning
 			std::shared_ptr<Texture> LightningEffectTex
 				= Resources::Load<Texture>(L"LightningEffectTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\LightningImpact.png");
-			mAnimator->Create(L"LightningEffect", LightningEffectTex, Vector2(0.0f, 0.0f), Vector2(70.f, 70.f), 8);
+			mAnimator->Create(L"LightningEffect", LightningEffectTex, Vector2(0.0f, 0.0f), Vector2(70.f, 70.f), 8, Vector2::Zero, 0.05f);
 			
 			std::shared_ptr<Texture> LightningBlankTex
 				= Resources::Load<Texture>(L"LightningBlankTex", L"..\\Resources\\Texture\\Blank.png");
 			mAnimator->Create(L"LightningBlank", LightningBlankTex, Vector2(0.0f, 0.0f), Vector2(1.f, 1.f), 1);
 
-			//melee
-			std::shared_ptr<Texture> ValkAtkDownTex
-				= Resources::Load<Texture>(L"ValkAtkDownTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkDown.png");
-			mAnimator->Create(L"ValkAtkDown", ValkAtkDownTex, Vector2(0.0f, 0.0f), Vector2(92.f, 107.0f), 6, Vector2::Zero, 0.02f);
+			std::shared_ptr<Texture> ValDeathEffectTex
+				= Resources::Load<Texture>(L"ValDeathEffectTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\ValDeathEffect.png");
+			mAnimator->Create(L"ValDeathEffect", ValDeathEffectTex, Vector2(0.0f, 0.0f), Vector2(50.f, 56.f), 25, Vector2::Zero, 0.1f);
 
-			std::shared_ptr<Texture> ValkAtkLeftTex
-				= Resources::Load<Texture>(L"ValkAtkLeftTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkLeft.png");
-			mAnimator->Create(L"ValkAtkLeft", ValkAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
+			mAnimator->SetLarge(true);
 
-			std::shared_ptr<Texture> ValkAtkRightTex
-				= Resources::Load<Texture>(L"ValkAtkRightTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkRight.png");
-			mAnimator->Create(L"ValkAtkRight", ValkAtkRightTex, Vector2(0.0f, 0.0f), Vector2(111.f, 83.0f), 6, Vector2::Zero, 0.02f);
+			std::shared_ptr<Texture> ValChargeNewTex
+				= Resources::Load<Texture>(L"ValChargeNewTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\Charge\\ChargeNew.png");
+			mAnimator->Create(L"ValChargeNew", ValChargeNewTex, Vector2(0.0f, 0.0f), Vector2(136.f, 236.f), 7, Vector2::Zero, 0.1f);
 
-			std::shared_ptr<Texture> ValkAtkUpTex
-				= Resources::Load<Texture>(L"ValkAtkUpTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Melee\\ValkAtkUp.png");
-			mAnimator->Create(L"ValkAtkUp", ValkAtkUpTex, Vector2(0.0f, 0.0f), Vector2(105.f, 92.0f), 6, Vector2::Zero, 0.02f);
+			std::shared_ptr<Texture> ValChargeMiddleTex
+				= Resources::Load<Texture>(L"ValChargeMiddleTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\Charge\\ChargeMiddle.png");
+			mAnimator->Create(L"ValChargeMiddle", ValChargeMiddleTex, Vector2(0.0f, 0.0f), Vector2(136.f, 236.f), 6, Vector2::Zero, 0.1f);
+
+			std::shared_ptr<Texture> ValChargeEndTex
+				= Resources::Load<Texture>(L"ValChargeEndTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\Charge\\ChargeEnd.png");
+			mAnimator->Create(L"ValChargeEnd", ValChargeEndTex, Vector2(0.0f, 0.0f), Vector2(136.f, 236.f), 8, Vector2::Zero, 0.1f);
+
+			std::shared_ptr<Texture> ValDeathEffect2Tex
+				= Resources::Load<Texture>(L"ValDeathEffect2Tex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Effect\\ValDeathEffect2.png");
+			mAnimator->Create(L"ValDeathEffect2", ValDeathEffect2Tex, Vector2(0.0f, 0.0f), Vector2(320.f, 320.f), 19, Vector2::Zero, 0.1f);
+			
 		}
 
 		
@@ -74,12 +82,15 @@ namespace ss
 		mTransform->SetPosition(mValkPos);
 
 		if (mAnimator->GetActiveAnimation() != nullptr
-			&& mAnimator->GetActiveAnimation()->IsComplete())
+			&& mAnimator->GetActiveAnimation()->IsComplete()
+			&& mAnimator->GetActiveAnimation()->GetKey() == L"LightningEffect")
 			mAnimator->PlayAnimation(L"LightningBlank", true);
 	}
 	void ValEffector::LateUpdate()
 	{
 		GameObject::LateUpdate();
+
+		
 	}
 	void ValEffector::Render()
 	{
@@ -107,6 +118,7 @@ namespace ss
 	void ValEffector::PlayNormalRushEffect(e4Direction dir)
 	{
 		BindCB(0.4f, 0.4f, 0.f, .9f);
+		mTransform->SetScale(1.f, 1.f, 1.f);
 
 		switch (dir)
 		{
@@ -128,6 +140,101 @@ namespace ss
 		
 		mAnimator->PlayAnimation(L"LightningEffect", false);
 	}
+
+	void ValEffector::PlayDeathEffect()
+	{
+		if (mDeathStage == 0)
+		{
+			mTransform->SetScale(4.f, 4.f, 1.f);
+
+			BindCB(0.0f, 0.f, 0.3f, 0.7f);
+
+			mOffset = Vector3(-0.012f, 0.24f, 0.0f);
+			mAnimator->SetLarge(false);
+			mAnimator->PlayAnimation(L"ValDeathEffect", false);
+
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mDeathStage++;
+		}
+		else if (mDeathStage == 1)
+		{
+			mTransform->SetScale(20.f, 20.f, 1.f);
+
+			BindCB(-0.7f, 0.f, 0.6f, 0.75f);
+
+			mOffset = Vector3(-0.02f, 0.15f, 0.0f);
+			
+			mAnimator->PlayAnimation(L"ValDeathEffect2", false);
+
+			mDeathAniPlayed = true;
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mDeathStage++;
+		}
+		else if (mDeathStage == 2)
+		{
+			
+		}
+
+
+	}
+
+	void ValEffector::PlayChargeEffectNew()
+	{
+		mTransform->SetScale(10.f, 10.f, 1.f);
+
+		BindCB(0.f, 0.f, 0.0f, 0.75f);
+
+		mOffset = Vector3(0.03f, 0.1f, 0.0f);
+		mAnimator->PlayAnimation(L"ValChargeNew", false);
+	}
+
+	void ValEffector::PlayChargeEffectMiddle()
+	{
+		mTransform->SetScale(10.f, 10.f, 1.f);
+
+		BindCB(0.f, 0.f, 0.0f, 0.75f);
+
+		mOffset = Vector3(0.03f, 0.1f, 0.0f);
+		mAnimator->PlayAnimation(L"ValChargeMiddle", true);
+	}
+
+	bool ValEffector::PlayChargeNewAndMiddle()
+	{
+		if (mChargeStage == 0)
+		{
+			PlayChargeEffectNew();
+			if (mAnimator->GetActiveAnimation()->IsComplete())
+				mChargeStage++;
+		}
+		else if (mChargeStage == 1)
+		{
+			PlayChargeEffectMiddle();
+			return true;
+		}
+		
+		return false;
+	}
+
+	bool ValEffector::PlayChargeEffectEnd()
+	{
+		mChargeStage = 0;
+		mTransform->SetScale(10.f, 10.f, 1.f);
+
+		BindCB(0.f, 0.f, 0.0f, 0.75f);
+
+		mOffset = Vector3(0.03f, 0.1f, 0.0f);
+		mAnimator->PlayAnimation(L"ValChargeEnd", false);
+
+		if (mAnimator->GetActiveAnimation()->IsComplete())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	
+	
 
 }
 

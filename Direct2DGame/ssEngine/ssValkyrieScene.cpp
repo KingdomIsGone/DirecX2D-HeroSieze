@@ -18,8 +18,9 @@
 #include "ssIndicator.h"
 #include "ssPlayerCameraScript.h"
 #include "ssValkyrie.h"
-
-#include "ssCloneAssault.h"
+#include "ssBossHpBar.h"
+#include "ssBossHpFill.h"
+#include "ssValAwaker.h"
 
 namespace ss
 {
@@ -161,19 +162,45 @@ namespace ss
 			}
 		}
 		
-		Valkyrie* Boss = new Valkyrie();
-		Boss->GetComponent<Transform>()->SetPosition(Vector3(0.0f, -1.0f, 1.0f));
-		AddGameObject(eLayerType::Monster, Boss);
+		//boss, hpBar
+		{
+			mValkyrie = new Valkyrie();
+			mValkyrie->GetComponent<Transform>()->SetPosition(Vector3(0.0f, -1.0f, 1.0f));
+			AddGameObject(eLayerType::Monster, mValkyrie);
 
-		CloneAssault* assault = new CloneAssault(e4Direction::Down);
-		assault->GetComponent<Transform>()->SetPosition(0.f, 1.f, 1.f);
-		assault->SetStart();
-		AddGameObject(eLayerType::EnemyProjectile, assault);
+			mBossHpBar = new BossHpBar();
+			AddGameObject(eLayerType::UI, mBossHpBar);
+			mBossHpBar->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.9f);
+
+			mBossHpFill = new BossHpFill();
+			AddGameObject(eLayerType::UI, mBossHpFill);
+			mBossHpFill->GetComponent<Transform>()->SetPosition(0.0f, 1.3f, 0.9f);
+			mValkyrie->SetBossHpFill(mBossHpFill);
+		}
+
+		mValAwaker = new ValAwaker();
+		AddGameObject(eLayerType::Monster, mValAwaker);
+		mValAwaker->GetComponent<Transform>()->SetPosition(0.0f, 2.5f, 1.f);
+		
 	}
 
 	void ValkyrieScene::Update()
 	{
 		Scene::Update();
+
+		if (mValAwaker->GetTouched())
+			mValkyrie->SetAwake();
+
+		if (mValkyrie->GetAwake())
+		{
+			mBossHpBar->SetHP();
+			mBossHpFill->SetMater();
+		}
+		else
+			mBossHpBar->SetBlank();
+
+		if (mValkyrie->GetDead())
+			mBossHpBar->SetBlank();
 	}
 
 	void ValkyrieScene::LateUpdate()

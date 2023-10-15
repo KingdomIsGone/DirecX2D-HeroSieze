@@ -23,5 +23,10 @@ namespace ss
 		class Camera* mUICamera;
 		class Camera* mCursorCamera;
 		class Camera* mInventoryCamera;
+
+		class BossHpBar* mBossHpBar;
+		class BossHpFill* mBossHpFill;
+		class Valkyrie* mValkyrie;
+		class ValAwaker* mValAwaker;
 	};
 }

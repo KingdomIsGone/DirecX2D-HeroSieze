@@ -21,7 +21,7 @@ namespace ss
 		AddComponent<DamageScript>();
 
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(Vector3(1.8f, 1.8f, 1.0f));
+		mTransform->SetScale(Vector3(1.2f, 1.2f, 1.0f));
 		Animator* at = AddComponent<Animator>();
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

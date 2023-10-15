@@ -165,6 +165,7 @@
     <ClInclude Include="ssAnubis.h" />
     <ClInclude Include="ssAnubisRoom.h" />
     <ClInclude Include="ssAnubisScript.h" />
+    <ClInclude Include="ssAwakerScript.h" />
     <ClInclude Include="ssBigLightning.h" />
     <ClInclude Include="ssBigLightningScript.h" />
     <ClInclude Include="ssBossHpBar.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
+    <ClInclude Include="ssValAwaker.h" />
     <ClInclude Include="ssValEffector.h" />
     <ClInclude Include="ssValkyrie.h" />
     <ClInclude Include="ssValkyrieScene.h" />
@@ -252,6 +254,7 @@
     <ClCompile Include="ssAnubis.cpp" />
     <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />
+    <ClCompile Include="ssAwakerScript.cpp" />
     <ClCompile Include="ssBigLightning.cpp" />
     <ClCompile Include="ssBigLightningScript.cpp" />
     <ClCompile Include="ssBossHpBar.cpp" />
@@ -324,6 +327,7 @@
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />
     <ClCompile Include="ssPlayScene.cpp" />
+    <ClCompile Include="ssValAwaker.cpp" />
     <ClCompile Include="ssValEffector.cpp" />
     <ClCompile Include="ssValkyrie.cpp" />
     <ClCompile Include="ssValkyrieScene.cpp" />

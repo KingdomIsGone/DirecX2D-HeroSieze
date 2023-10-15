@@ -14,8 +14,14 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		//ani
-		void PlayTransformAni();
+		void SetAhlphaMater(float alpha);
+
+		void SetBossHpFill(class BossHpFill* fill);
+		bool GetAwake() { return mbAwake; }
+		void SetAwake() { mbAwake = true; }
+		bool GetDead() { return mbDead; }
+		void SetDead() { mbDead = true; }
+
 
 	private:
 		Transform* mTransform;
@@ -23,11 +29,16 @@ namespace ss
 
 		class ValkyrieScript* mScript;
 		class Animator* mAnimator;
+		class MeshRenderer* mMr;
 
 		UINT mTransformAniStage;
 
 		float mPrevHp;
 		float mCurHp;
 
+		class ValEffector* mEffector;
+		
+		bool mbAwake;
+		bool mbDead;
 	};
 }
