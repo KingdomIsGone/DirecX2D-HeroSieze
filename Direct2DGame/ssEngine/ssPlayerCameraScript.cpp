@@ -7,6 +7,9 @@ namespace ss
 {
 	void PlayerCameraScript::Update()
 	{
+		if (!mOn)
+			return;
+
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 

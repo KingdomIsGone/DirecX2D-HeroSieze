@@ -21,7 +21,8 @@ namespace ss
 		void SetAwake() { mbAwake = true; }
 		bool GetDead() { return mbDead; }
 		void SetDead() { mbDead = true; }
-
+		bool GetEventComplete() { return mbEventComplete; }
+		void SetEventComplete(bool is) { mbEventComplete = is; }
 
 	private:
 		Transform* mTransform;
@@ -39,6 +40,7 @@ namespace ss
 		class ValEffector* mEffector;
 		
 		bool mbAwake;
+		bool mbEventComplete;
 		bool mbDead;
 	};
 }

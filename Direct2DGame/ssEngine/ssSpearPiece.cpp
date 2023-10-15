@@ -13,7 +13,7 @@ namespace ss
 
 	SpearPiece::SpearPiece()
 		: mDeleteTime(0.0f)
-		, mSpeed(3.0f)
+		, mSpeed(4.5f)
 		, mAlpha(1.f)
 		, mMoveDistance(2.3f)
 	{

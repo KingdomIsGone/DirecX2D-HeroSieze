@@ -78,6 +78,8 @@ namespace ss
 
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 
+		static void SetOnOff(bool is) { mbOn = is; }
+
 	private:
 		static Vector3 mPlayerPos;
 		static Vector3 mPoint;
@@ -117,5 +119,7 @@ namespace ss
 
 		std::map<UINT, UINT> mColDirMap;
 		std::vector<class SkillSlot*> mSkillSlots;
+
+		static bool mbOn;
 	};
 }

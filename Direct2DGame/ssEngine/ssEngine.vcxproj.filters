@@ -266,6 +266,12 @@
     <ClCompile Include="ssBossName.cpp">
       <Filter>Contents\Object\UI\BossName</Filter>
     </ClCompile>
+    <ClCompile Include="ssLeavesScript.cpp">
+      <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves</Filter>
+    </ClCompile>
+    <ClCompile Include="ssLeaves01.cpp">
+      <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -536,6 +542,12 @@
     <ClInclude Include="ssBossName.h">
       <Filter>Contents\Object\UI\BossName</Filter>
     </ClInclude>
+    <ClInclude Include="ssLeavesScript.h">
+      <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves</Filter>
+    </ClInclude>
+    <ClInclude Include="ssLeaves01.h">
+      <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -747,6 +759,12 @@
     </Filter>
     <Filter Include="Contents\Object\UI\BossName">
       <UniqueIdentifier>{48249838-d302-4704-a7b8-cfd35cb2a3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\BossRoomValkyrie\MapLeaves">
+      <UniqueIdentifier>{7e993897-f7bb-498e-9955-3dc76eea973e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01">
+      <UniqueIdentifier>{c8fcefd1-5f08-4185-a79e-6ab91223e1f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

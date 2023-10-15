@@ -111,12 +111,12 @@ namespace ss
 		mSmallHpBar->SetName(L"PlayerSmallHpBar");
 		mTransform = GetComponent<Transform>();
 		mSmallHpBar->GetComponent<Transform>()->SetParent(mTransform);
-		AddOtherGameObject(mSmallHpBar, eLayerType::MonsterUI);
+		AddOtherGameObject(mSmallHpBar, eLayerType::Player);
 
 		mSmallHpBarFill = new P_HpSmallBarFill();
 		mSmallHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
 		mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
-		AddOtherGameObject(mSmallHpBarFill, eLayerType::MonsterUI);
+		AddOtherGameObject(mSmallHpBarFill, eLayerType::Player);
 
 		mHpBarFill = new PlayerHpBarFill();
 		AddOtherGameObject(mHpBarFill, eLayerType::UI);

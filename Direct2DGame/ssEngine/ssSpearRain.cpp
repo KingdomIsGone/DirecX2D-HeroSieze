@@ -22,6 +22,7 @@ namespace ss
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(Vector3(mShadowScale, mShadowScale, 1.0f));
 
+		
 		mAnimator = AddComponent<Animator>();
 		
 		mr = AddComponent<MeshRenderer>();
@@ -30,7 +31,6 @@ namespace ss
 
 		std::shared_ptr<Texture> ShadowTex
 			= Resources::Load<Texture>(L"ShadowTex", L"..\\Resources\\Texture\\Monster\\Valkyrie\\Shadow.png");
-		
 		
 		mAnimator->SetLarge(true);
 		mAnimator->Create(L"Shadow", ShadowTex, Vector2(0.0f, 0.0f), Vector2(270.f, 180.0f), 1);

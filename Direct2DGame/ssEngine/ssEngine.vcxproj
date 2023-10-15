@@ -203,6 +203,8 @@
     <ClInclude Include="ssItemImage.h" />
     <ClInclude Include="ssItemList.h" />
     <ClInclude Include="ssITemlistSelectEffect.h" />
+    <ClInclude Include="ssLeaves01.h" />
+    <ClInclude Include="ssLeavesScript.h" />
     <ClInclude Include="ssLegendBoots.h" />
     <ClInclude Include="ssLegendStaff1.h" />
     <ClInclude Include="ssLightBall.h" />
@@ -293,6 +295,8 @@
     <ClCompile Include="ssItemImage.cpp" />
     <ClCompile Include="ssItemList.cpp" />
     <ClCompile Include="ssITemlistSelectEffect.cpp" />
+    <ClCompile Include="ssLeaves01.cpp" />
+    <ClCompile Include="ssLeavesScript.cpp" />
     <ClCompile Include="ssLegendBoots.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
     <ClCompile Include="ssLightBall.cpp" />

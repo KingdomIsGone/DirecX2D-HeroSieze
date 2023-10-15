@@ -126,7 +126,7 @@ namespace ss
 		
 		}
 
-		mAnimator->PlayAnimation(L"ValkThrowLeft", true);
+		mAnimator->PlayAnimation(L"ValkWaiting", true);
 
 		mEffector = new ValEffector();
 		mEffector->SetValkyrie(this);
@@ -148,17 +148,6 @@ namespace ss
 	void Valkyrie::Update()
 	{
 		GameObject::Update();
-
-
-		/*mCurHp = mScript->GetHP();
-		if (mCurHp != mPrevHp)
-		{
-			mHpBarFill->ChangeHP(mCurHp);
-
-			mPrevHp = mCurHp;
-		}*/
-
-
 
 	}
 	void Valkyrie::LateUpdate()

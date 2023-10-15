@@ -31,7 +31,7 @@ namespace ss
 		, mRushAxisDist(0.01f)
 		, mRushBackDist(0.8f)
 		, mRushDistCol(3.2f)
-		, mRushDistRow(4.6f)
+		, mRushDistRow(4.1f)
 		, mRushSpeed(4.5f)
 		, mEffectCount(0)
 		, mBigStage(0)
@@ -51,8 +51,6 @@ namespace ss
 	}
 	void ValkyrieScript::Initialize()
 	{
-		//mState = eState::Sleep;
-		srand((unsigned int)time(NULL));
 
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
@@ -261,6 +259,7 @@ namespace ss
 		}
 		else if (mTransformAniStage == 3)
 		{
+			mValk->SetEventComplete(true);
 			mState = eState::Chase;
 		}
 	}
@@ -838,7 +837,9 @@ namespace ss
 			mAnimator->PlayAnimation(L"ValkCast", true);
 			mPlayerPos = PlayerScript::GetPlayerPos();
 			mBig = new BigLightning();
-			mBig->SetPosition(mPlayerPos);
+			Vector3 pos = mPlayerPos;
+			pos.z += 0.1f;
+			mBig->SetPosition(pos);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, mBig);
 
 			mBigStage++;
@@ -1584,7 +1585,7 @@ namespace ss
 	void ValkyrieScript::Pattern()
 	{
 		mPatternTime += Time::DeltaTime();
-		if (mPatternTime < 1.f)
+		if (mPatternTime < 0.6f)
 			return;
 
 		mPatternTime = 0.f;
@@ -1624,7 +1625,7 @@ namespace ss
 	void ValkyrieScript::Pattern2()
 	{
 		mPatternTime += Time::DeltaTime();
-		if (mPatternTime < 1.f)
+		if (mPatternTime < 0.4f)
 			return;
 
 		mPatternTime = 0.f;

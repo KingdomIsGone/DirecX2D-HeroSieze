@@ -22,10 +22,14 @@
 #include "ssBossHpFill.h"
 #include "ssValAwaker.h"
 #include "ssBossName.h"
+#include "ssLeaves01.h"
+#include "ssTime.h"
 
 namespace ss
 {
 	ValkyrieScene::ValkyrieScene()
+		: mCameraDistance(0.f)
+		, mCWStage(0)
 	{
 	}
 	ValkyrieScene::~ValkyrieScene()
@@ -33,7 +37,7 @@ namespace ss
 	}
 	void ValkyrieScene::Initialize()
 	{
-		//map texture
+		//map texture, mapObject
 		{
 			std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 			{
@@ -53,6 +57,12 @@ namespace ss
 			mr->SetMaterial(Resources::Find<Material>(L"ValkyrieSceneMater"));
 			//DesertField->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.01f));
 			DesertField->GetComponent<Transform>()->SetScale(Vector3(22.5f, 24.0f, 1.0f));
+
+			Leaves01* leaves01 = new Leaves01();
+			leaves01->GetComponent<Transform>()->SetPosition(Vector3(1.f, -0.5f, 0.85f));
+			AddGameObject(eLayerType::Item, leaves01);
+
+			
 
 		}
 
@@ -87,31 +97,30 @@ namespace ss
 
 			//Main Camera
 			{
-				GameObject* camera = new GameObject();
-				AddGameObject(eLayerType::Map, camera);
-				camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-				mMainCamera = camera->AddComponent<Camera>();
+				mObjMainCamera = new GameObject();
+				AddGameObject(eLayerType::Map, mObjMainCamera);
+				mObjMainCamera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+				mMainCamera = mObjMainCamera->AddComponent<Camera>();
 				renderer::cameras.push_back(mMainCamera);
 
 				mMainCamera->TurnLayerMask(eLayerType::UI, false);
 				//cameraComp->TurnLayerMask(eLayerType::Player, false);
 				mMainCamera->TurnLayerMask(eLayerType::Cursor, false);
 				mMainCamera->TurnLayerMask(eLayerType::Inventory, false);
-				camera->AddComponent<CameraScript>();
+				mObjMainCamera->AddComponent<CameraScript>();
 			}
 
 			//Player Camera
 			{
-				GameObject* camera = new GameObject();
-				camera->SetName(L"PlayerCamera");
-				AddGameObject(eLayerType::Player, camera);
-				camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-				mPlayerCamera = camera->AddComponent<Camera>();
+				mObjPlayerCamera = new GameObject();
+				mObjPlayerCamera->SetName(L"PlayerCamera");
+				AddGameObject(eLayerType::Player, mObjPlayerCamera);
+				mObjPlayerCamera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+				mPlayerCamera = mObjPlayerCamera->AddComponent<Camera>();
 				renderer::cameras.push_back(mPlayerCamera);
 				mPlayerCamera->DisableLayerMasks();
 				mPlayerCamera->TurnLayerMask(eLayerType::Player, true);
-				camera->AddComponent<PlayerCameraScript>();
-				//renderer::mainCamera = cameraComp;
+				mPlayerCameraScirpt = mObjPlayerCamera->AddComponent<PlayerCameraScript>();
 			}
 
 			//UI Camera
@@ -166,7 +175,7 @@ namespace ss
 		//boss, hpBar
 		{
 			mValkyrie = new Valkyrie();
-			mValkyrie->GetComponent<Transform>()->SetPosition(Vector3(0.0f, -1.0f, 1.0f));
+			mValkyrie->GetComponent<Transform>()->SetPosition(Vector3(-0.1f, 7.6f, 1.0f));
 			AddGameObject(eLayerType::Monster, mValkyrie);
 
 			mBossHpBar = new BossHpBar();
@@ -181,8 +190,8 @@ namespace ss
 		}
 
 		mValAwaker = new ValAwaker();
-		AddGameObject(eLayerType::Monster, mValAwaker);
-		mValAwaker->GetComponent<Transform>()->SetPosition(0.0f, 2.5f, 1.f);
+		AddGameObject(eLayerType::Item, mValAwaker);
+		mValAwaker->GetComponent<Transform>()->SetPosition(0.0f, 6.4f, 1.f);
 		
 		mBossName = new BossName();
 		mBossName->SetBossName(L"¹ßÅ°¸®");
@@ -196,6 +205,8 @@ namespace ss
 	{
 		Scene::Update();
 
+		
+
 		if (mValAwaker->GetTouched())
 			mValkyrie->SetAwake();
 
@@ -204,6 +215,7 @@ namespace ss
 			mBossHpBar->SetHP();
 			mBossHpFill->SetMater();
 			mBossName->SetOnOff(true);
+			CameraWalkUp();
 		}
 		else
 		{
@@ -239,4 +251,54 @@ namespace ss
 	void ValkyrieScene::OnExit()
 	{
 	}
+	void ValkyrieScene::CameraWalkUp()
+	{
+		if (mCWStage == 4)
+			return;
+
+		if (mCWStage == 0)
+		{
+			PlayerScript::SetOnOff(false);
+			mPlayerInitialPos = PlayerScript::GetPlayerPos();
+			mCameraInitialPos = mObjMainCamera->GetComponent<Transform>()->GetPosition();
+			mPlayerInitialCameraPos = mObjPlayerCamera->GetComponent<Transform>()->GetPosition();
+			mCWStage++;
+		}
+		else if (mCWStage == 1)
+		{
+			if (mCameraDistance < 1.5f)
+			{
+				mCameraDistance += Time::DeltaTime();
+
+				mMainCamera->TurnLayerMask(eLayerType::Player, false);
+				mPlayerCameraScirpt->SetOnOff(false);
+
+				Vector3 cameraPos = mObjMainCamera->GetComponent<Transform>()->GetPosition();
+				Vector3 playerCameraPos = mObjPlayerCamera->GetComponent<Transform>()->GetPosition();
+
+				playerCameraPos.y += Time::DeltaTime();
+				cameraPos.y += Time::DeltaTime();
+
+				mObjPlayerCamera->GetComponent<Transform>()->SetPosition(playerCameraPos);
+				mObjMainCamera->GetComponent<Transform>()->SetPosition(cameraPos);
+			}
+			else
+				mCWStage++;
+		}
+		else if (mCWStage == 2)
+		{
+			if (mValkyrie->GetEventComplete())
+				mCWStage++;
+		}
+		else if (mCWStage == 3)
+		{
+			mMainCamera->TurnLayerMask(eLayerType::Player, true);
+			mPlayerCameraScirpt->SetOnOff(true);
+			mObjPlayerCamera->GetComponent<Transform>()->SetPosition(mPlayerInitialCameraPos);
+			mObjMainCamera->GetComponent<Transform>()->SetPosition(mCameraInitialPos);
+			PlayerScript::SetOnOff(true);
+			mCWStage++;
+		}
+	}
+	
 }

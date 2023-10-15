@@ -17,12 +17,15 @@ namespace ss
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+		void CameraWalkUp();
+
 	private:
 		class Camera* mMainCamera;
 		class Camera* mPlayerCamera;
 		class Camera* mUICamera;
 		class Camera* mCursorCamera;
 		class Camera* mInventoryCamera;
+
 
 		class BossHpBar* mBossHpBar;
 		class BossHpFill* mBossHpFill;
@@ -31,5 +34,15 @@ namespace ss
 		class BossName* mBossName;
 
 		bool mbFont;
+
+		GameObject* mObjMainCamera;
+		GameObject* mObjPlayerCamera;
+		class PlayerCameraScript* mPlayerCameraScirpt;
+		float mCameraDistance;
+		UINT mCWStage;
+		Vector3 mPlayerInitialPos;
+		Vector3 mCameraInitialPos;
+		Vector3 mPlayerInitialCameraPos;
+
 	};
 }

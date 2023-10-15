@@ -10,7 +10,7 @@ namespace ss
 		mCollider->SetCollideType(eCollideType::Item);
 		mScript = AddComponent<AwakerScript>();
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(3.f, 1.f, 1.f);
+		mTransform->SetScale(3.f, 0.3f, 1.f);
 	}
 	ValAwaker::~ValAwaker()
 	{

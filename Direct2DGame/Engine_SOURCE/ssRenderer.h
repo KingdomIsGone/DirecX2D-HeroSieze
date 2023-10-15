@@ -94,6 +94,7 @@ namespace renderer
 		float DiscardLight;
 		//TransparentPs
 		float TransAlpha;
+		float TransAlpha2;
 	};
 
 	extern ss::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

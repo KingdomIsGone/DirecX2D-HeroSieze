@@ -10,6 +10,8 @@ namespace ss
 {
 	void CameraScript::Update()
 	{
+		
+
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 

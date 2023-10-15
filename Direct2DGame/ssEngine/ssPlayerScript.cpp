@@ -28,6 +28,7 @@ namespace ss
 	float ss::PlayerScript::mCurMp = 1000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 	UINT ss::PlayerScript::mSpellNum = 0;
+	bool ss::PlayerScript::mbOn = true;
 
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)
@@ -58,8 +59,12 @@ namespace ss
 
 	void PlayerScript::Update()
 	{
-		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
-		mPlayerPos = pos;
+		if (!mbOn)
+			return;
+
+		//Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		//mPlayerPos = pos;
+		GetOwner()->GetComponent<Transform>()->SetPosition(mPlayerPos);
 
 		if (mInventory->GetOnOff())
 			return;
@@ -528,6 +533,9 @@ namespace ss
 		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
 		FireAura* aura = new FireAura();
+		Vector3 pos = aura->GetComponent<Transform>()->GetPosition();
+		pos.z += 0.1;
+		aura->GetComponent<Transform>()->SetPosition(pos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, aura);
 		mSpellNum = 0;
 	}

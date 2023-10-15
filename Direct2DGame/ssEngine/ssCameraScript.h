@@ -19,5 +19,6 @@ namespace ss
 		Vector3 mCurPos;
 		Vector3 mDistance;
 
+
 	};
 }
