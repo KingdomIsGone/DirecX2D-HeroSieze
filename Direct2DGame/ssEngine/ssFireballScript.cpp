@@ -8,7 +8,7 @@
 namespace ss
 {
 	FireBallScript::FireBallScript()
-		: mDamage(200.0f)
+		: mDamage(100.0f)
 	{
 	}
 	FireBallScript::~FireBallScript()

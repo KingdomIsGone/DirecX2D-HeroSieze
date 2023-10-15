@@ -76,6 +76,8 @@ namespace ss
 			AddGameObject(eLayerType::Player, player);
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.02f));
 
+			mPlayerScript = player->GetScript();
+
 			Cursor* cursor = new Cursor();
 			AddGameObject(eLayerType::Cursor, cursor);
 
@@ -255,6 +257,8 @@ namespace ss
 	{
 		if (mCWStage == 4)
 			return;
+
+		mPlayerScript->SetStop();
 
 		if (mCWStage == 0)
 		{

@@ -4,7 +4,7 @@
 namespace ss
 {
 	MeteorScript::MeteorScript()
-		: mDamage(1000.0f)
+		: mDamage(2000.0f)
 	{
 	}
 	MeteorScript::~MeteorScript()

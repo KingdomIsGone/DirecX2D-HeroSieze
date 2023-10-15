@@ -39,7 +39,8 @@ namespace ss
 
 			other->GetOwner()->GetComponent<PlayerScript>()->ChangeHp(-Damage);
 
-			GetOwner()->SetState(GameObject::eState::Dead);
+			if(GetOwner()->GetName() != L"SpearPiece")
+				GetOwner()->SetState(GameObject::eState::Dead);
 		}
 		else if (other->GetCollideType() == eCollideType::NormalMonster)
 		{

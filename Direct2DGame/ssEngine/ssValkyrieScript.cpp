@@ -115,11 +115,10 @@ namespace ss
 		}
 		
 
-		
 
 		if (Input::GetKey(eKeyCode::P))
 		{
-			mState = eState::BigLightning;
+			mState = eState::Dead;
 		}
 		
 	}
@@ -1454,28 +1453,28 @@ namespace ss
 			switch (mDirState)
 			{
 			case ss::ValkyrieScript::eDirState::Up:
-				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpUp", false);
 				break;
 			case ss::ValkyrieScript::eDirState::UpRight:
-				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpUp", false);
 				break;
 			case ss::ValkyrieScript::eDirState::UpLeft:
-				mAnimator->PlayAnimation(L"ValkThrowUp", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpUp", false);
 				break;
 			case ss::ValkyrieScript::eDirState::Down:
-				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpDown", false);
 				break;
 			case ss::ValkyrieScript::eDirState::DownRight:
-				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpDown", false);
 				break;
 			case ss::ValkyrieScript::eDirState::DownLeft:
-				mAnimator->PlayAnimation(L"ValkThrowDown", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpDown", false);
 				break;
 			case ss::ValkyrieScript::eDirState::Right:
-				mAnimator->PlayAnimation(L"ValkThrowRight", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpRight", false);
 				break;
 			case ss::ValkyrieScript::eDirState::Left:
-				mAnimator->PlayAnimation(L"ValkThrowLeft", false);
+				mAnimator->PlayAnimation(L"ValkThrowUpLeft", false);
 				break;
 			default:
 				break;

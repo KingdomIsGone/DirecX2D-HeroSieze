@@ -32,6 +32,7 @@ namespace ss
 		class Valkyrie* mValkyrie;
 		class ValAwaker* mValAwaker;
 		class BossName* mBossName;
+		class PlayerScript* mPlayerScript;
 
 		bool mbFont;
 

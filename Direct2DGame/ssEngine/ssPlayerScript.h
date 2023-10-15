@@ -79,6 +79,7 @@ namespace ss
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 
 		static void SetOnOff(bool is) { mbOn = is; }
+		void SetStop() { mCursorPos = mPlayerPos; }
 
 	private:
 		static Vector3 mPlayerPos;

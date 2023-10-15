@@ -62,9 +62,8 @@ namespace ss
 		if (!mbOn)
 			return;
 
-		//Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
-		//mPlayerPos = pos;
-		GetOwner()->GetComponent<Transform>()->SetPosition(mPlayerPos);
+		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		mPlayerPos = pos;
 
 		if (mInventory->GetOnOff())
 			return;
@@ -534,8 +533,7 @@ namespace ss
 
 		FireAura* aura = new FireAura();
 		Vector3 pos = aura->GetComponent<Transform>()->GetPosition();
-		pos.z += 0.1;
-		aura->GetComponent<Transform>()->SetPosition(pos);
+		
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, aura);
 		mSpellNum = 0;
 	}
