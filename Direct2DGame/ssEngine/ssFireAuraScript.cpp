@@ -6,7 +6,7 @@
 namespace ss
 {
 	FireAuraScript::FireAuraScript()
-		: mDamage(80.f)
+		: mDamage(40.f)
 	{
 	}
 	FireAuraScript::~FireAuraScript()
@@ -31,7 +31,7 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			if (mTime > 0.5f)
+			if (mTime > 0.2f)
 			{
 				mColIDs.clear();
 				mTime = 0.0f;

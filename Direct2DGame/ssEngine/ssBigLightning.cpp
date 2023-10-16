@@ -9,6 +9,7 @@
 #include "ssValkyrie.h"
 #include "ssBigLightningScript.h"
 #include "ssTime.h"
+#include "ssPlayerScript.h"
 
 namespace ss
 {
@@ -64,6 +65,18 @@ namespace ss
 	void BigLightning::Update()
 	{
 		GameObject::Update();
+
+		Vector3 playerPos = PlayerScript::GetPlayerPos();
+		
+		if (playerPos.x < mPos.x)
+			mPos.x -= 0.5f * Time::DeltaTime();
+		else
+			mPos.x += 0.5f * Time::DeltaTime();
+
+		if (playerPos.y < mPos.y)
+			mPos.y -= 0.5f * Time::DeltaTime();
+		else
+			mPos.y += 0.5f * Time::DeltaTime();
 
 		PlayAni();
 	}

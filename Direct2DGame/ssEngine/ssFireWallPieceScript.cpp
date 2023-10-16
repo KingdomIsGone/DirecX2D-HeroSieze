@@ -6,7 +6,7 @@
 namespace ss
 {
 	FireWallPieceScript::FireWallPieceScript()
-		: mDamage(150.0f)
+		: mDamage(80.0f)
 		, mTime(2.0f)
 	{
 	}
@@ -29,7 +29,7 @@ namespace ss
 		{
 			mTime += Time::DeltaTime();
 
-			if (mTime > 1.0f)
+			if (mTime > 0.3f)
 			{
 				mColIDs.clear();
 				mTime = 0.0f;

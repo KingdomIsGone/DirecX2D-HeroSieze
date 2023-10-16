@@ -1,17 +1,15 @@
 #include "ssP_HpSmallBar.h"
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
+#include "ssPlayerScript.h"
 
 namespace ss
 {
 	P_HpSmallBar::P_HpSmallBar()
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(Vector3(0.20f, 0.04f, 1.0f));
-		Vector3 pos = mTransform->GetPosition();
-		pos.y += 0.17f;
-		pos.z -= 0.01f;
-		mTransform->SetPosition(pos);
+		mTransform->SetScale(Vector3(0.3f, 0.06f, 1.0f));
+		
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"PlayerHpSmallBarMater"));
@@ -28,6 +26,13 @@ namespace ss
 	void P_HpSmallBar::Update()
 	{
 		GameObject::Update();
+
+		Vector3 pos = PlayerScript::GetPlayerPos();
+		pos.x += 0.02f;
+		pos.y += 0.19f;
+		pos.z = 0.92;
+		mTransform->SetPosition(pos);
+
 	}
 	void P_HpSmallBar::LateUpdate()
 	{

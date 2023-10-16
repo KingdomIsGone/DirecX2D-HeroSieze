@@ -1,4 +1,4 @@
-#include "ssMummyScript.h"
+#include "ssBearScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
@@ -6,24 +6,26 @@
 
 namespace ss
 {
-	MummyScript::MummyScript()
+	BearScript::BearScript()
 		: mAgroDistance(2.5f)
-		, mSpeed(0.2f)
-		, mHp(500.0f)
-		, mDamage(50.f)
-	{
-	}
-	MummyScript::~MummyScript()
-	{
-	}
-	void MummyScript::Initialize()
+		, mSpeed(0.5f)
+		, mHp(2200.0f)
+		, mDamage(100.f)
+		, mDamage2(200.f)
+		, mAtkCount(0)
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
-		mAnimator = GetOwner()->GetComponent<Animator>();
+		
+	}
+	BearScript::~BearScript()
+	{
+	}
+	void BearScript::Initialize()
+	{
 	}
 
-	void MummyScript::Update()
+	void BearScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -36,30 +38,36 @@ namespace ss
 
 		switch (mState)
 		{
-		case ss::MummyScript::eState::Idle:
+		case ss::BearScript::eState::Idle:
 			Idle();
 			break;
-		case ss::MummyScript::eState::Chase:
+		case ss::BearScript::eState::Chase:
 			Chase();
 			break;
-		case ss::MummyScript::eState::Attack:
+		case ss::BearScript::eState::Attack:
 			Attack();
 			break;
-		case ss::MummyScript::eState::Dead:
+		case ss::BearScript::eState::Attack2:
+			Attack2();
+			break;
+		case ss::BearScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void MummyScript::Idle()
+	void BearScript::Idle()
 	{
+		mAnimator = GetOwner()->GetComponent<Animator>();
+		mAnimator->PlayAnimation(L"Bear_Idle", true);
+
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void MummyScript::Chase()
+	void BearScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -78,29 +86,29 @@ namespace ss
 
 		PlayMoveAni();
 
-
-		//float distance = math::GetDistance(mPos, mPlayerPos);
-		/*if (distance < 0.005f)
-			mState = eState::Attack;*/
 	}
 
-	void MummyScript::Attack()
+	void BearScript::Attack()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		switch (mDirState)
 		{
-		case ss::MummyScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"MummyUpAtk", true);
+		case ss::BearScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Bear_UpAtk", false);
 			break;
-		case ss::MummyScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"MummyDownAtk", true);
+		case ss::BearScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Bear_DownAtk", false);
 			break;
-		case ss::MummyScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"MummyLeftAtk", true);
+		case ss::BearScript::eDirState::Left:
+		{
+			mAnimator->PlayAnimation(L"Bear_LeftAtk", false);
+		}
 			break;
-		case ss::MummyScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"MummyRightAtk", true);
+		case ss::BearScript::eDirState::Right:
+		{
+			mAnimator->PlayAnimation(L"Bear_RightAtk", false);
+		}
 			break;
 		default:
 			break;
@@ -108,7 +116,46 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
-			Damage();
+			mAtkCount++;
+			Damage(mDamage);
+			mAnimator->GetActiveAnimation()->Reset();
+			if (mAtkCount == 2)
+			{
+				mState = eState::Attack2;
+			}
+		}
+
+		float distance = math::GetDistance(mPos, mPlayerPos);
+		if (distance > 0.3f && !mIsColliding)
+			mState = eState::Chase;
+	}
+
+	void BearScript::Attack2()
+	{
+		mAnimator = GetOwner()->GetComponent<Animator>();
+
+		switch (mDirState)
+		{
+		case ss::BearScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Bear_UpAtk2", false);
+			break;
+		case ss::BearScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Bear_DownAtk2", false);
+			break;
+		case ss::BearScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"Bear_LeftAtk2", false);
+			break;
+		case ss::BearScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"Bear_RightAtk2", false);
+			break;
+		default:
+			break;
+		}
+
+		if (mAnimator->GetActiveAnimation()->IsComplete())
+		{
+			mAtkCount = 0;
+			Damage(mDamage2);
 			mAnimator->GetActiveAnimation()->Reset();
 		}
 
@@ -117,7 +164,7 @@ namespace ss
 			mState = eState::Chase;
 	}
 
-	void MummyScript::PlayMoveAni()
+	void BearScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -142,29 +189,29 @@ namespace ss
 
 		switch (mDirState)
 		{
-		case ss::MummyScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"MummyUp", true);
+		case ss::BearScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Bear_Up", true);
 			break;
-		case ss::MummyScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"MummyDown", true);
+		case ss::BearScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Bear_Down", true);
 			break;
-		case ss::MummyScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"MummyLeft", true);
+		case ss::BearScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"Bear_Left", true);
 			break;
-		case ss::MummyScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"MummyRight", true);
+		case ss::BearScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"Bear_Right", true);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void MummyScript::Damage()
+	void BearScript::Damage(float damage)
 	{
-		PlayerScript::ChangeHp(-mDamage);
+		PlayerScript::ChangeHp(-damage);
 	}
 
-	Vector3 MummyScript::ReverseMove()
+	Vector3 BearScript::ReverseMove()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x -= mSpeed * Time::DeltaTime();
@@ -179,14 +226,14 @@ namespace ss
 		return mPos;
 	}
 
-	float MummyScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float BearScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
 	}
 
-	void MummyScript::DamageCheck()
+	void BearScript::DamageCheck()
 	{
 		float value = GetOwner()->GetChangeHpValue();
 		if (value != 0)
@@ -196,10 +243,13 @@ namespace ss
 		}
 	}
 
-	void MummyScript::OnCollisionEnter(Collider2D* other)
+	void BearScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
+		{
 			mState = eState::Attack;
+			
+		}
 
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
@@ -223,12 +273,18 @@ namespace ss
 			mColDirMap[colID] = colNum;
 		}
 	}
-	void MummyScript::OnCollisionStay(Collider2D* other)
+	void BearScript::OnCollisionStay(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
-			mState = eState::Attack;
+		{
+			if(mAtkCount <2)
+				mState = eState::Attack;
+			else if(mAtkCount == 2)
+				mState = eState::Attack2;
+
+		}
 	}
-	void MummyScript::OnCollisionExit(Collider2D* other)
+	void BearScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

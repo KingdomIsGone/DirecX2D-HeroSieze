@@ -70,6 +70,7 @@ namespace ss
 			//Main Camera
 			{
 				GameObject* camera = new GameObject();
+				camera->SetName(L"MainCamera");
 				AddGameObject(eLayerType::Map, camera);
 				camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 				mMainCamera = camera->AddComponent<Camera>();
@@ -298,7 +299,7 @@ namespace ss
 			torch10->GetComponent<Transform>()->SetPosition(3.84f, 0.46f, 1.02f);
 		}
 
-		//배경 z=1.1f
+		//배경 z=1.5f
 		{
 			std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 			{
@@ -316,7 +317,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"AnubisRoomMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.1f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.5f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(27.0f, 27.0f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}

@@ -78,6 +78,7 @@ namespace ss::enums
 		Projectile,
 		Item,
 		Sensor,
+		Wall,
 	};
 
 	enum class eItemGrade

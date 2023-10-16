@@ -2,26 +2,24 @@
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
 #include "ssCamera.h"
+#include "ssPlayerScript.h"
 
 namespace ss
 {
 	P_HpSmallBarFill::P_HpSmallBarFill()
-		: mFullHpScale(0.14f)
-		, mCurHpScale(0.14f)
+		: mFullHpScale(0.2f)
+		, mCurHpScale(0.2f)
 		, mCurHP(3000.0f)
 		, mFullHP(3000.0f)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(Vector3(mCurHpScale, 0.018f, 1.0f));
-		Vector3 pos = mTransform->GetPosition();
-		pos.y += 0.174f;
-		pos.z -= 0.02f;
-		mTransform->SetPosition(pos);
+		
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"PlayerHpSmallBarFillRedMater"));
 
-		mWidth = Resources::Find<Texture>(L"PlayerHpSmallBarFillRedTex")->GetWidth() / 6.f - 0.03;
+		mWidth = mTransform->GetWorldRightBottom().x - mTransform->GetWorldLeftBottom().x;
 
 		mHpChanged = true;
 	}
@@ -36,16 +34,21 @@ namespace ss
 	{
 		GameObject::Update();
 
+		Vector3 playerPos = PlayerScript::GetPlayerPos();
+		playerPos.x += 0.018f + mModifyX;
+		playerPos.y += 0.195f;
+		playerPos.z = 0.91;
+
+		mTransform->SetPosition(playerPos);
+
 		float ratio = mCurHP / mFullHP;
 		mCurHpScale = mFullHpScale * ratio;
 
 		if (mHpChanged)
 		{
-			Vector3 pos = mTransform->GetPosition();
 			float ratio = mCurHpScale / mFullHpScale;
-			pos.x = 0.0f;
-			pos.x -= (1 - ratio) * mWidth * 0.5f;
-			mTransform->SetPosition(pos);
+			mModifyX = 0.0f;
+			mModifyX -= (1 - ratio) * mWidth * 0.5f;
 
 			mTransform->SetScale(Vector3(mCurHpScale, 0.018f, 1.0f));
 			mHpChanged = false;

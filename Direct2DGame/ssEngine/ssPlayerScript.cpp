@@ -23,7 +23,7 @@
 namespace ss
 {
 	Vector3 ss::PlayerScript::mPlayerPos = Vector3::Zero;
-	float ss::PlayerScript::mSpeed = 1.5f;
+	float ss::PlayerScript::mSpeed = 1.1f;
 	float ss::PlayerScript::mCurHp = 3000.0f;
 	float ss::PlayerScript::mCurMp = 1000.0f;
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);

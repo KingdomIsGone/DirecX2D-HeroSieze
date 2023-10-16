@@ -74,5 +74,7 @@ namespace ss
 
 		//custom
 		std::bitset<(UINT)eLayerType::End> mLayerRenderMask;
+
+		std::wstring mCameraName;
 	};
 }

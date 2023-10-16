@@ -27,5 +27,7 @@ namespace ss
 		bool mHpChanged;
 		float mCurHP;
 		float mFullHP;
+
+		float mModifyX;
 	};
 }

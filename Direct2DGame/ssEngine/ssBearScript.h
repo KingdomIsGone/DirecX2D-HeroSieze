@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	class MummyScript : public Script
+	class BearScript : public Script
 	{
 	public:
 		enum class eState
@@ -13,6 +13,7 @@ namespace ss
 			Idle,
 			Chase,
 			Attack,
+			Attack2,
 			Dead,
 		};
 
@@ -23,8 +24,8 @@ namespace ss
 			Left,
 			Right,
 		};
-		MummyScript();
-		~MummyScript();
+		BearScript();
+		~BearScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -32,15 +33,17 @@ namespace ss
 		void Idle();
 		void Chase();
 		void Attack();
+		void Attack2();
 
 		void PlayMoveAni();
 
-		void Damage();
+		void Damage(float damage);
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 
 		float GetHP() { return mHp; }
 		void DamageCheck();
+
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
@@ -55,6 +58,9 @@ namespace ss
 		float mSpeed;
 		float mAgroDistance;
 		float mDamage;
+		float mDamage2;
+
+		UINT mAtkCount;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;

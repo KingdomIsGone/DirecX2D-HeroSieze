@@ -73,12 +73,16 @@ namespace ss
 		mHpBar = new EnemyHpBar();
 		mHpBar->SetName(L"enemyHpBar");
 		mTransform = GetComponent<Transform>();
-		mHpBar->GetComponent<Transform>()->SetParent(mTransform);
+		mHpBar->SetOwnerTransform(mTransform);
+		mHpBar->SetOffset(0.f, 0.25f);
+		mHpBar->GetComponent<Transform>()->SetScale(Vector3(0.6f, 0.1f, 1.f));
 		AddOtherGameObject(mHpBar, eLayerType::MonsterUI);
 
 		mHpBarFill = new EnemyHpBarFill();
-		mHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
-		Vector3 tempPos2 = mHpBarFill->GetComponent<Transform>()->GetPosition();
+		mHpBarFill->SetOwnerTransform(mTransform);
+		mHpBarFill->SetOffset(0.0f, 0.26f);
+		mHpBarFill->SetFullHp(mCurHp);
+		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 	}
 	DesertSkeleton::~DesertSkeleton()

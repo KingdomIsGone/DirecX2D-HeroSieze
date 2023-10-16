@@ -272,6 +272,12 @@
     <ClCompile Include="ssLeaves01.cpp">
       <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01</Filter>
     </ClCompile>
+    <ClCompile Include="ssBear.cpp">
+      <Filter>Contents\Object\Monster\Bear</Filter>
+    </ClCompile>
+    <ClCompile Include="ssBearScript.cpp">
+      <Filter>Contents\Object\Monster\Bear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -548,6 +554,12 @@
     <ClInclude Include="ssLeaves01.h">
       <Filter>Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01</Filter>
     </ClInclude>
+    <ClInclude Include="ssBear.h">
+      <Filter>Contents\Object\Monster\Bear</Filter>
+    </ClInclude>
+    <ClInclude Include="ssBearScript.h">
+      <Filter>Contents\Object\Monster\Bear</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -765,6 +777,9 @@
     </Filter>
     <Filter Include="Contents\Scene\BossRoomValkyrie\MapLeaves\Leaves01">
       <UniqueIdentifier>{c8fcefd1-5f08-4185-a79e-6ab91223e1f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\Bear">
+      <UniqueIdentifier>{550aada6-599e-4c34-9909-bda27fb6803c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

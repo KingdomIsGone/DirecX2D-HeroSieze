@@ -21,5 +21,7 @@ namespace ss
 
 	private:
 		float mDamage;
+		UINT mCount;
+		bool mOnce;
 	};
 }

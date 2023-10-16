@@ -24,6 +24,7 @@
 #include "ssBossName.h"
 #include "ssLeaves01.h"
 #include "ssTime.h"
+#include "ssBear.h"
 
 namespace ss
 {
@@ -100,6 +101,7 @@ namespace ss
 			//Main Camera
 			{
 				mObjMainCamera = new GameObject();
+				mObjMainCamera->SetName(L"MainCamera");
 				AddGameObject(eLayerType::Map, mObjMainCamera);
 				mObjMainCamera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 				mMainCamera = mObjMainCamera->AddComponent<Camera>();
@@ -200,6 +202,13 @@ namespace ss
 		mBossName->SetFontPos(560.f, 20.f);
 		AddGameObject(eLayerType::UI, mBossName);
 		mBossName->GetComponent<Transform>()->SetPosition(0.0f, 0.f, 0.9f);
+
+		//monster Bear
+		{
+			Bear* bear1 = new Bear();
+			bear1->GetComponent<Transform>()->SetPosition(3.f, 2.f, 1.f);
+			AddGameObject(eLayerType::Monster, bear1);
+		}
 		
 	}
 

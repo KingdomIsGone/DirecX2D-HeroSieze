@@ -63,6 +63,8 @@ namespace ss
 
 	void Camera::Render()
 	{
+		mCameraName = GetOwner()->GetName();
+
 		View = mView;
 		Projection = mProjection;
 
@@ -150,8 +152,23 @@ namespace ss
 		{
 			if (mLayerMask[i] == true)
 			{
-				if (i == 2)
-					int a = 0;
+				//if (i == 2)
+				//{
+				//	//플레이어 레이어 오브젝트에 표시해두기
+				//	if (mCameraName == L"MainCamera")
+				//	{
+				//		Layer& layer = scene->GetLayer((eLayerType)i);
+				//		const std::vector<GameObject*> gameObjs
+				//			= layer.GetGameObjects();
+
+				//		for (GameObject* obj : gameObjs)
+				//		{
+				//			obj->SetIsPlayerLayer(true);
+				//		}
+				//	}
+				//}
+
+
 				Layer& layer = scene->GetLayer((eLayerType)i);
 				const std::vector<GameObject*> gameObjs
 					= layer.GetGameObjects();
@@ -225,6 +242,7 @@ namespace ss
 				!= GameObject::eState::Active)
 				continue;
 
+
 			gameObj->Render();
 		}
 	}
@@ -242,6 +260,7 @@ namespace ss
 			if (gameObj->GetState()
 				!= GameObject::eState::Active)
 				continue;
+
 
 			gameObj->Render();
 		}

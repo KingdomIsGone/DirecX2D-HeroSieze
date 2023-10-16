@@ -136,6 +136,9 @@ namespace ss
 		void SetParent(GameObject* obj) { mParent = obj; }
 		void PushBackOtherGameObject(OtherGameObject* otherObj) { mGameObjects.push_back(otherObj); }
 
+		void SetIsPlayerLayer(bool is) { mbPlayerLayer = is; }
+		bool GetIsPlayerLayer() { return mbPlayerLayer; }
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
@@ -146,5 +149,6 @@ namespace ss
 		float mChaingeHpValue;
 		bool mIsChild;
 		GameObject* mParent;
+		bool mbPlayerLayer;
 	};
 }

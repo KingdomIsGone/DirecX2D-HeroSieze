@@ -109,13 +109,9 @@ namespace ss
 		//hp¹Ù, fill
 		mSmallHpBar = new P_HpSmallBar();
 		mSmallHpBar->SetName(L"PlayerSmallHpBar");
-		mTransform = GetComponent<Transform>();
-		mSmallHpBar->GetComponent<Transform>()->SetParent(mTransform);
 		AddOtherGameObject(mSmallHpBar, eLayerType::Player);
 
 		mSmallHpBarFill = new P_HpSmallBarFill();
-		mSmallHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
-		mSmallHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mSmallHpBarFill, eLayerType::Player);
 
 		mHpBarFill = new PlayerHpBarFill();

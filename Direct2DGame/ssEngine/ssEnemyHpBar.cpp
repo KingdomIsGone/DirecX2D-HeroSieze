@@ -5,6 +5,8 @@
 namespace ss
 {
 	EnemyHpBar::EnemyHpBar()
+		: mOffsetX(0.f)
+		, mOffsetY(0.f)
 	{
 		SetName(L"enemyHpBar");
 		mTransform = GetComponent<Transform>();
@@ -29,6 +31,13 @@ namespace ss
 	void EnemyHpBar::Update()
 	{
 		GameObject::Update();
+
+		Vector3 ownerPos = mOwnerTransform->GetPosition();
+		ownerPos.x += mOffsetX;
+		ownerPos.y += mOffsetY;
+		ownerPos.z -= 0.05f;
+
+		mTransform->SetPosition(ownerPos);
 	}
 	void EnemyHpBar::LateUpdate()
 	{

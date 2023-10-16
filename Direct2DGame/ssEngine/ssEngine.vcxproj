@@ -166,6 +166,8 @@
     <ClInclude Include="ssAnubisRoom.h" />
     <ClInclude Include="ssAnubisScript.h" />
     <ClInclude Include="ssAwakerScript.h" />
+    <ClInclude Include="ssBear.h" />
+    <ClInclude Include="ssBearScript.h" />
     <ClInclude Include="ssBigLightning.h" />
     <ClInclude Include="ssBigLightningScript.h" />
     <ClInclude Include="ssBossHpBar.h" />
@@ -258,6 +260,8 @@
     <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />
     <ClCompile Include="ssAwakerScript.cpp" />
+    <ClCompile Include="ssBear.cpp" />
+    <ClCompile Include="ssBearScript.cpp" />
     <ClCompile Include="ssBigLightning.cpp" />
     <ClCompile Include="ssBigLightningScript.cpp" />
     <ClCompile Include="ssBossHpBar.cpp" />

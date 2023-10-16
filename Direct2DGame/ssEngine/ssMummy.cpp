@@ -71,11 +71,16 @@ namespace ss
 		//hp¹Ù, fill
 		mHpBar = new EnemyHpBar();
 		mTransform = GetComponent<Transform>();
-		mHpBar->GetComponent<Transform>()->SetParent(mTransform);
+		mHpBar->SetOwnerTransform(mTransform);
+		mHpBar->SetOffset(0.f, 0.25f);
+		mHpBar->GetComponent<Transform>()->SetScale(Vector3(0.6f, 0.1f, 1.f));
 		AddOtherGameObject(mHpBar, eLayerType::MonsterUI);
 
 		mHpBarFill = new EnemyHpBarFill();
-		mHpBarFill->GetComponent<Transform>()->SetParent(mTransform);
+		mHpBarFill->SetOwnerTransform(mTransform);
+		mHpBarFill->SetOffset(0.0f, 0.26f);
+		mHpBarFill->SetFullHp(mCurHp);
+		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		Vector3 tempPos2 = mHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 	}

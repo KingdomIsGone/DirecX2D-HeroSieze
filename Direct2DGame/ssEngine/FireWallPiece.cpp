@@ -11,7 +11,7 @@
 namespace ss
 {
 	FireWallPiece::FireWallPiece()
-		: mDamage(500.0f)
+		: mDamage(80.0f)
 	{
 		SetName(L"FireWallPiece");
 		mScript = AddComponent<FireWallPieceScript>();

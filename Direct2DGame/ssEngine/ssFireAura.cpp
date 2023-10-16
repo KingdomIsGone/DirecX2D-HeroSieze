@@ -10,7 +10,7 @@
 namespace ss
 {
 	FireAura::FireAura()
-		: mDamage(500.0f)
+		: mDamage(80.0f)
 		, mDuration(6.5f)
 	{
 		SetName(L"FireAura");

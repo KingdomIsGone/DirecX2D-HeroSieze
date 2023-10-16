@@ -23,21 +23,29 @@ namespace ss
 
 	void FireBallScript::OnCollisionEnter(Collider2D* other)
 	{
-		
+		if (other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			if (!mOnce)
+			{
+				other->GetOwner()->SetChangeHpValue(-mDamage);
+				mCount = 0;
+				mOnce = true;
+			}
+		}
 	}
 
 	void FireBallScript::OnCollisionStay(Collider2D* other)
 	{
-		if (other->GetCollideType() == eCollideType::NormalMonster)
-		{
-			other->GetOwner()->SetChangeHpValue(-mDamage);
-		}
-
-		if (other->GetCollideType() != eCollideType::Player 
-			&& other->GetCollideType() != eCollideType::SpecialMonster
-			&& other->GetCollideType() != eCollideType::Sensor)
+		if (other->GetCollideType() == eCollideType::Wall)
 		{
 			GetOwner()->SetState(GameObject::eState::Dead);
+		}
+		else if (other->GetCollideType() == eCollideType::NormalMonster)
+		{
+			mCount++;
+
+			if(mCount > 5)
+				GetOwner()->SetState(GameObject::eState::Dead);
 		}
 	}
 

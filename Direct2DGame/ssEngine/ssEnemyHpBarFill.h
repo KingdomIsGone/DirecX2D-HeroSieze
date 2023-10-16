@@ -18,11 +18,25 @@ namespace ss
 
 		void ChangeHP(float hp) { mHpChanged = true; mCurHP = hp; }
 
+		void SetOwnerTransform(Transform* tr) { mOwnerTransform = tr; }
+		void SetOffset(float x, float y) { mOffsetX = x; mOffsetY = y; }
+		void SetFullHp(float full) { mFullHP = full; mCurHP = full; }
+
+		void SetFullScale(float x, float y);
+
 	private:
 		Transform* mTransform;
+		Transform* mOwnerTransform;
+
+		float mOffsetX;
+		float mOffsetY;
+
+		float mModifyX;
+
 		Vector3 mPos;
 		float mFullHpScale;
 		float mCurHpScale;
+		float mScaleY;
 		float mWidth;
 		bool mHpChanged;
 		float mCurHP;
