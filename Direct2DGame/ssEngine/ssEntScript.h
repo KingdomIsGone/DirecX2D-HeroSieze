@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	class DesertArcherScript : public Script
+	class EntScript : public Script
 	{
 	public:
 		enum class eState
@@ -23,8 +23,8 @@ namespace ss
 			Left,
 			Right,
 		};
-		DesertArcherScript();
-		~DesertArcherScript();
+		EntScript();
+		~EntScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -35,12 +35,12 @@ namespace ss
 
 		void PlayMoveAni();
 
-		void CalDir(Vector3 targetPos);
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 
 		float GetHP() { return mHp; }
 
+		void Damage();
 		void DamageCheck();
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
@@ -55,6 +55,7 @@ namespace ss
 		float mHp;
 		float mSpeed;
 		float mAgroDistance;
+		float mDamage;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;

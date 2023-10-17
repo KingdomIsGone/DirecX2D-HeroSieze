@@ -282,7 +282,8 @@ namespace ss
 
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
-			|| other->GetCollideType() == eCollideType::SpecialMonster)
+			|| other->GetCollideType() == eCollideType::SpecialMonster
+			|| other->GetCollideType() == eCollideType::Wall)
 		{
 			UINT colNum = other->GetColDir();
 			UINT colID = other->GetColliderID();
@@ -320,7 +321,8 @@ namespace ss
 
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
-			|| other->GetCollideType() == eCollideType::SpecialMonster)
+			|| other->GetCollideType() == eCollideType::SpecialMonster
+			|| other->GetCollideType() == eCollideType::Wall)
 		{
 			UINT colNum = mColDirMap[other->GetColliderID()];
 

@@ -1,23 +1,23 @@
-#include "ssDesertArcherScript.h"
+#include "ssTreeMonScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
-#include "ssArrow.h"
 #include "ssSceneManager.h"
+#include "ssDart.h"
 
 namespace ss
 {
-	DesertArcherScript::DesertArcherScript()
+	TreeMonScript::TreeMonScript()
 		: mAgroDistance(2.6f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
 	{
 	}
-	DesertArcherScript::~DesertArcherScript()
+	TreeMonScript::~TreeMonScript()
 	{
 	}
-	void DesertArcherScript::Initialize()
+	void TreeMonScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
@@ -25,7 +25,7 @@ namespace ss
 
 	}
 
-	void DesertArcherScript::Update()
+	void TreeMonScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -38,30 +38,30 @@ namespace ss
 
 		switch (mState)
 		{
-		case ss::DesertArcherScript::eState::Idle:
+		case ss::TreeMonScript::eState::Idle:
 			Idle();
 			break;
-		case ss::DesertArcherScript::eState::Chase:
+		case ss::TreeMonScript::eState::Chase:
 			Chase();
 			break;
-		case ss::DesertArcherScript::eState::Attack:
+		case ss::TreeMonScript::eState::Attack:
 			Attack();
 			break;
-		case ss::DesertArcherScript::eState::Dead:
+		case ss::TreeMonScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::Idle()
+	void TreeMonScript::Idle()
 	{
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void DesertArcherScript::Chase()
+	void TreeMonScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -85,24 +85,23 @@ namespace ss
 			mState = eState::Attack;
 	}
 
-	void DesertArcherScript::Attack()
+	void TreeMonScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		CalDir(mPlayerPos);
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherAtkUp", false);
+		case ss::TreeMonScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"TreeMonAtkUp", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherAtkDown", false);
+		case ss::TreeMonScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"TreeMonAtkDown", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherAtkLeft", false);
+		case ss::TreeMonScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"TreeMonAtkLeft", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherAtkRight", false);
+		case ss::TreeMonScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"TreeMonAtkRight", false);
 			break;
 		default:
 			break;
@@ -111,13 +110,12 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			float degree = CalculateMoveDegree(mPos, mPlayerPos);
-			Arrow* arrow = new Arrow(degree);
+			Dart* dart = new Dart(degree);
 
 			Vector3 pos = mPos;
 			pos.z -= 0.1f;
-			arrow->GetComponent<Transform>()->SetPosition(pos);
-
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, arrow);
+			dart->GetComponent<Transform>()->SetPosition(pos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, dart);
 
 			mAnimator->GetActiveAnimation()->Reset();
 		}
@@ -128,7 +126,7 @@ namespace ss
 			mState = eState::Chase;
 	}
 
-	void DesertArcherScript::PlayMoveAni()
+	void TreeMonScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -152,24 +150,24 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherWalkUp", true);
+		case ss::TreeMonScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"TreeMonWalkUp", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherWalkDown", true);
+		case ss::TreeMonScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"TreeMonWalkDown", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherWalkLeft", true);
+		case ss::TreeMonScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"TreeMonWalkLeft", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherWalkRight", true);
+		case ss::TreeMonScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"TreeMonWalkRight", true);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::CalDir(Vector3 targetPos)
+	void TreeMonScript::CalDir(Vector3 targetPos)
 	{
 		float degree = math::CalculateDegree(Vector2(mPos.x, mPos.y), Vector2(targetPos.x, targetPos.y));
 
@@ -183,7 +181,7 @@ namespace ss
 			mDirState = eDirState::Down;
 	}
 
-	Vector3 DesertArcherScript::ReverseMove()
+	Vector3 TreeMonScript::ReverseMove()
 	{
 		if (mLeftColCount > 0)
 		{
@@ -212,7 +210,7 @@ namespace ss
 		return mPos;
 	}
 
-	float DesertArcherScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float TreeMonScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
@@ -220,7 +218,7 @@ namespace ss
 	}
 
 
-	void DesertArcherScript::DamageCheck()
+	void TreeMonScript::DamageCheck()
 	{
 		float value = GetOwner()->GetChangeHpValue();
 		if (value != 0)
@@ -230,7 +228,7 @@ namespace ss
 		}
 	}
 
-	void DesertArcherScript::OnCollisionEnter(Collider2D* other)
+	void TreeMonScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
@@ -256,10 +254,10 @@ namespace ss
 		}
 
 	}
-	void DesertArcherScript::OnCollisionStay(Collider2D* other)
+	void TreeMonScript::OnCollisionStay(Collider2D* other)
 	{
 	}
-	void DesertArcherScript::OnCollisionExit(Collider2D* other)
+	void TreeMonScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

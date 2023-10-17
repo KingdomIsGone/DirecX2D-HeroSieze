@@ -606,6 +606,16 @@ namespace renderer
 			}
 		}
 
+		//Çìµå
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"head", L"..\\Resources\\Texture\\Player\\head.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(shader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"PyroHead", spriteMateiral);
+		}
+
 		//HPMP Bar z=1.01
 		{
 			{

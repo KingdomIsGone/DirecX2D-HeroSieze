@@ -508,7 +508,9 @@ namespace ss
 		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
 		Meteor* meteor = new Meteor();
-		meteor->GetComponent<Transform>()->SetPosition(cursorPos);
+		Vector3 pos = cursorPos;
+		pos.z = 1.1f;
+		meteor->GetComponent<Transform>()->SetPosition(pos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, meteor);
 	}
 

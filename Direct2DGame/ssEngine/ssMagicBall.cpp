@@ -1,18 +1,18 @@
-#include "ssArrow.h"
+#include "ssMagicBall.h"
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
 #include "ssAnimator.h"
 #include "ssTime.h"
 #include "ssCollider2D.h"
-#include "ssArrowScript.h"
+#include "ssMagicBallScript.h"
 
 namespace ss
 {
-	Arrow::Arrow(float Degree)
+	MagicBall::MagicBall(float Degree)
 		: mDeleteTime(0.0f)
 	{
-		AddComponent<ArrowScript>();
-		SetName(L"Arrow");
+		AddComponent<MagicBallScript>();
+		SetName(L"MagicBall");
 
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(Vector3(1.2f, 1.2f, 1.0f));
@@ -21,12 +21,12 @@ namespace ss
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 
-		std::shared_ptr<Texture> ArrowTex
-			= Resources::Load<Texture>(L"ArrowTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\Arrows.png");
+		std::shared_ptr<Texture> MagicBallTex
+			= Resources::Load<Texture>(L"MagicBallTex", L"..\\Resources\\Texture\\Monster\\SkeletonMage\\MagicBall.png");
 
 		Animator* at = AddComponent<Animator>();
-		at->Create(L"Arrow", ArrowTex, Vector2(0.0f, 0.0f), Vector2(28.0f, 9.0f), 4);
-		at->PlayAnimation(L"Arrow", true);
+		at->Create(L"MagicBall", MagicBallTex, Vector2(0.0f, 0.0f), Vector2(48.0f, 19.0f), 4);
+		at->PlayAnimation(L"MagicBall", true);
 
 		mDirVector = DegreeToVector(Degree);
 
@@ -39,16 +39,16 @@ namespace ss
 		mCollider->SetSize(Vector2(0.2f, 0.1f));
 	}
 
-	Arrow::~Arrow()
+	MagicBall::~MagicBall()
 	{
 	}
 
-	void Arrow::Initialize()
+	void MagicBall::Initialize()
 	{
 		GameObject::Initialize();
 	}
 
-	void Arrow::Update()
+	void MagicBall::Update()
 	{
 		GameObject::Update();
 
@@ -59,7 +59,7 @@ namespace ss
 		mTransform->SetPosition(pos);
 	}
 
-	void Arrow::LateUpdate()
+	void MagicBall::LateUpdate()
 	{
 		GameObject::LateUpdate();
 
@@ -69,7 +69,7 @@ namespace ss
 			SetState(eState::Dead);
 	}
 
-	void Arrow::Render()
+	void MagicBall::Render()
 	{
 		GameObject::Render();
 	}

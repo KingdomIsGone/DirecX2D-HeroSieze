@@ -1,31 +1,29 @@
-#include "ssDesertArcherScript.h"
+#include "ssEntScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
-#include "ssArrow.h"
-#include "ssSceneManager.h"
 
 namespace ss
 {
-	DesertArcherScript::DesertArcherScript()
-		: mAgroDistance(2.6f)
+	EntScript::EntScript()
+		: mAgroDistance(1.8f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
+		, mDamage(80.0f)
 	{
 	}
-	DesertArcherScript::~DesertArcherScript()
+	EntScript::~EntScript()
 	{
 	}
-	void DesertArcherScript::Initialize()
+	void EntScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
-
 	}
 
-	void DesertArcherScript::Update()
+	void EntScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -38,30 +36,30 @@ namespace ss
 
 		switch (mState)
 		{
-		case ss::DesertArcherScript::eState::Idle:
+		case ss::EntScript::eState::Idle:
 			Idle();
 			break;
-		case ss::DesertArcherScript::eState::Chase:
+		case ss::EntScript::eState::Chase:
 			Chase();
 			break;
-		case ss::DesertArcherScript::eState::Attack:
+		case ss::EntScript::eState::Attack:
 			Attack();
 			break;
-		case ss::DesertArcherScript::eState::Dead:
+		case ss::EntScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::Idle()
+	void EntScript::Idle()
 	{
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void DesertArcherScript::Chase()
+	void EntScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -79,30 +77,29 @@ namespace ss
 
 		PlayMoveAni();
 
-		float distance = math::GetDistance(mPos, mPlayerPos);
+		//float distance = math::GetDistance(mPos, mPlayerPos);
 
-		if (distance <= 2.0f)
-			mState = eState::Attack;
+		/*if (distance < 0.005f)
+			mState = eState::Attack;*/
 	}
 
-	void DesertArcherScript::Attack()
+	void EntScript::Attack()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
-		CalDir(mPlayerPos);
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherAtkUp", false);
+		case ss::EntScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Ent_AtkUp", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherAtkDown", false);
+		case ss::EntScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Ent_AtkDown", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherAtkLeft", false);
+		case ss::EntScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"Ent_AtkLeft", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherAtkRight", false);
+		case ss::EntScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"Ent_AtkRight", false);
 			break;
 		default:
 			break;
@@ -110,25 +107,17 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
-			float degree = CalculateMoveDegree(mPos, mPlayerPos);
-			Arrow* arrow = new Arrow(degree);
-
-			Vector3 pos = mPos;
-			pos.z -= 0.1f;
-			arrow->GetComponent<Transform>()->SetPosition(pos);
-
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, arrow);
-
+			Damage();
 			mAnimator->GetActiveAnimation()->Reset();
 		}
 
 
 		float distance = math::GetDistance(mPos, mPlayerPos);
-		if (distance > 2.0f && !mIsColliding)
+		if (distance > 0.5f && !mIsColliding)
 			mState = eState::Chase;
 	}
 
-	void DesertArcherScript::PlayMoveAni()
+	void EntScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -152,38 +141,24 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherWalkUp", true);
+		case ss::EntScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Ent_Up", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherWalkDown", true);
+		case ss::EntScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Ent_Down", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherWalkLeft", true);
+		case ss::EntScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"Ent_Left", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherWalkRight", true);
+		case ss::EntScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"Ent_Right", true);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::CalDir(Vector3 targetPos)
-	{
-		float degree = math::CalculateDegree(Vector2(mPos.x, mPos.y), Vector2(targetPos.x, targetPos.y));
-
-		if (-45.f <= degree && degree < 45.f)
-			mDirState = eDirState::Right;
-		else if (45.f <= degree && degree < 135.f)
-			mDirState = eDirState::Up;
-		else if (135.f <= degree || degree < -135.f)
-			mDirState = eDirState::Left;
-		else if (-135.f <= degree && degree < -45.f)
-			mDirState = eDirState::Down;
-	}
-
-	Vector3 DesertArcherScript::ReverseMove()
+	Vector3 EntScript::ReverseMove()
 	{
 		if (mLeftColCount > 0)
 		{
@@ -212,15 +187,19 @@ namespace ss
 		return mPos;
 	}
 
-	float DesertArcherScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float EntScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
 	}
 
+	void EntScript::Damage()
+	{
+		PlayerScript::ChangeHp(-mDamage);
+	}
 
-	void DesertArcherScript::DamageCheck()
+	void EntScript::DamageCheck()
 	{
 		float value = GetOwner()->GetChangeHpValue();
 		if (value != 0)
@@ -230,8 +209,11 @@ namespace ss
 		}
 	}
 
-	void DesertArcherScript::OnCollisionEnter(Collider2D* other)
+	void EntScript::OnCollisionEnter(Collider2D* other)
 	{
+		if (other->GetCollideType() == eCollideType::Player)
+			mState = eState::Attack;
+
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
 			|| other->GetCollideType() == eCollideType::SpecialMonster
@@ -256,10 +238,12 @@ namespace ss
 		}
 
 	}
-	void DesertArcherScript::OnCollisionStay(Collider2D* other)
+	void EntScript::OnCollisionStay(Collider2D* other)
 	{
+		if (other->GetCollideType() == eCollideType::Player)
+			mState = eState::Attack;
 	}
-	void DesertArcherScript::OnCollisionExit(Collider2D* other)
+	void EntScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

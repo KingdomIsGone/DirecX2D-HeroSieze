@@ -290,6 +290,42 @@
     <ClCompile Include="ssArrowScript.cpp">
       <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
     </ClCompile>
+    <ClCompile Include="ssSkeletonMage.cpp">
+      <Filter>Contents\Object\Monster\SkeletonMage</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSkeletonMageScript.cpp">
+      <Filter>Contents\Object\Monster\SkeletonMage</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMagicBall.cpp">
+      <Filter>Contents\Object\Monster\SkeletonMage\MagicBall</Filter>
+    </ClCompile>
+    <ClCompile Include="ssMagicBallScript.cpp">
+      <Filter>Contents\Object\Monster\SkeletonMage\MagicBall</Filter>
+    </ClCompile>
+    <ClCompile Include="ssTreeMon.cpp">
+      <Filter>Contents\Object\Monster\TreeMon</Filter>
+    </ClCompile>
+    <ClCompile Include="ssTreeMonScript.cpp">
+      <Filter>Contents\Object\Monster\TreeMon</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDart.cpp">
+      <Filter>Contents\Object\Monster\TreeMon\Dart</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDartScript.cpp">
+      <Filter>Contents\Object\Monster\TreeMon\Dart</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFlames.cpp">
+      <Filter>Contents\Object\Player\Skill\Meteor\Flames</Filter>
+    </ClCompile>
+    <ClCompile Include="ssFlameScript.cpp">
+      <Filter>Contents\Object\Player\Skill\Meteor\Flames</Filter>
+    </ClCompile>
+    <ClCompile Include="ssEnt.cpp">
+      <Filter>Contents\Object\Monster\Ent</Filter>
+    </ClCompile>
+    <ClCompile Include="ssEntScript.cpp">
+      <Filter>Contents\Object\Monster\Ent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -584,6 +620,42 @@
     <ClInclude Include="ssArrowScript.h">
       <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
     </ClInclude>
+    <ClInclude Include="ssSkeletonMage.h">
+      <Filter>Contents\Object\Monster\SkeletonMage</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSkeletonMageScript.h">
+      <Filter>Contents\Object\Monster\SkeletonMage</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMagicBall.h">
+      <Filter>Contents\Object\Monster\SkeletonMage\MagicBall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssMagicBallScript.h">
+      <Filter>Contents\Object\Monster\SkeletonMage\MagicBall</Filter>
+    </ClInclude>
+    <ClInclude Include="ssTreeMon.h">
+      <Filter>Contents\Object\Monster\TreeMon</Filter>
+    </ClInclude>
+    <ClInclude Include="ssTreeMonScript.h">
+      <Filter>Contents\Object\Monster\TreeMon</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDart.h">
+      <Filter>Contents\Object\Monster\TreeMon\Dart</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDartScript.h">
+      <Filter>Contents\Object\Monster\TreeMon\Dart</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFlames.h">
+      <Filter>Contents\Object\Player\Skill\Meteor\Flames</Filter>
+    </ClInclude>
+    <ClInclude Include="ssFlameScript.h">
+      <Filter>Contents\Object\Player\Skill\Meteor\Flames</Filter>
+    </ClInclude>
+    <ClInclude Include="ssEnt.h">
+      <Filter>Contents\Object\Monster\Ent</Filter>
+    </ClInclude>
+    <ClInclude Include="ssEntScript.h">
+      <Filter>Contents\Object\Monster\Ent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -810,6 +882,24 @@
     </Filter>
     <Filter Include="Contents\Object\Monster\DesertArcher\Arrow">
       <UniqueIdentifier>{b65d9e1d-3427-4bf3-9717-0678a7ff0430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\SkeletonMage">
+      <UniqueIdentifier>{f4f16ccb-7cc6-4c85-92f0-8c9921650c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\SkeletonMage\MagicBall">
+      <UniqueIdentifier>{47f5bdb8-ae97-442e-a850-3b27b730d8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\TreeMon">
+      <UniqueIdentifier>{ac00b2f4-d361-4c33-9df8-876a669ffb83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\TreeMon\Dart">
+      <UniqueIdentifier>{65b731c1-0743-4a5a-aed9-0038d25bed51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\Skill\Meteor\Flames">
+      <UniqueIdentifier>{1f2681cc-a1f3-4637-9b89-d0a5e011d484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\Ent">
+      <UniqueIdentifier>{0a996a6f-25de-421d-abc1-dbe1a19276c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

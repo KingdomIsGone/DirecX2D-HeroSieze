@@ -1,23 +1,23 @@
-#include "ssDesertArcherScript.h"
+#include "ssSkeletonMageScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
-#include "ssArrow.h"
 #include "ssSceneManager.h"
+#include "ssMagicBall.h"
 
 namespace ss
 {
-	DesertArcherScript::DesertArcherScript()
+	SkeletonMageScript::SkeletonMageScript()
 		: mAgroDistance(2.6f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
 	{
 	}
-	DesertArcherScript::~DesertArcherScript()
+	SkeletonMageScript::~SkeletonMageScript()
 	{
 	}
-	void DesertArcherScript::Initialize()
+	void SkeletonMageScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
@@ -25,7 +25,7 @@ namespace ss
 
 	}
 
-	void DesertArcherScript::Update()
+	void SkeletonMageScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -38,30 +38,30 @@ namespace ss
 
 		switch (mState)
 		{
-		case ss::DesertArcherScript::eState::Idle:
+		case ss::SkeletonMageScript::eState::Idle:
 			Idle();
 			break;
-		case ss::DesertArcherScript::eState::Chase:
+		case ss::SkeletonMageScript::eState::Chase:
 			Chase();
 			break;
-		case ss::DesertArcherScript::eState::Attack:
+		case ss::SkeletonMageScript::eState::Attack:
 			Attack();
 			break;
-		case ss::DesertArcherScript::eState::Dead:
+		case ss::SkeletonMageScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::Idle()
+	void SkeletonMageScript::Idle()
 	{
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void DesertArcherScript::Chase()
+	void SkeletonMageScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -85,24 +85,25 @@ namespace ss
 			mState = eState::Attack;
 	}
 
-	void DesertArcherScript::Attack()
+	void SkeletonMageScript::Attack()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		CalDir(mPlayerPos);
+
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherAtkUp", false);
+		case ss::SkeletonMageScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"SkMageAtkUp", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherAtkDown", false);
+		case ss::SkeletonMageScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"SkMageAtkDown", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherAtkLeft", false);
+		case ss::SkeletonMageScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"SkMageAtkLeft", false);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherAtkRight", false);
+		case ss::SkeletonMageScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"SkMageAtkRight", false);
 			break;
 		default:
 			break;
@@ -111,13 +112,13 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			float degree = CalculateMoveDegree(mPos, mPlayerPos);
-			Arrow* arrow = new Arrow(degree);
+			MagicBall* ball = new MagicBall(degree);
 
 			Vector3 pos = mPos;
 			pos.z -= 0.1f;
-			arrow->GetComponent<Transform>()->SetPosition(pos);
+			ball->GetComponent<Transform>()->SetPosition(pos);
 
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, arrow);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, ball);
 
 			mAnimator->GetActiveAnimation()->Reset();
 		}
@@ -128,7 +129,7 @@ namespace ss
 			mState = eState::Chase;
 	}
 
-	void DesertArcherScript::PlayMoveAni()
+	void SkeletonMageScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -152,24 +153,24 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
 		{
-		case ss::DesertArcherScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"ArcherWalkUp", true);
+		case ss::SkeletonMageScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"SkMageWalkUp", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"ArcherWalkDown", true);
+		case ss::SkeletonMageScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"SkMageWalkDown", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"ArcherWalkLeft", true);
+		case ss::SkeletonMageScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"SkMageWalkLeft", true);
 			break;
-		case ss::DesertArcherScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"ArcherWalkRight", true);
+		case ss::SkeletonMageScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"SkMageWalkRight", true);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void DesertArcherScript::CalDir(Vector3 targetPos)
+	void SkeletonMageScript::CalDir(Vector3 targetPos)
 	{
 		float degree = math::CalculateDegree(Vector2(mPos.x, mPos.y), Vector2(targetPos.x, targetPos.y));
 
@@ -183,7 +184,7 @@ namespace ss
 			mDirState = eDirState::Down;
 	}
 
-	Vector3 DesertArcherScript::ReverseMove()
+	Vector3 SkeletonMageScript::ReverseMove()
 	{
 		if (mLeftColCount > 0)
 		{
@@ -212,7 +213,7 @@ namespace ss
 		return mPos;
 	}
 
-	float DesertArcherScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float SkeletonMageScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
@@ -220,7 +221,7 @@ namespace ss
 	}
 
 
-	void DesertArcherScript::DamageCheck()
+	void SkeletonMageScript::DamageCheck()
 	{
 		float value = GetOwner()->GetChangeHpValue();
 		if (value != 0)
@@ -230,7 +231,7 @@ namespace ss
 		}
 	}
 
-	void DesertArcherScript::OnCollisionEnter(Collider2D* other)
+	void SkeletonMageScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
@@ -256,10 +257,10 @@ namespace ss
 		}
 
 	}
-	void DesertArcherScript::OnCollisionStay(Collider2D* other)
+	void SkeletonMageScript::OnCollisionStay(Collider2D* other)
 	{
 	}
-	void DesertArcherScript::OnCollisionExit(Collider2D* other)
+	void SkeletonMageScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

@@ -179,6 +179,8 @@
     <ClInclude Include="ssChargedBolt.h" />
     <ClInclude Include="ssCloneAssault.h" />
     <ClInclude Include="ssCloneScript.h" />
+    <ClInclude Include="ssDart.h" />
+    <ClInclude Include="ssDartScript.h" />
     <ClInclude Include="ssDesertArcher.h" />
     <ClInclude Include="ssDesertArcherScript.h" />
     <ClInclude Include="ssDesertBossRoom.h" />
@@ -189,6 +191,8 @@
     <ClInclude Include="ssDesertTownScene.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
     <ClInclude Include="ssEnemyHpBarFill.h" />
+    <ClInclude Include="ssEnt.h" />
+    <ClInclude Include="ssEntScript.h" />
     <ClInclude Include="ssEquipIndicator.h" />
     <ClInclude Include="ssEquipmentSlot.h" />
     <ClInclude Include="ssFireAura.h" />
@@ -197,6 +201,8 @@
     <ClInclude Include="ssFireballScript.h" />
     <ClInclude Include="ssFireWall.h" />
     <ClInclude Include="ssFireWallPieceScript.h" />
+    <ClInclude Include="ssFlames.h" />
+    <ClInclude Include="ssFlameScript.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssHydra.h" />
     <ClInclude Include="ssHydraScript.h" />
@@ -214,6 +220,8 @@
     <ClInclude Include="ssLegendBoots.h" />
     <ClInclude Include="ssLegendStaff1.h" />
     <ClInclude Include="ssLightBall.h" />
+    <ClInclude Include="ssMagicBall.h" />
+    <ClInclude Include="ssMagicBallScript.h" />
     <ClInclude Include="ssMagicHat.h" />
     <ClInclude Include="ssMagicRobe.h" />
     <ClInclude Include="ssMagicStaff.h" />
@@ -230,6 +238,8 @@
     <ClInclude Include="ssPlayerMpBarFill.h" />
     <ClInclude Include="ssRightInfo.h" />
     <ClInclude Include="ssSarcophagus.h" />
+    <ClInclude Include="ssSkeletonMage.h" />
+    <ClInclude Include="ssSkeletonMageScript.h" />
     <ClInclude Include="ssSkeletonScript.h" />
     <ClInclude Include="ssPlayer.h" />
     <ClInclude Include="ssPlayerCameraScript.h" />
@@ -243,6 +253,8 @@
     <ClInclude Include="ssThunderPiece.h" />
     <ClInclude Include="ssTitleScene.h" />
     <ClInclude Include="ssTorchBig.h" />
+    <ClInclude Include="ssTreeMon.h" />
+    <ClInclude Include="ssTreeMonScript.h" />
     <ClInclude Include="ssUIScene.h" />
     <ClInclude Include="ssCameraScript.h" />
     <ClInclude Include="ssPlayScene.h" />
@@ -277,6 +289,8 @@
     <ClCompile Include="ssChargedBolt.cpp" />
     <ClCompile Include="ssCloneAssault.cpp" />
     <ClCompile Include="ssCloneScript.cpp" />
+    <ClCompile Include="ssDart.cpp" />
+    <ClCompile Include="ssDartScript.cpp" />
     <ClCompile Include="ssDesertArcher.cpp" />
     <ClCompile Include="ssDesertArcherScript.cpp" />
     <ClCompile Include="ssDesertBossRoom.cpp" />
@@ -287,6 +301,8 @@
     <ClCompile Include="ssDesertTownScene.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
+    <ClCompile Include="ssEnt.cpp" />
+    <ClCompile Include="ssEntScript.cpp" />
     <ClCompile Include="ssEquipIndicator.cpp" />
     <ClCompile Include="ssEquipmentSlot.cpp" />
     <ClCompile Include="ssFireAura.cpp" />
@@ -295,6 +311,8 @@
     <ClCompile Include="ssFireballScript.cpp" />
     <ClCompile Include="ssFireWall.cpp" />
     <ClCompile Include="ssFireWallPieceScript.cpp" />
+    <ClCompile Include="ssFlames.cpp" />
+    <ClCompile Include="ssFlameScript.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssHydra.cpp" />
     <ClCompile Include="ssHydraScript.cpp" />
@@ -312,6 +330,8 @@
     <ClCompile Include="ssLegendBoots.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
     <ClCompile Include="ssLightBall.cpp" />
+    <ClCompile Include="ssMagicBall.cpp" />
+    <ClCompile Include="ssMagicBallScript.cpp" />
     <ClCompile Include="ssMagicHat.cpp" />
     <ClCompile Include="ssMagicRobe.cpp" />
     <ClCompile Include="ssMagicStaff.cpp" />
@@ -328,6 +348,8 @@
     <ClCompile Include="ssPlayerMpBarFill.cpp" />
     <ClCompile Include="ssRightInfo.cpp" />
     <ClCompile Include="ssSarcophagus.cpp" />
+    <ClCompile Include="ssSkeletonMage.cpp" />
+    <ClCompile Include="ssSkeletonMageScript.cpp" />
     <ClCompile Include="ssSkeletonScript.cpp" />
     <ClCompile Include="ssPlayer.cpp" />
     <ClCompile Include="ssPlayerCameraScript.cpp" />
@@ -341,6 +363,8 @@
     <ClCompile Include="ssThunderPiece.cpp" />
     <ClCompile Include="ssTitleScene.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />
+    <ClCompile Include="ssTreeMon.cpp" />
+    <ClCompile Include="ssTreeMonScript.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
     <ClCompile Include="ssCameraScript.cpp" />
     <ClCompile Include="ssEngine.cpp" />

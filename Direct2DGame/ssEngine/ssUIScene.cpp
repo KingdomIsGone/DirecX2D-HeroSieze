@@ -45,6 +45,9 @@
 
 #include "ssSpearRain.h"
 #include "ssDesertArcher.h"
+#include "ssSkeletonMage.h"
+#include "ssTreeMon.h"
+#include "ssEnt.h"
 
 
 namespace ss
@@ -68,13 +71,25 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::Cursor, indicator);
 
-	/*	DesertSkeleton* deSkeleton = new DesertSkeleton();
+		/*DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
 		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
 
-		DesertArcher* archer = new DesertArcher();
+		/*DesertArcher* archer = new DesertArcher();
 		AddGameObject(eLayerType::Monster, archer);
 		archer->GetComponent<Transform>()->SetPosition(-2.5f, 0.0f, 1.02f);
+
+		SkeletonMage* mage = new SkeletonMage();
+		AddGameObject(eLayerType::Monster, mage);
+		mage->GetComponent<Transform>()->SetPosition(2.5f, 0.0f, 1.02f);
+
+		TreeMon* tree = new TreeMon();
+		AddGameObject(eLayerType::Monster, tree);
+		tree->GetComponent<Transform>()->SetPosition(0.f, 2.6f, 1.02f);*/
+
+		Ent* ent = new Ent();
+		AddGameObject(eLayerType::Monster, ent); 
+		ent->GetComponent<Transform>()->SetPosition(1.f, 2.6f, 1.02f);
 
 		//item
 		LegendStaff1* staff = new LegendStaff1();
@@ -296,6 +311,17 @@ namespace ss
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
+		//head
+		{
+			GameObject* obj = new GameObject();
+			obj->SetName(L"pyroHead");
+			AddGameObjectToActiveScene(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"PyroHead"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.7f, 1.42f, 0.745f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.16f, 0.16f, 1.0f));
+		}
 
 		//HPMP Bar z=1.01
 		{
@@ -514,6 +540,16 @@ namespace ss
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"CharacterCircle0", spriteMateiral);
 			}
+		}
+
+		//Çìµå
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"head", L"..\\Resources\\Texture\\Player\\head.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"PyroHead", spriteMateiral);
 		}
 
 		//HPMP Bar z=1.01

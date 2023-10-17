@@ -6,6 +6,8 @@
 #include "ssCollider2D.h"
 #include "ssTime.h"
 #include "ssMeteorScript.h"
+#include "ssSceneManager.h"
+#include "ssFlames.h"
 
 namespace ss
 {
@@ -22,7 +24,7 @@ namespace ss
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
 		Collider2D* collider = AddComponent<Collider2D>();
-		collider->SetCollideType(eCollideType::NormalMonster);
+		collider->SetCollideType(eCollideType::Projectile);
 		collider->SetSize(Vector2(0.25f, 0.25f));
 		collider->SetCenter(Vector2(-0.00f, -0.1f));
 
@@ -43,7 +45,7 @@ namespace ss
 			= Resources::Load<Texture>(L"MeteorExplodeTex", L"..\\Resources\\Texture\\Skill\\Meteor\\Explode10010013.png");
 		mAnimator->Create(L"MeteorExplode", MeteorExplodeTex, Vector2(0.0f, 0.0f), Vector2(100.0f, 100.0f), 13);
 
-		mTransform->SetScale(Vector3(2.5f, 2.5f, 1.0));
+		mTransform->SetScale(Vector3(3.5f, 3.5f, 1.0));
 		
 
 		mAnimator->PlayAnimation(L"MoltenNova", true);
@@ -64,10 +66,12 @@ namespace ss
 
 		if (mDelayTime <= 0.0f && mStage == 0)
 		{
+			mTransform->SetScale(Vector3(2.5f, 2.5f, 1.0));
 			mAnimator->PlayAnimation(L"Meteor", true);
 			mStage++;
 			mTargetY = mPos.y + 0.1f;
 			mPos.y += 2.5f;
+			mPos.z = 0.9f;
 			mTransform->SetPosition(mPos);
 		}
 		else if (mStage == 1)
@@ -83,8 +87,18 @@ namespace ss
 		{
 			mAnimator->PlayAnimation(L"MeteorExplode", false);
 			mMScript->SetDamageActivate();
+
+			Flames* flame = new Flames();
+			Vector3 pos = mTransform->GetPosition();
+			pos.z = 1.1f;
+			flame->GetComponent<Transform>()->SetPosition(pos);
+
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, flame);
+
 			if (mAnimator->GetActiveAnimation()->IsComplete())
+			{
 				SetState(eState::Dead);
+			}
 		}
 
 	}

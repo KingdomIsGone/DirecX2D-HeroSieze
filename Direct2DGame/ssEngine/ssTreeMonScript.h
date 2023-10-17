@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	class DesertArcherScript : public Script
+	class TreeMonScript : public Script
 	{
 	public:
 		enum class eState
@@ -23,8 +23,8 @@ namespace ss
 			Left,
 			Right,
 		};
-		DesertArcherScript();
-		~DesertArcherScript();
+		TreeMonScript();
+		~TreeMonScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

@@ -51,19 +51,19 @@ namespace ss
 		//Attack Ani
 		std::shared_ptr<Texture> ArcherAtkUpTex
 			= Resources::Load<Texture>(L"ArcherAtkUpTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\ArcherAtkUp.png");
-		at->Create(L"ArcherAtkUp", ArcherAtkUpTex, Vector2(0.0f, 0.0f), Vector2(24.0f, 49.0f), 9);
+		at->Create(L"ArcherAtkUp", ArcherAtkUpTex, Vector2(0.0f, 0.0f), Vector2(24.0f, 49.0f), 9, Vector2::Zero, 0.12f);
 
 		std::shared_ptr<Texture> ArcherAtkDownTex
 			= Resources::Load<Texture>(L"ArcherAtkDownTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\ArcherAtkDown.png");
-		at->Create(L"ArcherAtkDown", ArcherAtkDownTex, Vector2(0.0f, 0.0f), Vector2(32.0f, 47.0f), 10);
+		at->Create(L"ArcherAtkDown", ArcherAtkDownTex, Vector2(0.0f, 0.0f), Vector2(32.0f, 47.0f), 10, Vector2::Zero, 0.12f);
 
 		std::shared_ptr<Texture> ArcherAtkRightTex
 			= Resources::Load<Texture>(L"ArcherAtkRightTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\ArcherAtkRight.png");
-		at->Create(L"ArcherAtkRight", ArcherAtkRightTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 49.0f), 9);
+		at->Create(L"ArcherAtkRight", ArcherAtkRightTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 49.0f), 9, Vector2::Zero, 0.12f);
 
 		std::shared_ptr<Texture> ArcherAtkLeftTex
 			= Resources::Load<Texture>(L"ArcherAtkLeftTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\ArcherAtkLeft.png");
-		at->Create(L"ArcherAtkLeft", ArcherAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 49.0f), 9);
+		at->Create(L"ArcherAtkLeft", ArcherAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(31.0f, 49.0f), 9, Vector2::Zero, 0.12f);
 
 		//Idle
 		std::shared_ptr<Texture> ArcherIdleTex

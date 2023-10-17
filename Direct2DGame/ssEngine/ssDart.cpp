@@ -1,18 +1,18 @@
-#include "ssArrow.h"
+#include "ssDart.h"
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
 #include "ssAnimator.h"
 #include "ssTime.h"
 #include "ssCollider2D.h"
-#include "ssArrowScript.h"
+#include "ssDartScript.h"
 
 namespace ss
 {
-	Arrow::Arrow(float Degree)
+	Dart::Dart(float Degree)
 		: mDeleteTime(0.0f)
 	{
-		AddComponent<ArrowScript>();
-		SetName(L"Arrow");
+		AddComponent<DartScript>();
+		SetName(L"Dart");
 
 		mTransform = GetComponent<Transform>();
 		mTransform->SetScale(Vector3(1.2f, 1.2f, 1.0f));
@@ -21,12 +21,12 @@ namespace ss
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 
-		std::shared_ptr<Texture> ArrowTex
-			= Resources::Load<Texture>(L"ArrowTex", L"..\\Resources\\Texture\\Monster\\DesertArcher\\Arrows.png");
+		std::shared_ptr<Texture> DartTex
+			= Resources::Load<Texture>(L"DartTex", L"..\\Resources\\Texture\\Monster\\TreeMon\\Tribal_Doll_Dart_spr.png");
 
 		Animator* at = AddComponent<Animator>();
-		at->Create(L"Arrow", ArrowTex, Vector2(0.0f, 0.0f), Vector2(28.0f, 9.0f), 4);
-		at->PlayAnimation(L"Arrow", true);
+		at->Create(L"Dart", DartTex, Vector2(0.0f, 0.0f), Vector2(24.0f, 3.0f), 1);
+		at->PlayAnimation(L"Dart", false);
 
 		mDirVector = DegreeToVector(Degree);
 
@@ -39,16 +39,16 @@ namespace ss
 		mCollider->SetSize(Vector2(0.2f, 0.1f));
 	}
 
-	Arrow::~Arrow()
+	Dart::~Dart()
 	{
 	}
 
-	void Arrow::Initialize()
+	void Dart::Initialize()
 	{
 		GameObject::Initialize();
 	}
 
-	void Arrow::Update()
+	void Dart::Update()
 	{
 		GameObject::Update();
 
@@ -59,7 +59,7 @@ namespace ss
 		mTransform->SetPosition(pos);
 	}
 
-	void Arrow::LateUpdate()
+	void Dart::LateUpdate()
 	{
 		GameObject::LateUpdate();
 
@@ -69,7 +69,7 @@ namespace ss
 			SetState(eState::Dead);
 	}
 
-	void Arrow::Render()
+	void Dart::Render()
 	{
 		GameObject::Render();
 	}

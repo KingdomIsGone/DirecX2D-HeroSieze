@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	class DesertArcherScript : public Script
+	class SkeletonMageScript : public Script
 	{
 	public:
 		enum class eState
@@ -23,8 +23,8 @@ namespace ss
 			Left,
 			Right,
 		};
-		DesertArcherScript();
-		~DesertArcherScript();
+		SkeletonMageScript();
+		~SkeletonMageScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -36,6 +36,7 @@ namespace ss
 		void PlayMoveAni();
 
 		void CalDir(Vector3 targetPos);
+
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 
