@@ -16,13 +16,14 @@ namespace ss
 	}
 	SkeletonScript::~SkeletonScript()
 	{
+		ColideClear();
 	}
 	void SkeletonScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
-		
+		mCollider = GetOwner()->GetComponent<Collider2D>();
 
 
 	}
@@ -164,25 +165,25 @@ namespace ss
 
 	Vector3 SkeletonScript::ReverseMove()
 	{
-		if (mLeftColCount > 0)
+		if (mCollider->GetDirCount(e4Direction::Left) > 0)
 		{
 			if (mPos.x > mPlayerPos.x)
 				mPos.x += (mSpeed + 0.f) * Time::DeltaTime();
 		}
 
-		if (mRightColCount > 0)
+		if (mCollider->GetDirCount(e4Direction::Right) > 0)
 		{
 			if (mPos.x < mPlayerPos.x)
 				mPos.x -= (mSpeed + 0.f) * Time::DeltaTime();
 		}
 
-		if (mTopColCount > 0)
+		if (mCollider->GetDirCount(e4Direction::Up) > 0)
 		{
 			if (mPos.y < mPlayerPos.y)
 				mPos.y -= (mSpeed + 0.f) * Time::DeltaTime();
 		}
 
-		if (mBottomColCount > 0)
+		if (mCollider->GetDirCount(e4Direction::Down) > 0)
 		{
 			if (mPos.y > mPlayerPos.y)
 				mPos.y += (mSpeed + 0.f) * Time::DeltaTime();
@@ -196,6 +197,23 @@ namespace ss
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
+	}
+
+	void SkeletonScript::ColideClear()
+	{
+		for (auto iter = mColAdressMap.begin(); iter != mColAdressMap.end(); iter++)
+		{
+			UINT colNum = iter->second->GetColDir();
+
+			if (colNum == 1)
+				iter->second->SetDirCountMinus(e4Direction::Up);
+			else if (colNum == 2)
+				iter->second->SetDirCountMinus(e4Direction::Down);
+			else if (colNum == 3)
+				iter->second->SetDirCountMinus(e4Direction::Left);
+			else if (colNum == 4)
+				iter->second->SetDirCountMinus(e4Direction::Right);
+		}
 	}
 
 	void SkeletonScript::Damage()
@@ -218,7 +236,7 @@ namespace ss
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Attack;
 
-		if (other->GetCollideType() == eCollideType::Player 
+		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
 			|| other->GetCollideType() == eCollideType::SpecialMonster
 			|| other->GetCollideType() == eCollideType::Wall)
@@ -230,17 +248,17 @@ namespace ss
 				return;
 
 			if (colNum == 1)
-				mBottomColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Down);
 			else if (colNum == 2)
-				mTopColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Up);
 			else if (colNum == 3)
-				mRightColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Right);
 			else if (colNum == 4)
-				mLeftColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Left);
 
 			mColDirMap[colID] = colNum;
+			mColAdressMap[colID] = other;
 		}
-	
 	}
 	void SkeletonScript::OnCollisionStay(Collider2D* other)
 	{
@@ -260,15 +278,16 @@ namespace ss
 			UINT colNum = mColDirMap[other->GetColliderID()];
 
 			if (colNum == 1)
-				mBottomColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Down);
 			else if (colNum == 2)
-				mTopColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Up);
 			else if (colNum == 3)
-				mRightColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Right);
 			else if (colNum == 4)
-				mLeftColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Left);
 
 			mColDirMap.erase(other->GetColliderID());
+			mColAdressMap.erase(other->GetColliderID());
 		}
 	}
 }

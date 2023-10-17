@@ -38,6 +38,7 @@ namespace ss
 		void CalDir(Vector3 targetPos);
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
+		void ColideClear();
 
 		float GetHP() { return mHp; }
 
@@ -64,11 +65,9 @@ namespace ss
 		bool mIsColliding;
 
 		class Animator* mAnimator;
-
-		UINT mTopColCount;
-		UINT mBottomColCount;
-		UINT mRightColCount;
-		UINT mLeftColCount;
+		class Collider2D* mCollider;
+		
 		std::map<UINT, UINT> mColDirMap;
+		std::map<UINT, Collider2D*> mColAdressMap;
 	};
 }

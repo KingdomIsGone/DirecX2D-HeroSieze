@@ -107,7 +107,7 @@ namespace ss
 				= Resources::Load<Texture>(L"Bear_IdleTex", L"..\\Resources\\Texture\\Monster\\Bear\\BearIdleDown.png");
 			at->Create(L"Bear_Idle", Bear_IdleTex, Vector2(0.0f, 0.0f), Vector2(98.0f, 110.0f), 7);
 		}
-
+		at->PlayAnimation(L"Bear_Idle", true);
 
 		//hp¹Ù, fill
 		mHpBar = new EnemyHpBar();

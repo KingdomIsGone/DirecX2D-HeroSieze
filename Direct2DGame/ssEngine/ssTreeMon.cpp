@@ -15,7 +15,7 @@ namespace ss
 		, mPrevHp(1000.0f)
 	{
 		SetName(L"TreeMon");
-		mMScript = AddComponent<TreeMonScript>();
+		
 
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
@@ -86,6 +86,8 @@ namespace ss
 		mHpBarFill->SetFullHp(mCurHp);
 		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
+
+		mMScript = AddComponent<TreeMonScript>();
 	}
 	TreeMon::~TreeMon()
 	{

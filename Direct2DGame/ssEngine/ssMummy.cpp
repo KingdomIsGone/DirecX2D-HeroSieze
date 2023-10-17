@@ -16,7 +16,7 @@ namespace ss
 		, mPrevHp(500.0f)
 	{
 		SetName(L"Mummy");
-		mScript = AddComponent<MummyScript>();
+		
 
 		//콜라이더 세팅
 		GetComponent<Transform>()->SetScale(1.3f, 1.3f, 1.0f);
@@ -83,6 +83,8 @@ namespace ss
 		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		Vector3 tempPos2 = mHpBarFill->GetComponent<Transform>()->GetPosition();
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
+
+		mScript = AddComponent<MummyScript>();
 	}
 
 	Mummy::~Mummy()

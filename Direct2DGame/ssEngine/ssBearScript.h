@@ -41,6 +41,7 @@ namespace ss
 		void Damage(float damage);
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
+		void ColideClear();
 
 		float GetHP() { return mHp; }
 		void DamageCheck();
@@ -71,11 +72,9 @@ namespace ss
 		bool mIsColliding;
 
 		class Animator* mAnimator;
+		class Collider2D* mCollider;
 
-		UINT mTopColCount;
-		UINT mBottomColCount;
-		UINT mRightColCount;
-		UINT mLeftColCount;
 		std::map<UINT, UINT> mColDirMap;
+		std::map<UINT, Collider2D*> mColAdressMap;
 	};
 }

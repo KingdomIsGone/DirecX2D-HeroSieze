@@ -40,6 +40,10 @@ namespace ss
 		void SetColDir(UINT num) { mCurColDir = num; }
 		UINT GetColDir() { return mCurColDir; }
 
+		void SetDirCountPlus(e4Direction dir);
+		void SetDirCountMinus(e4Direction dir);
+		UINT GetDirCount(e4Direction dir);
+
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
@@ -55,5 +59,10 @@ namespace ss
 		bool mColIsPlayer;
 		Collider2D* mPlayerCol;
 		UINT mCurColDir; //»óÇÏÁÂ¿ì 1234
+
+		UINT mTopColCount;
+		UINT mBottomColCount;
+		UINT mRightColCount;
+		UINT mLeftColCount;
 	};
 }

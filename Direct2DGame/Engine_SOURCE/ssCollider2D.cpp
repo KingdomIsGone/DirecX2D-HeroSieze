@@ -12,6 +12,10 @@ namespace ss
 		, mTransform(nullptr)
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
+		, mTopColCount(0)
+		, mBottomColCount(0)
+		, mRightColCount(0)
+		, mLeftColCount(0)
 	{
 		mColliderNumber++;
 		mColliderID = mColliderNumber;
@@ -97,5 +101,66 @@ namespace ss
 		gameObject->OnCollisionExit(other);
 
 		mIsCollide = false;
+	}
+	void Collider2D::SetDirCountPlus(e4Direction dir)
+	{
+		switch (dir)
+		{
+		case ss::enums::e4Direction::Up:
+			mTopColCount++;
+			break;
+		case ss::enums::e4Direction::Down:
+			mBottomColCount++;
+			break;
+		case ss::enums::e4Direction::Right:
+			mRightColCount++;
+			break;
+		case ss::enums::e4Direction::Left:
+			mLeftColCount++;
+			break;
+		default:
+			break;
+		}
+	}
+	void Collider2D::SetDirCountMinus(e4Direction dir)
+	{
+		switch (dir)
+		{
+		case ss::enums::e4Direction::Up:
+			mTopColCount--;
+			break;
+		case ss::enums::e4Direction::Down:
+			mBottomColCount--;
+			break;
+		case ss::enums::e4Direction::Right:
+			mRightColCount--;
+			break;
+		case ss::enums::e4Direction::Left:
+			mLeftColCount--;
+			break;
+		default:
+			break;
+		}
+	}
+	UINT Collider2D::GetDirCount(e4Direction dir)
+	{
+		switch (dir)
+		{
+		case ss::enums::e4Direction::Up:
+			return mTopColCount;
+			break;
+		case ss::enums::e4Direction::Down:
+			return mBottomColCount;
+			break;
+		case ss::enums::e4Direction::Right:
+			return mRightColCount;
+			break;
+		case ss::enums::e4Direction::Left:
+			return mLeftColCount;
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

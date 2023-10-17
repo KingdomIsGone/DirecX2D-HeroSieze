@@ -3,25 +3,31 @@
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
+#include "ssPlayerScript.h"
+#include "ssCollider2D.h"
+#include "ssResources.h"
 
 namespace ss
 {
 	BearScript::BearScript()
-		: mAgroDistance(2.5f)
+		: mAgroDistance(1.8f)
 		, mSpeed(0.5f)
 		, mHp(2200.0f)
-		, mDamage(100.f)
-		, mDamage2(200.f)
+		, mDamage(120.0f)
+		, mDamage2(240.f)
 		, mAtkCount(0)
 	{
-		mState = eState::Idle;
-		mDirState = eDirState::Down;
 	}
 	BearScript::~BearScript()
 	{
+		ColideClear();
 	}
 	void BearScript::Initialize()
 	{
+		mState = eState::Idle;
+		mDirState = eDirState::Down;
+		mAnimator = GetOwner()->GetComponent<Animator>();
+		mCollider = GetOwner()->GetComponent<Collider2D>();
 	}
 
 	void BearScript::Update()
@@ -32,8 +38,7 @@ namespace ss
 		DamageCheck();
 		if (mHp <= 0)
 		{
-			mState = eState::Dead;
-			
+			GetOwner()->SetState(GameObject::eState::Dead);
 		}
 
 		switch (mState)
@@ -45,26 +50,22 @@ namespace ss
 			Chase();
 			break;
 		case ss::BearScript::eState::Attack:
-			Attack();
+		{
+			if (mAtkCount < 2)
+				Attack();
+			else
+				Attack2();
 			break;
-		case ss::BearScript::eState::Attack2:
-			Attack2();
-			break;
+		}
 		case ss::BearScript::eState::Dead:
-			Dead();
 			break;
 		default:
 			break;
 		}
-
-
 	}
 
 	void BearScript::Idle()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
-		mAnimator->PlayAnimation(L"Bear_Idle", true);
-
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
@@ -82,19 +83,21 @@ namespace ss
 		else
 			mPos.y -= mSpeed * Time::DeltaTime();
 
-		if (mIsColliding)
-			mPos = ReverseMove();
+		mPos = ReverseMove();
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
 		PlayMoveAni();
 
+		//float distance = math::GetDistance(mPos, mPlayerPos);
+
+		/*if (distance < 0.005f)
+			mState = eState::Attack;*/
 	}
 
 	void BearScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
-
+		
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -104,14 +107,10 @@ namespace ss
 			mAnimator->PlayAnimation(L"Bear_DownAtk", false);
 			break;
 		case ss::BearScript::eDirState::Left:
-		{
 			mAnimator->PlayAnimation(L"Bear_LeftAtk", false);
-		}
 			break;
 		case ss::BearScript::eDirState::Right:
-		{
 			mAnimator->PlayAnimation(L"Bear_RightAtk", false);
-		}
 			break;
 		default:
 			break;
@@ -120,23 +119,18 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			mAtkCount++;
-			Damage(mDamage);
+			Damage(-mDamage);
 			mAnimator->GetActiveAnimation()->Reset();
-			if (mAtkCount == 2)
-			{
-				mState = eState::Attack2;
-			}
 		}
 
+
 		float distance = math::GetDistance(mPos, mPlayerPos);
-		if (distance > 0.3f && !mIsColliding)
+		if (distance > 0.5f && !mIsColliding)
 			mState = eState::Chase;
 	}
 
 	void BearScript::Attack2()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
-
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -158,39 +152,14 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			mAtkCount = 0;
-			Damage(mDamage2);
+			Damage(-mDamage2);
 			mAnimator->GetActiveAnimation()->Reset();
 		}
 
+
 		float distance = math::GetDistance(mPos, mPlayerPos);
-		if (distance > 0.3f && !mIsColliding)
+		if (distance > 0.5f && !mIsColliding)
 			mState = eState::Chase;
-	}
-
-	void BearScript::Dead()
-	{
-		switch (mDirState)
-		{
-		case ss::BearScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"Bear_DieUp", false);
-			break;
-		case ss::BearScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"Bear_DieDown", false);
-			break;
-		case ss::BearScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"Bear_DieLeft", false);
-			break;
-		case ss::BearScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"Bear_DieRight", false);
-			break;
-		default:
-			break;
-		}
-
-		if (mAnimator->GetActiveAnimation()->IsComplete())
-		{
-			GetOwner()->SetState(GameObject::eState::Dead);
-		}
 	}
 
 	void BearScript::PlayMoveAni()
@@ -215,7 +184,6 @@ namespace ss
 			mDirState = eDirState::Right;
 
 		mAnimator = GetOwner()->GetComponent<Animator>();
-
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -242,15 +210,29 @@ namespace ss
 
 	Vector3 BearScript::ReverseMove()
 	{
-		if (mPos.x < mPlayerPos.x)
-			mPos.x -= mSpeed * Time::DeltaTime();
-		else
-			mPos.x += mSpeed * Time::DeltaTime();
+		if (mCollider->GetDirCount(e4Direction::Left) > 0)
+		{
+			if (mPos.x > mPlayerPos.x)
+				mPos.x += (mSpeed + 0.f) * Time::DeltaTime();
+		}
 
-		if (mPos.y < mPlayerPos.y)
-			mPos.y += mSpeed * Time::DeltaTime();
-		else
-			mPos.y -= mSpeed * Time::DeltaTime();
+		if (mCollider->GetDirCount(e4Direction::Right) > 0)
+		{
+			if (mPos.x < mPlayerPos.x)
+				mPos.x -= (mSpeed + 0.f) * Time::DeltaTime();
+		}
+
+		if (mCollider->GetDirCount(e4Direction::Up) > 0)
+		{
+			if (mPos.y < mPlayerPos.y)
+				mPos.y -= (mSpeed + 0.f) * Time::DeltaTime();
+		}
+
+		if (mCollider->GetDirCount(e4Direction::Down) > 0)
+		{
+			if (mPos.y > mPlayerPos.y)
+				mPos.y += (mSpeed + 0.f) * Time::DeltaTime();
+		}
 
 		return mPos;
 	}
@@ -261,6 +243,24 @@ namespace ss
 
 		return degree;
 	}
+
+	void BearScript::ColideClear()
+	{
+		for (auto iter = mColAdressMap.begin(); iter != mColAdressMap.end(); iter++)
+		{
+			UINT colNum = iter->second->GetColDir();
+
+			if (colNum == 1)
+				iter->second->SetDirCountMinus(e4Direction::Up);
+			else if (colNum == 2)
+				iter->second->SetDirCountMinus(e4Direction::Down);
+			else if (colNum == 3)
+				iter->second->SetDirCountMinus(e4Direction::Left);
+			else if (colNum == 4)
+				iter->second->SetDirCountMinus(e4Direction::Right);
+		}
+	}
+
 
 	void BearScript::DamageCheck()
 	{
@@ -275,10 +275,7 @@ namespace ss
 	void BearScript::OnCollisionEnter(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
-		{
 			mState = eState::Attack;
-			
-		}
 
 		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
@@ -292,27 +289,24 @@ namespace ss
 				return;
 
 			if (colNum == 1)
-				mBottomColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Down);
 			else if (colNum == 2)
-				mTopColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Up);
 			else if (colNum == 3)
-				mRightColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Right);
 			else if (colNum == 4)
-				mLeftColCount++;
+				mCollider->SetDirCountPlus(e4Direction::Left);
 
 			mColDirMap[colID] = colNum;
+			mColAdressMap[colID] = other;
 		}
+
 	}
 	void BearScript::OnCollisionStay(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
-		{
-			if(mAtkCount <2)
-				mState = eState::Attack;
-			else if(mAtkCount == 2)
-				mState = eState::Attack2;
+			mState = eState::Attack;
 
-		}
 	}
 	void BearScript::OnCollisionExit(Collider2D* other)
 	{
@@ -327,15 +321,18 @@ namespace ss
 			UINT colNum = mColDirMap[other->GetColliderID()];
 
 			if (colNum == 1)
-				mBottomColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Down);
 			else if (colNum == 2)
-				mTopColCount--;
-			else if (colNum == 3)
-				mRightColCount--;
-			else if (colNum == 4)
-				mLeftColCount--;
+				mCollider->SetDirCountMinus(e4Direction::Up);
+			else if (colNum == 3)	  
+				mCollider->SetDirCountMinus(e4Direction::Right);
+			else if (colNum == 4)	  
+				mCollider->SetDirCountMinus(e4Direction::Left);
 
 			mColDirMap.erase(other->GetColliderID());
+			mColAdressMap.erase(other->GetColliderID());
 		}
+
+
 	}
 }

@@ -206,8 +206,13 @@ namespace ss
 		//monster Bear
 		{
 			Bear* bear1 = new Bear();
-			bear1->GetComponent<Transform>()->SetPosition(3.f, 2.f, 1.f);
+			bear1->GetComponent<Transform>()->SetPosition(2.24f, -2.89f, 1.f);
 			AddGameObject(eLayerType::Monster, bear1);
+
+
+			Bear* bear2 = new Bear();
+			bear2->GetComponent<Transform>()->SetPosition(0.83f, -4.82f, 1.f);
+			AddGameObject(eLayerType::Monster, bear2);
 		}
 		
 	}
@@ -215,8 +220,6 @@ namespace ss
 	void ValkyrieScene::Update()
 	{
 		Scene::Update();
-
-		
 
 		if (mValAwaker->GetTouched())
 			mValkyrie->SetAwake();
