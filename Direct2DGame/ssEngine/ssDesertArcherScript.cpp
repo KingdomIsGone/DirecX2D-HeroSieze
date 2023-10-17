@@ -1,33 +1,31 @@
-#include "ssSkeletonScript.h"
+#include "ssDesertArcherScript.h"
 #include "ssTime.h"
 #include "ssPlayerScript.h"
 #include "ssGameObject.h"
 #include "ssAnimator.h"
-#include "ssPlayerScript.h"
+#include "ssArrow.h"
+#include "ssSceneManager.h"
 
 namespace ss
 {
-	SkeletonScript::SkeletonScript()
-		: mAgroDistance(1.8f)
+	DesertArcherScript::DesertArcherScript()
+		: mAgroDistance(2.6f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
-		, mDamage(80.0f)
 	{
 	}
-	SkeletonScript::~SkeletonScript()
+	DesertArcherScript::~DesertArcherScript()
 	{
 	}
-	void SkeletonScript::Initialize()
+	void DesertArcherScript::Initialize()
 	{
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
-		
-
 
 	}
 
-	void SkeletonScript::Update()
+	void DesertArcherScript::Update()
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -40,30 +38,30 @@ namespace ss
 
 		switch (mState)
 		{
-		case ss::SkeletonScript::eState::Idle:
+		case ss::DesertArcherScript::eState::Idle:
 			Idle();
 			break;
-		case ss::SkeletonScript::eState::Chase:
+		case ss::DesertArcherScript::eState::Chase:
 			Chase();
 			break;
-		case ss::SkeletonScript::eState::Attack:
+		case ss::DesertArcherScript::eState::Attack:
 			Attack();
 			break;
-		case ss::SkeletonScript::eState::Dead:
+		case ss::DesertArcherScript::eState::Dead:
 			break;
 		default:
 			break;
 		}
 	}
 
-	void SkeletonScript::Idle()
+	void DesertArcherScript::Idle()
 	{
 		float distance = math::GetDistance(mPos, mPlayerPos);
 
 		if (distance < mAgroDistance)
 			mState = eState::Chase;
 	}
-	void SkeletonScript::Chase()
+	void DesertArcherScript::Chase()
 	{
 		if (mPos.x < mPlayerPos.x)
 			mPos.x += mSpeed * Time::DeltaTime();
@@ -81,29 +79,29 @@ namespace ss
 
 		PlayMoveAni();
 
-		//float distance = math::GetDistance(mPos, mPlayerPos);
+		float distance = math::GetDistance(mPos, mPlayerPos);
 
-		/*if (distance < 0.005f)
-			mState = eState::Attack;*/
+		if (distance <= 2.0f)
+			mState = eState::Attack;
 	}
 
-	void SkeletonScript::Attack()
+	void DesertArcherScript::Attack()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		switch (mDirState)
 		{
-		case ss::SkeletonScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"Skeleton_UpAtk", false);
+		case ss::DesertArcherScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"ArcherAtkUp", false);
 			break;
-		case ss::SkeletonScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"Skeleton_DownAtk", false);
+		case ss::DesertArcherScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"ArcherAtkDown", false);
 			break;
-		case ss::SkeletonScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"Skeleton_LeftAtk", false);
+		case ss::DesertArcherScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"ArcherAtkLeft", false);
 			break;
-		case ss::SkeletonScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"Skeleton_RightAtk", false);
+		case ss::DesertArcherScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"ArcherAtkRight", false);
 			break;
 		default:
 			break;
@@ -111,17 +109,25 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
-			Damage();
+			float degree = CalculateMoveDegree(mPos, mPlayerPos);
+			Arrow* arrow = new Arrow(degree);
+
+			Vector3 pos = mPos;
+			pos.z -= 0.1f;
+			arrow->GetComponent<Transform>()->SetPosition(pos);
+
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::EnemyProjectile, arrow);
+
 			mAnimator->GetActiveAnimation()->Reset();
 		}
-		
+
 
 		float distance = math::GetDistance(mPos, mPlayerPos);
-		if (distance > 0.5f && !mIsColliding)
+		if (distance > 2.0f && !mIsColliding)
 			mState = eState::Chase;
 	}
 
-	void SkeletonScript::PlayMoveAni()
+	void DesertArcherScript::PlayMoveAni()
 	{
 		if (abs(mPos.x - mPlayerPos.x) < 0.5f)
 			mXAccess = true;
@@ -145,24 +151,24 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
 		{
-		case ss::SkeletonScript::eDirState::Up:
-			mAnimator->PlayAnimation(L"SkeletonUp", true);
+		case ss::DesertArcherScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"ArcherWalkUp", true);
 			break;
-		case ss::SkeletonScript::eDirState::Down:
-			mAnimator->PlayAnimation(L"SkeletonDown", true);
+		case ss::DesertArcherScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"ArcherWalkDown", true);
 			break;
-		case ss::SkeletonScript::eDirState::Left:
-			mAnimator->PlayAnimation(L"SkeletonLeft", true);
+		case ss::DesertArcherScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"ArcherWalkLeft", true);
 			break;
-		case ss::SkeletonScript::eDirState::Right:
-			mAnimator->PlayAnimation(L"SkeletonRight", true);
+		case ss::DesertArcherScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"ArcherWalkRight", true);
 			break;
 		default:
 			break;
 		}
 	}
 
-	Vector3 SkeletonScript::ReverseMove()
+	Vector3 DesertArcherScript::ReverseMove()
 	{
 		if (mLeftColCount > 0)
 		{
@@ -191,19 +197,15 @@ namespace ss
 		return mPos;
 	}
 
-	float SkeletonScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
+	float DesertArcherScript::CalculateMoveDegree(Vector3 monsterpos, Vector3 point)
 	{
 		float degree = math::CalculateDegree(Vector2(monsterpos.x, monsterpos.y), Vector2(point.x, point.y));
 
 		return degree;
 	}
 
-	void SkeletonScript::Damage()
-	{
-		PlayerScript::ChangeHp(-mDamage);
-	}
 
-	void SkeletonScript::DamageCheck()
+	void DesertArcherScript::DamageCheck()
 	{
 		float value = GetOwner()->GetChangeHpValue();
 		if (value != 0)
@@ -213,12 +215,9 @@ namespace ss
 		}
 	}
 
-	void SkeletonScript::OnCollisionEnter(Collider2D* other)
+	void DesertArcherScript::OnCollisionEnter(Collider2D* other)
 	{
-		if (other->GetCollideType() == eCollideType::Player)
-			mState = eState::Attack;
-
-		if (other->GetCollideType() == eCollideType::Player 
+		if (other->GetCollideType() == eCollideType::Player
 			|| other->GetCollideType() == eCollideType::NormalMonster
 			|| other->GetCollideType() == eCollideType::SpecialMonster)
 		{
@@ -239,14 +238,12 @@ namespace ss
 
 			mColDirMap[colID] = colNum;
 		}
-	
+
 	}
-	void SkeletonScript::OnCollisionStay(Collider2D* other)
+	void DesertArcherScript::OnCollisionStay(Collider2D* other)
 	{
-		if (other->GetCollideType() == eCollideType::Player)
-			mState = eState::Attack;
 	}
-	void SkeletonScript::OnCollisionExit(Collider2D* other)
+	void DesertArcherScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::Player)
 			mState = eState::Chase;

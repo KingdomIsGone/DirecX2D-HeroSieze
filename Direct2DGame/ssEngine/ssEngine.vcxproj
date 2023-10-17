@@ -165,6 +165,8 @@
     <ClInclude Include="ssAnubis.h" />
     <ClInclude Include="ssAnubisRoom.h" />
     <ClInclude Include="ssAnubisScript.h" />
+    <ClInclude Include="ssArrow.h" />
+    <ClInclude Include="ssArrowScript.h" />
     <ClInclude Include="ssAwakerScript.h" />
     <ClInclude Include="ssBear.h" />
     <ClInclude Include="ssBearScript.h" />
@@ -177,6 +179,8 @@
     <ClInclude Include="ssChargedBolt.h" />
     <ClInclude Include="ssCloneAssault.h" />
     <ClInclude Include="ssCloneScript.h" />
+    <ClInclude Include="ssDesertArcher.h" />
+    <ClInclude Include="ssDesertArcherScript.h" />
     <ClInclude Include="ssDesertBossRoom.h" />
     <ClInclude Include="ssDesertDungeon1.h" />
     <ClInclude Include="ssDesertDungeon2.h" />
@@ -259,6 +263,8 @@
     <ClCompile Include="ssAnubis.cpp" />
     <ClCompile Include="ssAnubisRoom.cpp" />
     <ClCompile Include="ssAnubisScript.cpp" />
+    <ClCompile Include="ssArrow.cpp" />
+    <ClCompile Include="ssArrowScript.cpp" />
     <ClCompile Include="ssAwakerScript.cpp" />
     <ClCompile Include="ssBear.cpp" />
     <ClCompile Include="ssBearScript.cpp" />
@@ -271,6 +277,8 @@
     <ClCompile Include="ssChargedBolt.cpp" />
     <ClCompile Include="ssCloneAssault.cpp" />
     <ClCompile Include="ssCloneScript.cpp" />
+    <ClCompile Include="ssDesertArcher.cpp" />
+    <ClCompile Include="ssDesertArcherScript.cpp" />
     <ClCompile Include="ssDesertBossRoom.cpp" />
     <ClCompile Include="ssDesertDungeon1.cpp" />
     <ClCompile Include="ssDesertDungeon2.cpp" />

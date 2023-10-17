@@ -44,6 +44,7 @@
 #include "ssHydra.h"
 
 #include "ssSpearRain.h"
+#include "ssDesertArcher.h"
 
 
 namespace ss
@@ -67,10 +68,13 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::Cursor, indicator);
 
-		DesertSkeleton* deSkeleton = new DesertSkeleton();
+	/*	DesertSkeleton* deSkeleton = new DesertSkeleton();
 		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);
+		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
 
+		DesertArcher* archer = new DesertArcher();
+		AddGameObject(eLayerType::Monster, archer);
+		archer->GetComponent<Transform>()->SetPosition(-2.5f, 0.0f, 1.02f);
 
 		//item
 		LegendStaff1* staff = new LegendStaff1();
@@ -280,7 +284,7 @@ namespace ss
 	{
 		
 
-		//캐릭터 및 레벨창 z=1.01
+		//캐릭터 및 레벨창 
 		{
 			GameObject* obj = new GameObject();
 			obj->SetName(L"CharacterCircle");
@@ -288,7 +292,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"CharacterCircle0"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.7f, 1.4f, 1.01f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.7f, 1.4f, 0.75f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -301,23 +305,23 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"HPMPMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.74f, 1.4f, 1.01f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.74f, 1.4f, 0.75f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(1.5f, 0.22f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
 
-		//USEITEMBox z=1.01
-		{
-			GameObject* obj = new GameObject();
-			obj->SetName(L"ItemUseBox");
-			AddGameObjectToActiveScene(eLayerType::UI, obj);
-			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"ItemUseMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.3f, 1.1f, 1.01f));
-			obj->GetComponent<Transform>()->SetScale(Vector3(0.27f, 0.27f, 1.0f));
-			//obj->AddComponent<CameraScript>();
-		}
+		////USEITEMBox z=1.01
+		//{
+		//	GameObject* obj = new GameObject();
+		//	obj->SetName(L"ItemUseBox");
+		//	AddGameObjectToActiveScene(eLayerType::UI, obj);
+		//	MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"ItemUseMater"));
+		//	obj->GetComponent<Transform>()->SetPosition(Vector3(-2.3f, 1.1f, 1.01f));
+		//	obj->GetComponent<Transform>()->SetScale(Vector3(0.27f, 0.27f, 1.0f));
+		//	//obj->AddComponent<CameraScript>();
+		//}
 
 		//SkillMenu z=1.01
 		{
@@ -327,7 +331,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SkillMenuMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.92f, -1.42f, 1.01f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-1.92f, -1.42f, 0.75f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(2.34f, 0.72f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -341,7 +345,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"tMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.33f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.33f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -353,7 +357,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"cMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.215f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.215f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -365,7 +369,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"1Mater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.015f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.015f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -377,7 +381,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"2Mater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.75f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.75f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -389,7 +393,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"3Mater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.485f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.485f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -401,7 +405,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"4Mater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.22f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-1.22f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -413,7 +417,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"vMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.65f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.65f, 0.74f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.12f, 0.12f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -427,7 +431,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"MenuSetMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.27f, -1.53f, 1.005f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.27f, -1.53f, 0.745f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.25f, 0.25f, 1.0f));
 			//obj->AddComponent<CameraScript>();
 		}
@@ -441,7 +445,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.35f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.35f, 0.745f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -453,7 +457,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.44f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.44f, 0.745f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
 				//obj->AddComponent<CameraScript>();
 			}
@@ -465,7 +469,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.53f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.53f, 0.745f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
 			}
 
@@ -476,7 +480,7 @@ namespace ss
 				MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"ResourceBackBarMater"));
-				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.62f, 1.005f));
+				obj->GetComponent<Transform>()->SetPosition(Vector3(-2.70f, -1.62f, 0.745f));
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
 			}
 		}
@@ -489,7 +493,7 @@ namespace ss
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"TownPortalMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.53f, 1.006f));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-0.97f, -1.53f, 0.745f));
 			obj->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.15f, 1.0f));
 			//obj->AddComponent<CameraScript>();  
 		}

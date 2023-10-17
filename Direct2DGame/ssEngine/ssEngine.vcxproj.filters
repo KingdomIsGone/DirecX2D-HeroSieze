@@ -278,6 +278,18 @@
     <ClCompile Include="ssBearScript.cpp">
       <Filter>Contents\Object\Monster\Bear</Filter>
     </ClCompile>
+    <ClCompile Include="ssDesertArcher.cpp">
+      <Filter>Contents\Object\Monster\DesertArcher</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertArcherScript.cpp">
+      <Filter>Contents\Object\Monster\DesertArcher</Filter>
+    </ClCompile>
+    <ClCompile Include="ssArrow.cpp">
+      <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="ssArrowScript.cpp">
+      <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -560,6 +572,18 @@
     <ClInclude Include="ssBearScript.h">
       <Filter>Contents\Object\Monster\Bear</Filter>
     </ClInclude>
+    <ClInclude Include="ssDesertArcher.h">
+      <Filter>Contents\Object\Monster\DesertArcher</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertArcherScript.h">
+      <Filter>Contents\Object\Monster\DesertArcher</Filter>
+    </ClInclude>
+    <ClInclude Include="ssArrow.h">
+      <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="ssArrowScript.h">
+      <Filter>Contents\Object\Monster\DesertArcher\Arrow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -780,6 +804,12 @@
     </Filter>
     <Filter Include="Contents\Object\Monster\Bear">
       <UniqueIdentifier>{550aada6-599e-4c34-9909-bda27fb6803c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\DesertArcher">
+      <UniqueIdentifier>{9c818dd9-8b64-4025-8cf7-6891a9d52eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Monster\DesertArcher\Arrow">
+      <UniqueIdentifier>{b65d9e1d-3427-4bf3-9717-0678a7ff0430}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

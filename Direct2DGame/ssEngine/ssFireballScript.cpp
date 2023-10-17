@@ -1,9 +1,5 @@
 #include "ssFireballScript.h"
 #include "ssGameObject.h"
-#include "ssSkeletonScript.h"
-#include "ssMummyScript.h"
-#include "ssSarcophagus.h"
-#include "ssAnubisScript.h"
 
 namespace ss
 {
