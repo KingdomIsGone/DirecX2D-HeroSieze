@@ -38,7 +38,6 @@ namespace ss
 
 		void PlayMoveAni();
 
-		void Damage(float damage);
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 		void ColideClear();

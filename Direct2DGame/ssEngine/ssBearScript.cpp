@@ -38,7 +38,7 @@ namespace ss
 		DamageCheck();
 		if (mHp <= 0)
 		{
-			GetOwner()->SetState(GameObject::eState::Dead);
+			mState = eState::Dead;
 		}
 
 		switch (mState)
@@ -58,6 +58,7 @@ namespace ss
 			break;
 		}
 		case ss::BearScript::eState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -97,7 +98,6 @@ namespace ss
 
 	void BearScript::Attack()
 	{
-		
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -119,7 +119,7 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			mAtkCount++;
-			Damage(-mDamage);
+			PlayerScript::ChangeHp(-mDamage);
 			mAnimator->GetActiveAnimation()->Reset();
 		}
 
@@ -152,7 +152,7 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
 			mAtkCount = 0;
-			Damage(-mDamage2);
+			PlayerScript::ChangeHp(-mDamage2);
 			mAnimator->GetActiveAnimation()->Reset();
 		}
 
@@ -160,6 +160,30 @@ namespace ss
 		float distance = math::GetDistance(mPos, mPlayerPos);
 		if (distance > 0.5f && !mIsColliding)
 			mState = eState::Chase;
+	}
+
+	void BearScript::Dead()
+	{
+		switch (mDirState)
+		{
+		case ss::BearScript::eDirState::Up:
+			mAnimator->PlayAnimation(L"Bear_DieUp", false);
+			break;
+		case ss::BearScript::eDirState::Down:
+			mAnimator->PlayAnimation(L"Bear_DieDown", false);
+			break;
+		case ss::BearScript::eDirState::Left:
+			mAnimator->PlayAnimation(L"Bear_DieLeft", false);
+			break;
+		case ss::BearScript::eDirState::Right:
+			mAnimator->PlayAnimation(L"Bear_DieRight", false);
+			break;
+		default:
+			break;
+		}
+
+		if(mAnimator->GetActiveAnimation()->IsComplete())
+			GetOwner()->SetState(GameObject::eState::Dead);
 	}
 
 	void BearScript::PlayMoveAni()
@@ -203,10 +227,7 @@ namespace ss
 		}
 	}
 
-	void BearScript::Damage(float damage)
-	{
-		PlayerScript::ChangeHp(-damage);
-	}
+	
 
 	Vector3 BearScript::ReverseMove()
 	{

@@ -43,6 +43,13 @@ cbuffer Noise : register(b5)
     float4 noiseTextureSize;
 }
 
+cbuffer BossEffect : register(b6) //custom
+{
+    float Radd3;
+    float Gadd3;
+    float Badd3;
+    float A3;
+}
 
 cbuffer BossEffect2 : register(b7) //custom
 {

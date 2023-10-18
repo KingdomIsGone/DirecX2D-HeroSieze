@@ -53,6 +53,8 @@ namespace ss
 		Animator* at = GetOwner()->GetComponent<Animator>();
 		mCursor = new Cursor();
 		mIndicator = new Indicator();
+
+		
 		
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
 	}
@@ -68,7 +70,10 @@ namespace ss
 		if (mInventory->GetOnOff())
 			return;
 
+		float a = mCurHp;
+
 		MpRecovery();
+		HpRecovery();
 		SpellWaiting();
 
 		switch (mState)
@@ -92,10 +97,7 @@ namespace ss
 			break;
 		}
 
-		if (Input::GetKeyDown(eKeyCode::P))
-		{
-			mCurHp -= 500.0f;
-		}
+		
 	}
 
 	void PlayerScript::Complete()
@@ -563,12 +565,33 @@ namespace ss
 		}
 	}
 
+	void PlayerScript::HpRecovery()
+	{
+		if (mCurHp <= 0)
+		{
+			mRecoveryOn = true;
+			mCurHp = 0.f;
+		}
+
+		if (mRecoveryOn)
+		{
+			mCurHp += 800.f * Time::DeltaTime();
+
+			if (mCurHp >= 3000.f)
+			{
+				mCurHp = 3000.f;
+				mRecoveryOn = false;
+			}
+		}
+	}
+
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
 		other->SetColIsPlayer(true);
 		other->SetPlayerCol(GetOwner()->GetComponent<Collider2D>());
 		if (other->GetCollideType() == eCollideType::NormalMonster
-			|| other->GetCollideType() == eCollideType::SpecialMonster)
+			|| other->GetCollideType() == eCollideType::SpecialMonster
+			|| other->GetCollideType() == eCollideType::Wall)
 		{
 			UINT colNum = other->GetColDir();
 			UINT colID = other->GetColliderID();
@@ -598,7 +621,8 @@ namespace ss
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster
-			|| other->GetCollideType() == eCollideType::SpecialMonster)
+			|| other->GetCollideType() == eCollideType::SpecialMonster
+			|| other->GetCollideType() == eCollideType::Wall)
 		{
 			UINT colNum = mColDirMap[other->GetColliderID()];
 

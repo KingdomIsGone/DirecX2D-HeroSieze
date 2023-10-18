@@ -6,7 +6,7 @@
 namespace ss
 {
 	FireAuraScript::FireAuraScript()
-		: mDamage(40.f)
+		: mDamage(60.f)
 	{
 	}
 	FireAuraScript::~FireAuraScript()

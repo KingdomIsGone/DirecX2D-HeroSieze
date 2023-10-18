@@ -28,6 +28,16 @@ namespace ss
 			UpRight,
 			Up,
 		};
+		enum class eState
+		{
+			Idle,
+			InEnemy,
+			Attack,
+		};
+
+		void Idle();
+		void InEnemy();
+		void Attack();
 
 		void SetHydra(class Hydra* hydra) { mHydra = hydra; }
 		void AttackFireBall(Vector3 hydraPos, Vector3 point);
@@ -36,6 +46,8 @@ namespace ss
 		void PlayStandAni();
 
 	private:
+		eState mState;
+
 		float mDamage;
 		float mTime;
 		Vector3 mHydraPos;
@@ -45,5 +57,6 @@ namespace ss
 		std::vector<UINT> mColIDs;
 
 		class Hydra* mHydra;
+		class Animator* mAnimator;
 	};
 }

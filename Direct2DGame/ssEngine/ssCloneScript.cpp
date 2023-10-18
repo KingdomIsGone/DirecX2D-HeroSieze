@@ -22,7 +22,7 @@ namespace ss
 		, mRushBackDist(0.8f)
 		, mRushDistCol(3.2f)
 		, mRushDistRow(4.6f)
-		, mRushSpeed(4.5f)
+		, mRushSpeed(4.5f)  
 		, mBackdistance(0.f)
 	{
 	}

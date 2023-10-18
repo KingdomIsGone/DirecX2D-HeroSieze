@@ -37,6 +37,7 @@ namespace ss::enums
 		Item,
 		Inventory,
 		Cursor,
+		Wall,
 		End = 16,
 	};
 

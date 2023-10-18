@@ -40,7 +40,7 @@ namespace ss
 		{
 			mCount++;
 
-			if(mCount > 5)
+			if(mCount > 3)
 				GetOwner()->SetState(GameObject::eState::Dead);
 		}
 	}

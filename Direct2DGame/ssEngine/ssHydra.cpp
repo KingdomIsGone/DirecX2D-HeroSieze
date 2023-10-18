@@ -65,35 +65,35 @@ namespace ss
 		{
 			std::shared_ptr<Texture> HydraAtkDownTex
 				= Resources::Load<Texture>(L"HydraAtkDownTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraDownAtk.png");
-			mAnimator->Create(L"HydraAtkDown", HydraAtkDownTex, Vector2(0.0f, 0.0f), Vector2(31.f, 47.f), 5);
+			mAnimator->Create(L"HydraAtkDown", HydraAtkDownTex, Vector2(0.0f, 0.0f), Vector2(31.f, 47.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkDownLeftTex
 				= Resources::Load<Texture>(L"HydraAtkDownLeftTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraDownLeftAtk.png");
-			mAnimator->Create(L"HydraAtkDownLeft", HydraAtkDownLeftTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkDownLeft", HydraAtkDownLeftTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkDownRightTex
 				= Resources::Load<Texture>(L"HydraAtkDownRightTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraDownRIghtAtk.png");
-			mAnimator->Create(L"HydraAtkDownRight", HydraAtkDownRightTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkDownRight", HydraAtkDownRightTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkLeftTex
 				= Resources::Load<Texture>(L"HydraAtkLeftTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraLeftAtk.png");
-			mAnimator->Create(L"HydraAtkLeft", HydraAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(34.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkLeft", HydraAtkLeftTex, Vector2(0.0f, 0.0f), Vector2(34.f, 45.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkRightTex
 				= Resources::Load<Texture>(L"HydraAtkRightTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraRightAtk.png");
-			mAnimator->Create(L"HydraAtkRight", HydraAtkRightTex, Vector2(0.0f, 0.0f), Vector2(34.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkRight", HydraAtkRightTex, Vector2(0.0f, 0.0f), Vector2(34.f, 45.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkUpTex
 				= Resources::Load<Texture>(L"HydraAtkUpTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraUpAtk.png");
-			mAnimator->Create(L"HydraAtkUp", HydraAtkUpTex, Vector2(0.0f, 0.0f), Vector2(31.f, 47.f), 5);
+			mAnimator->Create(L"HydraAtkUp", HydraAtkUpTex, Vector2(0.0f, 0.0f), Vector2(31.f, 47.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkUpLeftTex
 				= Resources::Load<Texture>(L"HydraAtkUpLeftTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraUpLeftAtk.png");
-			mAnimator->Create(L"HydraAtkUpLeft", HydraAtkUpLeftTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkUpLeft", HydraAtkUpLeftTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5, Vector2::Zero, 0.15);
 
 			std::shared_ptr<Texture> HydraAtkUpRightTex
 				= Resources::Load<Texture>(L"HydraAtkUpRightTex", L"..\\Resources\\Texture\\Skill\\Hydra\\HydraAtk\\HydraUpRightAtk.png");
-			mAnimator->Create(L"HydraAtkUpRight", HydraAtkUpRightTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5);
+			mAnimator->Create(L"HydraAtkUpRight", HydraAtkUpRightTex, Vector2(0.0f, 0.0f), Vector2(32.f, 45.f), 5, Vector2::Zero, 0.15);
 		}
 
 

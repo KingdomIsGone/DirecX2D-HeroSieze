@@ -24,7 +24,7 @@ namespace ss
 		//렌더, 애니메이터 세팅
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"BossEffectMaterial2"));
+		mr->SetMaterial(Resources::Find<Material>(L"BossEffectMaterial3"));
 
 
 		//ani setting
@@ -47,7 +47,7 @@ namespace ss
 			mAnimator->Create(L"ValkAtkUp", ValkAtkUpTex, Vector2(0.0f, 0.0f), Vector2(105.f, 92.0f), 6, Vector2::Zero, 0.02f);
 		}
 
-		BindCB(0.f, 0.f, 0.5f, 0.85f);
+		BindCB(0.f, 0.f, 0.5f, 0.77f);
 
 		mScript = AddComponent<CloneScript>();
 		mScript->SetClone(this);
@@ -65,7 +65,7 @@ namespace ss
 	void CloneAssault::Update()
 	{
 		GameObject::Update();
-
+		
 		//mPos = mTransform->GetPosition();
 		
 	}
@@ -81,15 +81,15 @@ namespace ss
 	void CloneAssault::BindCB(float Radd, float Gadd, float Badd, float A)
 	{
 		ss::graphics::ConstantBuffer* cb
-			= renderer::constantBuffer[(int)eCBType::BossEffect2];
+			= renderer::constantBuffer[(int)eCBType::BossEffect3];
 
-		renderer::BossEffectCB2 data;
+		renderer::BossEffectCB3 data;
 
 		data.Radd = Radd;
 		data.Gadd = Gadd;
 		data.Badd = Badd;
 		data.A = A;
-		data.DiscardLight = 0.02f;
+		
 
 		cb->SetData(&data);
 
@@ -101,6 +101,8 @@ namespace ss
 	{
 		if(mScript != nullptr)
 			mScript->SetStart();
+
+		
 	}
 
 	

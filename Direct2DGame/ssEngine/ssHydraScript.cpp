@@ -13,6 +13,8 @@ namespace ss
 		, mTargetPos(Vector3(0.0f, 0.0f, 999.f))
 	{
 		mDirState = eDirState::Down;
+		mState = eState::Idle;
+		
 	}
 	HydraScript::~HydraScript()
 	{
@@ -23,11 +25,23 @@ namespace ss
 	void HydraScript::Update()
 	{
 		mHydraPos = mHydra->GetComponent<Transform>()->GetPosition();
-		CalDir(mTargetPos);
-		if (!mOnAttack)
-			PlayStandAni();
-		else
-			PlayAtkAni();
+
+		switch (mState)
+		{
+		case ss::HydraScript::eState::Idle:
+			Idle();
+			break;
+		case ss::HydraScript::eState::InEnemy:
+			InEnemy();
+			break;
+		case ss::HydraScript::eState::Attack:
+			Attack();
+			break;
+		default:
+			break;
+		}
+
+		
 
 
 	}
@@ -39,35 +53,38 @@ namespace ss
 	{
 		if (other->GetCollideType() == eCollideType::NormalMonster)
 		{
-			mTime += Time::DeltaTime();
-
-			if (mTime < 4.5f)
-			{
-				CalDir(mTargetPos);
-
-				return;
-			}
-			else
-			{
-				mOnAttack = true;
-				mTargetPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
-				CalDir(mTargetPos);
-				PlayAtkAni();
-
-				if (mHydra->GetAnimator()->GetActiveAnimation()->IsComplete())
-				{
-					mTime = 0.0f;
-					AttackFireBall(mHydraPos, mTargetPos);
-					mOnAttack = false;
-					PlayStandAni();
-				}
-			}
+			mTargetPos = other->GetOwner()->GetComponent<Transform>()->GetPosition();
+			mState = eState::Attack;
 		}
 	}
 	void HydraScript::OnCollisionExit(Collider2D* other)
 	{
 	}
 
+
+	void HydraScript::Idle()
+	{
+		PlayStandAni();
+	}
+
+	void HydraScript::InEnemy()
+	{
+		PlayStandAni();
+		mState = eState::Attack;
+	}
+
+	void HydraScript::Attack()
+	{
+		CalDir(mTargetPos);
+		PlayAtkAni();
+
+		if (mHydra->GetAnimator()->GetActiveAnimation()->IsComplete())
+		{
+			AttackFireBall(mHydraPos, mTargetPos);
+			mHydra->GetAnimator()->GetActiveAnimation()->Reset();
+			mState = eState::Idle;
+		}
+	}
 
 	void HydraScript::AttackFireBall(Vector3 hydraPos, Vector3 point)
 	{

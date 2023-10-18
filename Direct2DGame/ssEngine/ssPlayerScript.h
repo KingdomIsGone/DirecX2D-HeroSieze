@@ -73,6 +73,7 @@ namespace ss
 		void HydraCast(Vector3 cursorPos);
 
 		void MpRecovery();
+		void HpRecovery();
 
 		void SetInventory(class Inventory* inven) { mInventory = inven; }
 
@@ -94,6 +95,7 @@ namespace ss
 		static float mCurHp;
 		static float mCurMp;
 		float mFullMp;
+		bool mRecoveryOn;
 		
 		class Cursor* mCursor;
 		class Indicator* mIndicator;

@@ -10,6 +10,7 @@ namespace ss
 		mTransform = GetComponent<Transform>();
 
 		mCol = AddComponent<Collider2D>();
+		mCol->SetCollideType(eCollideType::Wall);
 	}
 	WallCollider::~WallCollider()
 	{

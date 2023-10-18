@@ -126,6 +126,11 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = ss::Resources::Find<Shader>(L"BossEffectShader3");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 		shader = ss::Resources::Find<Shader>(L"AlphaAnimationShader");
 		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
@@ -396,6 +401,9 @@ namespace renderer
 		// BossEffect2 Buffer custom
 		constantBuffer[(UINT)eCBType::BossEffect2] = new ConstantBuffer(eCBType::BossEffect2);
 		constantBuffer[(UINT)eCBType::BossEffect2]->Create(sizeof(BossEffectCB2));
+		// BossEffect2 Buffer custom
+		constantBuffer[(UINT)eCBType::BossEffect3] = new ConstantBuffer(eCBType::BossEffect3);
+		constantBuffer[(UINT)eCBType::BossEffect3]->Create(sizeof(BossEffectCB3));
 	}
 
 	void LoadShader()
@@ -470,6 +478,11 @@ namespace renderer
 		bossEffectShader2->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
 		bossEffectShader2->Create(eShaderStage::PS, L"BossEffectPS2.hlsl", "main");
 		ss::Resources::Insert(L"BossEffectShader2", bossEffectShader2);
+
+		std::shared_ptr<Shader> bossEffectShader3 = std::make_shared<Shader>();
+		bossEffectShader3->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		bossEffectShader3->Create(eShaderStage::PS, L"BossEffectPS3.hlsl", "main");
+		ss::Resources::Insert(L"BossEffectShader3", bossEffectShader3);
 
 		std::shared_ptr<Shader> alphaAnimationShader = std::make_shared<Shader>();
 		alphaAnimationShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
@@ -550,6 +563,13 @@ namespace renderer
 		material->SetShader(BossEffectShader2);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BossEffectMaterial2", material);
+
+		std::shared_ptr<Shader> BossEffectShader3
+			= Resources::Find<Shader>(L"BossEffectShader3");
+		material = std::make_shared<Material>();
+		material->SetShader(BossEffectShader3);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BossEffectMaterial3", material);
 
 		std::shared_ptr<Shader> AlphaAnimationShader
 			= Resources::Find<Shader>(L"AlphaAnimationShader");

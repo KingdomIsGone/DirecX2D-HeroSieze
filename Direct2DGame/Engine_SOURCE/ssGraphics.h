@@ -17,6 +17,7 @@
 #define CBSLOT_ANIMATION2D		3
 #define CBSLOT_PARTICLE			4
 #define CBSLOT_NOISE			5
+#define CBSLOT_BOSSEFFECT3      6
 #define CBSLOT_BOSSEFFECT2      7
 #define CBSLOT_BOSSEFFECT       8
 #define CBSLOT_DEBUG            9
@@ -48,6 +49,7 @@ namespace ss::graphics
 		Animator,
 		Particle,
 		Noise,
+		BossEffect3 = 6,
 		BossEffect2 = 7,
 		BossEffect = 8,
 		Debug = 9,

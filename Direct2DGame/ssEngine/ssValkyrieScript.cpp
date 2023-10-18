@@ -44,6 +44,7 @@ namespace ss
 		, mDeadStage(0)
 		, mAlpha(1.f)
 		, mTransformAniStage(0)
+		, mCenterPoint(-0.136f, 6.37f, 1.f)
 	{
 	}
 	ValkyrieScript::~ValkyrieScript()
@@ -79,10 +80,15 @@ namespace ss
 		if (mHp <= 0)
 			mState = eState::Dead;
 
+		
+
 		switch (mState)
 		{
 		case ss::ValkyrieScript::eState::Dead:
 			Dead();
+			break;
+		case ss::ValkyrieScript::eState::Positioning:
+			Positioning();
 			break;
 		case ss::ValkyrieScript::eState::Sleep:
 			break;
@@ -116,10 +122,10 @@ namespace ss
 		
 
 
-		if (Input::GetKey(eKeyCode::P))
+		/*if (Input::GetKey(eKeyCode::P))
 		{
 			mState = eState::Dead;
-		}
+		}*/
 		
 	}
 
@@ -130,6 +136,30 @@ namespace ss
 			mClone->SetStart();
 			mRushStage = 3;
 		}
+	}
+
+	void ValkyrieScript::Positioning()
+	{
+		CalDir(mCenterPoint);
+		WalkAni();
+
+		
+		if (mPos.x < mCenterPoint.x)
+			mPos.x += mSpeed * Time::DeltaTime();
+		else
+			mPos.x -= mSpeed * Time::DeltaTime();
+
+		if (mPos.y < mCenterPoint.y)
+			mPos.y += mSpeed * Time::DeltaTime();
+		else
+			mPos.y -= mSpeed * Time::DeltaTime();
+
+		GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
+
+		float Distance = math::GetDistance(mPos, mCenterPoint);
+
+		if (Distance < 1.7f)
+			mState = eState::Chase;
 	}
 
 	void ValkyrieScript::Dead()
@@ -162,6 +192,12 @@ namespace ss
 
 	void ValkyrieScript::Chase()
 	{
+		if (math::GetDistance(mCenterPoint, mPos) > 2.6f)
+		{
+			mState = eState::Positioning;
+			return;
+		}
+
 		CalDir(mPlayerPos);
 		WalkAni();
 
@@ -195,12 +231,13 @@ namespace ss
 		
 		GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
-		if(mHp > 14000.f)
+		if (mHp > 14000.f)
 			Pattern();
 		else
 		{
 			Pattern2();
 		}
+
 	}
 
 	void ValkyrieScript::WalkAni()
@@ -1631,7 +1668,7 @@ namespace ss
 
 		if (mPatternNum == 0)
 		{
-			mState = eState::LightningAssault;
+			mState = eState::CloneAssault;
 			mPatternNum++;
 		}
 		else if (mPatternNum == 1)
@@ -1641,22 +1678,27 @@ namespace ss
 		}
 		else if (mPatternNum == 2)
 		{
-			mState = eState::CloneAssault;
+			mState = eState::BigLightning;
 			mPatternNum++;
 		}
 		else if (mPatternNum == 3)
 		{
-			mState = eState::BigLightning;
+			mState = eState::CloneAssault;
 			mPatternNum++;
 		}
 		else if (mPatternNum == 4)
 		{
-			mState = eState::CloneAssault;
+			mState = eState::LightningRush;
 			mPatternNum++;
 		}
 		else if (mPatternNum == 5)
 		{
 			mState = eState::SpearRainCast;
+			mPatternNum++;
+		}
+		else if (mPatternNum == 6)
+		{
+			mState = eState::LightningAssault;
 			mPatternNum = 0;
 		}
 	}

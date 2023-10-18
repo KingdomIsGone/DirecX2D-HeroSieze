@@ -5,7 +5,7 @@
 namespace ss
 {
 	FlameScript::FlameScript()
-		: mDamage(40.0f)
+		: mDamage(60.0f)
 		, mTime(2.0f)
 	{
 	}

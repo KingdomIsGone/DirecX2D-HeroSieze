@@ -31,5 +31,6 @@ namespace ss
 		class Camera* mUICamera;
 		class Camera* mCursorCamera;
 		class Camera* mInventoryCamera;
+		class Camera* mMonUICamera;
 	};
 }

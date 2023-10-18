@@ -13,7 +13,8 @@ namespace ss
 			Dead,
 			Sleep,
 			Transform,
-			Chase,  //Idle
+			Positioning,
+			Chase, 
 			LightningRush,
 			LightningAssault,
 			CloneAssault,
@@ -55,6 +56,7 @@ namespace ss
 		void Pattern();
 		void Pattern2();
 
+		void Positioning();
 		void Dead();
 		void Chase();
 		void WalkAni();
@@ -132,6 +134,8 @@ namespace ss
 		//Dead
 		UINT mDeadStage;
 		float mAlpha;
+
+		Vector3 mCenterPoint;
 
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;

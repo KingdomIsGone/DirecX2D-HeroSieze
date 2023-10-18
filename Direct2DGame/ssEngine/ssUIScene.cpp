@@ -48,6 +48,7 @@
 #include "ssSkeletonMage.h"
 #include "ssTreeMon.h"
 #include "ssEnt.h"
+#include "ssCloneAssault.h"
 
 
 namespace ss
@@ -87,9 +88,13 @@ namespace ss
 		AddGameObject(eLayerType::Monster, tree);
 		tree->GetComponent<Transform>()->SetPosition(0.f, 2.6f, 1.02f);*/
 
-		Ent* ent = new Ent();
+		/*Ent* ent = new Ent();
 		AddGameObject(eLayerType::Monster, ent); 
-		ent->GetComponent<Transform>()->SetPosition(1.f, 2.6f, 1.02f);
+		ent->GetComponent<Transform>()->SetPosition(1.f, 2.6f, 1.02f);*/
+
+		CloneAssault* assault = new CloneAssault(e4Direction::Up);
+		AddGameObject(eLayerType::EnemyProjectile, assault);
+
 
 		//item
 		LegendStaff1* staff = new LegendStaff1();
