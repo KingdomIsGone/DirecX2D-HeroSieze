@@ -225,6 +225,7 @@ namespace ss
 		//monster Bear
 		{
 			Bear* bear1 = new Bear();
+			bear1->SetItmeHave(2);
 			bear1->GetComponent<Transform>()->SetPosition(2.24f, -2.89f, 1.f);
 			AddGameObject(eLayerType::Monster, bear1);
 

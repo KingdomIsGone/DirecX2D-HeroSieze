@@ -14,6 +14,8 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetItmeHave(UINT num);
+
 	private:
 		Transform* mTransform;
 		Vector3 mPos;

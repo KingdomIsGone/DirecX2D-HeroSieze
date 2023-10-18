@@ -156,5 +156,9 @@ namespace ss
 	{
 		GameObject::Render();
 	}
+	void Bear::SetItmeHave(UINT num)
+	{
+		mScript->SetItemHave(num);
+	}
 }
 

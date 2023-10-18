@@ -45,6 +45,7 @@ namespace ss
 		float GetHP() { return mHp; }
 		void DamageCheck();
 
+		void SetItemHave(UINT num) { mItemHave = num; }
 
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
@@ -62,6 +63,7 @@ namespace ss
 		float mDamage2;
 
 		UINT mAtkCount;
+		UINT mItemHave;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;

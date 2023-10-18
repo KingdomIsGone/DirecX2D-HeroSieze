@@ -85,7 +85,7 @@ namespace ss
 		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 
-		mMScript = AddComponent<SkeletonScript>();
+		mScript = AddComponent<SkeletonScript>();
 	}
 	DesertSkeleton::~DesertSkeleton()
 	{
@@ -100,7 +100,7 @@ namespace ss
 	{
 		GameObject::Update();
 
-		mCurHp = mMScript->GetHP();
+		mCurHp = mScript->GetHP();
 		if (mCurHp != mPrevHp)
 		{
 			mHpBarFill->ChangeHP(mCurHp);
@@ -116,5 +116,9 @@ namespace ss
 	void DesertSkeleton::Render()
 	{
 		GameObject::Render();
+	}
+	void DesertSkeleton::SetItmeHave(UINT num)
+	{
+		mScript->SetItemHave(num);
 	}
 }

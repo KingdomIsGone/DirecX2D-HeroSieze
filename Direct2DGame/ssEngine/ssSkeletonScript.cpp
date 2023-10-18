@@ -4,6 +4,9 @@
 #include "ssGameObject.h"
 #include "ssAnimator.h"
 #include "ssPlayerScript.h"
+#include "ssSceneManager.h"
+#include "ssNormalRobe.h"
+#include "ssNormalBoots.h"
 
 namespace ss
 {
@@ -12,11 +15,26 @@ namespace ss
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
 		, mDamage(80.0f)
+		, mItemHave(0)
 	{
 	}
 	SkeletonScript::~SkeletonScript()
 	{
 		ColideClear();
+
+		if (mItemHave == 1)
+		{
+			NormalRobe* robe = new NormalRobe();
+			robe->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, robe);
+		}
+		else if (mItemHave == 2)
+		{
+			NormalBoots* hat = new NormalBoots();
+			hat->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
+		}
+
 	}
 	void SkeletonScript::Initialize()
 	{

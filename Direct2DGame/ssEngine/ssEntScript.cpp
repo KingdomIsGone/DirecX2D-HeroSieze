@@ -5,6 +5,8 @@
 #include "ssAnimator.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssSceneManager.h"
+#include "ssNormalBelt.h"
 
 namespace ss
 {
@@ -13,11 +15,19 @@ namespace ss
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
 		, mDamage(80.0f)
+		, mItemHave(0)
 	{
 	}
 	EntScript::~EntScript()
 	{
 		ColideClear();
+
+		if (mItemHave == 1)
+		{
+			NormalBelt* robe = new NormalBelt();
+			robe->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, robe);
+		}
 	}
 	void EntScript::Initialize()
 	{

@@ -169,10 +169,12 @@ namespace ss
 			deSkeleton1->GetComponent<Transform>()->SetPosition(-5.f, -3.8f, 1.02f);
 
 			DesertSkeleton* deSkeleton2 = new DesertSkeleton();
+			deSkeleton2->SetItmeHave(1);
 			AddGameObject(eLayerType::Monster, deSkeleton2);
 			deSkeleton2->GetComponent<Transform>()->SetPosition(-6.5f, -3.7f, 1.02f);
 
 			DesertArcher* deSkeleton3 = new DesertArcher();
+			deSkeleton3->SetItmeHave(2);
 			AddGameObject(eLayerType::Monster, deSkeleton3);
 			deSkeleton3->GetComponent<Transform>()->SetPosition(-4.2f, -3.7f, 1.02f);
 
@@ -198,6 +200,7 @@ namespace ss
 			deSkeleton8->GetComponent<Transform>()->SetPosition(4.5f, -3.f, 1.02f);
 
 			DesertArcher* deSkeleton9 = new DesertArcher();
+			deSkeleton9->SetItmeHave(1);
 			AddGameObject(eLayerType::Monster, deSkeleton9);
 			deSkeleton9->GetComponent<Transform>()->SetPosition(5.f, -2.5f, 1.02f);
 

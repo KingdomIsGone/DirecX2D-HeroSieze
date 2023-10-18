@@ -88,7 +88,7 @@ namespace ss
 		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 
-		mMScript = AddComponent<EntScript>();
+		mScript = AddComponent<EntScript>();
 	}
 	Ent::~Ent()
 	{
@@ -103,7 +103,7 @@ namespace ss
 	{
 		GameObject::Update();
 
-		mCurHp = mMScript->GetHP();
+		mCurHp = mScript->GetHP();
 		if (mCurHp != mPrevHp)
 		{
 			mHpBarFill->ChangeHP(mCurHp);
@@ -119,5 +119,9 @@ namespace ss
 	void Ent::Render()
 	{
 		GameObject::Render();
+	}
+	void Ent::SetItmeHave(UINT num)
+	{
+		mScript->SetItemHave(num);
 	}
 }

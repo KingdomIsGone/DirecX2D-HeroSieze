@@ -170,6 +170,7 @@ namespace ss
 		//skeleton
 		{
 			DesertSkeleton* deSkeleton = new DesertSkeleton();
+			deSkeleton->SetItmeHave(2);
 			AddGameObject(eLayerType::Monster, deSkeleton);
 			deSkeleton->GetComponent<Transform>()->SetPosition(-0.1f, 4.5f, 1.02f);
 

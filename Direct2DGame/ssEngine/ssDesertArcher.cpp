@@ -89,7 +89,7 @@ namespace ss
 		mHpBarFill->SetFullScale(0.19f, 0.02f);
 		AddOtherGameObject(mHpBarFill, eLayerType::MonsterUI);
 
-		mMScript = AddComponent<DesertArcherScript>();
+		mScript = AddComponent<DesertArcherScript>();
 	}
 	DesertArcher::~DesertArcher()
 	{
@@ -104,7 +104,7 @@ namespace ss
 	{
 		GameObject::Update();
 
-		mCurHp = mMScript->GetHP();
+		mCurHp = mScript->GetHP();
 		if (mCurHp != mPrevHp)
 		{
 			mHpBarFill->ChangeHP(mCurHp);
@@ -120,5 +120,9 @@ namespace ss
 	void DesertArcher::Render()
 	{
 		GameObject::Render();
+	}
+	void DesertArcher::SetItmeHave(UINT num)
+	{
+		mScript->SetItemHave(num);
 	}
 }

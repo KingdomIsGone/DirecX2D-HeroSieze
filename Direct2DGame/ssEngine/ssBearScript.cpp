@@ -6,6 +6,9 @@
 #include "ssPlayerScript.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssMagicRobe.h"
+#include "ssMagicHat.h"
+#include "ssSceneManager.h"
 
 namespace ss
 {
@@ -16,11 +19,25 @@ namespace ss
 		, mDamage(120.0f)
 		, mDamage2(240.f)
 		, mAtkCount(0)
+		, mItemHave(0)
 	{
 	}
 	BearScript::~BearScript()
 	{
 		ColideClear();
+
+		if (mItemHave == 1)
+		{
+			MagicRobe* robe = new MagicRobe();
+			robe->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, robe);
+		}
+		else if (mItemHave == 2)
+		{
+			MagicHat* hat = new MagicHat();
+			hat->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
+		}
 	}
 	void BearScript::Initialize()
 	{

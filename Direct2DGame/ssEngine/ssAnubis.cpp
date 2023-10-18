@@ -10,6 +10,7 @@
 #include "ssBossHpBar.h"
 #include "ssPlayerScript.h"
 #include "ssImmuneText.h"
+#include "ssLegendStaff1.h"
 
 namespace ss
 {

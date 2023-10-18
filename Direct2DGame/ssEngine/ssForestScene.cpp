@@ -194,65 +194,67 @@ namespace ss
 
 		//Monster
 		{
-			//Ent* mon1 = new Ent();
-			//mon1->GetComponent<Transform>()->SetPosition(3.27f, 6.f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon1);
-			//
-			//Ent* mon2 = new Ent();
-			//mon2->GetComponent<Transform>()->SetPosition(3.77f, 6.f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon2);
-			//
-			//TreeMon* mon3 = new TreeMon();
-			//mon3->GetComponent<Transform>()->SetPosition(2.f, 5.3f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon3);
-			//
-			//TreeMon* mon4 = new TreeMon();
-			//mon4->GetComponent<Transform>()->SetPosition(2.f, 5.9f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon4);
+			Ent* mon1 = new Ent();
+			mon1->GetComponent<Transform>()->SetPosition(3.27f, 6.f, 1.f);
+			AddGameObject(eLayerType::Monster, mon1);
+			
+			Ent* mon2 = new Ent();
+			mon2->SetItmeHave(1);
+			mon2->GetComponent<Transform>()->SetPosition(3.77f, 6.f, 1.f);
+			AddGameObject(eLayerType::Monster, mon2);
+			
+			TreeMon* mon3 = new TreeMon();
+			mon3->GetComponent<Transform>()->SetPosition(2.f, 5.3f, 1.f);
+			AddGameObject(eLayerType::Monster, mon3);
+			
+			TreeMon* mon4 = new TreeMon();
+			mon4->GetComponent<Transform>()->SetPosition(2.f, 5.9f, 1.f);
+			AddGameObject(eLayerType::Monster, mon4);
 
-			//TreeMon* mon5 = new TreeMon();
-			//mon5->GetComponent<Transform>()->SetPosition(3.45f, 1.1f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon5);
-			//
-			//Ent* mon6 = new Ent();
-			//mon6->GetComponent<Transform>()->SetPosition(1.39f, 2.29f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon6);
-			//
-			//Ent* mon7 = new Ent();
-			//mon7->GetComponent<Transform>()->SetPosition(1.89f, 1.89f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon7);
+			TreeMon* mon5 = new TreeMon();
+			mon5->GetComponent<Transform>()->SetPosition(3.45f, 1.1f, 1.f);
+			AddGameObject(eLayerType::Monster, mon5);
+			
+			Ent* mon6 = new Ent();
+			mon6->GetComponent<Transform>()->SetPosition(1.39f, 2.29f, 1.f);
+			AddGameObject(eLayerType::Monster, mon6);
+			
+			Ent* mon7 = new Ent();
+			mon7->GetComponent<Transform>()->SetPosition(1.89f, 1.89f, 1.f);
+			AddGameObject(eLayerType::Monster, mon7);
 
-			//Ent* mon8 = new Ent();
-			//mon8->GetComponent<Transform>()->SetPosition(6.5f, 1.1f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon8);
-			//
-			//Ent* mon9 = new Ent();
-			//mon9->GetComponent<Transform>()->SetPosition(5.3f, -3.f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon9);
-			//
-			//Ent* mon10 = new Ent();
-			//mon10->GetComponent<Transform>()->SetPosition(3.8f, -1.98f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon10);
-			//
-			//Ent* mon11 = new Ent();
-			//mon11->GetComponent<Transform>()->SetPosition(-7.93f, -8.26f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon11);
-			//
-			//TreeMon* mon12 = new TreeMon();
-			//mon12->GetComponent<Transform>()->SetPosition(6.4f, 2.56f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon12);
-			//
-			//TreeMon* mon13 = new TreeMon();
-			//mon13->GetComponent<Transform>()->SetPosition(0.f, -6.48f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon13);
-			//
-			//TreeMon* mon14 = new TreeMon();
-			//mon14->GetComponent<Transform>()->SetPosition(-0.69f, -6.14f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon14);
-			//
-			//Bear* mon15 = new Bear();
-			//mon15->GetComponent<Transform>()->SetPosition(2.8f, -3.78f, 1.f);
-			//AddGameObject(eLayerType::Monster, mon15);
+			Ent* mon8 = new Ent();
+			mon8->GetComponent<Transform>()->SetPosition(6.5f, 1.1f, 1.f);
+			AddGameObject(eLayerType::Monster, mon8);
+			
+			Ent* mon9 = new Ent();
+			mon9->GetComponent<Transform>()->SetPosition(5.3f, -3.f, 1.f);
+			AddGameObject(eLayerType::Monster, mon9);
+			
+			Ent* mon10 = new Ent();
+			mon10->GetComponent<Transform>()->SetPosition(3.8f, -1.98f, 1.f);
+			AddGameObject(eLayerType::Monster, mon10);
+			
+			Ent* mon11 = new Ent();
+			mon11->GetComponent<Transform>()->SetPosition(-7.93f, -8.26f, 1.f);
+			AddGameObject(eLayerType::Monster, mon11);
+			
+			TreeMon* mon12 = new TreeMon();
+			mon12->GetComponent<Transform>()->SetPosition(6.4f, 2.56f, 1.f);
+			AddGameObject(eLayerType::Monster, mon12);
+			
+			TreeMon* mon13 = new TreeMon();
+			mon13->GetComponent<Transform>()->SetPosition(0.f, -6.48f, 1.f);
+			AddGameObject(eLayerType::Monster, mon13);
+			
+			TreeMon* mon14 = new TreeMon();
+			mon14->GetComponent<Transform>()->SetPosition(-0.69f, -6.14f, 1.f);
+			AddGameObject(eLayerType::Monster, mon14);
+			
+			Bear* mon15 = new Bear();
+			mon15->SetItmeHave(1);
+			mon15->GetComponent<Transform>()->SetPosition(2.8f, -3.78f, 1.f);
+			AddGameObject(eLayerType::Monster, mon15);
 
 		}
 

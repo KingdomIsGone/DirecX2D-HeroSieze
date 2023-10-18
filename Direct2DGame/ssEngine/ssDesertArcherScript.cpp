@@ -7,6 +7,9 @@
 #include "ssSceneManager.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssSceneManager.h"
+#include "ssNormalHat.h"
+#include "ssNormalStaff.h"
 
 namespace ss
 {
@@ -14,11 +17,25 @@ namespace ss
 		: mAgroDistance(2.6f)
 		, mSpeed(0.5f)
 		, mHp(1000.0f)
+		, mItemHave(0)
 	{
 	}
 	DesertArcherScript::~DesertArcherScript()
 	{
 		ColideClear();
+
+		if (mItemHave == 1)
+		{
+			NormalHat* robe = new NormalHat();
+			robe->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, robe);
+		}
+		else if (mItemHave == 2)
+		{
+			NormalStaff* hat = new NormalStaff();
+			hat->GetComponent<Transform>()->SetPosition(mPos);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
+		}
 	}
 	void DesertArcherScript::Initialize()
 	{

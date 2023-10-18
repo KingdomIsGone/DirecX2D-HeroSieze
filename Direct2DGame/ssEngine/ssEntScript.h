@@ -40,6 +40,7 @@ namespace ss
 		void ColideClear();
 
 		float GetHP() { return mHp; }
+		void SetItemHave(UINT num) { mItemHave = num; }
 
 		void Damage();
 		void DamageCheck();
@@ -57,6 +58,7 @@ namespace ss
 		float mSpeed;
 		float mAgroDistance;
 		float mDamage;
+		UINT mItemHave;
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;

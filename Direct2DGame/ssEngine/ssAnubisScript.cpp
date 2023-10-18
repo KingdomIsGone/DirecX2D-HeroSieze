@@ -14,6 +14,9 @@
 #include "ssBossHpFill.h"
 #include "ssAnubis.h"
 #include "ssImmuneText.h"
+#include "ssLegendStaff1.h"
+#include "ssLegendBoots.h"
+
 
 namespace ss
 {
@@ -30,6 +33,19 @@ namespace ss
 	}
 	AnubisScript::~AnubisScript()
 	{
+		Vector3 dropPos1 = mPos;
+		dropPos1.x -= 0.1f;
+		Vector3 dropPos2 = mPos;
+		dropPos2.x += 0.1f;
+
+		LegendStaff1* staff = new LegendStaff1();
+		staff->GetComponent<Transform>()->SetPosition(dropPos1);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, staff);
+
+		LegendBoots* boots = new LegendBoots();
+		boots->GetComponent<Transform>()->SetPosition(dropPos2);
+		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, boots);
+
 	}
 	void AnubisScript::Initialize()
 	{

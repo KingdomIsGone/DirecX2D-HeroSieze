@@ -44,6 +44,8 @@ namespace ss
 
 		void DamageCheck();
 
+		void SetItemHave(UINT num) { mItemHave = num; }
+
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
@@ -52,6 +54,7 @@ namespace ss
 	private:
 		eState mState;
 		eDirState mDirState;
+		UINT mItemHave;
 
 		float mHp;
 		float mSpeed;
