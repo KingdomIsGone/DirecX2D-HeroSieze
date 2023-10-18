@@ -98,6 +98,8 @@ namespace ss
 
 	void BearScript::Attack()
 	{
+		CalculateMoveDegree(mPos, mPlayerPos);
+
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -131,6 +133,8 @@ namespace ss
 
 	void BearScript::Attack2()
 	{
+		CalculateMoveDegree(mPos, mPlayerPos);
+
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:

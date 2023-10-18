@@ -29,6 +29,7 @@
 #include "ssUIScene.h"
 #include "ssSkeletonMage.h"
 #include "ssWallCollider.h"
+#include "ssPortal.h"
 
 namespace ss
 {
@@ -441,6 +442,7 @@ namespace ss
 
 		}
 
+		
 	}
 
 	void AnubisRoom::Update()
@@ -465,6 +467,14 @@ namespace ss
 		{
 			mBossHpBar->SetBlank();
 			mBossName->SetOnOff(false);
+
+			if (!mPortalOnce)
+			{
+				Portal* portal = new Portal();
+				portal->GetComponent<Transform>()->SetPosition(Vector3(-0.12f, -2.24f, 1.1f));
+				AddGameObject(eLayerType::Item, portal);
+				mPortalOnce = true;
+			}
 		}
 	}
 

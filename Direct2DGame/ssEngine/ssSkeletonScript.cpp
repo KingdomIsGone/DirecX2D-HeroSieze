@@ -90,7 +90,7 @@ namespace ss
 
 	void SkeletonScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
+		CalculateMoveDegree(mPos, mPlayerPos);
 
 		switch (mDirState)
 		{

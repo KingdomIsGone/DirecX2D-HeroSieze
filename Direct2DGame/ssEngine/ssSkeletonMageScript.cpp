@@ -90,7 +90,7 @@ namespace ss
 
 	void SkeletonMageScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
+		CalculateMoveDegree(mPos, mPlayerPos);
 
 		CalDir(mPlayerPos);
 

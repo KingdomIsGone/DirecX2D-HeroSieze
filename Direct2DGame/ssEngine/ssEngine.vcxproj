@@ -183,12 +183,10 @@
     <ClInclude Include="ssDartScript.h" />
     <ClInclude Include="ssDesertArcher.h" />
     <ClInclude Include="ssDesertArcherScript.h" />
-    <ClInclude Include="ssDesertBossRoom.h" />
-    <ClInclude Include="ssDesertDungeon1.h" />
-    <ClInclude Include="ssDesertDungeon2.h" />
-    <ClInclude Include="ssDesertFieldScene.h" />
+    <ClInclude Include="ssDesertDoor.h" />
+    <ClInclude Include="ssDesertMap.h" />
     <ClInclude Include="ssDesertSkeleton.h" />
-    <ClInclude Include="ssDesertTownScene.h" />
+    <ClInclude Include="ssDoorScript.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
     <ClInclude Include="ssEnemyHpBarFill.h" />
     <ClInclude Include="ssEnt.h" />
@@ -203,6 +201,7 @@
     <ClInclude Include="ssFireWallPieceScript.h" />
     <ClInclude Include="ssFlames.h" />
     <ClInclude Include="ssFlameScript.h" />
+    <ClInclude Include="ssForestScene.h" />
     <ClInclude Include="ssGridScript.h" />
     <ClInclude Include="ssHydra.h" />
     <ClInclude Include="ssHydraScript.h" />
@@ -236,6 +235,7 @@
     <ClInclude Include="ssNormalStaff.h" />
     <ClInclude Include="ssPlayerHpBarFill.h" />
     <ClInclude Include="ssPlayerMpBarFill.h" />
+    <ClInclude Include="ssPortal.h" />
     <ClInclude Include="ssRightInfo.h" />
     <ClInclude Include="ssSarcophagus.h" />
     <ClInclude Include="ssSkeletonMage.h" />
@@ -253,6 +253,7 @@
     <ClInclude Include="ssThunderPiece.h" />
     <ClInclude Include="ssTitleScene.h" />
     <ClInclude Include="ssTorchBig.h" />
+    <ClInclude Include="ssTown.h" />
     <ClInclude Include="ssTreeMon.h" />
     <ClInclude Include="ssTreeMonScript.h" />
     <ClInclude Include="ssUIScene.h" />
@@ -265,7 +266,6 @@
     <ClInclude Include="ssValkyrieScript.h" />
     <ClInclude Include="ssValThunderEffect.h" />
     <ClInclude Include="ssWallCollider.h" />
-    <ClInclude Include="ssWoodsField.h" />
     <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
@@ -293,12 +293,10 @@
     <ClCompile Include="ssDartScript.cpp" />
     <ClCompile Include="ssDesertArcher.cpp" />
     <ClCompile Include="ssDesertArcherScript.cpp" />
-    <ClCompile Include="ssDesertBossRoom.cpp" />
-    <ClCompile Include="ssDesertDungeon1.cpp" />
-    <ClCompile Include="ssDesertDungeon2.cpp" />
-    <ClCompile Include="ssDesertFieldScene.cpp" />
+    <ClCompile Include="ssDesertDoor.cpp" />
+    <ClCompile Include="ssDesertMap.cpp" />
     <ClCompile Include="ssDesertSkeleton.cpp" />
-    <ClCompile Include="ssDesertTownScene.cpp" />
+    <ClCompile Include="ssDoorScript.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />
     <ClCompile Include="ssEnemyHpBarFill.cpp" />
     <ClCompile Include="ssEnt.cpp" />
@@ -313,6 +311,7 @@
     <ClCompile Include="ssFireWallPieceScript.cpp" />
     <ClCompile Include="ssFlames.cpp" />
     <ClCompile Include="ssFlameScript.cpp" />
+    <ClCompile Include="ssForestScene.cpp" />
     <ClCompile Include="ssGridScript.cpp" />
     <ClCompile Include="ssHydra.cpp" />
     <ClCompile Include="ssHydraScript.cpp" />
@@ -346,6 +345,7 @@
     <ClCompile Include="ssNormalStaff.cpp" />
     <ClCompile Include="ssPlayerHpBarFill.cpp" />
     <ClCompile Include="ssPlayerMpBarFill.cpp" />
+    <ClCompile Include="ssPortal.cpp" />
     <ClCompile Include="ssRightInfo.cpp" />
     <ClCompile Include="ssSarcophagus.cpp" />
     <ClCompile Include="ssSkeletonMage.cpp" />
@@ -363,6 +363,7 @@
     <ClCompile Include="ssThunderPiece.cpp" />
     <ClCompile Include="ssTitleScene.cpp" />
     <ClCompile Include="ssTorchBig.cpp" />
+    <ClCompile Include="ssTown.cpp" />
     <ClCompile Include="ssTreeMon.cpp" />
     <ClCompile Include="ssTreeMonScript.cpp" />
     <ClCompile Include="ssUIScene.cpp" />
@@ -376,7 +377,6 @@
     <ClCompile Include="ssValkyrieScript.cpp" />
     <ClCompile Include="ssValThunderEffect.cpp" />
     <ClCompile Include="ssWallCollider.cpp" />
-    <ClCompile Include="ssWoodsField.cpp" />
     <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>

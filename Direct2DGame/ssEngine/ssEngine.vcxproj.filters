@@ -80,24 +80,6 @@
     <ClCompile Include="ssBossHpFill.cpp">
       <Filter>Contents\Object\UI\BossHpFill</Filter>
     </ClCompile>
-    <ClCompile Include="ssDesertBossRoom.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertDungeon1.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertDungeon2.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertFieldScene.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
-    <ClCompile Include="ssDesertTownScene.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
-    <ClCompile Include="ssWoodsField.cpp">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClCompile>
     <ClCompile Include="ssAnubisRoom.cpp">
       <Filter>Contents\Scene\BossRoomAnubis</Filter>
     </ClCompile>
@@ -326,6 +308,24 @@
     <ClCompile Include="ssEntScript.cpp">
       <Filter>Contents\Object\Monster\Ent</Filter>
     </ClCompile>
+    <ClCompile Include="ssDesertMap.cpp">
+      <Filter>Contents\Scene\DesertMap</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDesertDoor.cpp">
+      <Filter>Contents\Object\MapObject\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="ssDoorScript.cpp">
+      <Filter>Contents\Object\MapObject\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="ssTown.cpp">
+      <Filter>Contents\Scene\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="ssForestScene.cpp">
+      <Filter>Contents\Scene\Forest</Filter>
+    </ClCompile>
+    <ClCompile Include="ssPortal.cpp">
+      <Filter>Contents\Object\MapObject\Portal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -409,24 +409,6 @@
     </ClInclude>
     <ClInclude Include="ssBossHpFill.h">
       <Filter>Contents\Object\UI\BossHpFill</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertBossRoom.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertDungeon1.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertDungeon2.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertFieldScene.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssDesertTownScene.h">
-      <Filter>Contents\Scene\ETC</Filter>
-    </ClInclude>
-    <ClInclude Include="ssWoodsField.h">
-      <Filter>Contents\Scene\ETC</Filter>
     </ClInclude>
     <ClInclude Include="ssAnubisRoom.h">
       <Filter>Contents\Scene\BossRoomAnubis</Filter>
@@ -656,6 +638,24 @@
     <ClInclude Include="ssEntScript.h">
       <Filter>Contents\Object\Monster\Ent</Filter>
     </ClInclude>
+    <ClInclude Include="ssDesertMap.h">
+      <Filter>Contents\Scene\DesertMap</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDesertDoor.h">
+      <Filter>Contents\Object\MapObject\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="ssDoorScript.h">
+      <Filter>Contents\Object\MapObject\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="ssTown.h">
+      <Filter>Contents\Scene\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="ssForestScene.h">
+      <Filter>Contents\Scene\Forest</Filter>
+    </ClInclude>
+    <ClInclude Include="ssPortal.h">
+      <Filter>Contents\Object\MapObject\Portal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -729,9 +729,6 @@
     </Filter>
     <Filter Include="Contents\Scene\BossRoomAnubis">
       <UniqueIdentifier>{8ce4a93b-4016-46af-8593-3cde6545b1ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\ETC">
-      <UniqueIdentifier>{92f0f540-a87e-4518-a543-8f82e66765d4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object\MapObject">
       <UniqueIdentifier>{9d6d232a-306b-417d-995c-eb5aa7b8fe3e}</UniqueIdentifier>
@@ -900,6 +897,21 @@
     </Filter>
     <Filter Include="Contents\Object\Monster\Ent">
       <UniqueIdentifier>{0a996a6f-25de-421d-abc1-dbe1a19276c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\DesertMap">
+      <UniqueIdentifier>{4d52abfd-1933-4bbe-b8d7-c99f2fa526bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\MapObject\Door">
+      <UniqueIdentifier>{c0a1ceb0-804a-4636-9704-cd2c50fe1cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Town">
+      <UniqueIdentifier>{4315e0b0-c1ff-4137-9466-deeb717dc5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Forest">
+      <UniqueIdentifier>{8f76871c-0bf3-4633-8864-36439729c21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\MapObject\Portal">
+      <UniqueIdentifier>{f516ee86-d4b7-48c2-80a1-7f77093b0c63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

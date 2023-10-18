@@ -32,5 +32,7 @@ namespace ss
 		class Camera* mCursorCamera;
 		class Camera* mInventoryCamera;
 		class Camera* mMonUICamera;
+
+		bool mPortalOnce;
 	};
 }

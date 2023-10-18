@@ -90,7 +90,7 @@ namespace ss
 
 	void MummyScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
+		CalculateMoveDegree(mPos, mPlayerPos);
 
 		switch (mDirState)
 		{

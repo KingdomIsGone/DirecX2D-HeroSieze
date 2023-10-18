@@ -89,7 +89,7 @@ namespace ss
 
 	void EntScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
+		CalculateMoveDegree(mPos, mPlayerPos);
 
 		switch (mDirState)
 		{
