@@ -124,5 +124,7 @@ namespace ss
 		std::vector<class SkillSlot*> mSkillSlots;
 
 		static bool mbOn;
+		
+		class AudioSource* mAs;
 	};
 }

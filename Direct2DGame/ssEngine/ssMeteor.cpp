@@ -8,6 +8,10 @@
 #include "ssMeteorScript.h"
 #include "ssSceneManager.h"
 #include "ssFlames.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+#include "ssResources.h"
+
 
 namespace ss
 {
@@ -46,9 +50,12 @@ namespace ss
 		mAnimator->Create(L"MeteorExplode", MeteorExplodeTex, Vector2(0.0f, 0.0f), Vector2(100.0f, 100.0f), 13);
 
 		mTransform->SetScale(Vector3(3.5f, 3.5f, 1.0));
-		
 
 		mAnimator->PlayAnimation(L"MoltenNova", true);
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"MeteorCrash", L"..\\Resources\\Sound\\PlayerSound\\Meteor_Crash.wav"));
 	}
 	Meteor::~Meteor()
 	{
@@ -87,6 +94,13 @@ namespace ss
 		{
 			mAnimator->PlayAnimation(L"MeteorExplode", false);
 			mMScript->SetDamageActivate();
+
+			if (!mAudioOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"MeteorCrash"));
+				mAs->Play();
+				mAudioOnce = true;
+			}
 
 			Flames* flame = new Flames();
 			Vector3 pos = mTransform->GetPosition();

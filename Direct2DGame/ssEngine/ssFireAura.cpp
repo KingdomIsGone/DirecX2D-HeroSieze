@@ -10,8 +10,7 @@
 namespace ss
 {
 	FireAura::FireAura()
-		: mDamage(80.0f)
-		, mDuration(6.5f)
+		: mDuration(3.5f)
 	{
 		SetName(L"FireAura");
 		mMScript = AddComponent<FireAuraScript>();

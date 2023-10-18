@@ -19,6 +19,8 @@
 #include "Inventory.h"
 #include "ssSkillSlot.h"
 #include "ssHydra.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -54,8 +56,27 @@ namespace ss
 		mCursor = new Cursor();
 		mIndicator = new Indicator();
 
-		
-		
+		//¿Àµð¿À
+		{
+			GameObject* audioSpeaker = new GameObject();
+			mAs = audioSpeaker->AddComponent<AudioSource>();
+
+			mAs->SetClip(Resources::Load<AudioClip>(L"PlayerAtkSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\PlayerAtk.wav"));
+
+			mAs->SetClip(Resources::Load<AudioClip>(L"FireAuraSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\FireAura.wav"));
+
+			mAs->SetClip(Resources::Load<AudioClip>(L"FireWallSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\FireWall_Continue.wav"));
+
+			mAs->SetClip(Resources::Load<AudioClip>(L"HydyraStartSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\HydraStart.wav"));
+
+			mAs->SetClip(Resources::Load<AudioClip>(L"MetorStartSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\MeteorStart.wav"));
+
+		}
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
 	}
 
@@ -333,6 +354,8 @@ namespace ss
 		
 		if (!mShootOnce && mSpellNum == 0)
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"PlayerAtkSound"));
+			mAs->Play();
 			AttackFireBall(mPlayerPos, mCursorPos);
 			mShootOnce = true;
 		}
@@ -540,6 +563,9 @@ namespace ss
 		mCurMp -= 250.f;
 		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
+		mAs->SetClip(Resources::Find<AudioClip>(L"MetorStartSound"));
+		mAs->Play();
+
 		Meteor* meteor = new Meteor();
 		Vector3 pos = cursorPos;
 		pos.z = 1.1f;
@@ -566,8 +592,14 @@ namespace ss
 		mCurMp -= 150.f;
 		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
 
+		mAs->SetClip(Resources::Find<AudioClip>(L"FireAuraSound"));
+		mAs->Play();
+
 		FireAura* aura = new FireAura();
 		Vector3 pos = aura->GetComponent<Transform>()->GetPosition();
+		pos.x += 0.1f;
+		pos.y -= 0.1f;
+		aura->GetComponent<Transform>()->SetPosition(pos);
 		
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, aura);
 		mSpellNum = 0;
@@ -579,6 +611,9 @@ namespace ss
 			return;
 		mCurMp -= 300.f;
 		mSkillSlots[mSpellNum - 1]->CoolTimeStart();
+
+		mAs->SetClip(Resources::Find<AudioClip>(L"HydyraStartSound"));
+		mAs->Play();
 
 		Hydra* hydra = new Hydra();
 		hydra->GetComponent<Transform>()->SetPosition(cursorPos);

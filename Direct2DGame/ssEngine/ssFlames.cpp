@@ -12,7 +12,7 @@ namespace ss
 {
 	Flames::Flames()
 		: mDamage(80.0f)
-		, mDeadTime(5.f)
+		, mDeadTime(3.5f)
 	{
 		SetName(L"Flames");
 		mScript = AddComponent<FlameScript>();

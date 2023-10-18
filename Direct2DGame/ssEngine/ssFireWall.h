@@ -57,5 +57,8 @@ namespace ss
 
 		eStage mStage;
 		eDegreeCase mCase;
+
+		class AudioSource* mAs;
+		bool mAudioOnce;
 	};
 }

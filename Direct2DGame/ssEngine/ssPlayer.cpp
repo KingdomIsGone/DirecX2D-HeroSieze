@@ -357,14 +357,14 @@ namespace ss
 			skillSlot1->SetMater(L"MeteorIconMater");
 			skillSlot1->SetSlotNum(0);
 			skillSlot1->GetComponent<Transform>()->SetPosition(-2.02f, -1.54f, 0.745f);
-			skillSlot1->SetCoolSpeed(0.2f);
+			skillSlot1->SetCoolSpeed(0.1f);
 			AddOtherGameObject(skillSlot1, eLayerType::UI);
 
 			SkillSlot* skillSlot2 = new SkillSlot();
 			skillSlot2->SetMater(L"FireWallMater");
 			skillSlot2->SetSlotNum(1);
 			skillSlot2->GetComponent<Transform>()->SetPosition(-1.76f, -1.54f, 0.745f);
-			skillSlot2->SetCoolSpeed(0.3f);
+			skillSlot2->SetCoolSpeed(0.14f);
 			AddOtherGameObject(skillSlot2, eLayerType::UI);
 
 			SkillSlot* skillSlot3 = new SkillSlot();

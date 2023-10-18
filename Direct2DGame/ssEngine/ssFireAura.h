@@ -18,7 +18,6 @@ namespace ss
 		Transform* mTransform;
 		Vector3 mPos;
 
-		float mDamage;
 		float mDuration;
 
 		class FireAuraScript* mMScript;

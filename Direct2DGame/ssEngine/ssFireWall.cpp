@@ -3,6 +3,9 @@
 #include "FireWallPiece.h"
 #include "ssSceneManager.h"
 #include "ssTime.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+#include "ssResources.h"
 
 namespace ss
 {
@@ -68,6 +71,10 @@ namespace ss
 			break;
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"FireWallStart", L"..\\Resources\\Sound\\PlayerSound\\Fiewall_Start.wav"));
+
 	}
 	FireWall::~FireWall()
 	{
@@ -121,6 +128,10 @@ namespace ss
 	}
 	void FireWall::FirstOne()
 	{
+		mAs->SetClip(Resources::Find<AudioClip>(L"FireWallStart"));
+		mAs->SetLoop(false);
+		mAs->Play();
+
 		mWalls[0] = new FireWallPiece();
 		mWalls[0]->GetComponent<Transform>()->SetPosition(mWallPos[0]);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Projectile, mWalls[0]);
@@ -194,6 +205,14 @@ namespace ss
 	}
 	void FireWall::ContinueTime()
 	{
+		if (!mAudioOnce)
+		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"FireWallSound"));
+			mAs->SetLoop(true);
+			mAs->Play();
+			mAudioOnce = true;
+		}
+
 		mDelayTime += Time::DeltaTime();
 
 		if (mDelayTime < 5.0f)
@@ -204,6 +223,7 @@ namespace ss
 			mWalls[i]->SetState(eState::Dead);
 		}
 
+		mAs->Stop();
 		SetState(eState::Dead);
 	}
 }

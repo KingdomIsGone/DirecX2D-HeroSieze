@@ -25,5 +25,7 @@ namespace ss
 
 		class MeteorScript* mMScript;
 		class Animator* mAnimator;
+		class AudioSource* mAs;
+		bool mAudioOnce;
 	};
 }

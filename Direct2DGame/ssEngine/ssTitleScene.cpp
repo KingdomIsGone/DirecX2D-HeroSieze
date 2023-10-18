@@ -220,7 +220,9 @@ namespace ss
 
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>();
-		mAs->SetClip(Resources::Load<AudioClip>(L"TitleSound", L"..\\Resources\\Sound\\Hero_Siege_Menu_mus.ogg"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"TitleSound", L"..\\Resources\\Sound\\BGM\\Hero_Siege_Menu_mus.ogg"));
+		mAs->Play();
+
 	}
 
 	void TitleScene::Update()
@@ -256,7 +258,7 @@ namespace ss
 				&& LBpos.y <= cursorPos.y && cursorPos.y <= RTpos.y)
 			{
 				mStBtn->SetClicked(true);
-				SceneManager::LoadScene(L"UIScene");
+				SceneManager::LoadScene(L"Town");
 			}
 		}
 		else
