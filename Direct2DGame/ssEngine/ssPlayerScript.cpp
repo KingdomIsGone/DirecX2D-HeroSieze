@@ -107,16 +107,47 @@ namespace ss
 	void PlayerScript::SpellWaiting()
 	{
 		if (Input::GetKeyDown(eKeyCode::One))
+		{
 			mSpellNum = 1;
+
+			if (!mSkillSlots[mSpellNum - 1]->GetReady())
+			{
+				mSpellNum = 0;
+				return;
+			}
+		}
 		else if (Input::GetKeyDown(eKeyCode::two))
+		{
 			mSpellNum = 2;
+
+			if (!mSkillSlots[mSpellNum - 1]->GetReady())
+			{
+				mSpellNum = 0;
+				return;
+			}
+		}
 		else if (Input::GetKeyDown(eKeyCode::Three))
 		{
 			mSpellNum = 3;
+
+			if (!mSkillSlots[mSpellNum - 1]->GetReady())
+			{
+				mSpellNum = 0;
+				return;
+			}
+
 			FireAuraCast();
 		}
 		else if (Input::GetKeyDown(eKeyCode::four))
+		{
 			mSpellNum = 4;
+
+			if (!mSkillSlots[mSpellNum - 1]->GetReady())
+			{
+				mSpellNum = 0;
+				return;
+			}
+		}
 	}
 
 	void PlayerScript::Idle()

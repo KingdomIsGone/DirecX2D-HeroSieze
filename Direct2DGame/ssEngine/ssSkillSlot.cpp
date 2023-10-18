@@ -93,4 +93,12 @@ namespace ss
 		mMaterName = name;
 		mMeshRenderer->SetMaterial(Resources::Find<Material>(mMaterName));
 	}
+	bool SkillSlot::GetReady()
+	{
+		if (mCoolPercent == 0.f)
+			return true;
+		else
+			return false;
+
+	}
 }

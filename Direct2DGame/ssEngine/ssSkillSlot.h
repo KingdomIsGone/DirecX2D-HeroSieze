@@ -22,6 +22,8 @@ namespace ss
 		void SetSlotNum(UINT num) { mSlotNum = num; }
 		void SetCoolSpeed(float speed) { mCoolSpeed = speed; }
 
+		bool GetReady();
+
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
