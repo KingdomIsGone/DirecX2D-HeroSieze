@@ -12,43 +12,10 @@
 #include "ssCursor.h"
 #include "ssPlayer.h"
 #include "ssRenderer.h"
-#include "ssFireBall.h"
 #include "ssIndicator.h"
-#include "ssDesertSkeleton.h"
 #include "ssCollisionManager.h"
 #include "ssPlayerCameraScript.h"
-#include "ssAnubis.h"
-#include "ssChargedBolt.h"
-#include "ssChainLightening.h"
-#include "ssMummy.h"
-#include "ssSarcophagus.h"
-#include "ssBossHpBar.h"
-#include "ssBossHpFill.h"
-#include "ssMeteor.h"
-#include "FireWallPiece.h"
-#include "ssWallCollider.h"
-#include "TestObject.h"
-#include "ssFontWrapper.h"
 
-#include "ssLegendStaff1.h"
-#include "ssMagicStaff.h"
-#include "ssMagicHat.h"
-#include "ssNormalStaff.h"
-#include "ssNormalRobe.h"
-#include "ssMagicRobe.h"
-#include "ssNormalBelt.h"
-#include "ssLegendBoots.h"
-#include "ssNormalBoots.h"
-#include "ssNormalHat.h"
-#include "ssFireAura.h"
-#include "ssHydra.h"
-
-#include "ssSpearRain.h"
-#include "ssDesertArcher.h"
-#include "ssSkeletonMage.h"
-#include "ssTreeMon.h"
-#include "ssEnt.h"
-#include "ssCloneAssault.h"
 
 
 namespace ss
@@ -72,89 +39,8 @@ namespace ss
 		Indicator* indicator = new Indicator();
 		AddGameObject(eLayerType::Cursor, indicator);
 
-		/*DesertSkeleton* deSkeleton = new DesertSkeleton();
-		AddGameObject(eLayerType::Monster, deSkeleton);
-		deSkeleton->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.02f);*/
-
-		/*DesertArcher* archer = new DesertArcher();
-		AddGameObject(eLayerType::Monster, archer);
-		archer->GetComponent<Transform>()->SetPosition(-2.5f, 0.0f, 1.02f);
-
-		SkeletonMage* mage = new SkeletonMage();
-		AddGameObject(eLayerType::Monster, mage);
-		mage->GetComponent<Transform>()->SetPosition(2.5f, 0.0f, 1.02f);
-
-		TreeMon* tree = new TreeMon();
-		AddGameObject(eLayerType::Monster, tree);
-		tree->GetComponent<Transform>()->SetPosition(0.f, 2.6f, 1.02f);*/
-
-		/*Ent* ent = new Ent();
-		AddGameObject(eLayerType::Monster, ent); 
-		ent->GetComponent<Transform>()->SetPosition(1.f, 2.6f, 1.02f);*/
-
-		CloneAssault* assault = new CloneAssault(e4Direction::Up);
-		AddGameObject(eLayerType::EnemyProjectile, assault);
-
-
-		//item
-		LegendStaff1* staff = new LegendStaff1();
-		AddGameObject(eLayerType::Item, staff);
-		staff->GetComponent<Transform>()->SetPosition(-1.0f, 0.0f, 1.02f);
-
-		MagicStaff* magicStaff = new MagicStaff();
-		AddGameObject(eLayerType::Item, magicStaff);
-		magicStaff->GetComponent<Transform>()->SetPosition(-1.0f, 0.5f, 1.02f);
-
-		MagicHat* magicHat = new MagicHat();
-		AddGameObject(eLayerType::Item, magicHat);
-		magicHat->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		NormalStaff* normalStaff = new NormalStaff();
-		AddGameObject(eLayerType::Item, normalStaff);
-		normalStaff->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		NormalRobe* normalRobe = new NormalRobe();
-		AddGameObject(eLayerType::Item, normalRobe);
-		normalRobe->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		MagicRobe* magicRobe = new MagicRobe();
-		AddGameObject(eLayerType::Item, magicRobe);
-		magicRobe->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		NormalBelt* normalBelt = new NormalBelt();
-		AddGameObject(eLayerType::Item, normalBelt);
-		normalBelt->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		LegendBoots* legendBoots = new LegendBoots();
-		AddGameObject(eLayerType::Item, legendBoots);
-		legendBoots->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		NormalBoots* normalBoots = new NormalBoots();
-		AddGameObject(eLayerType::Item, normalBoots);
-		normalBoots->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-		NormalHat* normalHat = new NormalHat();
-		AddGameObject(eLayerType::Item, normalHat);
-		normalHat->GetComponent<Transform>()->SetPosition(-1.0f, -0.5f, 1.02f);
-
-
-		FireWallPiece* Fpiece = new FireWallPiece();
-		AddGameObject(eLayerType::Projectile, Fpiece);
-		Fpiece->GetComponent<Transform>()->SetPosition(1.0f, 0.0f, 1.01f);
-
-		Hydra* hydra = new Hydra();
-		AddGameObject(eLayerType::Monster, hydra);
-		hydra->GetComponent<Transform>()->SetPosition(1.5f, 0.0f, 1.01f);
-
-		SpearRain* rain = new SpearRain();
-		AddGameObject(eLayerType::Projectile, rain);
-		rain->GetComponent<Transform>()->SetPosition(0.0f, 0.0f, 1.02f);
-
-		TestObject* TestObj = new TestObject(nullptr);
-		AddGameObject(eLayerType::Projectile, TestObj);
-		TestObj->GetComponent<Transform>()->SetPosition(0.0f, 1.0f, 1.01f);
 		
-		//TextureSetting();
+
 		UI_Setting();
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
@@ -232,7 +118,7 @@ namespace ss
 			mUICamera->DisableLayerMasks();
 			mUICamera->TurnLayerMask(eLayerType::UI, true);
 		}
-	
+
 		//Cursor Camera
 		{
 			GameObject* camera = new GameObject();
@@ -259,7 +145,7 @@ namespace ss
 			mInventoryCamera->DisableLayerMasks();
 			mInventoryCamera->TurnLayerMask(eLayerType::Inventory, true);
 		}
-		
+
 		//라이트
 		{
 			GameObject* light = new GameObject();
@@ -270,7 +156,7 @@ namespace ss
 			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
 		}
 
-		
+
 	}
 
 	void UIScene::Update()
@@ -302,7 +188,7 @@ namespace ss
 	}
 	void UIScene::UI_Setting()
 	{
-		
+
 
 		//캐릭터 및 레벨창 
 		{
@@ -529,7 +415,7 @@ namespace ss
 			//obj->AddComponent<CameraScript>();  
 		}
 
-		
+
 	}
 	void UIScene::TextureSetting()
 	{

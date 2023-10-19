@@ -67,6 +67,7 @@ namespace ss
 
 		class Animator* mAnimator;
 		class Collider2D* mCollider;
+		class AudioSource* mAs;
 
 		std::map<UINT, UINT> mColDirMap;
 		std::map<UINT, Collider2D*> mColAdressMap;

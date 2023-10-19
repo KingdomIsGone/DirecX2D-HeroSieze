@@ -22,6 +22,8 @@
 #include "ssTreeMon.h"
 #include "ssEnt.h"
 #include "ssBear.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -332,6 +334,11 @@ namespace ss
 
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.wav"));
+		mAs->SetLoop(true);
+
 	}
 
 	void ForestScene::Update()
@@ -360,10 +367,13 @@ namespace ss
 		renderer::cameras.push_back(mUICamera);
 		renderer::cameras.push_back(mCursorCamera);
 		renderer::mainCamera = mCursorCamera;
+
+		mAs->Play();
 	}
 
 	void ForestScene::OnExit()
 	{
+		mAs->Stop();
 	}
 
 }

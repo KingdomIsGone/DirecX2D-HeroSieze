@@ -34,7 +34,9 @@ namespace ss
 		class ValAwaker* mValAwaker;
 		class BossName* mBossName;
 		class PlayerScript* mPlayerScript;
+		class AudioSource* mAs;
 
+		bool mSoundOnce;
 		bool mbFont;
 
 		GameObject* mObjMainCamera;

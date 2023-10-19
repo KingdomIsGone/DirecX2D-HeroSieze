@@ -30,6 +30,8 @@
 #include "ssSkeletonMage.h"
 #include "ssWallCollider.h"
 #include "ssPortal.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -443,6 +445,11 @@ namespace ss
 
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"AnubisBGM", L"..\\Resources\\Sound\\BGM\\AnubisBGM.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"Pyramid", L"..\\Resources\\Sound\\BGM\\PyramidBGM.wav"));
+		mAs->SetLoop(true);
 		
 	}
 
@@ -454,9 +461,18 @@ namespace ss
 
 		if (mAnubis->GetAwake())
 		{
-			 mBossHpBar->SetHP();
-			 mBossHpFill->SetMater();
-			 mBossName->SetOnOff(true);
+			if (!mSoundOnce)
+			{
+				mAs->Stop();
+				mAs->SetClip(Resources::Find<AudioClip>(L"AnubisBGM"));
+				mAs->SetLoop(true);
+				mAs->Play();
+				mSoundOnce = true;
+			}
+
+			mBossHpBar->SetHP();
+			mBossHpFill->SetMater();
+			mBossName->SetOnOff(true);
 		}
 		else
 		{
@@ -466,6 +482,7 @@ namespace ss
 
 		if (mAnubis->GetDead())
 		{
+			mAs->Stop();
 			mBossHpBar->SetBlank();
 			mBossName->SetOnOff(false);
 
@@ -497,6 +514,8 @@ namespace ss
 		renderer::cameras.push_back(mUICamera);
 		renderer::cameras.push_back(mCursorCamera);
 		renderer::mainCamera = mCursorCamera;
+
+		mAs->Play();
 	}
 
 	void AnubisRoom::OnExit()

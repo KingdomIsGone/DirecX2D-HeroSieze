@@ -9,6 +9,8 @@
 #include "ssMagicRobe.h"
 #include "ssMagicHat.h"
 #include "ssSceneManager.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -20,6 +22,7 @@ namespace ss
 		, mDamage2(240.f)
 		, mAtkCount(0)
 		, mItemHave(0)
+		, mAtk2Time(0.f)
 	{
 	}
 	BearScript::~BearScript()
@@ -45,6 +48,11 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"BearAtkSnd", L"..\\Resources\\Sound\\MonsterAtk\\BearAtk.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"BearStrongSnd", L"..\\Resources\\Sound\\MonsterAtk\\BearStrong.wav"));
 	}
 
 	void BearScript::Update()
@@ -117,6 +125,13 @@ namespace ss
 	{
 		CalculateMoveDegree(mPos, mPlayerPos);
 
+		if (!mSoundOnce)
+		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"BearAtkSnd"));
+			mAs->Play();
+			mSoundOnce = true;
+		}
+
 		switch (mDirState)
 		{
 		case ss::BearScript::eDirState::Up:
@@ -140,6 +155,7 @@ namespace ss
 			mAtkCount++;
 			PlayerScript::ChangeHp(-mDamage);
 			mAnimator->GetActiveAnimation()->Reset();
+			mSoundOnce = false;
 		}
 
 
@@ -151,6 +167,15 @@ namespace ss
 	void BearScript::Attack2()
 	{
 		CalculateMoveDegree(mPos, mPlayerPos);
+
+		mAtk2Time += Time::DeltaTime();
+		if (!mSoundOnce && mAtk2Time > 0.5f)
+		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"BearStrongSnd"));
+			mAs->Play();
+			mSoundOnce = true;
+
+		}
 
 		switch (mDirState)
 		{
@@ -175,6 +200,8 @@ namespace ss
 			mAtkCount = 0;
 			PlayerScript::ChangeHp(-mDamage2);
 			mAnimator->GetActiveAnimation()->Reset();
+			mSoundOnce = false;
+			mAtk2Time = 0.f;
 		}
 
 

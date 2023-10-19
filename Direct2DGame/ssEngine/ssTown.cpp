@@ -19,6 +19,8 @@
 #include "ssUIScene.h"
 #include "ssWallCollider.h"
 #include "ssDesertDoor.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -292,6 +294,11 @@ namespace ss
 
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>(); 
+		mAs->SetClip(Resources::Load<AudioClip>(L"TownBGM", L"..\\Resources\\Sound\\BGM\\TownBGM.wav"));
+		mAs->SetLoop(true);
+		
 	}
 
 	void Town::Update()
@@ -320,10 +327,13 @@ namespace ss
 		renderer::cameras.push_back(mUICamera);
 		renderer::cameras.push_back(mCursorCamera);
 		renderer::mainCamera = mCursorCamera;
+
+		mAs->Play();
 	}
 
 	void Town::OnExit()
 	{
+		mAs->Stop();
 	}
 
 }

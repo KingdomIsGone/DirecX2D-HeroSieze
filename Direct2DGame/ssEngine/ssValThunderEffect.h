@@ -41,7 +41,9 @@ namespace ss
 		class Animator* mAnimator;
 
 		class ThunderPiece* mLeftPiece;
+		class ThunderPiece* mMLeftPiece;
 		class ThunderPiece* mMiddlePiece;
+		class ThunderPiece* mMRightPiece;
 		class ThunderPiece* mRightPiece;
 
 	};

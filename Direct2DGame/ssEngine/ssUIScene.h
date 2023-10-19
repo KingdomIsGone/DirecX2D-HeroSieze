@@ -24,10 +24,6 @@ namespace ss
 	private:
 		class Cursor* cursor;
 
-		class Anubis* mAnubis;
-		class BossHpBar* mBossHpBar;
-		class BossHpFill* mBossHpFill;
-
 		class Camera* mMainCamera;
 		class Camera* mPlayerCamera;
 		class Camera* mUICamera;

@@ -10,6 +10,9 @@
 #include "ssSceneManager.h"
 #include "ssNormalHat.h"
 #include "ssNormalStaff.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+
 
 namespace ss
 {
@@ -43,6 +46,10 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"ArcherAtkSnd", L"..\\Resources\\Sound\\MonsterAtk\\ArcherAtk.wav"));
 	}
 
 	void DesertArcherScript::Update()
@@ -107,8 +114,6 @@ namespace ss
 
 	void DesertArcherScript::Attack()
 	{
-		mAnimator = GetOwner()->GetComponent<Animator>();
-
 		CalDir(mPlayerPos);
 		switch (mDirState)
 		{
@@ -130,6 +135,10 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
+
+			mAs->SetClip(Resources::Find<AudioClip>(L"ArcherAtkSnd"));
+			mAs->Play();
+
 			float degree = CalculateMoveDegree(mPos, mPlayerPos);
 			Arrow* arrow = new Arrow(degree);
 

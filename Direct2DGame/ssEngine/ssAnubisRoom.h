@@ -20,6 +20,7 @@ namespace ss
 
 	private:
 		class Cursor* cursor;
+		class AudioSource* mAs;
 
 		class Anubis* mAnubis;
 		class BossHpBar* mBossHpBar;
@@ -34,5 +35,6 @@ namespace ss
 		class Camera* mMonUICamera;
 
 		bool mPortalOnce;
+		bool mSoundOnce;
 	};
 }

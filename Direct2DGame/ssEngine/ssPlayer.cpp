@@ -20,6 +20,7 @@
 
 namespace ss
 {
+
 	Player::Player()
 		: mCurHp(3000.0f)
 		, mPrevHp(3000.0f)
@@ -371,7 +372,7 @@ namespace ss
 			skillSlot3->SetMater(L"FireAuraIconMater");
 			skillSlot3->SetSlotNum(2);
 			skillSlot3->GetComponent<Transform>()->SetPosition(-1.50f, -1.54f, 0.745f);
-			skillSlot3->SetCoolSpeed(0.6f);
+			skillSlot3->SetCoolSpeed(0.2f);
 			AddOtherGameObject(skillSlot3, eLayerType::UI);
 
 			SkillSlot* skillSlot4 = new SkillSlot();

@@ -6,6 +6,7 @@
 
 namespace ss
 {
+
 	EquipmentSlot::EquipmentSlot()
 	{
 		mTransform = GetComponent<Transform>();

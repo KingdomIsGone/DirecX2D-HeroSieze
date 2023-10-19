@@ -20,7 +20,7 @@ namespace ss
 
 	private:
 		class Cursor* cursor;
-
+		class AudioSource* mAs;
 
 		class Camera* mMainCamera;
 		class Camera* mPlayerCamera;

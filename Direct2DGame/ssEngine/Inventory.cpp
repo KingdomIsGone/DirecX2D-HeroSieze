@@ -22,6 +22,8 @@ namespace ss
 	std::vector<Item*> ss::Inventory::mHelmets = {};
 	std::vector<Item*> ss::Inventory::mBelts = {};
 	std::vector<Item*> ss::Inventory::mShoes = {};
+	
+	Item* ss::Inventory::mEquipmentsRight[6] = {};
 
 	Inventory::Inventory(GameObject* obj)
 		: mSelectedNum(-1)
@@ -105,6 +107,12 @@ namespace ss
 		rightBack->GetComponent<Transform>()->SetPosition(Vector3(1.52f, 1.0f, List1Pos.z - 0.09f));
 		AddOtherGameObject(rightBack, eLayerType::Inventory);
 		mRightInfo->SetItemBack(rightBack);
+
+		for (ItemList* list : mItemLists)
+		{
+			list->SetBlank();
+			list->SetItemIn(false);
+		}
 	}
 
 	Inventory::~Inventory()
@@ -155,30 +163,12 @@ namespace ss
 
 		if (mOn)
 		{
-			mTransform->SetPosition(Vector3(0.0f, 0.0f, -0.1f));
-			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
-
-			for (EquipmentSlot* slot : mEquipSlots)
-			{
-				slot->SetMater();
-			}
-
-			for (ItemList* list : mItemLists)
-			{
-				if (list->GetItemIn())
-					list->SetMater();
-				else
-					list->SetBlank();
-			}
-		}
-		else
-		{
 			mTransform->SetPosition(Vector3(-6.0f, 0.0f, -0.1f));
 			mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 
 			for (EquipmentSlot* slot : mEquipSlots)
 			{
-				slot->SetBlank(); 
+				slot->SetBlank();
 				slot->GetItemBack()->SetBlank();
 				slot->GetItemImage()->SetBlank();
 			}
@@ -197,6 +187,30 @@ namespace ss
 				slot->GetEquipSelect()->SetSelected(false);
 			}
 		}
+		else
+		{
+			mTransform->SetPosition(Vector3(0.0f, 0.0f, -0.1f));
+			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
+
+			for (EquipmentSlot* slot : mEquipSlots)
+			{
+				slot->SetMater();
+			}
+
+			for (ItemList* list : mItemLists)
+			{
+				if (list->GetItemIn())
+					list->SetMater();
+				else
+					list->SetBlank();
+			}
+		}
+
+	}
+
+	void Inventory::EquipedSlotCheck()
+	{
+
 	}
 
 	void Inventory::CursorOnEquipCheck()

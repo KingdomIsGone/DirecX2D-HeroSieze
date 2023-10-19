@@ -21,6 +21,8 @@
 #include "ssDesertSkeleton.h"
 #include "ssDesertArcher.h"
 #include "ssDesertDoor.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -411,6 +413,11 @@ namespace ss
 			
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>(); 
+		mAs->SetClip(Resources::Load<AudioClip>(L"DesertBGM", L"..\\Resources\\Sound\\BGM\\DesertMapBGM.wav"));
+		mAs->SetLoop(true);
+
 	}
 
 	void DesertMap::Update()
@@ -440,10 +447,13 @@ namespace ss
 		renderer::cameras.push_back(mUICamera);
 		renderer::cameras.push_back(mCursorCamera);
 		renderer::mainCamera = mCursorCamera;
+
+		mAs->Play();
 	}
 
 	void DesertMap::OnExit()
 	{
+		mAs->Stop();
 	}
 
 }

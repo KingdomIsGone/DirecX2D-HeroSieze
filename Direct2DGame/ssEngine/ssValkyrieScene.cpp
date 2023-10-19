@@ -26,6 +26,8 @@
 #include "ssTime.h"
 #include "ssBear.h"
 #include "ssWallCollider.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -356,6 +358,12 @@ namespace ss
 
 		}
 
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"ValkyrieBGM", L"..\\Resources\\Sound\\BGM\\ValBGM.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"ValSceneBGM", L"..\\Resources\\Sound\\BGM\\ValSceneBGM.wav"));
+		mAs->SetLoop(true);
+
 	}
 
 	void ValkyrieScene::Update()
@@ -365,12 +373,24 @@ namespace ss
 		if (mValAwaker->GetTouched())
 			mValkyrie->SetAwake();
 
-		if (mValkyrie->GetAwake())
+		if(mValkyrie->GetAwake())
+			CameraWalkUp();
+
+		if (mValkyrie->GetEventComplete())
 		{
+			if (!mSoundOnce)
+			{
+				mAs->Stop();
+				mAs->SetClip(Resources::Find<AudioClip>(L"ValkyrieBGM"));
+				mAs->SetLoop(true);
+				mAs->Play();
+				mSoundOnce = true;
+			}
+
 			mBossHpBar->SetHP();
 			mBossHpFill->SetMater();
 			mBossName->SetOnOff(true);
-			CameraWalkUp();
+			
 		}
 		else
 		{
@@ -380,6 +400,7 @@ namespace ss
 
 		if (mValkyrie->GetDead())
 		{
+			mAs->Stop();
 			mBossHpBar->SetBlank();
 			mBossName->SetOnOff(false);
 		}
@@ -403,6 +424,8 @@ namespace ss
 		renderer::cameras.push_back(mUICamera);
 		renderer::cameras.push_back(mCursorCamera);
 		renderer::mainCamera = mCursorCamera;
+
+		mAs->Play();
 	}
 	void ValkyrieScene::OnExit()
 	{

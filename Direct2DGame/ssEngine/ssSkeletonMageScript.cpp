@@ -7,6 +7,8 @@
 #include "ssMagicBall.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -26,6 +28,10 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"MageSound", L"..\\Resources\\Sound\\MonsterAtk\\SkMageAtk.wav"));
 	}
 
 	void SkeletonMageScript::Update()
@@ -114,6 +120,9 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"MageSound"));
+			mAs->Play();
+
 			float degree = CalculateMoveDegree(mPos, mPlayerPos);
 			MagicBall* ball = new MagicBall(degree);
 

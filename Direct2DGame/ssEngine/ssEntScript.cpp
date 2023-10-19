@@ -7,6 +7,8 @@
 #include "ssResources.h"
 #include "ssSceneManager.h"
 #include "ssNormalBelt.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -35,6 +37,10 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"EntSound", L"..\\Resources\\Sound\\MonsterAtk\\EntAtk.wav"));
 	}
 
 	void EntScript::Update()
@@ -121,6 +127,9 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"EntSound"));
+			mAs->Play();
+
 			Damage();
 			mAnimator->GetActiveAnimation()->Reset();
 		}

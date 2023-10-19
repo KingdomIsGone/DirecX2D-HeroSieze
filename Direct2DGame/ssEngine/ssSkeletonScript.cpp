@@ -7,6 +7,9 @@
 #include "ssSceneManager.h"
 #include "ssNormalRobe.h"
 #include "ssNormalBoots.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+#include "ssResources.h"
 
 namespace ss
 {
@@ -43,7 +46,9 @@ namespace ss
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
 
-
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"SkAtkSnd", L"..\\Resources\\Sound\\MonsterAtk\\DesertSkAtk.wav"));
 	}
 
 	void SkeletonScript::Update()
@@ -108,6 +113,10 @@ namespace ss
 
 	void SkeletonScript::Attack()
 	{
+		
+			
+		
+
 		CalculateMoveDegree(mPos, mPlayerPos);
 
 		switch (mDirState)
@@ -132,12 +141,16 @@ namespace ss
 		{
 			Damage();
 			mAnimator->GetActiveAnimation()->Reset();
+			mAs->SetClip(Resources::Find<AudioClip>(L"SkAtkSnd"));
+			mAs->Play();
 		}
 		
 
 		float distance = math::GetDistance(mPos, mPlayerPos);
 		if (distance > 0.5f && !mIsColliding)
+		{
 			mState = eState::Chase;
+		}
 	}
 
 	void SkeletonScript::PlayMoveAni()

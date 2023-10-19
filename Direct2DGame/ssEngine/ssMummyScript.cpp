@@ -5,6 +5,8 @@
 #include "ssAnimator.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -25,6 +27,11 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"MummySound", L"..\\Resources\\Sound\\MonsterAtk\\MummyAtk.wav"));
+
 	}
 
 	void MummyScript::Update()
@@ -112,6 +119,9 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"MummySound"));
+			mAs->Play();
+
 			Damage();
 			mAnimator->GetActiveAnimation()->Reset();
 		}

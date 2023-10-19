@@ -34,5 +34,7 @@ namespace ss
 		class P_HpSmallBarFill* mSmallHpBarFill;
 		class PlayerHpBarFill* mHpBarFill;
 		class PlayerMpBarFill* mMpBarFill;
+
+		
 	};
 }

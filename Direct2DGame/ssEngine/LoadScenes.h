@@ -24,11 +24,11 @@ namespace ss
 	void InitializeScenes()
 	{
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
-		SceneManager::CreateScene<UIScene>(L"UIScene");
-		SceneManager::CreateScene<DesertMap>(L"DesertMap");
-		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
 		SceneManager::CreateScene<Town>(L"Town");
+		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
+		SceneManager::CreateScene<DesertMap>(L"DesertMap");
 		SceneManager::CreateScene<ForestScene>(L"ForestScene");
+		SceneManager::CreateScene<UIScene>(L"UIScene");
 		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 	}

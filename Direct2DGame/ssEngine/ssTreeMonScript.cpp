@@ -7,6 +7,8 @@
 #include "ssDart.h"
 #include "ssCollider2D.h"
 #include "ssResources.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -26,6 +28,10 @@ namespace ss
 		mDirState = eDirState::Down;
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mCollider = GetOwner()->GetComponent<Collider2D>();
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"TreeMonSound", L"..\\Resources\\Sound\\MonsterAtk\\TreemonAtk.wav"));
 	}
 
 	void TreeMonScript::Update()
@@ -112,6 +118,9 @@ namespace ss
 
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"TreeMonSound"));
+			mAs->Play();
+
 			float degree = CalculateMoveDegree(mPos, mPlayerPos);
 			Dart* dart = new Dart(degree);
 
