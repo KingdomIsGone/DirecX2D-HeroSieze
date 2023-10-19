@@ -326,6 +326,9 @@
     <ClCompile Include="ssPortal.cpp">
       <Filter>Contents\Object\MapObject\Portal</Filter>
     </ClCompile>
+    <ClCompile Include="ssMiniMap.cpp">
+      <Filter>Contents\Object\UI\MiniMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -656,6 +659,9 @@
     <ClInclude Include="ssPortal.h">
       <Filter>Contents\Object\MapObject\Portal</Filter>
     </ClInclude>
+    <ClInclude Include="ssMiniMap.h">
+      <Filter>Contents\Object\UI\MiniMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -912,6 +918,9 @@
     </Filter>
     <Filter Include="Contents\Object\MapObject\Portal">
       <UniqueIdentifier>{f516ee86-d4b7-48c2-80a1-7f77093b0c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\MiniMap">
+      <UniqueIdentifier>{8b4c62ee-5665-48d5-a677-e22935d96152}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

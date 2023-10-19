@@ -111,7 +111,7 @@ namespace ss
 
 		if (type == eProjectionType::OrthoGraphic)
 		{
-			float OrthorGraphicRatio = mSize / 1000.0f;
+			float OrthorGraphicRatio = mSize / 400.0f;  //1000
 			width *= OrthorGraphicRatio;
 			height *= OrthorGraphicRatio;
 
@@ -120,7 +120,7 @@ namespace ss
 		else
 		{
 			mProjection = Matrix::CreatePerspectiveFieldOfViewLH(XM_2PI / 6.0f, mAspectRatio, mNear, mFar);
-		}
+		}  
 
 		return true;
 	}

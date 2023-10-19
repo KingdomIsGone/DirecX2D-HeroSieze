@@ -41,6 +41,7 @@ cbuffer ParticleSystem : register(b4)
 cbuffer Noise : register(b5)
 {
     float4 noiseTextureSize;
+
 }
 
 cbuffer BossEffect : register(b6) //custom
@@ -72,6 +73,7 @@ cbuffer BossEffect : register(b8) //custom
 cbuffer DebugMeshColor : register(b9) //custom
 {
     float4 DebugColor;
+    float2 UVpos;
 }
 
 cbuffer CoolTime : register(b10) //custom

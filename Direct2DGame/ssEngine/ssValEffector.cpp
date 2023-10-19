@@ -113,6 +113,7 @@ namespace ss
 
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::VS);
+
 	}
 
 	void ValEffector::PlayNormalRushEffect(e4Direction dir)

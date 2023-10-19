@@ -226,6 +226,7 @@
     <ClInclude Include="ssMagicStaff.h" />
     <ClInclude Include="ssMeteor.h" />
     <ClInclude Include="ssMeteorScript.h" />
+    <ClInclude Include="ssMiniMap.h" />
     <ClInclude Include="ssMummy.h" />
     <ClInclude Include="ssMummyScript.h" />
     <ClInclude Include="ssNormalBelt.h" />
@@ -336,6 +337,7 @@
     <ClCompile Include="ssMagicStaff.cpp" />
     <ClCompile Include="ssMeteor.cpp" />
     <ClCompile Include="ssMeteorScript.cpp" />
+    <ClCompile Include="ssMiniMap.cpp" />
     <ClCompile Include="ssMummy.cpp" />
     <ClCompile Include="ssMummyScript.cpp" />
     <ClCompile Include="ssNormalBelt.cpp" />

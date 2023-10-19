@@ -76,5 +76,6 @@ namespace ss
 
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::VS);
+		
 	}
 }

@@ -21,6 +21,7 @@
 #include "ssDesertDoor.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssMiniMap.h"
 
 namespace ss
 {
@@ -158,8 +159,6 @@ namespace ss
 			}
 		}
 
-		
-
 		//door
 		DesertDoor* door = new DesertDoor();
 		door->SetName(L"TownDoor");
@@ -180,7 +179,7 @@ namespace ss
 			}
 
 			GameObject* obj = new GameObject();
-			obj->SetName(L"DesertTownMap");
+			obj->SetName(L"DesertTownMapp");
 			AddGameObject(eLayerType::Map, obj);
 			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -293,6 +292,12 @@ namespace ss
 			//AddGameObject(eLayerType::Wall, wall20);
 
 		}
+
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"DesertTownMap", 3400.f, 2600.f);
+		map->SetRatioLength(19.1f, 11.f);
+		map->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.2f, 0.74f)); //2.4 1.2
+		AddGameObject(eLayerType::UI, map);
 
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>(); 

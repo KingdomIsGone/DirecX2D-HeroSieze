@@ -59,6 +59,7 @@ namespace renderer
 	CBUFFER(DebugCB, CBSLOT_DEBUG)  //custom
 	{
 		Vector4 debugColor;
+		Vector2 UVpos;
 	};
 
 	CBUFFER(CoolTimeCB, CBSLOT_COOLTIME)  //custom

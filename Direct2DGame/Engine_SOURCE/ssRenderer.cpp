@@ -135,6 +135,11 @@ namespace renderer
 		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"MiniMapShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 		
 
 #pragma endregion
@@ -401,9 +406,12 @@ namespace renderer
 		// BossEffect2 Buffer custom
 		constantBuffer[(UINT)eCBType::BossEffect2] = new ConstantBuffer(eCBType::BossEffect2);
 		constantBuffer[(UINT)eCBType::BossEffect2]->Create(sizeof(BossEffectCB2));
+
 		// BossEffect2 Buffer custom
 		constantBuffer[(UINT)eCBType::BossEffect3] = new ConstantBuffer(eCBType::BossEffect3);
 		constantBuffer[(UINT)eCBType::BossEffect3]->Create(sizeof(BossEffectCB3));
+
+
 	}
 
 	void LoadShader()
@@ -488,6 +496,11 @@ namespace renderer
 		alphaAnimationShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
 		alphaAnimationShader->Create(eShaderStage::PS, L"TransParentPS.hlsl", "main");
 		ss::Resources::Insert(L"AlphaAnimationShader", alphaAnimationShader);
+
+		std::shared_ptr<Shader> miniMapShader = std::make_shared<Shader>();
+		miniMapShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		miniMapShader->Create(eShaderStage::PS, L"MiniMapPS.hlsl", "main");
+		ss::Resources::Insert(L"MiniMapShader", miniMapShader);
 
 		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
 		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
@@ -624,6 +637,25 @@ namespace renderer
 				spriteMateiral->SetTexture(texture);
 				Resources::Insert(L"CharacterCircle0", spriteMateiral);
 			}
+		}
+
+		//MapDot
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"MapDotTex", L"..\\Resources\\Texture\\UI\\MapDot.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(shader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"MapDot", spriteMateiral);
+		}
+		//MapFrame
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"MapFrameTex", L"..\\Resources\\Texture\\UI\\MapFrame.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(shader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"MapFrameMater", spriteMateiral);
 		}
 
 		//Çìµå
