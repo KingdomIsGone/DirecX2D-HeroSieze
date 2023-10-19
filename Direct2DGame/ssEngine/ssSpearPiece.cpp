@@ -7,6 +7,7 @@
 #include "ssConstantBuffer.h"
 #include "ssRenderer.h"
 
+
 namespace ss
 {
 	float SpearPiece::mDamage = 10.0f;

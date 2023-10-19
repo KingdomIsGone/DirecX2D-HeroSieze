@@ -106,6 +106,7 @@ namespace ss
 		float mRushDistRow;
 		float mRushDistCol;
 		float mRushSpeed;
+		bool mRushSoundOnce;
 
 		//Assault
 		UINT mEffectCount;
@@ -115,11 +116,13 @@ namespace ss
 		class CloneAssault* mClone;
 		bool mStart;
 		bool On;
+		bool mAssaultSndOnce;
 
 		//BigLightning
 		UINT mBigStage;
 		bool mBigOnce;
 		class BigLightning* mBig;
+		bool mCircleSndOnce;
 		
 		//ThrowLightBall
 		UINT mBallStage;
@@ -130,10 +133,12 @@ namespace ss
 		float mInterval;
 		UINT mPieceCount;
 		class SpearRain* mRain;
+		bool mRainSoundOnce;
 
 		//Dead
 		UINT mDeadStage;
 		float mAlpha;
+		bool mDeathSndOnce;
 
 		Vector3 mCenterPoint;
 
@@ -143,5 +148,7 @@ namespace ss
 		class ValEffector* mEffector;
 		class Valkyrie* mValk;
 		class ValThunderEffect* mThunderEffect;
+		class AudioSource* mAs;
+
 	};
 }

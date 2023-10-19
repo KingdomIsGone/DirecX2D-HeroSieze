@@ -26,6 +26,8 @@ namespace ss
 		mr->SetMaterial(Resources::Find<Material>(L"MapDot"));
 		AddOtherGameObject(mMapDot, eLayerType::UI);
 
+		mPlayerPos = PlayerScript::GetPlayerPos();
+		mPrevPos = mPlayerPos;
 	}
 	MiniMap::~MiniMap()
 	{
@@ -42,9 +44,22 @@ namespace ss
 		BindCB();
 
 		mPos = mTransform->GetPosition();
-		mPos.x -= mXmoveAmount *4450.f * Time::DeltaTime();  
-		mPos.y += mYmoveAmount * 3380.f * Time::DeltaTime();
+
+		if (mPrevPos != mPlayerPos)
+		{
+			mXmoveAmount = mPlayerPos.x - mPrevPos.x;
+			mYmoveAmount = mPlayerPos.y - mPrevPos.y;
+
+			mPos.x -= mXmoveAmount * 0.2f;
+			mPos.y += -mYmoveAmount * 0.0000000000000001f;
+
+			mPrevPos = mPlayerPos;
+		}
+
 		mTransform->SetPosition(mPos);
+	
+		
+		
 
 	}
 	void MiniMap::LateUpdate()
@@ -60,7 +75,7 @@ namespace ss
 	{
 		mTextureName = name;
 		float modify = Width / Height;
-		mTransform->SetScale(Vector3(3.f * modify, 3.f, 1.0f));  
+		mTransform->SetScale(Vector3(3.f * modify, 3.f, 1.0f));  //3.f
 		std::shared_ptr<ss::Shader> miniMapShader = Resources::Find<Shader>(L"MiniMapShader");
 
 		std::shared_ptr<Texture> texture
@@ -78,17 +93,11 @@ namespace ss
 	{
 		mPlayerPos = PlayerScript::GetPlayerPos();
 
-		mPrevUVPos = mUVPos;
-
 		float tempX = mRatioWidth / 2.f + mPlayerPos.x;
 		mUVPos.x = tempX / mRatioWidth;
 		float tempY = mRatioHeight / 2.f - mPlayerPos.y;
 		mUVPos.y = tempY / mRatioHeight;
 
-		mXmoveAmount = mUVPos.x - mPrevUVPos.x;
-		mYmoveAmount = mUVPos.y - mPrevUVPos.y;
-
-		mPrevUVPos = mUVPos;
 	}
 
 	void MiniMap::BindCB()

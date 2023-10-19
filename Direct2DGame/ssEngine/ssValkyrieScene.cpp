@@ -78,7 +78,8 @@ namespace ss
 			Player* player = new Player();
 			player->SetName(L"Player");
 			AddGameObject(eLayerType::Player, player);
-			player->GetComponent<Transform>()->SetPosition(Vector3(7.57f, -6.77f, 1.f));
+			//player->GetComponent<Transform>()->SetPosition(Vector3(7.57f, -6.77f, 1.f));
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.f, 7.6f, 1.f));
 
 			mPlayerScript = player->GetScript();
 
@@ -363,6 +364,8 @@ namespace ss
 		mAs->SetClip(Resources::Load<AudioClip>(L"ValkyrieBGM", L"..\\Resources\\Sound\\BGM\\ValBGM.wav"));
 		mAs->SetClip(Resources::Load<AudioClip>(L"ValSceneBGM", L"..\\Resources\\Sound\\BGM\\ValSceneBGM.wav"));
 		mAs->SetLoop(true);
+
+
 
 	}
 

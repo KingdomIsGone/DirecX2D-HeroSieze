@@ -111,7 +111,7 @@ namespace ss
 
 		if (type == eProjectionType::OrthoGraphic)
 		{
-			float OrthorGraphicRatio = mSize / 400.0f;  //1000
+			float OrthorGraphicRatio = mSize / 1000.0f;  //1000
 			width *= OrthorGraphicRatio;
 			height *= OrthorGraphicRatio;
 

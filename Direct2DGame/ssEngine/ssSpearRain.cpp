@@ -8,6 +8,8 @@
 #include "ssRenderer.h"
 #include "ssSpearPiece.h"
 #include "ssSceneManager.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -35,7 +37,9 @@ namespace ss
 		mAnimator->SetLarge(true);
 		mAnimator->Create(L"Shadow", ShadowTex, Vector2(0.0f, 0.0f), Vector2(270.f, 180.0f), 1);
 		
-		
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"rain", L"..\\Resources\\Sound\\Valkyrie\\rain.wav"));
 	}
 	SpearRain::~SpearRain()
 	{
@@ -56,9 +60,11 @@ namespace ss
 		}
 		else if (mStage == 1)
 		{
+
 			mAniComplete = true;
 			mr->SetNoRender(true);
 			mStage++;
+			
 		}
 		else if (mStage == 2)
 		{

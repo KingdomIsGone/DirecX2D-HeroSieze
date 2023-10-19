@@ -12,6 +12,8 @@
 #include "ssPlayer.h"
 #include "ssValThunderEffect.h"
 #include "ssCloneAssault.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 namespace ss
 {
@@ -36,7 +38,11 @@ namespace ss
 		mCollider->SetCollideType(eCollideType::Projectile);
 		mTransform = GetOwner()->GetComponent<Transform>();
 
-		mPos = mTransform->GetPosition();
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+
+		mAs->SetClip(Resources::Load<AudioClip>(L"CloneMakeSnd", L"..\\Resources\\Sound\\Valkyrie\\CloneMade.wav"));
+		mAs->Play();
 	}
 
 	void CloneScript::Update()
@@ -59,8 +65,14 @@ namespace ss
 		{
 			
 		}
-		else if (mRushStage == 2) //·¯½¬Àü µÚ·Î Àá±ñ »©±â
+		else if (mRushStage == 2 && mStart) //·¯½¬Àü µÚ·Î Àá±ñ »©±â
 		{
+			if (!mMakeSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"CloneMakeSnd"));
+				mAs->Play();
+				mMakeSndOnce = true;
+			}
 			float distance;
 			if(mDir == e4Direction::Up)
 			{
@@ -102,6 +114,7 @@ namespace ss
 
 			if (distance >= mRushBackDist)
 			{
+				mMakeSndOnce = false;
 				mRushStage = 3;
 				mRushBeforePos = mPos;
 			}
@@ -179,6 +192,13 @@ namespace ss
 		}
 		else if (mRushStage == 4) //µ¹Áø
 		{
+			if (!mAssaultSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"AssaultSnd"));
+				mAs->Play();
+				mAssaultSndOnce = true;
+			}
+
 			float distance;
 			if (mDir == e4Direction::Up)
 			{
@@ -227,7 +247,7 @@ namespace ss
 				mEffectCount = 0;
 				mThunderEffect->SetDead();
 				mThunderEffect = nullptr;
-				//mState = 
+				mAssaultSndOnce = false;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDir == e4Direction::Right || mDir == e4Direction::Left))
@@ -236,7 +256,7 @@ namespace ss
 				mEffectCount = 0;
 				mThunderEffect->SetDead();
 				mThunderEffect = nullptr;
-				//mState = 
+				mAssaultSndOnce = false;
 			}
 		}
 		else if (mRushStage == 5)

@@ -49,10 +49,13 @@ namespace ss
 		//Assault
 		UINT mEffectCount;
 		float mBackdistance;
+		bool mAssaultSndOnce;
+		bool mMakeSndOnce;
 		
 		class Animator* mAnimator;
 		class Collider2D* mCollider;
 		class ValThunderEffect* mThunderEffect;
 		class CloneAssault* mClone;
+		class AudioSource* mAs;
 	};
 }

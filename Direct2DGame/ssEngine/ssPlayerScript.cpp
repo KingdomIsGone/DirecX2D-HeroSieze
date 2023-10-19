@@ -31,6 +31,7 @@ namespace ss
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 	UINT ss::PlayerScript::mSpellNum = 0;
 	bool ss::PlayerScript::mbOn = true;
+	
 
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)

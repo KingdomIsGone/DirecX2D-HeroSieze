@@ -188,17 +188,17 @@ namespace ss
 	}
 	void UIScene::UI_Setting()
 	{
-		//맵프레임
-		{
-			GameObject* obj = new GameObject();
-			obj->SetName(L"MapFrame");
-			AddGameObjectToActiveScene(eLayerType::UI, obj);
-			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"MapFrameMater"));
-			obj->GetComponent<Transform>()->SetPosition(Vector3(0.f, 1.2f, 0.75f));
-			obj->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.9f, 1.0f));
-		}
+		////맵프레임
+		//{
+		//	GameObject* obj = new GameObject();
+		//	obj->SetName(L"MapFrame");
+		//	AddGameObjectToActiveScene(eLayerType::UI, obj);
+		//	MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"MapFrameMater"));
+		//	obj->GetComponent<Transform>()->SetPosition(Vector3(0.f, 1.2f, 0.75f));
+		//	obj->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.9f, 1.0f));
+		//}
 
 		//캐릭터 및 레벨창 
 		{

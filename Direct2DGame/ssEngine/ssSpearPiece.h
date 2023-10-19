@@ -27,6 +27,7 @@ namespace ss
 		float mMoveDistance;
 
 		class Collider2D* mCollider;
+		class AudioSource* mAs;
 
 		static float mDamage;
 	};

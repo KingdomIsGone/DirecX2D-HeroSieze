@@ -30,6 +30,8 @@ namespace ss
 		class Collider2D* mCollider;
 		class Animator* mAnimator;
 		class MeshRenderer* mr;
+		class AudioSource* mAs;
+
 
 		UINT mStage;
 		bool mAniComplete;

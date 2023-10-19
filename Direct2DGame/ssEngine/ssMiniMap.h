@@ -26,11 +26,12 @@ namespace ss
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;
+		Vector3 mPrevPos;
 		Vector2 mUVPos;
-		Vector2 mPrevUVPos;
 
 		float mXmoveAmount;
 		float mYmoveAmount;
+		bool OnceIgnore;
 
 		class MeshRenderer* mMeshRenderer;
 

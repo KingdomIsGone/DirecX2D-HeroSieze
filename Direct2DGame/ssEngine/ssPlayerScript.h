@@ -66,6 +66,7 @@ namespace ss
 		static float GetPlayerSpeed() { return mSpeed; }
 		static Vector3 GetPoint() { return mPoint; }
 		static UINT GetSpellNum() { return mSpellNum; }
+		
 
 		void ShootMeteor(Vector3 cursorPos);
 		void FireWalls(Vector3 cursorPos);

@@ -21,6 +21,9 @@
 #include "ssLightBall.h"
 #include "ssSpearRain.h"
 #include "ssSpearPiece.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
+
 
 namespace ss
 {
@@ -61,6 +64,17 @@ namespace ss
 
 		mState = eState::Sleep;
 		mDirState = eDirState::Down;
+
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"ThunderBallSnd", L"..\\Resources\\Sound\\Valkyrie\\ValThunderBall.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"RushSnd", L"..\\Resources\\Sound\\Valkyrie\\Rush.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"AssaultSnd", L"..\\Resources\\Sound\\Valkyrie\\Assault.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"SpellCircleSnd", L"..\\Resources\\Sound\\Valkyrie\\SpellCircle.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"StormSnd", L"..\\Resources\\Sound\\Valkyrie\\storm.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"rain", L"..\\Resources\\Sound\\Valkyrie\\rain.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"death", L"..\\Resources\\Sound\\Valkyrie\\holy.wav"));
+
 	}
 
 	void ValkyrieScript::Update()
@@ -176,6 +190,12 @@ namespace ss
 		}
 		else if (mDeadStage == 1)
 		{
+			if (!mDeathSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"death"));
+				mAs->Play();
+				mDeathSndOnce = true;
+			}
 			mAlpha -= 1.f * Time::DeltaTime();
 
 			mValk->SetAhlphaMater(mAlpha);
@@ -450,6 +470,13 @@ namespace ss
 		}
 		else if (mRushStage == 3)
 		{
+			if (!mRushSoundOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"RushSnd"));
+				mAs->Play();
+				mRushSoundOnce = true;
+			}
+
 			mColState = eColideState::Rush;
 			ChangeColSetting();
 			float distance;
@@ -516,6 +543,7 @@ namespace ss
 				mColState = eColideState::Normal;
 				ChangeColSetting();
 				mState = eState::Chase;
+				mRushSoundOnce = false;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
@@ -524,6 +552,7 @@ namespace ss
 				mColState = eColideState::Normal;
 				ChangeColSetting();
 				mState = eState::Chase;
+				mRushSoundOnce = false;
 			}
 
 		}
@@ -774,6 +803,13 @@ namespace ss
 		}
 		else if (mRushStage == 4) //돌진
 		{
+			if (!mAssaultSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"AssaultSnd"));
+				mAs->Play();
+				mAssaultSndOnce = true;
+			}
+
 			float distance;
 			if (mDirState == eDirState::Up)
 			{
@@ -814,6 +850,8 @@ namespace ss
 
 			GetOwner()->GetComponent<Transform>()->SetPosition(mPos);
 
+			
+
 			if (distance >= mRushDistCol
 				&& (mDirState == eDirState::Up
 					|| mDirState == eDirState::Down))
@@ -824,6 +862,7 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
+				mAssaultSndOnce = false;
 				mState = eState::Chase;
 			}
 			else if (distance >= mRushDistRow
@@ -835,6 +874,7 @@ namespace ss
 				mThunderEffect = nullptr;
 				mColState = eColideState::Normal;
 				ChangeColSetting();
+				mAssaultSndOnce = false;
 				mState = eState::Chase;
 			}
 		}
@@ -882,14 +922,26 @@ namespace ss
 		}
 		else if (mBigStage == 2)
 		{
+			if (!mCircleSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"SpellCircleSnd"));
+				mAs->Play();
+				mCircleSndOnce = true;
+			}
 			if (mEffector->PlayChargeNewAndMiddle()
 				&& mBig->GetStage() >= 1)
+			{
 				mBigStage++;
+				mCircleSndOnce = false;
+			}
 		}
 		else if (mBigStage == 3)
 		{
 			if (mEffector->PlayChargeEffectEnd())
 			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"StormSnd"));
+				mAs->Play();
+
 				mBigStage = 0;
 				mState = eState::Chase;
 			}
@@ -1014,8 +1066,9 @@ namespace ss
 				mRushBeforePos = mPos;
 			}
 		}
-		else if (mRushStage == 2) // 클론 생성
+		else if (mRushStage == 2)
 		{
+
 			if (mDirState == eDirState::Up)
 			{
 				if (!mCloneOnce)
@@ -1197,6 +1250,13 @@ namespace ss
 		}
 		else if (mRushStage == 5) //돌진
 		{
+			if (!mAssaultSndOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"AssaultSnd"));
+				mAs->Play();
+				mAssaultSndOnce = true;
+			}
+
 			float distance;
 			if (mDirState == eDirState::Up)
 			{
@@ -1248,6 +1308,7 @@ namespace ss
 				mColState = eColideState::Normal;
 				ChangeColSetting();
 				mState = eState::Chase;
+				mAssaultSndOnce = false;
 			}
 			else if (distance >= mRushDistRow
 				&& (mDirState == eDirState::Right || mDirState == eDirState::Left))
@@ -1259,6 +1320,7 @@ namespace ss
 				mColState = eColideState::Normal;
 				ChangeColSetting();
 				mState = eState::Chase;
+				mAssaultSndOnce = false;
 			}
 		}
 
@@ -1466,6 +1528,9 @@ namespace ss
 				break;
 			}
 
+			mAs->SetClip(Resources::Find<AudioClip>(L"ThunderBallSnd"));
+			mAs->Play();
+
 			mBallStage = 4;
 		}
 		else if (mBallStage == 4)
@@ -1538,6 +1603,13 @@ namespace ss
 		}
 		else if (mRainStage == 4)
 		{
+			if (!mRainSoundOnce)
+			{
+				mAs->SetClip(Resources::Find<AudioClip>(L"rain"));
+				mAs->Play();
+				mRainSoundOnce = true;
+			}
+
 			mInterval -= Time::DeltaTime();
 			if (mInterval > 0.f)
 				return;
@@ -1557,6 +1629,7 @@ namespace ss
 			{
 				mRainStage++;
 				mPieceCount = 0;
+				mRainSoundOnce = false;
 			}
 		}
 		else if (mRainStage == 5)

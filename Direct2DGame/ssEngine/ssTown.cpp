@@ -293,11 +293,11 @@ namespace ss
 
 		}
 
-		MiniMap* map = new MiniMap();
+		/*MiniMap* map = new MiniMap();
 		map->SetMiniMap(L"DesertTownMap", 3400.f, 2600.f);
 		map->SetRatioLength(19.1f, 11.f);
-		map->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.2f, 0.74f)); //2.4 1.2
-		AddGameObject(eLayerType::UI, map);
+		map->GetComponent<Transform>()->SetPosition(Vector3(1.8f, 1.2f, 0.74f)); 
+		AddGameObject(eLayerType::UI, map);*/
 
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>(); 
