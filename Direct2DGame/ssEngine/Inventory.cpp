@@ -108,11 +108,7 @@ namespace ss
 		AddOtherGameObject(rightBack, eLayerType::Inventory);
 		mRightInfo->SetItemBack(rightBack);
 
-		for (ItemList* list : mItemLists)
-		{
-			list->SetBlank();
-			list->SetItemIn(false);
-		}
+		
 	}
 
 	Inventory::~Inventory()
@@ -163,6 +159,24 @@ namespace ss
 
 		if (mOn)
 		{
+			mTransform->SetPosition(Vector3(0.0f, 0.0f, -0.1f));
+			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
+
+			for (EquipmentSlot* slot : mEquipSlots)
+			{
+				slot->SetMater();
+			}
+
+			for (ItemList* list : mItemLists)
+			{
+				if (list->GetItemIn())
+					list->SetMater();
+				else
+					list->SetBlank();
+			}
+		}
+		else
+		{
 			mTransform->SetPosition(Vector3(-6.0f, 0.0f, -0.1f));
 			mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 
@@ -185,24 +199,6 @@ namespace ss
 			for (EquipmentSlot* slot : mEquipSlots)
 			{
 				slot->GetEquipSelect()->SetSelected(false);
-			}
-		}
-		else
-		{
-			mTransform->SetPosition(Vector3(0.0f, 0.0f, -0.1f));
-			mRenderer->SetMaterial(Resources::Find<Material>(L"InventoryMater"));
-
-			for (EquipmentSlot* slot : mEquipSlots)
-			{
-				slot->SetMater();
-			}
-
-			for (ItemList* list : mItemLists)
-			{
-				if (list->GetItemIn())
-					list->SetMater();
-				else
-					list->SetBlank();
 			}
 		}
 
