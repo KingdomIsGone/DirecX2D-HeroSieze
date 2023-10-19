@@ -32,7 +32,7 @@ namespace ss
 		void PushBackEquipSlot(class EquipmentSlot* slot) { mEquipSlots.push_back(slot); }
 
 		void OnOffCheck();
-		void EquipedSlotCheck();
+		void EquipSlotRenew();
 
 		void CursorOnEquipCheck();
 
@@ -68,7 +68,7 @@ namespace ss
 		static std::vector<Item*> mBelts;
 		static std::vector<Item*> mShoes;
 
-		static Item* mEquipmentsRight[6];
+		static Item* mEquipments[6];
 
 		std::bitset<(UINT)eKind::End> mItemKindMask;
 

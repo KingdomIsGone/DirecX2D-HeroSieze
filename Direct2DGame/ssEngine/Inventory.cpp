@@ -23,7 +23,7 @@ namespace ss
 	std::vector<Item*> ss::Inventory::mBelts = {};
 	std::vector<Item*> ss::Inventory::mShoes = {};
 	
-	Item* ss::Inventory::mEquipmentsRight[6] = {};
+	Item* ss::Inventory::mEquipments[6] = {};
 
 	Inventory::Inventory(GameObject* obj)
 		: mSelectedNum(-1)
@@ -153,6 +153,7 @@ namespace ss
 			else
 			{
 				mOn = true;
+				EquipSlotRenew();
 				mLight->SetColor(Vector4(-1.0f, -1.0f, -1.0f, 1.f));
 			}
 		}
@@ -204,9 +205,19 @@ namespace ss
 
 	}
 
-	void Inventory::EquipedSlotCheck()
+	void Inventory::EquipSlotRenew()
 	{
+		for (int i = 0; i < 6; i++)
+		{
+			if (mEquipments[i] == nullptr)
+				continue;
 
+			mEquipSlots[i]->GetItemBack()->SetItemGrade((UINT)mEquipments[i]->GetItemGrade());
+			mEquipSlots[i]->GetItemBack()->SetOnEquip(true);
+			mEquipSlots[i]->GetItemImage()->SetMaterName(mEquipments[i]->GetMaterName());
+			mEquipSlots[i]->GetItemImage()->SetOnEquip(true);
+		}
+		
 	}
 
 	void Inventory::CursorOnEquipCheck()
@@ -344,14 +355,14 @@ namespace ss
 
 			EraseItemList(kind);
 			
-			if (mEquipmentsRight[(UINT)kind] != nullptr)
+			if (mEquipments[(UINT)kind] != nullptr)
 			{
-				Item* temperItem = mEquipmentsRight[(UINT)kind];
+				Item* temperItem = mEquipments[(UINT)kind];
 				RestoreItemList(kind, temperItem);
 			}
 
 
-			mEquipmentsRight[(UINT)kind] = item;
+			mEquipments[(UINT)kind] = item;
 
 		}
 	}
@@ -428,10 +439,10 @@ namespace ss
 			return;
 		}
 
-		if (mEquipmentsRight[mSelectedEquip] != nullptr)
+		if (mEquipments[mSelectedEquip] != nullptr)
 		{
 			mRightInfo->TurnOnOff(true);
-			mRightInfo->SetItem(mEquipmentsRight[mSelectedEquip]);
+			mRightInfo->SetItem(mEquipments[mSelectedEquip]);
 		}
 		else
 		{
