@@ -28,7 +28,6 @@ namespace ss
 		void TurnOnOff(bool is) { mOn = is; }
 		bool GetOnOff() { return mOn; }
 
-		void SetLight(class Light* light) { mLight = light; }
 		void PushBackEquipSlot(class EquipmentSlot* slot) { mEquipSlots.push_back(slot); }
 
 		void OnOffCheck();

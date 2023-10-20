@@ -1313,33 +1313,40 @@ namespace renderer
 		BindNoiseTexture();
 		BindLights();
 
-		Camera* inventoryCamera = nullptr;
-		Camera* CursorCamera = nullptr;
 		for (Camera* cam : cameras)
 		{
 			if (cam == nullptr)
 				continue;
-			//custom
-			if (cam->GetName() == L"InventoryCamera")
-			{
-				inventoryCamera = cam;
-				continue;
-			}
-			else if (cam->GetName() == L"CursorCamera")
-			{
-				CursorCamera = cam;
-				continue;
-			}
 
 			cam->Render();
 		}
-		lights.clear();
-		BindNormalLights();
+		//Camera* inventoryCamera = nullptr;
+		//Camera* CursorCamera = nullptr;
+		//for (Camera* cam : cameras)
+		//{
+		//	if (cam == nullptr)
+		//		continue;
+		//	//custom
+		//	if (cam->GetName() == L"InventoryCamera")
+		//	{
+		//		inventoryCamera = cam;
+		//		continue;
+		//	}
+		//	else if (cam->GetName() == L"CursorCamera")
+		//	{
+		//		CursorCamera = cam;
+		//		continue;
+		//	}
 
-		if(inventoryCamera != nullptr)
-			inventoryCamera->Render();
-		if (CursorCamera != nullptr)
-			CursorCamera->Render();
+		//	cam->Render();
+		//}
+		//lights.clear();
+		//BindNormalLights();
+
+		//if(inventoryCamera != nullptr)
+		//	inventoryCamera->Render();
+		//if (CursorCamera != nullptr)
+		//	CursorCamera->Render();
 
 		lights.clear();
 		cameras.clear();

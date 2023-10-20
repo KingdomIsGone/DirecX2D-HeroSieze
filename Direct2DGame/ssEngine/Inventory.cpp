@@ -148,13 +148,11 @@ namespace ss
 			if (mOn)
 			{
 				mOn = false;
-				mLight->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
 			}
 			else
 			{
 				mOn = true;
 				EquipSlotRenew();
-				mLight->SetColor(Vector4(-1.0f, -1.0f, -1.0f, 1.f));
 			}
 		}
 

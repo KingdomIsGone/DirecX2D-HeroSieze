@@ -36,19 +36,11 @@ namespace ss
 			mMainCamera->TurnLayerMask(eLayerType::Cursor, false);
 			mMainCamera->TurnLayerMask(eLayerType::Inventory, false);
 		}
-		//라이트
-		{
-			GameObject* light = new GameObject();
-			light->SetName(L"Light");
-			AddGameObject(eLayerType::Light, light);
-			Light* lightComp = light->AddComponent<Light>();
-			lightComp->SetType(eLightType::Directional);
-			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
-		}
+		
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
 		GameObject* Back = new GameObject();
-		AddGameObject(eLayerType::Map, Back);
+		AddGameObject(eLayerType::Monster, Back);
 
 		Back->GetComponent<Transform>()->SetScale(7.f, 7.f, 1.0f);
 		Back->GetComponent<Transform>()->SetPosition(0.0f, 0.0f, 1.28f);
@@ -59,7 +51,7 @@ namespace ss
 
 		{
 			GameObject* cat = new GameObject();
-			AddGameObject(eLayerType::Map, cat);
+			AddGameObject(eLayerType::Monster, cat);
 
 			cat->GetComponent<Transform>()->SetScale(2.f, 2.f, 1.0f);
 			cat->GetComponent<Transform>()->SetPosition(-2.1f, 0.f, 1.f);
@@ -91,7 +83,15 @@ namespace ss
 			catani->Create(L"cat2", catTex, Vector2(0.0f, 0.0f), Vector2(62.0f, 60.0f), 6);
 			catani->PlayAnimation(L"cat2", true);
 		}
-	
+		//라이트
+		{
+			GameObject* light = new GameObject();
+			light->SetName(L"Light");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.f, 1.f, 1.f, 1.0f));
+		}
 	}
 	void EndingScene::Update()
 	{

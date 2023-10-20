@@ -121,14 +121,6 @@ namespace ss
 		mMpBarFill = new PlayerMpBarFill();
 		AddOtherGameObject(mMpBarFill, eLayerType::UI);
 
-		//라이트
-		GameObject* light = new GameObject();
-		light->SetName(L"LightInPlayer");
-		AddOtherGameObject(light, eLayerType::Light);
-		Light* lightComp = light->AddComponent<Light>();
-		lightComp->SetType(eLightType::Directional);
-		lightComp->SetColor(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
-
 		//inventory
 		{
 			//장비슬롯
@@ -342,7 +334,6 @@ namespace ss
 			inventory->SetName(L"Inventory");
 			AddOtherGameObject(inventory, eLayerType::Inventory);
 			mScript->SetInventory(inventory);
-			inventory->SetLight(lightComp);
 			inventory->PushBackEquipSlot(WeaponSlot);
 			inventory->PushBackEquipSlot(ArmorSlot);
 			inventory->PushBackEquipSlot(ShieldSlot);
