@@ -221,7 +221,7 @@ namespace ss
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>();
 		mAs->SetClip(Resources::Load<AudioClip>(L"TitleSound", L"..\\Resources\\Sound\\BGM\\Hero_Siege_Menu_mus.ogg"));
-		//mAs->Play();
+		mAs->Play();
 
 	}
 

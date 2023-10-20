@@ -91,8 +91,7 @@ namespace ss
 			mState = eState::Transform;
 		}
 
-		if (mHp <= 0)
-			mState = eState::Dead;
+		
 
 		
 
@@ -212,6 +211,12 @@ namespace ss
 
 	void ValkyrieScript::Chase()
 	{
+		if (mHp <= 0)
+		{
+			mState = eState::Dead;
+			return;
+		}
+
 		if (math::GetDistance(mCenterPoint, mPos) > 2.6f)
 		{
 			mState = eState::Positioning;
@@ -933,15 +938,14 @@ namespace ss
 			{
 				mBigStage++;
 				mCircleSndOnce = false;
+				mAs->SetClip(Resources::Find<AudioClip>(L"StormSnd"));
+				mAs->Play();
 			}
 		}
 		else if (mBigStage == 3)
 		{
 			if (mEffector->PlayChargeEffectEnd())
 			{
-				mAs->SetClip(Resources::Find<AudioClip>(L"StormSnd"));
-				mAs->Play();
-
 				mBigStage = 0;
 				mState = eState::Chase;
 			}

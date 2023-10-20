@@ -15,6 +15,7 @@
 #include "ssIndicator.h"
 #include "ssCollisionManager.h"
 #include "ssPlayerCameraScript.h"
+#include "ssCloneAssault.h"
 
 
 
@@ -156,6 +157,11 @@ namespace ss
 			lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
 		}
 
+
+		CloneAssault* clone = new CloneAssault(e4Direction::Up);
+		clone->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 0.0f, 1.0f));
+		
+		AddGameObject(eLayerType::EnemyProjectile, clone);
 
 	}
 

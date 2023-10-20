@@ -329,6 +329,7 @@
     <ClCompile Include="ssMiniMap.cpp">
       <Filter>Contents\Object\UI\MiniMap</Filter>
     </ClCompile>
+    <ClCompile Include="ssEndingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -662,6 +663,7 @@
     <ClInclude Include="ssMiniMap.h">
       <Filter>Contents\Object\UI\MiniMap</Filter>
     </ClInclude>
+    <ClInclude Include="ssEndingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">

@@ -18,6 +18,8 @@ namespace ss
 		void HpCheck();
 		void MpCheck();
 
+		void SetOnOff(bool is);
+
 		class PlayerScript* GetScript() { return mScript; }
 
 	private:
@@ -35,6 +37,6 @@ namespace ss
 		class PlayerHpBarFill* mHpBarFill;
 		class PlayerMpBarFill* mMpBarFill;
 
-		
+		bool mSleep;
 	};
 }

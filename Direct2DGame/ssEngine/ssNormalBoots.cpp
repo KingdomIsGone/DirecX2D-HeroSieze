@@ -52,7 +52,7 @@ namespace ss
 		break;
 		case ss::Item::eItemState::Field:
 		{
-			mTransform->SetScale(0.2f, 0.3f, 1.0f);
+			mTransform->SetScale(0.3f, 0.5f, 1.0f);
 		}
 		break;
 		default:

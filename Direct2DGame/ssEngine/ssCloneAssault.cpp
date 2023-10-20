@@ -66,7 +66,7 @@ namespace ss
 	{
 		GameObject::Update();
 		
-		//mPos = mTransform->GetPosition();
+		mPos = mTransform->GetPosition();
 		
 	}
 	void CloneAssault::LateUpdate()

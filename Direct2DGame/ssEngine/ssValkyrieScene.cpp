@@ -34,6 +34,7 @@ namespace ss
 	ValkyrieScene::ValkyrieScene()
 		: mCameraDistance(0.f)
 		, mCWStage(0)
+		, mEndTime(0.f)
 	{
 	}
 	ValkyrieScene::~ValkyrieScene()
@@ -64,7 +65,7 @@ namespace ss
 
 			Leaves01* leaves01 = new Leaves01();
 			leaves01->GetComponent<Transform>()->SetPosition(Vector3(1.f, -0.5f, 0.85f));
-			AddGameObject(eLayerType::Item, leaves01);
+			AddGameObject(eLayerType::Player, leaves01);
 
 			
 
@@ -78,8 +79,7 @@ namespace ss
 			Player* player = new Player();
 			player->SetName(L"Player");
 			AddGameObject(eLayerType::Player, player);
-			//player->GetComponent<Transform>()->SetPosition(Vector3(7.57f, -6.77f, 1.f));
-			player->GetComponent<Transform>()->SetPosition(Vector3(0.f, 7.6f, 1.f));
+			player->GetComponent<Transform>()->SetPosition(Vector3(7.57f, -6.77f, 1.f));
 
 			mPlayerScript = player->GetScript();
 
@@ -103,6 +103,7 @@ namespace ss
 			CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 			CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 			CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
+			CollisionManager::SetLayer(eLayerType::Player, eLayerType::Player, true);
 
 			//Main Camera
 			{
@@ -376,11 +377,9 @@ namespace ss
 		if (mValAwaker->GetTouched())
 			mValkyrie->SetAwake();
 
-		if(mValkyrie->GetAwake())
-			CameraWalkUp();
-
-		if (mValkyrie->GetEventComplete())
+		if (mValkyrie->GetAwake())
 		{
+			CameraWalkUp();
 			if (!mSoundOnce)
 			{
 				mAs->Stop();
@@ -389,11 +388,13 @@ namespace ss
 				mAs->Play();
 				mSoundOnce = true;
 			}
+		}
 
+		if (mValkyrie->GetEventComplete())
+		{
 			mBossHpBar->SetHP();
 			mBossHpFill->SetMater();
 			mBossName->SetOnOff(true);
-			
 		}
 		else
 		{
@@ -406,6 +407,10 @@ namespace ss
 			mAs->Stop();
 			mBossHpBar->SetBlank();
 			mBossName->SetOnOff(false);
+
+			mEndTime += Time::DeltaTime();
+			if (mEndTime > 4.f)
+				SceneManager::LoadScene(L"EndingScene");
 		}
 	}
 

@@ -12,7 +12,7 @@ namespace ss
 	{
 		SetMaterialName(L"NormalRobeMater");
 		SetItemKind(eItemKind::Armor);
-		SetItemGrade(eItemGrade::Magic);
+		SetItemGrade(eItemGrade::Normal);
 		SetItemState(eItemState::Field);
 		SetImageOn(true);
 		wchar_t itemName[20] = L"NormalRobe";

@@ -1234,6 +1234,17 @@ namespace renderer
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"StartBtn1Mater", spriteMaterial);
 		}
+		//EndingBack
+		{
+			std::shared_ptr<Texture> EndingTex
+				= Resources::Load<Texture>(L"EndingTex"
+					, L"..\\Resources\\Texture\\endingScene.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(EndingTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"EndingMater", spriteMaterial);
+		}
 	}
 
 	void Initialize()

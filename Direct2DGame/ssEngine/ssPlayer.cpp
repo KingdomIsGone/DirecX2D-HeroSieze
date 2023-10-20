@@ -449,4 +449,14 @@ namespace ss
 		}
 	}
 
+	void Player::SetOnOff(bool is)
+	{
+		if (is)
+		{
+			mScript->SetOnOff(true);
+		}
+		else
+			mScript->SetOnOff(false);
+	}
+
 }

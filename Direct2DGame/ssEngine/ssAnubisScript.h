@@ -76,8 +76,11 @@ namespace ss
 		static UINT mSarcoCount;
 		bool mbImmune;
 
+		bool mDeadSndOnce;
+
 		class Animator* mAnimator;
 		class BossHpFill* mBossHpFill;
 		class ImmuneText* mText;
+		class AudioSource* mAs;
 	};
 }

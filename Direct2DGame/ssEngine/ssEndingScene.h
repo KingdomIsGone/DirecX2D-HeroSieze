@@ -4,11 +4,11 @@
 
 namespace ss
 {
-	class Town : public Scene
+	class EndingScene : public Scene
 	{
 	public:
-		Town();
-		virtual ~Town();
+		EndingScene();
+		virtual ~EndingScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -19,18 +19,11 @@ namespace ss
 		virtual void OnExit() override;
 
 	private:
-		class Cursor* cursor;
-
-		class AudioSource* mAs;
-
-
 		class Camera* mMainCamera;
 		class Camera* mPlayerCamera;
 		class Camera* mUICamera;
 		class Camera* mCursorCamera;
 		class Camera* mInventoryCamera;
 		class Camera* mMonUICamera;
-
-		class Player* mPlayer;
 	};
 }

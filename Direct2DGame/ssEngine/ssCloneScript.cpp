@@ -37,6 +37,7 @@ namespace ss
 		mCollider = GetOwner()->GetComponent<Collider2D>();
 		mCollider->SetCollideType(eCollideType::Projectile);
 		mTransform = GetOwner()->GetComponent<Transform>();
+		mPos = mTransform->GetPosition();
 
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>();

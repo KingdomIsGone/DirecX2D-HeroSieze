@@ -8,6 +8,7 @@
 #include "ssDesertMap.h"
 #include "ssTown.h"
 #include "ssForestScene.h"
+#include "ssEndingScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\ssEngine.lib")
@@ -23,13 +24,14 @@ namespace ss
 {
 	void InitializeScenes()
 	{
-		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		//SceneManager::CreateScene<UIScene>(L"UIScene");
+		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<DesertMap>(L"DesertMap");
 		SceneManager::CreateScene<ForestScene>(L"ForestScene");
-		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
-		SceneManager::CreateScene<TitleScene>(L"TitleScene");
-		SceneManager::CreateScene<UIScene>(L"UIScene");
 		SceneManager::CreateScene<Town>(L"Town");
+		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
+		SceneManager::CreateScene<EndingScene>(L"EndingScene");
 		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
+		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 	}
 }

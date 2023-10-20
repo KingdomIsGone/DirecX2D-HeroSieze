@@ -78,12 +78,12 @@ namespace gui
 			obj->Render();
 		}
 
-		for (const ss::graphics::DebugMesh& mesh
+		/*for (const ss::graphics::DebugMesh& mesh
 			: renderer::debugMeshs)
 		{
 			DebugRender(mesh);
 		}
-		renderer::debugMeshs.clear();
+		renderer::debugMeshs.clear();*/
 	}
 	void Editor::Release()
 	{

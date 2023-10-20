@@ -48,5 +48,7 @@ namespace ss
 		Vector3 mCameraInitialPos;
 		Vector3 mPlayerInitialCameraPos;
 
+		float mEndTime;
+
 	};
 }

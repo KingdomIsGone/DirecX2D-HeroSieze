@@ -38,10 +38,10 @@ namespace ss
 			UIScene ui;
 			ui.UI_Setting();
 
-			Player* player = new Player();
-			player->SetName(L"Player");
-			AddGameObject(eLayerType::Player, player);
-			player->GetComponent<Transform>()->SetPosition(Vector3(-0.18f, 0.69f, 1.0f));
+			mPlayer = new Player();
+			mPlayer->SetName(L"Player");
+			AddGameObject(eLayerType::Player, mPlayer);
+			mPlayer->GetComponent<Transform>()->SetPosition(Vector3(-0.18f, 0.69f, 1.0f));
 
 			Cursor* cursor = new Cursor();
 			AddGameObject(eLayerType::Cursor, cursor);
@@ -310,7 +310,7 @@ namespace ss
 	{
 		Scene::Update();
 
-
+		
 
 	}
 
@@ -334,6 +334,7 @@ namespace ss
 		renderer::mainCamera = mCursorCamera;
 
 		mAs->Play();
+		
 	}
 
 	void Town::OnExit()

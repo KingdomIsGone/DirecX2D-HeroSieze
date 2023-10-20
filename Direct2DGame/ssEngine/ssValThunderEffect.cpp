@@ -52,11 +52,6 @@ namespace ss
 	{
 		GameObject::Update();
 
-		if (mValk == nullptr)
-		{
-			SetDead();
-			return;
-		}
 
 		if (mIsClone)
 		{

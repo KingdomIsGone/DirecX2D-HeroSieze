@@ -16,6 +16,8 @@
 #include "ssImmuneText.h"
 #include "ssLegendStaff1.h"
 #include "ssLegendBoots.h"
+#include "ssAudioClip.h"
+#include "ssAudioSource.h"
 
 
 namespace ss
@@ -45,7 +47,6 @@ namespace ss
 		LegendBoots* boots = new LegendBoots();
 		boots->GetComponent<Transform>()->SetPosition(dropPos2);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, boots);
-
 	}
 	void AnubisScript::Initialize()
 	{
@@ -57,7 +58,14 @@ namespace ss
 
 		mPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		
+		GameObject* audioSpeaker = new GameObject();
+		mAs = audioSpeaker->AddComponent<AudioSource>();
+		mAs->SetClip(Resources::Load<AudioClip>(L"ChargedBoltSnd", L"..\\Resources\\Sound\\Anubis\\AnubisElectricWall.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"AnuLightn", L"..\\Resources\\Sound\\Anubis\\AnubisLight.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"AnubisSummonSnd", L"..\\Resources\\Sound\\Anubis\\Summon.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"AnubisDeathSnd", L"..\\Resources\\Sound\\Anubis\\AnuDeath.wav"));
+		mAs->SetClip(Resources::Load<AudioClip>(L"AnubisStartSnd", L"..\\Resources\\Sound\\Anubis\\AnuStart.wav"));
+
 	}
 	void AnubisScript::Update()
 	{
@@ -97,12 +105,15 @@ namespace ss
 			break;
 		}
 
-		//ChainLightsTrifle();
 
 	}
 	void AnubisScript::Awake()
 	{
 		mState = eState::Idle;
+
+		mAs->SetClip(Resources::Find<AudioClip>(L"AnubisStartSnd"));
+		mAs->Play();
+
 	}
 	void AnubisScript::Idle()
 	{
@@ -172,6 +183,12 @@ namespace ss
 
 	void AnubisScript::Dead()
 	{
+		if (!mDeadSndOnce)
+		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"AnubisDeathSnd"));
+			mAs->Play();
+			mDeadSndOnce = true;
+		}
 		GetOwner()->GetComponent<Transform>()->SetScale(Vector3(3.0f, 3.0f, 1.0f));
 		mAnimator->PlayAnimation(L"AnubisDeadEffect", false);
 
@@ -184,6 +201,9 @@ namespace ss
 
 	void AnubisScript::ChargedBolts(bool isVertical)
 	{
+		mAs->SetClip(Resources::Find<AudioClip>(L"ChargedBoltSnd"));
+		mAs->Play();
+
 		int num = rand() % 7;
 
 		for (int i = 0; i < 30; i++)
@@ -239,6 +259,7 @@ namespace ss
 		}
 		if (mChainStage == 0)
 		{
+
 			for (int i = 0; i < 4; i++)
 			{
 				ChainLightening* chain = new ChainLightening();
@@ -259,6 +280,7 @@ namespace ss
 		}
 		else if (mChainStage == 2)
 		{
+			
 			for (int i = 8; i < 12; i++)
 			{
 				ChainLightening* chain = new ChainLightening();
@@ -275,6 +297,9 @@ namespace ss
 
 		if (mChainTime > 0.5f)
 		{
+			mAs->SetClip(Resources::Find<AudioClip>(L"AnuLightn"));
+			mAs->Play();
+
 			ChainLights();
 			mChainTime = 0.0f;
 			mChainCount++;
@@ -294,6 +319,9 @@ namespace ss
 			mState = eState::Idle;
 			return;
 		}
+
+		mAs->SetClip(Resources::Find<AudioClip>(L"AnubisSummonSnd"));
+		mAs->Play();
 
 		mSarcoCount = 4;
 		mbImmune = false;
