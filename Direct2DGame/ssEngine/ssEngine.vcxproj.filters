@@ -330,6 +330,9 @@
       <Filter>Contents\Object\UI\MiniMap</Filter>
     </ClCompile>
     <ClCompile Include="ssEndingScene.cpp" />
+    <ClCompile Include="ssDim.cpp">
+      <Filter>Contents\Object\UI\Dim</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -664,6 +667,9 @@
       <Filter>Contents\Object\UI\MiniMap</Filter>
     </ClInclude>
     <ClInclude Include="ssEndingScene.h" />
+    <ClInclude Include="ssDim.h">
+      <Filter>Contents\Object\UI\Dim</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -923,6 +929,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\MiniMap">
       <UniqueIdentifier>{8b4c62ee-5665-48d5-a677-e22935d96152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\Dim">
+      <UniqueIdentifier>{6cf0f5ce-3b26-4d75-a35a-9bdd95dc183b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

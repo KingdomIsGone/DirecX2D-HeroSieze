@@ -44,6 +44,7 @@ namespace ss
 		void OnRightView();
 
 		static void PushbackItem(class Item* item);
+		void SetDim(class Dim* dim) { mDim = dim; }
 
 	private:
 		Transform* mTransform;
@@ -75,5 +76,6 @@ namespace ss
 		int mSelectedEquip;
 
 		class RightInfo* mRightInfo;
+		class Dim* mDim;
 	};
 }

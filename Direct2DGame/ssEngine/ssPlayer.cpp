@@ -17,6 +17,7 @@
 #include "ssEquipIndicator.h"
 #include "ssPlayerMpBarFill.h"
 #include "ssSkillSlot.h"
+#include "ssDim.h"
 
 namespace ss
 {
@@ -121,227 +122,225 @@ namespace ss
 		mMpBarFill = new PlayerMpBarFill();
 		AddOtherGameObject(mMpBarFill, eLayerType::UI);
 
-		//inventory
-		{
-			//장비슬롯
 
-			//weapon
-			EquipmentSlot* WeaponSlot = new EquipmentSlot();
-			WeaponSlot->SetMaterialName(L"WeaponSlotMater");
-			WeaponSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 WeaponPos = WeaponSlot->GetComponent<Transform>()->GetPosition();
-			WeaponPos.x += -2.05f;
-			WeaponPos.y += 0.2f;
-			WeaponSlot->GetComponent<Transform>()->SetPosition(WeaponPos);
-			AddOtherGameObject(WeaponSlot, eLayerType::Inventory);
+		//장비슬롯
 
-			ItemBackground* weaponBack = new ItemBackground(nullptr);
-			weaponBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 WeaponBackPos = WeaponPos;
-			WeaponBackPos.z -= 0.01f;
-			weaponBack->GetComponent<Transform>()->SetPosition(WeaponBackPos);
-			AddOtherGameObject(weaponBack, eLayerType::Inventory);
-			WeaponSlot->SetItemBack(weaponBack);
+		//weapon
+		EquipmentSlot* WeaponSlot = new EquipmentSlot();
+		WeaponSlot->SetMaterialName(L"WeaponSlotMater");
+		WeaponSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 WeaponPos = WeaponSlot->GetComponent<Transform>()->GetPosition();
+		WeaponPos.x += -2.05f;
+		WeaponPos.y += 0.2f;
+		WeaponSlot->GetComponent<Transform>()->SetPosition(WeaponPos);
+		AddOtherGameObject(WeaponSlot, eLayerType::Inventory);
 
-			ItemImage* WeaponImage = new ItemImage(nullptr);
-			WeaponImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 WeaponImagePos = WeaponPos;
-			WeaponImagePos.z -= 0.02f;
-			WeaponImage->GetComponent<Transform>()->SetPosition(WeaponImagePos);
-			AddOtherGameObject(WeaponImage, eLayerType::Inventory);
-			WeaponSlot->SetItemImage(WeaponImage);
+		ItemBackground* weaponBack = new ItemBackground(nullptr);
+		weaponBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 WeaponBackPos = WeaponPos;
+		WeaponBackPos.z -= 0.01f;
+		weaponBack->GetComponent<Transform>()->SetPosition(WeaponBackPos);
+		AddOtherGameObject(weaponBack, eLayerType::Inventory);
+		WeaponSlot->SetItemBack(weaponBack);
 
-			EquipIndicator* weaponSelect = new EquipIndicator(nullptr);
-			weaponSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 weaponSelectPos = WeaponPos;
-			weaponSelectPos.z -= 0.03f;
-			weaponSelect->GetComponent<Transform>()->SetPosition(weaponSelectPos);
-			AddOtherGameObject(weaponSelect, eLayerType::Inventory);
-			WeaponSlot->SetEquipSelect(weaponSelect);
+		ItemImage* WeaponImage = new ItemImage(nullptr);
+		WeaponImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 WeaponImagePos = WeaponPos;
+		WeaponImagePos.z -= 0.02f;
+		WeaponImage->GetComponent<Transform>()->SetPosition(WeaponImagePos);
+		AddOtherGameObject(WeaponImage, eLayerType::Inventory);
+		WeaponSlot->SetItemImage(WeaponImage);
 
-			//Armor
-			EquipmentSlot* ArmorSlot = new EquipmentSlot();
-			ArmorSlot->SetMaterialName(L"ArmorSlotMater");
-			ArmorSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ArmorPos = ArmorSlot->GetComponent<Transform>()->GetPosition();
-			ArmorPos.x += -1.55f;
-			ArmorPos.y += 0.26f;
-			ArmorSlot->GetComponent<Transform>()->SetPosition(ArmorPos);
-			AddOtherGameObject(ArmorSlot, eLayerType::Inventory);
+		EquipIndicator* weaponSelect = new EquipIndicator(nullptr);
+		weaponSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 weaponSelectPos = WeaponPos;
+		weaponSelectPos.z -= 0.03f;
+		weaponSelect->GetComponent<Transform>()->SetPosition(weaponSelectPos);
+		AddOtherGameObject(weaponSelect, eLayerType::Inventory);
+		WeaponSlot->SetEquipSelect(weaponSelect);
 
-			ItemBackground* ArmorBack = new ItemBackground(nullptr);
-			ArmorBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ArmorBackPos = ArmorPos;
-			ArmorBackPos.z -= 0.01f;
-			ArmorBack->GetComponent<Transform>()->SetPosition(ArmorBackPos);
-			AddOtherGameObject(ArmorBack, eLayerType::Inventory);
-			ArmorSlot->SetItemBack(ArmorBack);
+		//Armor
+		EquipmentSlot* ArmorSlot = new EquipmentSlot();
+		ArmorSlot->SetMaterialName(L"ArmorSlotMater");
+		ArmorSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ArmorPos = ArmorSlot->GetComponent<Transform>()->GetPosition();
+		ArmorPos.x += -1.55f;
+		ArmorPos.y += 0.26f;
+		ArmorSlot->GetComponent<Transform>()->SetPosition(ArmorPos);
+		AddOtherGameObject(ArmorSlot, eLayerType::Inventory);
 
-			ItemImage* ArmorImage = new ItemImage(nullptr);
-			ArmorImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ArmorImagePos = ArmorPos;
-			ArmorImagePos.z -= 0.02f;
-			ArmorImage->GetComponent<Transform>()->SetPosition(ArmorImagePos);
-			AddOtherGameObject(ArmorImage, eLayerType::Inventory);
-			ArmorSlot->SetItemImage(ArmorImage);
+		ItemBackground* ArmorBack = new ItemBackground(nullptr);
+		ArmorBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ArmorBackPos = ArmorPos;
+		ArmorBackPos.z -= 0.01f;
+		ArmorBack->GetComponent<Transform>()->SetPosition(ArmorBackPos);
+		AddOtherGameObject(ArmorBack, eLayerType::Inventory);
+		ArmorSlot->SetItemBack(ArmorBack);
 
-			EquipIndicator* armorSelect = new EquipIndicator(nullptr);
-			armorSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 armorSelectPos = ArmorPos;
-			armorSelectPos.z -= 0.03f;
-			armorSelect->GetComponent<Transform>()->SetPosition(armorSelectPos);
-			AddOtherGameObject(armorSelect, eLayerType::Inventory);
-			ArmorSlot->SetEquipSelect(armorSelect);
+		ItemImage* ArmorImage = new ItemImage(nullptr);
+		ArmorImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ArmorImagePos = ArmorPos;
+		ArmorImagePos.z -= 0.02f;
+		ArmorImage->GetComponent<Transform>()->SetPosition(ArmorImagePos);
+		AddOtherGameObject(ArmorImage, eLayerType::Inventory);
+		ArmorSlot->SetItemImage(ArmorImage);
 
-			//Shield
-			EquipmentSlot* ShieldSlot = new EquipmentSlot();
-			ShieldSlot->SetMaterialName(L"ShieldSlotMater");
-			ShieldSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ShieldPos = ShieldSlot->GetComponent<Transform>()->GetPosition();
-			ShieldPos.x += -1.05f;
-			ShieldPos.y += 0.2f;
-			ShieldSlot->GetComponent<Transform>()->SetPosition(ShieldPos);
-			AddOtherGameObject(ShieldSlot, eLayerType::Inventory);
+		EquipIndicator* armorSelect = new EquipIndicator(nullptr);
+		armorSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 armorSelectPos = ArmorPos;
+		armorSelectPos.z -= 0.03f;
+		armorSelect->GetComponent<Transform>()->SetPosition(armorSelectPos);
+		AddOtherGameObject(armorSelect, eLayerType::Inventory);
+		ArmorSlot->SetEquipSelect(armorSelect);
 
-			ItemBackground* ShieldBack = new ItemBackground(nullptr);
-			ShieldBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ShieldBackPos = ShieldPos;
-			ShieldBackPos.z -= 0.01f;
-			ShieldBack->GetComponent<Transform>()->SetPosition(ShieldBackPos);
-			AddOtherGameObject(ShieldBack, eLayerType::Inventory);
-			ShieldSlot->SetItemBack(ShieldBack);
+		//Shield
+		EquipmentSlot* ShieldSlot = new EquipmentSlot();
+		ShieldSlot->SetMaterialName(L"ShieldSlotMater");
+		ShieldSlot->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ShieldPos = ShieldSlot->GetComponent<Transform>()->GetPosition();
+		ShieldPos.x += -1.05f;
+		ShieldPos.y += 0.2f;
+		ShieldSlot->GetComponent<Transform>()->SetPosition(ShieldPos);
+		AddOtherGameObject(ShieldSlot, eLayerType::Inventory);
 
-			ItemImage* ShieldImage = new ItemImage(nullptr);
-			ShieldImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 ShieldImagePos = ShieldPos;
-			ShieldImagePos.z -= 0.02f;
-			ShieldImage->GetComponent<Transform>()->SetPosition(ShieldImagePos);
-			AddOtherGameObject(ShieldImage, eLayerType::Inventory);
-			ShieldSlot->SetItemImage(ShieldImage);
+		ItemBackground* ShieldBack = new ItemBackground(nullptr);
+		ShieldBack->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ShieldBackPos = ShieldPos;
+		ShieldBackPos.z -= 0.01f;
+		ShieldBack->GetComponent<Transform>()->SetPosition(ShieldBackPos);
+		AddOtherGameObject(ShieldBack, eLayerType::Inventory);
+		ShieldSlot->SetItemBack(ShieldBack);
 
-			EquipIndicator* shieldSelect = new EquipIndicator(nullptr);
-			shieldSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
-			Vector3 shieldSelectPos = ShieldPos;
-			shieldSelectPos.z -= 0.03f;
-			shieldSelect->GetComponent<Transform>()->SetPosition(shieldSelectPos);
-			AddOtherGameObject(shieldSelect, eLayerType::Inventory);
-			ShieldSlot->SetEquipSelect(shieldSelect);
+		ItemImage* ShieldImage = new ItemImage(nullptr);
+		ShieldImage->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 ShieldImagePos = ShieldPos;
+		ShieldImagePos.z -= 0.02f;
+		ShieldImage->GetComponent<Transform>()->SetPosition(ShieldImagePos);
+		AddOtherGameObject(ShieldImage, eLayerType::Inventory);
+		ShieldSlot->SetItemImage(ShieldImage);
 
-			//Helmet
-			EquipmentSlot* HelmetSlot = new EquipmentSlot();
-			HelmetSlot->SetMaterialName(L"HelmetSlotMater");
-			HelmetSlot->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
-			Vector3 HelmetPos = HelmetSlot->GetComponent<Transform>()->GetPosition();
-			HelmetPos.x += -1.55f;
-			HelmetPos.y += 0.85f;
-			HelmetSlot->GetComponent<Transform>()->SetPosition(HelmetPos);
-			AddOtherGameObject(HelmetSlot, eLayerType::Inventory);
+		EquipIndicator* shieldSelect = new EquipIndicator(nullptr);
+		shieldSelect->GetComponent<Transform>()->SetScale(0.4f, 0.7f, 1.0f);
+		Vector3 shieldSelectPos = ShieldPos;
+		shieldSelectPos.z -= 0.03f;
+		shieldSelect->GetComponent<Transform>()->SetPosition(shieldSelectPos);
+		AddOtherGameObject(shieldSelect, eLayerType::Inventory);
+		ShieldSlot->SetEquipSelect(shieldSelect);
 
-			ItemBackground* HelmetBack = new ItemBackground(nullptr);
-			HelmetBack->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
-			Vector3 HelmetBackPos = HelmetPos;
-			HelmetBackPos.z -= 0.01f;
-			HelmetBack->GetComponent<Transform>()->SetPosition(HelmetBackPos);
-			AddOtherGameObject(HelmetBack, eLayerType::Inventory);
-			HelmetSlot->SetItemBack(HelmetBack);
+		//Helmet
+		EquipmentSlot* HelmetSlot = new EquipmentSlot();
+		HelmetSlot->SetMaterialName(L"HelmetSlotMater");
+		HelmetSlot->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
+		Vector3 HelmetPos = HelmetSlot->GetComponent<Transform>()->GetPosition();
+		HelmetPos.x += -1.55f;
+		HelmetPos.y += 0.85f;
+		HelmetSlot->GetComponent<Transform>()->SetPosition(HelmetPos);
+		AddOtherGameObject(HelmetSlot, eLayerType::Inventory);
 
-			ItemImage* HelmetImage = new ItemImage(nullptr);
-			HelmetImage->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
-			Vector3 HelmetImagePos = HelmetPos;
-			HelmetImagePos.z -= 0.02f;
-			HelmetImage->GetComponent<Transform>()->SetPosition(HelmetImagePos);
-			AddOtherGameObject(HelmetImage, eLayerType::Inventory);
-			HelmetSlot->SetItemImage(HelmetImage);
+		ItemBackground* HelmetBack = new ItemBackground(nullptr);
+		HelmetBack->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
+		Vector3 HelmetBackPos = HelmetPos;
+		HelmetBackPos.z -= 0.01f;
+		HelmetBack->GetComponent<Transform>()->SetPosition(HelmetBackPos);
+		AddOtherGameObject(HelmetBack, eLayerType::Inventory);
+		HelmetSlot->SetItemBack(HelmetBack);
 
-			EquipIndicator* helmetSelect = new EquipIndicator(nullptr);
-			helmetSelect->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
-			Vector3 helmetSelectPos = HelmetPos;
-			helmetSelectPos.z -= 0.03f;
-			helmetSelect->GetComponent<Transform>()->SetPosition(helmetSelectPos);
-			AddOtherGameObject(helmetSelect, eLayerType::Inventory);
-			HelmetSlot->SetEquipSelect(helmetSelect);
+		ItemImage* HelmetImage = new ItemImage(nullptr);
+		HelmetImage->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
+		Vector3 HelmetImagePos = HelmetPos;
+		HelmetImagePos.z -= 0.02f;
+		HelmetImage->GetComponent<Transform>()->SetPosition(HelmetImagePos);
+		AddOtherGameObject(HelmetImage, eLayerType::Inventory);
+		HelmetSlot->SetItemImage(HelmetImage);
 
-			//Belt
-			EquipmentSlot* BeltSlot = new EquipmentSlot();
-			BeltSlot->SetMaterialName(L"BeltSlotMater");
-			BeltSlot->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
-			Vector3 BeltPos = BeltSlot->GetComponent<Transform>()->GetPosition();
-			BeltPos.x += -1.55f;
-			BeltPos.y += -0.3f;
-			BeltSlot->GetComponent<Transform>()->SetPosition(BeltPos);
-			AddOtherGameObject(BeltSlot, eLayerType::Inventory);
+		EquipIndicator* helmetSelect = new EquipIndicator(nullptr);
+		helmetSelect->GetComponent<Transform>()->SetScale(0.4f, 0.4f, 1.0f);
+		Vector3 helmetSelectPos = HelmetPos;
+		helmetSelectPos.z -= 0.03f;
+		helmetSelect->GetComponent<Transform>()->SetPosition(helmetSelectPos);
+		AddOtherGameObject(helmetSelect, eLayerType::Inventory);
+		HelmetSlot->SetEquipSelect(helmetSelect);
 
-			ItemBackground* BeltBack = new ItemBackground(nullptr);
-			BeltBack->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
-			Vector3 BeltBackPos = BeltPos;
-			BeltBackPos.z -= 0.01f;
-			BeltBack->GetComponent<Transform>()->SetPosition(BeltBackPos);
-			AddOtherGameObject(BeltBack, eLayerType::Inventory);
-			BeltSlot->SetItemBack(BeltBack);
+		//Belt
+		EquipmentSlot* BeltSlot = new EquipmentSlot();
+		BeltSlot->SetMaterialName(L"BeltSlotMater");
+		BeltSlot->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
+		Vector3 BeltPos = BeltSlot->GetComponent<Transform>()->GetPosition();
+		BeltPos.x += -1.55f;
+		BeltPos.y += -0.3f;
+		BeltSlot->GetComponent<Transform>()->SetPosition(BeltPos);
+		AddOtherGameObject(BeltSlot, eLayerType::Inventory);
 
-			ItemImage* BeltImage = new ItemImage(nullptr);
-			BeltImage->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
-			Vector3 BeltImagePos = BeltPos;
-			BeltImagePos.z -= 0.02f;
-			BeltImage->GetComponent<Transform>()->SetPosition(BeltImagePos);
-			AddOtherGameObject(BeltImage, eLayerType::Inventory);
-			BeltSlot->SetItemImage(BeltImage);
+		ItemBackground* BeltBack = new ItemBackground(nullptr);
+		BeltBack->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
+		Vector3 BeltBackPos = BeltPos;
+		BeltBackPos.z -= 0.01f;
+		BeltBack->GetComponent<Transform>()->SetPosition(BeltBackPos);
+		AddOtherGameObject(BeltBack, eLayerType::Inventory);
+		BeltSlot->SetItemBack(BeltBack);
 
-			EquipIndicator* beltSelect = new EquipIndicator(nullptr);
-			beltSelect->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
-			Vector3 beltSelectPos = BeltPos;
-			beltSelectPos.z -= 0.03f;
-			beltSelect->GetComponent<Transform>()->SetPosition(beltSelectPos);
-			AddOtherGameObject(beltSelect, eLayerType::Inventory);
-			BeltSlot->SetEquipSelect(beltSelect);
+		ItemImage* BeltImage = new ItemImage(nullptr);
+		BeltImage->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
+		Vector3 BeltImagePos = BeltPos;
+		BeltImagePos.z -= 0.02f;
+		BeltImage->GetComponent<Transform>()->SetPosition(BeltImagePos);
+		AddOtherGameObject(BeltImage, eLayerType::Inventory);
+		BeltSlot->SetItemImage(BeltImage);
 
-			//Shoes
-			EquipmentSlot* ShoesSlot = new EquipmentSlot();
-			ShoesSlot->SetMaterialName(L"ShoesSlotMater");
-			ShoesSlot->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
-			Vector3 ShoesPos = ShoesSlot->GetComponent<Transform>()->GetPosition();
-			ShoesPos.x += -1.55f;
-			ShoesPos.y += -0.76f;
-			ShoesSlot->GetComponent<Transform>()->SetPosition(ShoesPos);
-			AddOtherGameObject(ShoesSlot, eLayerType::Inventory);
+		EquipIndicator* beltSelect = new EquipIndicator(nullptr);
+		beltSelect->GetComponent<Transform>()->SetScale(0.4f, 0.35f, 1.0f);
+		Vector3 beltSelectPos = BeltPos;
+		beltSelectPos.z -= 0.03f;
+		beltSelect->GetComponent<Transform>()->SetPosition(beltSelectPos);
+		AddOtherGameObject(beltSelect, eLayerType::Inventory);
+		BeltSlot->SetEquipSelect(beltSelect);
 
-			ItemBackground* ShoesBack = new ItemBackground(nullptr);
-			ShoesBack->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
-			Vector3 ShoesBackPos = ShoesPos;
-			ShoesBackPos.z -= 0.01f;
-			ShoesBack->GetComponent<Transform>()->SetPosition(ShoesBackPos);
-			AddOtherGameObject(ShoesBack, eLayerType::Inventory);
-			ShoesSlot->SetItemBack(ShoesBack);
+		//Shoes
+		EquipmentSlot* ShoesSlot = new EquipmentSlot();
+		ShoesSlot->SetMaterialName(L"ShoesSlotMater");
+		ShoesSlot->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+		Vector3 ShoesPos = ShoesSlot->GetComponent<Transform>()->GetPosition();
+		ShoesPos.x += -1.55f;
+		ShoesPos.y += -0.76f;
+		ShoesSlot->GetComponent<Transform>()->SetPosition(ShoesPos);
+		AddOtherGameObject(ShoesSlot, eLayerType::Inventory);
 
-			ItemImage* ShoesImage = new ItemImage(nullptr);
-			ShoesImage->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
-			Vector3 ShoesImagePos = ShoesPos;
-			ShoesImagePos.z -= 0.02f;
-			ShoesImage->GetComponent<Transform>()->SetPosition(ShoesImagePos);
-			AddOtherGameObject(ShoesImage, eLayerType::Inventory);
-			ShoesSlot->SetItemImage(ShoesImage);
+		ItemBackground* ShoesBack = new ItemBackground(nullptr);
+		ShoesBack->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+		Vector3 ShoesBackPos = ShoesPos;
+		ShoesBackPos.z -= 0.01f;
+		ShoesBack->GetComponent<Transform>()->SetPosition(ShoesBackPos);
+		AddOtherGameObject(ShoesBack, eLayerType::Inventory);
+		ShoesSlot->SetItemBack(ShoesBack);
 
-			EquipIndicator* shoesSelect = new EquipIndicator(nullptr);
-			shoesSelect->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
-			Vector3 shoesSelectPos = ShoesPos;
-			shoesSelectPos.z -= 0.03f;
-			shoesSelect->GetComponent<Transform>()->SetPosition(shoesSelectPos);
-			AddOtherGameObject(shoesSelect, eLayerType::Inventory);
-			ShoesSlot->SetEquipSelect(shoesSelect);
+		ItemImage* ShoesImage = new ItemImage(nullptr);
+		ShoesImage->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+		Vector3 ShoesImagePos = ShoesPos;
+		ShoesImagePos.z -= 0.02f;
+		ShoesImage->GetComponent<Transform>()->SetPosition(ShoesImagePos);
+		AddOtherGameObject(ShoesImage, eLayerType::Inventory);
+		ShoesSlot->SetItemImage(ShoesImage);
 
-			//인벤토리
-			Inventory* inventory = new Inventory(this);
-			inventory->SetName(L"Inventory");
-			AddOtherGameObject(inventory, eLayerType::Inventory);
-			mScript->SetInventory(inventory);
-			inventory->PushBackEquipSlot(WeaponSlot);
-			inventory->PushBackEquipSlot(ArmorSlot);
-			inventory->PushBackEquipSlot(ShieldSlot);
-			inventory->PushBackEquipSlot(HelmetSlot);
-			inventory->PushBackEquipSlot(BeltSlot);
-			inventory->PushBackEquipSlot(ShoesSlot);
+		EquipIndicator* shoesSelect = new EquipIndicator(nullptr);
+		shoesSelect->GetComponent<Transform>()->SetScale(0.4f, 0.45f, 1.0f);
+		Vector3 shoesSelectPos = ShoesPos;
+		shoesSelectPos.z -= 0.03f;
+		shoesSelect->GetComponent<Transform>()->SetPosition(shoesSelectPos);
+		AddOtherGameObject(shoesSelect, eLayerType::Inventory);
+		ShoesSlot->SetEquipSelect(shoesSelect);
 
-		}
+		//인벤토리
+		Inventory* inventory = new Inventory(this);
+		inventory->SetName(L"Inventory");
+		AddOtherGameObject(inventory, eLayerType::Inventory);
+		mScript->SetInventory(inventory);
+		inventory->PushBackEquipSlot(WeaponSlot);
+		inventory->PushBackEquipSlot(ArmorSlot);
+		inventory->PushBackEquipSlot(ShieldSlot);
+		inventory->PushBackEquipSlot(HelmetSlot);
+		inventory->PushBackEquipSlot(BeltSlot);
+		inventory->PushBackEquipSlot(ShoesSlot);
+
 
 		//Skill Slot
 		{
@@ -378,6 +377,11 @@ namespace ss
 			mScript->PushBackSkillSlot(skillSlot3);
 			mScript->PushBackSkillSlot(skillSlot4);
 		}
+
+		mDim = new Dim();
+		AddOtherGameObject(mDim, eLayerType::UI);
+		inventory->SetDim(mDim);
+
 	}
 
 	Player::~Player()

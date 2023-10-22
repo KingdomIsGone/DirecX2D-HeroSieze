@@ -293,17 +293,16 @@ namespace ss
 
 		}
 
-		/*MiniMap* map = new MiniMap();
-		map->SetMiniMap(L"DesertTownMap", 3400.f, 2600.f);
-		map->SetRatioLength(19.1f, 11.f);
-		map->GetComponent<Transform>()->SetPosition(Vector3(1.8f, 1.2f, 0.74f)); 
-		AddGameObject(eLayerType::UI, map);*/
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"DesertTownMap", 3400.f, 2600.f, 2.4f, 2.4f);
+		map->SetRatioLength(26.f, 18.f);
+		map->SetSize();
+		AddGameObject(eLayerType::UI, map);
 
 		GameObject* audioSpeaker = new GameObject();
 		mAs = audioSpeaker->AddComponent<AudioSource>(); 
 		mAs->SetClip(Resources::Load<AudioClip>(L"TownBGM", L"..\\Resources\\Sound\\BGM\\TownBGM.wav"));
-		mAs->SetLoop(true);
-		
+		mAs->SetLoop(true); 
 	}
 
 	void Town::Update()

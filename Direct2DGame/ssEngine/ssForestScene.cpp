@@ -24,6 +24,8 @@
 #include "ssBear.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssMiniMap.h"
+
 
 namespace ss
 {
@@ -338,6 +340,12 @@ namespace ss
 		mAs = audioSpeaker->AddComponent<AudioSource>();
 		mAs->SetClip(Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.wav"));
 		mAs->SetLoop(true);
+
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"ForestMap", 4200.f, 4400.f, 3.2f, 3.1f);
+		map->SetRatioLength(24.8f, 28.f);
+		map->SetSize();
+		AddGameObject(eLayerType::UI, map);
 
 	}
 

@@ -26,12 +26,12 @@ namespace ss
 	{
 		//SceneManager::CreateScene<UIScene>(L"UIScene");
 		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
-		SceneManager::CreateScene<DesertMap>(L"DesertMap");
-		SceneManager::CreateScene<ForestScene>(L"ForestScene");
-		SceneManager::CreateScene<Town>(L"Town");
-		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<EndingScene>(L"EndingScene");
+		SceneManager::CreateScene<Town>(L"Town");
+		SceneManager::CreateScene<ForestScene>(L"ForestScene");
 		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
+		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
+		SceneManager::CreateScene<DesertMap>(L"DesertMap");
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 	}
 }

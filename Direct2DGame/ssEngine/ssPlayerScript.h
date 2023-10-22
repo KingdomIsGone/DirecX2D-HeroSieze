@@ -77,6 +77,7 @@ namespace ss
 		void HpRecovery();
 
 		void SetInventory(class Inventory* inven) { mInventory = inven; }
+		void SetDim(class Dim* dim) { mDim = dim; }
 
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 
@@ -101,6 +102,7 @@ namespace ss
 		class Cursor* mCursor;
 		class Indicator* mIndicator;
 		class Inventory* mInventory;
+		class Dim* mDim;
 
 		bool mIsMoving;
 		bool mIsAttacking;
@@ -127,5 +129,6 @@ namespace ss
 		static bool mbOn;
 		
 		class AudioSource* mAs;
+		
 	};
 }

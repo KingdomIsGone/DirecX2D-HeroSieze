@@ -14,11 +14,12 @@ namespace ss
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetMiniMap(std::wstring name, float Width, float Height);
+		void SetMiniMap(std::wstring name, float Width, float Height, float WidthScale, float HeightScale);
 		void SetRatioLength(float width, float height) { mRatioWidth = width; mRatioHeight = height; }
 
 		void CalUVPos();
 		void BindCB();
+		void SetSize();
 
 	private:
 		Transform* mTransform;
@@ -26,8 +27,8 @@ namespace ss
 
 		Vector3 mPos;
 		Vector3 mPlayerPos;
-		Vector3 mPrevPos;
 		Vector2 mUVPos;
+		Vector2 mBasePos;
 
 		float mXmoveAmount;
 		float mYmoveAmount;
@@ -37,6 +38,9 @@ namespace ss
 
 		float mRatioWidth;
 		float mRatioHeight;
+
+		float mWidth;
+		float mHeight;
 
 		GameObject* mMapDot;
 

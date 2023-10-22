@@ -32,6 +32,8 @@
 #include "ssPortal.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssAnubisRoom.h"
+#include "ssMiniMap.h"
 
 namespace ss
 {
@@ -451,6 +453,12 @@ namespace ss
 		mAs->SetClip(Resources::Load<AudioClip>(L"Pyramid", L"..\\Resources\\Sound\\BGM\\PyramidBGM.wav"));
 		mAs->SetLoop(true);
 		
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"AnubisRoomTex", 3208.f, 3216.f, 2.4f, 2.4f);
+		map->SetRatioLength(26.8f, 26.8f);
+		map->SetSize();
+		AddGameObject(eLayerType::UI, map);
+
 	}
 
 	void AnubisRoom::Update()

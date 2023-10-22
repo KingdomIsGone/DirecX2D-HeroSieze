@@ -140,6 +140,11 @@ namespace renderer
 		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
+
+		shader = ss::Resources::Find<Shader>(L"FixedAlphaShader");
+		ss::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 		
 
 #pragma endregion
@@ -496,6 +501,11 @@ namespace renderer
 		alphaAnimationShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
 		alphaAnimationShader->Create(eShaderStage::PS, L"TransParentPS.hlsl", "main");
 		ss::Resources::Insert(L"AlphaAnimationShader", alphaAnimationShader);
+
+		std::shared_ptr<Shader> fixedAlphaShader = std::make_shared<Shader>();
+		fixedAlphaShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		fixedAlphaShader->Create(eShaderStage::PS, L"FixedAlphaShaderPS.hlsl", "main");
+		ss::Resources::Insert(L"FixedAlphaShader", fixedAlphaShader);
 
 		std::shared_ptr<Shader> miniMapShader = std::make_shared<Shader>();
 		miniMapShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
@@ -1244,6 +1254,20 @@ namespace renderer
 			spriteMaterial->SetTexture(EndingTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"EndingMater", spriteMaterial);
+		}
+		std::shared_ptr<Shader> fixedAlphaShader
+			= Resources::Find<Shader>(L"FixedAlphaShader");
+		//Dim
+		{
+			{
+				std::shared_ptr<Texture> texture
+					= Resources::Load<Texture>(L"Dim", L"..\\Resources\\Texture\\UI\\Dim.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				spriteMaterial->SetShader(fixedAlphaShader);
+				spriteMaterial->SetTexture(texture);
+				Resources::Insert(L"DimMater", spriteMaterial);
+			}
 		}
 	}
 

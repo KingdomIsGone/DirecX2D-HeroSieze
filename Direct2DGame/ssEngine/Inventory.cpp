@@ -13,6 +13,7 @@
 #include "ssITemlistSelectEffect.h"
 #include "ssEquipIndicator.h"
 #include "ssRightInfo.h"
+#include "ssDim.h"
 
 namespace ss
 {
@@ -148,10 +149,12 @@ namespace ss
 			if (mOn)
 			{
 				mOn = false;
+				mDim->SetOnOff(false);
 			}
 			else
 			{
 				mOn = true;
+				mDim->SetOnOff(true);
 				EquipSlotRenew();
 			}
 		}

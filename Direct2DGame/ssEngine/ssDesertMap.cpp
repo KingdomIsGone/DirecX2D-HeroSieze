@@ -23,6 +23,7 @@
 #include "ssDesertDoor.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssMiniMap.h"
 
 namespace ss
 {
@@ -417,6 +418,12 @@ namespace ss
 		mAs = audioSpeaker->AddComponent<AudioSource>(); 
 		mAs->SetClip(Resources::Load<AudioClip>(L"DesertBGM", L"..\\Resources\\Sound\\BGM\\DesertMapBGM.wav"));
 		mAs->SetLoop(true);
+
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"DesertMapTex", 4500.f, 4500.f, 2.4f, 2.4f);
+		map->SetRatioLength(26.8f, 27.2f);
+		map->SetSize();
+		AddGameObject(eLayerType::UI, map);
 
 	}
 

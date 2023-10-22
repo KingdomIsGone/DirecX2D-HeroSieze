@@ -20,14 +20,14 @@ namespace ss
 		
 		mMapDot = new GameObject();
 		mMapDot->GetComponent<Transform>()->SetScale(0.05f, 0.05f, 1.f);
-		mMapDot->GetComponent<Transform>()->SetPosition(2.5f, 1.3f, 0.73f);
+		mMapDot->GetComponent<Transform>()->SetPosition(2.5f, 1.3f, 0.69f);
 		MeshRenderer* mr = mMapDot->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"MapDot"));
 		AddOtherGameObject(mMapDot, eLayerType::UI);
 
 		mPlayerPos = PlayerScript::GetPlayerPos();
-		mPrevPos = mPlayerPos;
+		mBasePos = Vector2(2.5f, 1.3f);
 	}
 	MiniMap::~MiniMap()
 	{
@@ -45,18 +45,11 @@ namespace ss
 
 		mPos = mTransform->GetPosition();
 
-		if (mPrevPos != mPlayerPos)
-		{
-			mXmoveAmount = mPlayerPos.x - mPrevPos.x;
-			mYmoveAmount = mPlayerPos.y - mPrevPos.y;
+		mXmoveAmount = (mUVPos.x - 0.5f) * mWidth;
+		mYmoveAmount = (0.5f - mUVPos.y) * mHeight;
 
-			mPos.x -= mXmoveAmount * 0.2f;
-			mPos.y += -mYmoveAmount * 0.0000000000000001f;
-
-			mPrevPos = mPlayerPos;
-		}
-
-		mTransform->SetPosition(mPos);
+		mTransform->SetPosition(mBasePos.x - mXmoveAmount, mBasePos.y - mYmoveAmount, 0.7f);
+		
 	
 		
 		
@@ -71,11 +64,11 @@ namespace ss
 		GameObject::Render();
 	}
 
-	void MiniMap::SetMiniMap(std::wstring name, float Width, float Height)
+	void MiniMap::SetMiniMap(std::wstring name, float Width, float Height , float WidthScale, float HeightScale)
 	{
 		mTextureName = name;
 		float modify = Width / Height;
-		mTransform->SetScale(Vector3(3.f * modify, 3.f, 1.0f));  //3.f
+		mTransform->SetScale(Vector3(WidthScale * modify, HeightScale, 1.0f));  //3.f
 		std::shared_ptr<ss::Shader> miniMapShader = Resources::Find<Shader>(L"MiniMapShader");
 
 		std::shared_ptr<Texture> texture
@@ -85,7 +78,6 @@ namespace ss
 		material->SetShader(miniMapShader);
 		material->SetTexture(texture);
 
-		
 		mMeshRenderer->SetMaterial(material);
 	}
 
@@ -114,6 +106,12 @@ namespace ss
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::VS);
 	}
+
+	void MiniMap::SetSize()
+	{
+		mWidth = mTransform->GetWorldRightBottom().x - mTransform->GetWorldLeftBottom().x;
+		mHeight = mTransform->GetWorldLeftUp().y - mTransform->GetWorldLeftBottom().y;
+    }
 
 	
 }

@@ -186,6 +186,7 @@
     <ClInclude Include="ssDesertDoor.h" />
     <ClInclude Include="ssDesertMap.h" />
     <ClInclude Include="ssDesertSkeleton.h" />
+    <ClInclude Include="ssDim.h" />
     <ClInclude Include="ssDoorScript.h" />
     <ClInclude Include="ssEndingScene.h" />
     <ClInclude Include="ssEnemyHpBar.h" />
@@ -298,6 +299,7 @@
     <ClCompile Include="ssDesertDoor.cpp" />
     <ClCompile Include="ssDesertMap.cpp" />
     <ClCompile Include="ssDesertSkeleton.cpp" />
+    <ClCompile Include="ssDim.cpp" />
     <ClCompile Include="ssDoorScript.cpp" />
     <ClCompile Include="ssEndingScene.cpp" />
     <ClCompile Include="ssEnemyHpBar.cpp" />

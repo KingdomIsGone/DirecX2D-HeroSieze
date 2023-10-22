@@ -28,6 +28,7 @@
 #include "ssWallCollider.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssMiniMap.h"
 
 namespace ss
 {
@@ -366,7 +367,11 @@ namespace ss
 		mAs->SetClip(Resources::Load<AudioClip>(L"ValSceneBGM", L"..\\Resources\\Sound\\BGM\\ValSceneBGM.wav"));
 		mAs->SetLoop(true);
 
-
+		MiniMap* map = new MiniMap();
+		map->SetMiniMap(L"ValkyrieScene", 4000.f, 4000.f, 3.2f, 3.2f);
+		map->SetRatioLength(22.32f, 24.2f);
+		map->SetSize();
+		AddGameObject(eLayerType::UI, map);
 
 	}
 

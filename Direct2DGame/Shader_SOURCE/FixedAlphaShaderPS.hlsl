@@ -33,13 +33,7 @@ float4 main(VSOut In) : SV_TARGET
     
     color *= lightColor;
     
-    if (UVpos.x + 0.15f < In.UV.x || In.UV.x < UVpos.x - 0.15f)
-        discard;
+    color.w = 0.5f;
     
-    if (UVpos.y + 0.15f < In.UV.y || In.UV.y < UVpos.y - 0.15f)
-        discard;
-    
-    
-    
-     return color;
+    return color;
 }
