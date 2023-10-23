@@ -138,6 +138,9 @@ namespace ss
 				mSpellNum = 0;
 				return;
 			}
+
+			if (mSkillSlots[mSpellNum - 1]->GetSkillID() == eSkillID::FireAura)
+				FireAuraCast();
 		}
 		else if (Input::GetKeyDown(eKeyCode::two))
 		{
@@ -148,6 +151,9 @@ namespace ss
 				mSpellNum = 0;
 				return;
 			}
+
+			if (mSkillSlots[mSpellNum - 1]->GetSkillID() == eSkillID::FireAura)
+				FireAuraCast();
 		}
 		else if (Input::GetKeyDown(eKeyCode::Three))
 		{
@@ -159,7 +165,8 @@ namespace ss
 				return;
 			}
 
-			FireAuraCast();
+			if(mSkillSlots[mSpellNum - 1]->GetSkillID() == eSkillID::FireAura)
+				FireAuraCast();
 		}
 		else if (Input::GetKeyDown(eKeyCode::four))
 		{
@@ -170,6 +177,9 @@ namespace ss
 				mSpellNum = 0;
 				return;
 			}
+
+			if (mSkillSlots[mSpellNum - 1]->GetSkillID() == eSkillID::FireAura)
+				FireAuraCast();
 		}
 	}
 
@@ -379,21 +389,137 @@ namespace ss
 		}
 		else if (!mShootOnce && mSpellNum == 1)
 		{
-			ShootMeteor(mCursorPos);
-			mShootOnce = true;
-			mSpellNum = 0;
+			eSkillID id = mSkillSlots[mSpellNum - 1]->GetSkillID();
+
+			switch (id)
+			{
+			case ss::enums::eSkillID::FireAura:
+				break;
+			case ss::enums::eSkillID::FireWall:
+			{
+				FireWalls(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+				break;
+			case ss::enums::eSkillID::Meteor:
+			{
+				ShootMeteor(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+				break;
+			case ss::enums::eSkillID::Hydra:
+			{
+				HydraCast(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+				break;
+			default:
+				break;
+			}
+
+			
 		}
 		else if (!mShootOnce && mSpellNum == 2)
 		{
-			FireWalls(mCursorPos);
-			mShootOnce = true;
-			mSpellNum = 0;
+			eSkillID id = mSkillSlots[mSpellNum - 1]->GetSkillID();
+
+			switch (id)
+			{
+			case ss::enums::eSkillID::FireAura:
+				break;
+			case ss::enums::eSkillID::FireWall:
+			{
+				FireWalls(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Meteor:
+			{
+				ShootMeteor(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Hydra:
+			{
+				HydraCast(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			default:
+				break;
+			}
+		}
+		else if (!mShootOnce && mSpellNum == 3)
+		{
+			eSkillID id = mSkillSlots[mSpellNum - 1]->GetSkillID();
+
+			switch (id)
+			{
+			case ss::enums::eSkillID::FireAura:
+				break;
+			case ss::enums::eSkillID::FireWall:
+			{
+				FireWalls(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Meteor:
+			{
+				ShootMeteor(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Hydra:
+			{
+				HydraCast(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			default:
+				break;
+			}
 		}
 		else if (!mShootOnce && mSpellNum == 4)
 		{
-			HydraCast(mCursorPos);
-			mShootOnce = true;
-			mSpellNum = 0;
+			eSkillID id = mSkillSlots[mSpellNum - 1]->GetSkillID();
+
+			switch (id)
+			{
+			case ss::enums::eSkillID::FireAura:
+				break;
+			case ss::enums::eSkillID::FireWall:
+			{
+				FireWalls(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Meteor:
+			{
+				ShootMeteor(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Hydra:
+			{
+				HydraCast(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			default:
+				break;
+			}
 		}
 		
 		AttackAni(mPlayerPos, mCursorPos);

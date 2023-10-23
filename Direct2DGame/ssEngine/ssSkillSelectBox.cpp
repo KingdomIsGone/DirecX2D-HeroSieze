@@ -50,6 +50,11 @@ namespace ss
 			AddOtherGameObject(mSelectImage[i], eLayerType::UI);
 		}
 
+		mSelectImage[0]->SetID(eSkillID::FireAura);
+		mSelectImage[0]->SetCoolTime(0.2f);
+		mSelectImage[0]->SetMaterName(L"FireAuraIconMater");
+		mSelectImage[0]->SetInSkill(true);
+
 	}
 
 	SkillSelectBox::~SkillSelectBox()
@@ -191,7 +196,10 @@ namespace ss
 				if (LBpos.x <= cursorPos.x && cursorPos.x <= RTpos.x
 					&& LBpos.y <= cursorPos.y && cursorPos.y <= RTpos.y)
 				{
-					//mSkillSlot[mSelectSlotNum] = mSelectImage[i]
+					mSkillSlot[mSelectSlotNum]->SetMater(mSelectImage[i]->GetMaterName());
+					mSkillSlot[mSelectSlotNum]->SetCoolSpeed(mSelectImage[i]->GetCoolTime());
+					mSkillSlot[mSelectSlotNum]->SetSkillID(mSelectImage[i]->GetID());
+
 					mOn = false;
 					break;
 				}

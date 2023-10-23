@@ -21,6 +21,8 @@ namespace ss
 		void SetMater(std::wstring name);
 		void SetSlotNum(UINT num) { mSlotNum = num; }
 		void SetCoolSpeed(float speed) { mCoolSpeed = speed; }
+		void SetSkillID(eSkillID id) { mSkillID = id; }
+		eSkillID GetSkillID() { return mSkillID; }
 
 		bool GetReady();
 
@@ -32,7 +34,11 @@ namespace ss
 		float mCoolPercent;
 		float mCoolSpeed;
 		bool mOnCool;
+
 		std::wstring mMaterName;
+		eSkillID mSkillID;
+
+
 		UINT mSlotNum;
 	};
 }
