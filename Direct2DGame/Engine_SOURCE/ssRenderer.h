@@ -119,7 +119,6 @@ namespace renderer
 
 	void Initialize();
 	void BindLights();
-	void BindNormalLights();  //custom
 	void Render();
 	void Release();
 

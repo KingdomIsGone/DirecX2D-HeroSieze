@@ -356,7 +356,7 @@ namespace ss
 			}
 		}
 
-		//MenuSet z=1.005
+		//MenuSet z=0.745f
 		{
 			GameObject* obj = new GameObject();
 			obj->SetName(L"MenuSet");
@@ -369,7 +369,7 @@ namespace ss
 			//obj->AddComponent<CameraScript>();
 		}
 
-		//ResourceBackBar z=1.005
+		//ResourceBackBar z=0.745
 		{
 			{
 				GameObject* obj = new GameObject();
@@ -417,6 +417,48 @@ namespace ss
 				obj->GetComponent<Transform>()->SetScale(Vector3(0.4f, 0.058f, 1.0f));
 			}
 		}
+
+		//ResourceIcon 0.74
+		{
+			GameObject* obj = new GameObject();
+			AddGameObjectToActiveScene(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"goldIconMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.85f, -1.35f, 0.74f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.085f, 0.075f, 1.0f));
+		}
+		{
+
+			GameObject* obj = new GameObject();
+			AddGameObjectToActiveScene(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"rubyKeyIconMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.85f, -1.44f, 0.74f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.096f, 0.054f, 1.0f));
+		}
+		{
+
+			GameObject* obj = new GameObject();
+			AddGameObjectToActiveScene(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"silverKeyIconMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.85f, -1.53f, 0.74f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.096f, 0.054f, 1.0f));
+		}
+		{
+
+			GameObject* obj = new GameObject();
+			AddGameObjectToActiveScene(eLayerType::UI, obj);
+			MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"criKeyIconMater"));
+			obj->GetComponent<Transform>()->SetPosition(Vector3(-2.85f, -1.62f, 0.74f));
+			obj->GetComponent<Transform>()->SetScale(Vector3(0.096f, 0.054f, 1.0f));
+		}
+
 
 		//Portal z=1.006
 		{

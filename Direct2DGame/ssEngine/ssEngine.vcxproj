@@ -249,6 +249,8 @@
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
+    <ClInclude Include="ssSkillSelectBox.h" />
+    <ClInclude Include="ssSkillSelectImage.h" />
     <ClInclude Include="ssSkillSlot.h" />
     <ClInclude Include="ssSpearPiece.h" />
     <ClInclude Include="ssSpearRain.h" />
@@ -362,6 +364,8 @@
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
+    <ClCompile Include="ssSkillSelectBox.cpp" />
+    <ClCompile Include="ssSkillSelectImage.cpp" />
     <ClCompile Include="ssSkillSlot.cpp" />
     <ClCompile Include="ssSpearPiece.cpp" />
     <ClCompile Include="ssSpearRain.cpp" />

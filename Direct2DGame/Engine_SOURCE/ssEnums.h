@@ -104,5 +104,13 @@ namespace ss::enums
 		Right,
 		Left,
 	};
+	enum class eSkillID
+	{
+		FireAura,
+		FireWall,
+		Meteor,
+		Hydra,
+
+	};
 
 }

@@ -21,6 +21,7 @@
 #include "ssHydra.h"
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
+#include "ssSkillSelectBox.h"
 
 namespace ss
 {
@@ -342,11 +343,27 @@ namespace ss
 	{
 		if (Input::GetKey(eKeyCode::LBUTTON))
 		{
+			mCursorPos = mCursor->GetPos();
+			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
+			mCursorPos -= GetPlayerPos();
+
+			//스킬 ui를 클릭했을때
+			if (-2.19f <= mCursorPos.x && mCursorPos.x <= -1.11f
+				&& -1.69f <= mCursorPos.y && mCursorPos.y <= -1.39f)
+				return;
+
+			//if (mBox->GetOnOff())
+			//셀렉트박스를 클릭했을때
+			if (-2.13f <= mCursorPos.x && mCursorPos.x <= -0.56f
+				&& -1.4f <= mCursorPos.y && mCursorPos.y <= -1.13f)
+				return;
+			
+
+			mCursorPos = mCursor->GetPos();
+			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
 			mState = eState::Attack;
 			mIsAttacking = true;
 			mIsMoving = false;
-			mCursorPos = mCursor->GetPos();
-			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
 			mPlayerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 		}
 

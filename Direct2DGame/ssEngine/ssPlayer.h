@@ -37,6 +37,7 @@ namespace ss
 		class PlayerHpBarFill* mHpBarFill;
 		class PlayerMpBarFill* mMpBarFill;
 		class Dim* mDim;
+		
 
 		bool mSleep;
 	};

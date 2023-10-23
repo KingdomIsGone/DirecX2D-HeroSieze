@@ -50,6 +50,7 @@ namespace ss
 
 		void AttackAni(Vector3 playerpos, Vector3 point);
 		void AttackFireBall(Vector3 playerpos, Vector3 point);
+		
 
 		Vector3 ReverseMove(Vector3 playerpos, Vector3 point);
 		float CalculateMoveDegree(Vector3 playerpos, Vector3 point);
@@ -80,6 +81,7 @@ namespace ss
 		void SetDim(class Dim* dim) { mDim = dim; }
 
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
+		void SetSkillBox(class SkillSelectBox* box) { mBox = box; }
 
 		static void SetOnOff(bool is) { mbOn = is; }
 		void SetStop() { mCursorPos = mPlayerPos; }
@@ -103,6 +105,7 @@ namespace ss
 		class Indicator* mIndicator;
 		class Inventory* mInventory;
 		class Dim* mDim;
+		class SkillSelectBox* mBox;
 
 		bool mIsMoving;
 		bool mIsAttacking;

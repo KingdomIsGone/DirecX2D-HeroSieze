@@ -333,6 +333,12 @@
     <ClCompile Include="ssDim.cpp">
       <Filter>Contents\Object\UI\Dim</Filter>
     </ClCompile>
+    <ClCompile Include="ssSkillSelectBox.cpp">
+      <Filter>Contents\Object\UI\SkillSelectBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSkillSelectImage.cpp">
+      <Filter>Contents\Object\UI\SkillSelectBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -670,6 +676,12 @@
     <ClInclude Include="ssDim.h">
       <Filter>Contents\Object\UI\Dim</Filter>
     </ClInclude>
+    <ClInclude Include="ssSkillSelectBox.h">
+      <Filter>Contents\Object\UI\SkillSelectBox</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSkillSelectImage.h">
+      <Filter>Contents\Object\UI\SkillSelectBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -932,6 +944,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\Dim">
       <UniqueIdentifier>{6cf0f5ce-3b26-4d75-a35a-9bdd95dc183b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillSelectBox">
+      <UniqueIdentifier>{cf5e7024-7709-4b0b-b3f7-b8d57c151772}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

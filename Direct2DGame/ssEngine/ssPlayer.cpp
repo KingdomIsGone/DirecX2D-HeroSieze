@@ -18,6 +18,7 @@
 #include "ssPlayerMpBarFill.h"
 #include "ssSkillSlot.h"
 #include "ssDim.h"
+#include "ssSkillSelectBox.h"
 
 namespace ss
 {
@@ -341,7 +342,6 @@ namespace ss
 		inventory->PushBackEquipSlot(BeltSlot);
 		inventory->PushBackEquipSlot(ShoesSlot);
 
-
 		//Skill Slot
 		{
 			SkillSlot* skillSlot1 = new SkillSlot();
@@ -376,12 +376,24 @@ namespace ss
 			mScript->PushBackSkillSlot(skillSlot2);
 			mScript->PushBackSkillSlot(skillSlot3);
 			mScript->PushBackSkillSlot(skillSlot4);
+
+			//SkillSelectBox
+			SkillSelectBox* skillBox = new SkillSelectBox(this);
+			AddOtherGameObject(skillBox, eLayerType::UI);
+			mScript->SetSkillBox(skillBox);
+
+			skillBox->SetSkillSlot(skillSlot1);
+			skillBox->SetSkillSlot(skillSlot2);
+			skillBox->SetSkillSlot(skillSlot3);
+			skillBox->SetSkillSlot(skillSlot4);
 		}
 
+		//Dim
 		mDim = new Dim();
 		AddOtherGameObject(mDim, eLayerType::UI);
 		inventory->SetDim(mDim);
 
+		
 	}
 
 	Player::~Player()

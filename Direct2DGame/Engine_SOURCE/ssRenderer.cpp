@@ -1269,6 +1269,53 @@ namespace renderer
 				Resources::Insert(L"DimMater", spriteMaterial);
 			}
 		}
+
+		//ResourceIcon
+		{
+			std::shared_ptr<Texture>goldIconTex
+				= Resources::Load<Texture>(L"goldIconTex", L"..\\Resources\\Texture\\UI\\MoneySymbol.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(goldIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"goldIconMater", spriteMaterial);
+		}
+		{
+			std::shared_ptr<Texture>silverKeyIconTex
+				= Resources::Load<Texture>(L"silverKeyIconTex", L"..\\Resources\\Texture\\UI\\Hud_Key_spr.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(silverKeyIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"silverKeyIconMater", spriteMaterial);
+		}
+		{
+			std::shared_ptr<Texture>criKeyIconTex
+				= Resources::Load<Texture>(L"criKeyIconTex", L"..\\Resources\\Texture\\UI\\Hud_Crystal_Key_spr.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(criKeyIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"criKeyIconMater", spriteMaterial);
+		}
+		{
+			std::shared_ptr<Texture>rubyKeyIconTex
+				= Resources::Load<Texture>(L"rubyKeyIconTex", L"..\\Resources\\Texture\\UI\\ruby.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(rubyKeyIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"rubyKeyIconMater", spriteMaterial);
+		}
+		{
+			std::shared_ptr<Texture>SkillBoxTex
+				= Resources::Load<Texture>(L"SkillBoxTex", L"..\\Resources\\Texture\\UI\\SkillSelectBox.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(SkillBoxTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"SkillBoxMater", spriteMaterial);
+		}
 	}
 
 	void Initialize()
@@ -1300,13 +1347,7 @@ namespace renderer
 		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
-	//custom
-	void BindNormalLights()
-	{
-		lightsBuffer->SetData(&lightNormalAttribute, 1);
-		lightsBuffer->BindSRV(eShaderStage::VS, 13);
-		lightsBuffer->BindSRV(eShaderStage::PS, 13);
-	}
+	
 
 	void BindNoiseTexture()
 	{
@@ -1344,33 +1385,6 @@ namespace renderer
 
 			cam->Render();
 		}
-		//Camera* inventoryCamera = nullptr;
-		//Camera* CursorCamera = nullptr;
-		//for (Camera* cam : cameras)
-		//{
-		//	if (cam == nullptr)
-		//		continue;
-		//	//custom
-		//	if (cam->GetName() == L"InventoryCamera")
-		//	{
-		//		inventoryCamera = cam;
-		//		continue;
-		//	}
-		//	else if (cam->GetName() == L"CursorCamera")
-		//	{
-		//		CursorCamera = cam;
-		//		continue;
-		//	}
-
-		//	cam->Render();
-		//}
-		//lights.clear();
-		//BindNormalLights();
-
-		//if(inventoryCamera != nullptr)
-		//	inventoryCamera->Render();
-		//if (CursorCamera != nullptr)
-		//	CursorCamera->Render();
 
 		lights.clear();
 		cameras.clear();
