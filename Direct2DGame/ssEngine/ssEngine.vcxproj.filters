@@ -339,6 +339,9 @@
     <ClCompile Include="ssSkillSelectImage.cpp">
       <Filter>Contents\Object\UI\SkillSelectBox</Filter>
     </ClCompile>
+    <ClCompile Include="ssSkillTree.cpp">
+      <Filter>Contents\Object\UI\SkillTree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -682,6 +685,9 @@
     <ClInclude Include="ssSkillSelectImage.h">
       <Filter>Contents\Object\UI\SkillSelectBox</Filter>
     </ClInclude>
+    <ClInclude Include="ssSkillTree.h">
+      <Filter>Contents\Object\UI\SkillTree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -947,6 +953,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\SkillSelectBox">
       <UniqueIdentifier>{cf5e7024-7709-4b0b-b3f7-b8d57c151772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillTree">
+      <UniqueIdentifier>{4672bb7b-e855-41dd-9a37-c91c3b04931b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

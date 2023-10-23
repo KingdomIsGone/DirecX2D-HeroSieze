@@ -1,9 +1,4 @@
 #pragma once
-class SkillSelectBox
-{
-};
-
-#pragma once
 #include "ssGameObject.h"
 
 namespace ss

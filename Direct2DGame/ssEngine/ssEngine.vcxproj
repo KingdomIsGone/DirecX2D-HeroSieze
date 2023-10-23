@@ -252,6 +252,7 @@
     <ClInclude Include="ssSkillSelectBox.h" />
     <ClInclude Include="ssSkillSelectImage.h" />
     <ClInclude Include="ssSkillSlot.h" />
+    <ClInclude Include="ssSkillTree.h" />
     <ClInclude Include="ssSpearPiece.h" />
     <ClInclude Include="ssSpearRain.h" />
     <ClInclude Include="ssStartBtn.h" />
@@ -367,6 +368,7 @@
     <ClCompile Include="ssSkillSelectBox.cpp" />
     <ClCompile Include="ssSkillSelectImage.cpp" />
     <ClCompile Include="ssSkillSlot.cpp" />
+    <ClCompile Include="ssSkillTree.cpp" />
     <ClCompile Include="ssSpearPiece.cpp" />
     <ClCompile Include="ssSpearRain.cpp" />
     <ClCompile Include="ssStartBtn.cpp" />

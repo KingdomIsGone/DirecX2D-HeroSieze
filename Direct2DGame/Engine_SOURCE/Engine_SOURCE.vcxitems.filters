@@ -112,6 +112,9 @@
     <Filter Include="GameObject\Component\Light">
       <UniqueIdentifier>{d9573ede-7b72-4cc5-8556-46ecd68972ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Renderer\RenderMaterial">
+      <UniqueIdentifier>{bbae6861-7775-44ef-bee1-aa94f0192e25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -243,6 +246,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderMaterial.h">
+      <Filter>Graphics\Renderer\RenderMaterial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssMath.cpp">
@@ -358,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleShader.cpp">
       <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssRenderMaterial.cpp">
+      <Filter>Graphics\Renderer\RenderMaterial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

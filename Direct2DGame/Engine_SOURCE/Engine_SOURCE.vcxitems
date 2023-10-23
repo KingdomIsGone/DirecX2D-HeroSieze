@@ -47,6 +47,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ssRenderMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ssScene.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ssRenderMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ssScene.cpp" />
