@@ -3,31 +3,25 @@
 
 namespace ss
 {
-	class ImmuneText : public GameObject
+	class SkillPointText : public GameObject
 	{
 	public:
-		ImmuneText();
-		~ImmuneText();
+		SkillPointText(GameObject* parent);
+		~SkillPointText();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void setPos(Vector3 pos) { mPos = pos; }
-
-		void SetTextMater();
-		void SetBlank();
-		void SetText() { mbText = true; }
+		void SetOnOff(bool is) { mOn = is; }
 
 	private:
 		Transform* mTransform;
 		Vector3 mPos;
 
-		bool mbText;
-		float mDelayTime;
+		bool mOn;
 
-		class Animator* mAnimator;
 		class MeshRenderer* mRenderer;
 	};
 }

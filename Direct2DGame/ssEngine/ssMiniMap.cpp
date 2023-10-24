@@ -20,7 +20,7 @@ namespace ss
 		
 		mMapDot = new GameObject();
 		mMapDot->GetComponent<Transform>()->SetScale(0.05f, 0.05f, 1.f);
-		mMapDot->GetComponent<Transform>()->SetPosition(2.5f, 1.3f, 0.69f);
+		mMapDot->GetComponent<Transform>()->SetPosition(2.5f, 1.3f, 0.71f);
 		MeshRenderer* mr = mMapDot->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"MapDot"));
@@ -48,7 +48,7 @@ namespace ss
 		mXmoveAmount = (mUVPos.x - 0.5f) * mWidth;
 		mYmoveAmount = (0.5f - mUVPos.y) * mHeight;
 
-		mTransform->SetPosition(mBasePos.x - mXmoveAmount, mBasePos.y - mYmoveAmount, 0.7f);
+		mTransform->SetPosition(mBasePos.x - mXmoveAmount, mBasePos.y - mYmoveAmount, 0.72f);
 		
 	
 		

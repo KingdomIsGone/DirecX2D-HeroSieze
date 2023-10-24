@@ -79,6 +79,7 @@ namespace ss
 
 		void SetInventory(class Inventory* inven) { mInventory = inven; }
 		void SetDim(class Dim* dim) { mDim = dim; }
+		void SetTree(class SkillTree* tree) { mTree = tree; }
 
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 		void SetSkillBox(class SkillSelectBox* box) { mBox = box; }
@@ -106,6 +107,7 @@ namespace ss
 		class Inventory* mInventory;
 		class Dim* mDim;
 		class SkillSelectBox* mBox;
+		class SkillTree* mTree;
 
 		bool mIsMoving;
 		bool mIsAttacking;

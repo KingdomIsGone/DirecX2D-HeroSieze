@@ -22,6 +22,7 @@
 #include "ssAudioClip.h"
 #include "ssAudioSource.h"
 #include "ssSkillSelectBox.h"
+#include "ssSkillTree.h"
 
 namespace ss
 {
@@ -87,11 +88,14 @@ namespace ss
 		if (!mbOn)
 			return;
 
-		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
-		mPlayerPos = pos;
-
 		if (mInventory->GetOnOff())
 			return;
+
+		if (mTree->GetOnOff())
+			return;
+
+		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		mPlayerPos = pos;
 
 		float a = mCurHp;
 

@@ -737,5 +737,16 @@ namespace ss
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"SkillTreeMater", spriteMaterial);
 		}
+
+		//skillPointText
+		{
+			std::shared_ptr<Texture> skillPointText
+				= Resources::Load<Texture>(L"skillPointText", L"..\\Resources\\Texture\\UI\\skillPointText.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(skillPointText);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"skillPointMater", spriteMaterial);
+		}
 	}
 }

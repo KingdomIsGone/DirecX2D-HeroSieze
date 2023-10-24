@@ -392,13 +392,14 @@ namespace ss
 		SkillTree* tree = new SkillTree(this);
 		tree->GetComponent<Transform>()->SetPosition(0.f, 0.3f, 0.6f);
 		AddOtherGameObject(tree, eLayerType::UI);
-
+		mScript->SetTree(tree);
 
 		//Dim
 		mDim = new Dim();
 		AddOtherGameObject(mDim, eLayerType::UI);
 		inventory->SetDim(mDim);
 		tree->SetDim(mDim);
+		
 		
 	}
 

@@ -7,14 +7,14 @@ namespace ss
 	Dim::Dim()
 		: mRenderOn(false)
 	{
-		SetName(L"Cursor");
+		SetName(L"Dim");
 		mTransform = GetComponent<Transform>();
 
 		mMr = AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mMr->SetMaterial(Resources::Find<Material>(L"DimMater"));
 		mTransform->SetScale(Vector3(8.f, 5.f, 0.8f));
-		mTransform->SetPosition(Vector3::Zero);
+		mTransform->SetPosition(Vector3(0.0f, 0.0f, 0.7f));
 	}
 	Dim::~Dim()
 	{
