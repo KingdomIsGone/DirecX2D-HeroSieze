@@ -345,6 +345,15 @@
     <ClCompile Include="ssSkillPointText.cpp">
       <Filter>Contents\Object\UI\SkillTree\Text</Filter>
     </ClCompile>
+    <ClCompile Include="ssSkillIcon.cpp">
+      <Filter>Contents\Object\UI\SkillTree\SkillIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="ssSkillLevel.cpp">
+      <Filter>Contents\Object\UI\SkillTree\SkillLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="ssNumber.cpp">
+      <Filter>Contents\Object\UI\SkillTree\Number</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -694,6 +703,15 @@
     <ClInclude Include="ssSkillPointText.h">
       <Filter>Contents\Object\UI\SkillTree\Text</Filter>
     </ClInclude>
+    <ClInclude Include="ssSkillIcon.h">
+      <Filter>Contents\Object\UI\SkillTree\SkillIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="ssSkillLevel.h">
+      <Filter>Contents\Object\UI\SkillTree\SkillLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="ssNumber.h">
+      <Filter>Contents\Object\UI\SkillTree\Number</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -965,6 +983,15 @@
     </Filter>
     <Filter Include="Contents\Object\UI\SkillTree\Text">
       <UniqueIdentifier>{e0bbe623-a537-48ca-8c8a-579432c8ba52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillTree\SkillIcon">
+      <UniqueIdentifier>{e557882c-2d77-46a7-a6b4-177b11bf6a5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillTree\SkillLevel">
+      <UniqueIdentifier>{6be2788b-8ab9-49a9-8481-07be207510d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\UI\SkillTree\Number">
+      <UniqueIdentifier>{77172114-67be-4f89-8a98-9c1a14a99303}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

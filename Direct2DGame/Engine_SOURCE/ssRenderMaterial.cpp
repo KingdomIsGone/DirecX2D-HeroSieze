@@ -363,6 +363,109 @@ namespace ss
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"HydraIconBlackMater", spriteMaterial);
 		}
+		//스킬 icon Hydra Black
+		{
+			std::shared_ptr<Texture>HydraIconBlackTex
+				= Resources::Load<Texture>(L"HydraIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\HydraIconBlack.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetTexture(HydraIconBlackTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"HydraIconBlackMater", spriteMaterial);
+		}
+		//스킬 icon telePort
+		{
+			std::shared_ptr<Texture>TelePortIconTex
+				= Resources::Load<Texture>(L"TelePortIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\TeleportIcon.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetTexture(TelePortIconTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"TelePortIconMater", spriteMaterial);
+		}
+		//스킬 icon telePortBlack
+		{
+			std::shared_ptr<Texture>TelePortIconBlackTex
+				= Resources::Load<Texture>(L"TelePortIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\TeleportIconBlack.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetTexture(TelePortIconBlackTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"TelePortIconBlackMater", spriteMaterial);
+		}
+
+		//invalid skill icon
+		{
+			{
+				std::shared_ptr<Texture>SkillIcon1Tex
+					= Resources::Load<Texture>(L"SkillIcon1Tex", L"..\\Resources\\Texture\\Skill\\Icon\\icon1Black.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(SkillIcon1Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"SkillIcon1Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture>SkillIcon2Tex
+					= Resources::Load<Texture>(L"SkillIcon2Tex", L"..\\Resources\\Texture\\Skill\\Icon\\icon2Black.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(SkillIcon2Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"SkillIcon2Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture>SkillIcon3Tex
+					= Resources::Load<Texture>(L"SkillIcon3Tex", L"..\\Resources\\Texture\\Skill\\Icon\\icon3Black.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(SkillIcon3Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"SkillIcon3Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture>SkillIcon4Tex
+					= Resources::Load<Texture>(L"SkillIcon4Tex", L"..\\Resources\\Texture\\Skill\\Icon\\icon4Black.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(SkillIcon4Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"SkillIcon4Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture>SkillIcon5Tex
+					= Resources::Load<Texture>(L"SkillIcon5Tex", L"..\\Resources\\Texture\\Skill\\Icon\\icon5Black.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(SkillIcon5Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"SkillIcon5Mater", spriteMaterial);
+			}
+			
+		}
+		//redLine
+		{
+			{
+				std::shared_ptr<Texture>RedLineTex
+					= Resources::Load<Texture>(L"RedLineTex", L"..\\Resources\\Texture\\UI\\RedLine.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(RedLineTex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"RedLineMater", spriteMaterial);
+			}
+		}
+		//SkillLevelUI
+		{
+			std::shared_ptr<Texture>SkillLevTex
+				= Resources::Load<Texture>(L"SkillLevTex", L"..\\Resources\\Texture\\UI\\SkillLevelWindow.png");
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(SpShader);
+			spriteMaterial->SetTexture(SkillLevTex);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"SkillLevMater", spriteMaterial);
+		}
+
 
 		//인벤토리
 		{
@@ -748,5 +851,100 @@ namespace ss
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"skillPointMater", spriteMaterial);
 		}
+
+		//number
+		{
+			{
+				std::shared_ptr<Texture> Number0Tex
+					= Resources::Load<Texture>(L"Number0Tex", L"..\\Resources\\Texture\\UI\\Number\\0.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number0Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number0Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number1Tex
+					= Resources::Load<Texture>(L"Number1Tex", L"..\\Resources\\Texture\\UI\\Number\\1.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number1Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number1Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number2Tex
+					= Resources::Load<Texture>(L"Number2Tex", L"..\\Resources\\Texture\\UI\\Number\\2.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number2Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number2Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number3Tex
+					= Resources::Load<Texture>(L"Number3Tex", L"..\\Resources\\Texture\\UI\\Number\\3.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number3Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number3Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number4Tex
+					= Resources::Load<Texture>(L"Number4Tex", L"..\\Resources\\Texture\\UI\\Number\\4.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number4Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number4Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number5Tex
+					= Resources::Load<Texture>(L"Number5Tex", L"..\\Resources\\Texture\\UI\\Number\\5.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number5Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number5Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number6Tex
+					= Resources::Load<Texture>(L"Number6Tex", L"..\\Resources\\Texture\\UI\\Number\\6.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number6Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number6Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number7Tex
+					= Resources::Load<Texture>(L"Number7Tex", L"..\\Resources\\Texture\\UI\\Number\\7.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number7Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number7Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number8Tex
+					= Resources::Load<Texture>(L"Number8Tex", L"..\\Resources\\Texture\\UI\\Number\\8.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number8Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number8Mater", spriteMaterial);
+			}
+			{
+				std::shared_ptr<Texture> Number9Tex
+					= Resources::Load<Texture>(L"Number9Tex", L"..\\Resources\\Texture\\UI\\Number\\9.png");
+				std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+				spriteMaterial->SetShader(SpShader);
+				spriteMaterial->SetTexture(Number9Tex);
+				spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				Resources::Insert(L"Number9Mater", spriteMaterial);
+			}
+		}
+
 	}
 }

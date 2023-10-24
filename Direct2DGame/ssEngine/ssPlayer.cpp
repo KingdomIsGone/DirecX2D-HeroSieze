@@ -20,6 +20,7 @@
 #include "ssDim.h"
 #include "ssSkillSelectBox.h"
 #include "ssSkillTree.h"
+#include "ssFontWrapper.h"
 
 namespace ss
 {
@@ -428,6 +429,7 @@ namespace ss
 	void Player::Render()
 	{
 		GameObject::Render();
+
 	}
 
 	void Player::DamageCheck()

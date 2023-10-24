@@ -236,6 +236,7 @@
     <ClInclude Include="ssNormalHat.h" />
     <ClInclude Include="ssNormalRobe.h" />
     <ClInclude Include="ssNormalStaff.h" />
+    <ClInclude Include="ssNumber.h" />
     <ClInclude Include="ssPlayerHpBarFill.h" />
     <ClInclude Include="ssPlayerMpBarFill.h" />
     <ClInclude Include="ssPortal.h" />
@@ -249,6 +250,8 @@
     <ClInclude Include="ssPlayerScript.h" />
     <ClInclude Include="ssP_HpSmallBar.h" />
     <ClInclude Include="ssP_HpSmallBarFill.h" />
+    <ClInclude Include="ssSkillIcon.h" />
+    <ClInclude Include="ssSkillLevel.h" />
     <ClInclude Include="ssSkillPointText.h" />
     <ClInclude Include="ssSkillSelectBox.h" />
     <ClInclude Include="ssSkillSelectImage.h" />
@@ -353,6 +356,7 @@
     <ClCompile Include="ssNormalHat.cpp" />
     <ClCompile Include="ssNormalRobe.cpp" />
     <ClCompile Include="ssNormalStaff.cpp" />
+    <ClCompile Include="ssNumber.cpp" />
     <ClCompile Include="ssPlayerHpBarFill.cpp" />
     <ClCompile Include="ssPlayerMpBarFill.cpp" />
     <ClCompile Include="ssPortal.cpp" />
@@ -366,6 +370,8 @@
     <ClCompile Include="ssPlayerScript.cpp" />
     <ClCompile Include="ssP_HpSmallBar.cpp" />
     <ClCompile Include="ssP_HpSmallBarFill.cpp" />
+    <ClCompile Include="ssSkillIcon.cpp" />
+    <ClCompile Include="ssSkillLevel.cpp" />
     <ClCompile Include="ssSkillPointText.cpp" />
     <ClCompile Include="ssSkillSelectBox.cpp" />
     <ClCompile Include="ssSkillSelectImage.cpp" />
