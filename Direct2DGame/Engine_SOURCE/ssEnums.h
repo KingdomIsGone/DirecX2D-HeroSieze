@@ -110,7 +110,8 @@ namespace ss::enums
 		FireWall,
 		Meteor,
 		Hydra,
-
+		Teleport,
+		None,
 	};
 
 }

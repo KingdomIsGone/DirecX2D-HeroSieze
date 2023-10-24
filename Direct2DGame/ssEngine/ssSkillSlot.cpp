@@ -12,7 +12,7 @@ namespace ss
 	{
 		mMeshRenderer = AddComponent<MeshRenderer>();
 		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mMeshRenderer->SetMaterial(Resources::Find<Material>(L"MeteorIconMater"));
+		mMeshRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(0.24f, 0.24f, 1.0f);
 	}

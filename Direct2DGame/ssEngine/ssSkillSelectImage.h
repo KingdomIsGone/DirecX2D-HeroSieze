@@ -1,9 +1,4 @@
 #pragma once
-class SkillSelectImage
-{
-};
-
-#pragma once
 #include "ssGameObject.h"
 
 namespace ss
@@ -32,6 +27,11 @@ namespace ss
 		eSkillID GetID() { return mID; }
 		void SetCoolTime(float time) { mCoolTime = time; }
 		float GetCoolTime() { return mCoolTime; }
+		void SetSkillID(eSkillID id) { mID = id; }
+		eSkillID GetSkillID() { return mID; }
+
+		void SetTex(std::shared_ptr<Texture> tex) { mTex = tex; }
+		std::shared_ptr<Texture> GetTex() { return mTex; }
 
 	private:
 		Transform* mTransform;
@@ -42,6 +42,7 @@ namespace ss
 		float mCoolTime;
 
 		class MeshRenderer* mRenderer;
+		std::shared_ptr<Texture> mTex;
 		class SkillSelectBox* mBox;
 
 		bool mIn;

@@ -22,11 +22,13 @@ namespace ss
 		};
 
 		void ImageSort();
+		void ImageSetting();
 
 		void SetSkillCountPlus() { mLearnedSkillCount++; }
 		void SetOnOff(bool is) { mOn = is; }
 		bool GetOnOff() { return mOn; }
 		void SetSkillSlot(class SkillSlot* slot) { mSkillSlot.push_back(slot); }
+		void SetSkillTree(class SkillTree* tree) { mTree = tree; }
 
 		void SlotClickCheck();
 		void SelectClickCheck();
@@ -38,6 +40,8 @@ namespace ss
 
 		class MeshRenderer* mRenderer;
 		class SkillSelectImage* mSelectImage[6];
+		class SkillTree* mTree;
+
 		std::vector<SkillSlot*> mSkillSlot;
 
 		SkillInfo mSkills[6];

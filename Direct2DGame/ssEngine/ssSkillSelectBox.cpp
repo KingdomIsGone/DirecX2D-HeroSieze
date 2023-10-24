@@ -7,10 +7,12 @@
 #include "ssInput.h"
 #include "ssSkillSlot.h"
 #include "ssCursor.h"
+#include "ssSkillTree.h"
+#include "ssShader.h"
 
 namespace ss
 {
-	UINT ss::SkillSelectBox::mLearnedSkillCount = 6;
+	UINT ss::SkillSelectBox::mLearnedSkillCount = 0;
 
 	SkillSelectBox::SkillSelectBox(GameObject* obj)
 		: mSelectSlotNum(-1)
@@ -50,10 +52,7 @@ namespace ss
 			AddOtherGameObject(mSelectImage[i], eLayerType::UI);
 		}
 
-		mSelectImage[0]->SetID(eSkillID::FireAura);
-		mSelectImage[0]->SetCoolTime(0.2f);
-		mSelectImage[0]->SetMaterName(L"FireAuraIconMater");
-		mSelectImage[0]->SetInSkill(true);
+		
 
 	}
 
@@ -70,7 +69,10 @@ namespace ss
 		GameObject::Update();
 
 		ImageSort();
+		ImageSetting();
+
 		SlotClickCheck();
+
 		if (mOn)
 			SelectClickCheck();
 
@@ -89,77 +91,165 @@ namespace ss
 
 	void SkillSelectBox::ImageSort()
 	{
-		if (mLearnedSkillCount == 1)
+		if (mLearnedSkillCount == 0)
+		{
+			mTransform->SetPosition(Vector3(-2.03f, -1.28f, 0.7f));
+			mTransform->SetScale(Vector3(0.3f, 0.3f, 1.f));
+		}
+		else if (mLearnedSkillCount == 1)
 		{
 			mTransform->SetPosition(Vector3(-2.03f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(0.3f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-2.03f, -1.28f, 0.7f));
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-2.03f, -1.28f, 0.69f));
 		}
 		else if (mLearnedSkillCount == 2)
 		{
 			mTransform->SetPosition(Vector3(-1.86f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(0.56f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.7f));
-			mSelectImage[0]->SetOnOff(true);
-			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
-			mSelectImage[1]->SetOnOff(true);
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.69f));
+			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.69f));
 		}
 		else if (mLearnedSkillCount == 3)
 		{
 			mTransform->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(0.83f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.7f));
-			mSelectImage[0]->SetOnOff(true);
-			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
-			mSelectImage[1]->SetOnOff(true);
-			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.7f));
-			mSelectImage[2]->SetOnOff(true);
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.69f));
+			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.69f));
+			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.69f));
 		}
 		else if (mLearnedSkillCount == 4)
 		{
 			mTransform->SetPosition(Vector3(-1.6f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(1.1f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.7f));
-			mSelectImage[0]->SetOnOff(true);
-			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
-			mSelectImage[1]->SetOnOff(true);
-			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.7f));
-			mSelectImage[2]->SetOnOff(true);
-			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.7f));
-			mSelectImage[3]->SetOnOff(true);
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.69f));
+			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.69f));
+			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.69f));
+			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.69f));
 		}
 		else if (mLearnedSkillCount == 5)
 		{
 			mTransform->SetPosition(Vector3(-1.47f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(1.37f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.7f));
-			mSelectImage[0]->SetOnOff(true);
-			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
-			mSelectImage[1]->SetOnOff(true);
-			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.7f));
-			mSelectImage[2]->SetOnOff(true);
-			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.7f));
-			mSelectImage[3]->SetOnOff(true);
-			mSelectImage[4]->GetComponent<Transform>()->SetPosition(Vector3(-0.95f, -1.28f, 0.7f));
-			mSelectImage[4]->SetOnOff(true);
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.69f));
+			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.69f));
+			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.69f));
+			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.69f));
+			mSelectImage[4]->GetComponent<Transform>()->SetPosition(Vector3(-0.95f, -1.28f, 0.69f));
 		}
 		else if (mLearnedSkillCount == 6)
 		{
 			mTransform->SetPosition(Vector3(-1.34f, -1.28f, 0.7f));
 			mTransform->SetScale(Vector3(1.64f, 0.3f, 1.f));
 
-			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.7f));
-			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.7f));
-			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.7f));
-			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.7f));
-			mSelectImage[4]->GetComponent<Transform>()->SetPosition(Vector3(-0.95f, -1.28f, 0.7f));
-			mSelectImage[5]->GetComponent<Transform>()->SetPosition(Vector3(-0.69f, -1.28f, 0.7f));
+			mSelectImage[0]->GetComponent<Transform>()->SetPosition(Vector3(-1.99f, -1.28f, 0.69f));
+			mSelectImage[1]->GetComponent<Transform>()->SetPosition(Vector3(-1.73f, -1.28f, 0.69f));
+			mSelectImage[2]->GetComponent<Transform>()->SetPosition(Vector3(-1.47f, -1.28f, 0.69f));
+			mSelectImage[3]->GetComponent<Transform>()->SetPosition(Vector3(-1.21f, -1.28f, 0.69f));
+			mSelectImage[4]->GetComponent<Transform>()->SetPosition(Vector3(-0.95f, -1.28f, 0.69f));
+			mSelectImage[5]->GetComponent<Transform>()->SetPosition(Vector3(-0.69f, -1.28f, 0.69f));
 		}
+
+	}  //포지션 정리
+
+	void SkillSelectBox::ImageSetting()  //사용 가능스킬을 스킬이미지에 정보 넘기기
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			mSelectImage[i]->SetSkillID(eSkillID::None);
+			mSelectImage[i]->SetInSkill(false);
+		}
+
+		std::bitset<5> bitset = mTree->GetSkLevelBitSet();
+		int count = 0;
+		if (bitset[0] == 1)
+		{
+			count++;
+			mSelectImage[0]->SetInSkill(true);
+			mSelectImage[0]->SetMaterName(L"FireAuraIconMater");
+			mSelectImage[0]->SetTex(Resources::Find<Texture>(L"FireAuraIconTex"));
+			mSelectImage[0]->SetMater();
+			mSelectImage[0]->SetSkillID(eSkillID::FireAura);
+			mSelectImage[0]->SetCoolTime(0.2f);
+		}
+		if (bitset[1] == 1)
+		{
+			count++;
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (mSelectImage[i]->GetSkillID() == eSkillID::None)
+				{
+					mSelectImage[i]->SetInSkill(true);
+					mSelectImage[i]->SetMaterName(L"FireWallMater");
+					mSelectImage[i]->SetTex(Resources::Find<Texture>(L"FireWallIconTex"));
+					mSelectImage[i]->SetMater();
+					mSelectImage[i]->SetSkillID(eSkillID::FireWall);
+					mSelectImage[i]->SetCoolTime(0.14f);
+					break;
+				}
+				
+			}
+		}
+		if (bitset[2] == 1)
+		{
+			count++;
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (mSelectImage[i]->GetSkillID() == eSkillID::None)
+				{
+					mSelectImage[i]->SetInSkill(true);
+					mSelectImage[i]->SetMaterName(L"MeteorIconMater");
+					mSelectImage[i]->SetTex(Resources::Find<Texture>(L"MeteorIconTex"));
+					mSelectImage[i]->SetMater();
+					mSelectImage[i]->SetSkillID(eSkillID::Meteor);
+					mSelectImage[i]->SetCoolTime(0.1f);
+					break;
+				}
+			}
+		}
+		if (bitset[3] == 1)
+		{
+			count++;
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (mSelectImage[i]->GetSkillID() == eSkillID::None)
+				{
+					mSelectImage[i]->SetInSkill(true);
+					mSelectImage[i]->SetMaterName(L"HydraIconMater");
+					mSelectImage[i]->SetTex(Resources::Find<Texture>(L"HydraIconTex"));
+					mSelectImage[i]->SetMater();
+					mSelectImage[i]->SetSkillID(eSkillID::Hydra);
+					mSelectImage[i]->SetCoolTime(0.2f);
+					break;
+				}
+			}
+		}
+		if (bitset[4] == 1)
+		{
+			count++;
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (mSelectImage[i]->GetSkillID() == eSkillID::None)
+				{
+					mSelectImage[i]->SetInSkill(true);
+					mSelectImage[i]->SetMaterName(L"TelePortIconMater");
+					mSelectImage[i]->SetTex(Resources::Find<Texture>(L"TelePortIconTex"));
+					mSelectImage[i]->SetMater();
+					mSelectImage[i]->SetSkillID(eSkillID::Teleport);
+					mSelectImage[i]->SetCoolTime(0.15f);
+					break;
+				}
+			}
+		}
+		mLearnedSkillCount = count;
 	}
 
 	void SkillSelectBox::SlotClickCheck()
@@ -177,6 +267,10 @@ namespace ss
 				{
 					mSelectSlotNum = i;
 					mOn = true;
+					for (int i = 0; i < 5; i++)
+					{
+						mSelectImage[i]->SetOnOff(true);
+					}
 					break;
 				}
 			}
@@ -196,9 +290,33 @@ namespace ss
 				if (LBpos.x <= cursorPos.x && cursorPos.x <= RTpos.x
 					&& LBpos.y <= cursorPos.y && cursorPos.y <= RTpos.y)
 				{
-					mSkillSlot[mSelectSlotNum]->SetMater(mSelectImage[i]->GetMaterName());
+					MeshRenderer* mr = mSkillSlot[mSelectSlotNum]->GetComponent<MeshRenderer>();
+					std::shared_ptr<Material> mt = std::make_shared<Material>();
+					
+
+					std::shared_ptr<Shader> shader;
+					if (mSelectSlotNum == 0)
+						shader = Resources::Find<Shader>(L"CoolTimeShader1");
+					else if(mSelectSlotNum == 1)
+						shader = Resources::Find<Shader>(L"CoolTimeShader2");
+					else if (mSelectSlotNum == 2)
+						shader = Resources::Find<Shader>(L"CoolTimeShader3");
+					else if (mSelectSlotNum == 3)
+						shader = Resources::Find<Shader>(L"CoolTimeShader4");
+					
+
+					mt->SetShader(shader);
+					mt->SetTexture(mSelectImage[i]->GetTex());
+					mt->SetRenderingMode(eRenderingMode::Transparent);
+					mr->SetMaterial(mt);
+
 					mSkillSlot[mSelectSlotNum]->SetCoolSpeed(mSelectImage[i]->GetCoolTime());
 					mSkillSlot[mSelectSlotNum]->SetSkillID(mSelectImage[i]->GetID());
+
+					for (int i = 0; i < 5; i++)
+					{
+						mSelectImage[i]->SetOnOff(false);
+					}
 
 					mOn = false;
 					break;

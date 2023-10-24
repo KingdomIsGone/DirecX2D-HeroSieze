@@ -25,6 +25,7 @@ namespace ss
 		bool GetOnOff() { return mOn; }
 		void SetDim(class Dim* dim) { mDim = dim; }
 		
+		std::bitset<5> GetSkLevelBitSet();
 
 	private:
 		Transform* mTransform;

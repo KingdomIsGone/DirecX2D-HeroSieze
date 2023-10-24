@@ -468,4 +468,23 @@ namespace ss
 		return wc;
 	}
 
+	std::bitset<5> SkillTree::GetSkLevelBitSet()
+	{
+		std::bitset<5> bitset;
+
+		bitset.reset();
+
+		if (mFireAuraLevel > 0)
+			bitset[0] = 1;
+		if (mFireWallLevel > 0)
+			bitset[1] = 1;
+		if (mMeteorLevel > 0)
+			bitset[2] = 1;
+		if (mHydraLevel > 0)
+			bitset[3] = 1;
+		if (mTelePortLevel > 0)
+			bitset[4] = 1;
+
+		return bitset;
+	}
 }

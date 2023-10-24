@@ -14,7 +14,7 @@ namespace ss
 
 		mRenderer = AddComponent<MeshRenderer>();
 		mRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mRenderer->SetMaterial(Resources::Find<Material>(L"HydraIconMater")); //BlankMater
+		mRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater")); 
 
 	}
 
@@ -30,10 +30,6 @@ namespace ss
 	{
 		GameObject::Update();
 
-		if (mBox->GetOnOff() && mIn)
-			mOn = true;
-		else
-			mOn = false;
 
 	}
 	void SkillSelectImage::LateUpdate()
@@ -43,7 +39,7 @@ namespace ss
 
 	void SkillSelectImage::Render()
 	{
-		if (mOn)
+		if (mOn && mIn)
 			GameObject::Render();
 		
 	}
