@@ -18,5 +18,7 @@ namespace ss
 		Transform* mTransform;
 		Vector3 mPos;
 
+		class Light* mLight;
+
 	};
 }

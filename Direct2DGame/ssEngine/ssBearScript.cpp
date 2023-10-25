@@ -41,6 +41,8 @@ namespace ss
 			hat->GetComponent<Transform>()->SetPosition(mPos);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
 		}
+
+		PlayerScript::AddExp(2.f);
 	}
 	void BearScript::Initialize()
 	{

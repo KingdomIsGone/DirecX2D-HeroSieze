@@ -37,6 +37,7 @@ namespace ss
 			Right,
 		};
 
+		void ExpCheck();
 		void Complete();
 		void SpellWaiting();
 
@@ -86,6 +87,8 @@ namespace ss
 
 		void PushBackSkillSlot(class SkillSlot* slot) { mSkillSlots.push_back(slot); }
 		void SetSkillBox(class SkillSelectBox* box) { mBox = box; }
+		void SetLvEffector(class LvUpEffector* effector) { mLvEffector = effector; }
+		static void AddExp(float exp) { mExp += exp; }
 
 		static void SetOnOff(bool is) { mbOn = is; }
 		void SetStop() { mCursorPos = mPlayerPos; }
@@ -111,6 +114,7 @@ namespace ss
 		class Dim* mDim;
 		class SkillSelectBox* mBox;
 		class SkillTree* mTree;
+		class LvUpEffector* mLvEffector;
 
 		bool mIsMoving;
 		bool mIsAttacking;
@@ -138,6 +142,8 @@ namespace ss
 		std::vector<class SkillSlot*> mSkillSlots;
 
 		static bool mbOn;
+		static float mExp;
+		static UINT mLevel;
 		
 		class AudioSource* mAs;
 		

@@ -15,7 +15,7 @@
 
 namespace ss
 {
-	UINT ss::SkillTree::mSkillPoint = 5;
+	UINT ss::SkillTree::mSkillPoint = 0;
 	UINT ss::SkillTree::mFireWallLevel = 0;
 	UINT ss::SkillTree::mFireAuraLevel = 0;
 	UINT ss::SkillTree::mHydraLevel = 0;

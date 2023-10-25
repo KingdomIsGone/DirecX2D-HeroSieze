@@ -2,6 +2,7 @@
 #include "ssMeshRenderer.h"
 #include "ssResources.h"
 #include "ssAnimator.h"
+#include "ssLight.h"
 
 namespace ss
 {
@@ -18,6 +19,10 @@ namespace ss
 		animator->PlayAnimation(L"Torch", true);
 
 		mTransform = GetComponent<Transform>();
+
+		//mLight = AddComponent<Light>();
+		
+
 	}
 	TorchBig::~TorchBig()
 	{
@@ -29,6 +34,10 @@ namespace ss
 	void TorchBig::Update()
 	{
 		GameObject::Update();
+
+		/*mLight->SetType(eLightType::Point);
+		mLight->SetRadius(1.f);
+		mLight->SetColor(Vector4(1.f, 1.f, 1.f, 1.0f));*/
 	}
 	void TorchBig::LateUpdate()
 	{

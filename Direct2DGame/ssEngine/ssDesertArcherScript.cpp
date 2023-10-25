@@ -39,6 +39,8 @@ namespace ss
 			hat->GetComponent<Transform>()->SetPosition(mPos);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
 		}
+
+		PlayerScript::AddExp(0.8f);
 	}
 	void DesertArcherScript::Initialize()
 	{

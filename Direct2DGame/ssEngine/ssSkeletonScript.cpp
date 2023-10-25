@@ -38,6 +38,7 @@ namespace ss
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
 		}
 
+		PlayerScript::AddExp(1.f);
 	}
 	void SkeletonScript::Initialize()
 	{

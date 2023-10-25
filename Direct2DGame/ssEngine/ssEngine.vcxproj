@@ -221,6 +221,7 @@
     <ClInclude Include="ssLegendBoots.h" />
     <ClInclude Include="ssLegendStaff1.h" />
     <ClInclude Include="ssLightBall.h" />
+    <ClInclude Include="ssLvUpEffector.h" />
     <ClInclude Include="ssMagicBall.h" />
     <ClInclude Include="ssMagicBallScript.h" />
     <ClInclude Include="ssMagicHat.h" />
@@ -341,6 +342,7 @@
     <ClCompile Include="ssLegendBoots.cpp" />
     <ClCompile Include="ssLegendStaff1.cpp" />
     <ClCompile Include="ssLightBall.cpp" />
+    <ClCompile Include="ssLvUpEffector.cpp" />
     <ClCompile Include="ssMagicBall.cpp" />
     <ClCompile Include="ssMagicBallScript.cpp" />
     <ClCompile Include="ssMagicHat.cpp" />

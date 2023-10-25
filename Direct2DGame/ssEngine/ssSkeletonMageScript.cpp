@@ -21,6 +21,7 @@ namespace ss
 	}
 	SkeletonMageScript::~SkeletonMageScript()
 	{
+		PlayerScript::AddExp(1.f);
 	}
 	void SkeletonMageScript::Initialize()
 	{

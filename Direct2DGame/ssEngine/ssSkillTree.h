@@ -21,6 +21,7 @@ namespace ss
 
 		wchar_t* IntToWchar(int num);
 
+		void AddSkillPoint() { mSkillPoint++; }
 		void SetOnOff(bool is) { mOn = is; }
 		bool GetOnOff() { return mOn; }
 		void SetDim(class Dim* dim) { mDim = dim; }

@@ -167,9 +167,12 @@ namespace ss
 				AddGameObject(eLayerType::Light, light);
 				Light* lightComp = light->AddComponent<Light>();
 				lightComp->SetType(eLightType::Directional);
-				lightComp->SetColor(Vector4(1.f, 1.0f, 1.0f, 1.0f));
+				lightComp->SetColor(Vector4(1.f, 1.f, 1.f, 1.0f));
 			}
 		}
+		
+			
+		
 		
 		//skeleton
 		{
@@ -258,9 +261,11 @@ namespace ss
 			TorchBig* torch1 = new TorchBig();
 			AddGameObject(eLayerType::Map, torch1);
 			torch1->GetComponent<Transform>()->SetPosition(0.3f, 5.7f, 1.02f);
+			
 			TorchBig* torch2 = new TorchBig();
 			AddGameObject(eLayerType::Map, torch2);
 			torch2->GetComponent<Transform>()->SetPosition(-0.5f, 5.7f, 1.02f);
+			
 
 			TorchBig* torch3 = new TorchBig();
 			AddGameObject(eLayerType::Map, torch3);

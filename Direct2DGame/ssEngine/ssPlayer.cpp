@@ -21,6 +21,7 @@
 #include "ssSkillSelectBox.h"
 #include "ssSkillTree.h"
 #include "ssFontWrapper.h"
+#include "ssLvUpEffector.h"
 
 namespace ss
 {
@@ -414,6 +415,10 @@ namespace ss
 		inventory->SetDim(mDim);
 		tree->SetDim(mDim);
 		
+		//LVEffector
+		LvUpEffector* effector = new LvUpEffector();
+		AddOtherGameObject(effector, eLayerType::MonsterUI);
+		mScript->SetLvEffector(effector);
 		
 	}
 

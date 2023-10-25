@@ -29,9 +29,9 @@ namespace ss
 		SceneManager::CreateScene<EndingScene>(L"EndingScene");
 		SceneManager::CreateScene<ForestScene>(L"ForestScene");
 		SceneManager::CreateScene<ValkyrieScene>(L"ValkyrieScene");
-		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
 		SceneManager::CreateScene<DesertMap>(L"DesertMap");
-		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<Town>(L"Town");
+		SceneManager::CreateScene<AnubisRoom>(L"AnubisRoom");
+		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 	}
 }

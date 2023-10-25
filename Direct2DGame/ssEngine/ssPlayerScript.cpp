@@ -23,6 +23,7 @@
 #include "ssAudioSource.h"
 #include "ssSkillSelectBox.h"
 #include "ssSkillTree.h"
+#include "ssLvUpEffector.h"
 
 namespace ss
 {
@@ -33,7 +34,8 @@ namespace ss
 	Vector3 ss::PlayerScript::mPoint = Vector3(600.0f, 350.0f, 1.0f);
 	UINT ss::PlayerScript::mSpellNum = 0;
 	bool ss::PlayerScript::mbOn = true;
-	
+	float ss::PlayerScript::mExp = 0.f;
+	UINT ss::PlayerScript::mLevel = 1;
 
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)
@@ -80,6 +82,8 @@ namespace ss
 
 			mAs->SetClip(Resources::Load<AudioClip>(L"MetorStartSound"
 				, L"..\\Resources\\Sound\\PlayerSound\\MeteorStart.wav"));
+			mAs->SetClip(Resources::Load<AudioClip>(L"TeleportSound"
+				, L"..\\Resources\\Sound\\PlayerSound\\TeleportSnd.wav"));
 
 		}
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
@@ -87,6 +91,8 @@ namespace ss
 
 	void PlayerScript::Update()
 	{
+		ExpCheck();
+
 		if (!mbOn)
 			return;
 
@@ -853,6 +859,9 @@ namespace ss
 			mCurMp -= 300.f;
 
 			mSkillSlots[mTeleportSlotNum - 1]->CoolTimeStart();
+
+			mAs->SetClip(Resources::Find<AudioClip>(L"TeleportSound"));
+			mAs->Play();
 			mTeleportStage++;
 		}
 		else if (mTeleportStage == 1)
@@ -914,6 +923,46 @@ namespace ss
 				mCurHp = 3000.f;
 				mRecoveryOn = false;
 			}
+		}
+	}
+
+	void PlayerScript::ExpCheck()
+	{
+		if (mExp >= 4 && mLevel == 1)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
+		}
+		else if (mLevel == 2 && mExp >= 8)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
+		}
+		else if (mLevel == 3 && mExp >= 12)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
+		}
+		else if (mLevel == 4 && mExp >= 18)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
+		}
+		else if (mLevel == 5 && mExp >= 24)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
+		}
+		else if (mLevel == 6 && mExp >= 30)
+		{
+			mLevel++;
+			mTree->AddSkillPoint();
+			mLvEffector->Play();
 		}
 	}
 

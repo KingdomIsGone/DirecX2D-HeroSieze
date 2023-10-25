@@ -354,6 +354,9 @@
     <ClCompile Include="ssNumber.cpp">
       <Filter>Contents\Object\UI\SkillTree\Number</Filter>
     </ClCompile>
+    <ClCompile Include="ssLvUpEffector.cpp">
+      <Filter>Contents\Object\Player\LvUpEffector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -712,6 +715,9 @@
     <ClInclude Include="ssNumber.h">
       <Filter>Contents\Object\UI\SkillTree\Number</Filter>
     </ClInclude>
+    <ClInclude Include="ssLvUpEffector.h">
+      <Filter>Contents\Object\Player\LvUpEffector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -992,6 +998,9 @@
     </Filter>
     <Filter Include="Contents\Object\UI\SkillTree\Number">
       <UniqueIdentifier>{77172114-67be-4f89-8a98-9c1a14a99303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Player\LvUpEffector">
+      <UniqueIdentifier>{4a01e1c6-a0bc-430a-bdec-62b3c7af1f29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
