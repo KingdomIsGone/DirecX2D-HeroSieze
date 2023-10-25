@@ -22,6 +22,7 @@
 #include "ssSkillTree.h"
 #include "ssFontWrapper.h"
 #include "ssLvUpEffector.h"
+#include "ssIndicator.h"
 
 namespace ss
 {
@@ -419,6 +420,7 @@ namespace ss
 		LvUpEffector* effector = new LvUpEffector();
 		AddOtherGameObject(effector, eLayerType::MonsterUI);
 		mScript->SetLvEffector(effector);
+
 		
 	}
 

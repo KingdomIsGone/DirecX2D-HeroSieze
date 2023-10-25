@@ -20,7 +20,7 @@ namespace ss
 		mTime += 1.f * Time::DeltaTime();
 
 		Vector3 playerPos = PlayerScript::GetPlayerPos();
-		playerPos.z += 0.1f;
+		playerPos.z = 1.2f;
 		GetOwner()->GetComponent<Transform>()->SetPosition(playerPos);
 	}
 	void FireAuraScript::OnCollisionEnter(Collider2D* other)

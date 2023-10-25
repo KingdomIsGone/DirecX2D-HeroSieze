@@ -38,6 +38,7 @@ namespace ss
 		Vector3 ReverseMove();
 		float CalculateMoveDegree(Vector3 monsterpos, Vector3 point);
 		void ColideClear();
+		void CalDir(Vector3 targetPos);
 
 		float GetHP() { return mHp; }
 

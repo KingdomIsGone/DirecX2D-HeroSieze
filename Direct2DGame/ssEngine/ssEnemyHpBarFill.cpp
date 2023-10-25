@@ -5,6 +5,7 @@
 
 namespace ss
 {
+	UINT ss::EnemyHpBarFill::mCount = 0;
 	EnemyHpBarFill::EnemyHpBarFill()
 	{
 		mTransform = GetComponent<Transform>();
@@ -13,7 +14,8 @@ namespace ss
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"EnemyHpBarFillRedMater"));
 
-
+		mThisCount = mCount;
+		mCount++;
 		mHpChanged = true;
 	}
 	EnemyHpBarFill::~EnemyHpBarFill()
@@ -30,7 +32,7 @@ namespace ss
 		Vector3 ownerPos = mOwnerTransform->GetPosition();
 		ownerPos.x += mOffsetX + mModifyX;
 		ownerPos.y += mOffsetY;
-		ownerPos.z -= 0.08f;
+		ownerPos.z -= 0.08f + 0.001f * mThisCount;
 
 		mTransform->SetPosition(ownerPos);
 

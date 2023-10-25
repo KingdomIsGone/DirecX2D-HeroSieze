@@ -26,5 +26,7 @@ namespace ss
 		float mOffsetX;
 		float mOffsetY;
 
+		static UINT mCount;
+		UINT mThisCount;
 	};
 }

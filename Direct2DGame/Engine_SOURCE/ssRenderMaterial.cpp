@@ -287,7 +287,7 @@ namespace ss
 			std::shared_ptr<Texture> MeteorIconTex
 				= Resources::Load<Texture>(L"MeteorIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\MeteorIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader1);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(MeteorIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"MeteorIconMater", spriteMaterial);
@@ -297,7 +297,7 @@ namespace ss
 			std::shared_ptr<Texture> MeteorIconBlackTex
 				= Resources::Load<Texture>(L"MeteorIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\MeteorIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader1);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(MeteorIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"MeteorIconBlackMater", spriteMaterial);
@@ -307,7 +307,7 @@ namespace ss
 			std::shared_ptr<Texture> FireWallIconTex
 				= Resources::Load<Texture>(L"FireWallIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireWallIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader2);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(FireWallIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"FireWallMater", spriteMaterial);
@@ -317,7 +317,7 @@ namespace ss
 			std::shared_ptr<Texture> FireWallIconBlackTex
 				= Resources::Load<Texture>(L"FireWallIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireWallIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader2);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(FireWallIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"FireWallIconBlackMater", spriteMaterial);
@@ -328,7 +328,7 @@ namespace ss
 			std::shared_ptr<Texture>FireAuraIconTex
 				= Resources::Load<Texture>(L"FireAuraIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireAuraIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader3);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(FireAuraIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"FireAuraIconMater", spriteMaterial);
@@ -338,7 +338,7 @@ namespace ss
 			std::shared_ptr<Texture>FireAuraIconBlackTex
 				= Resources::Load<Texture>(L"FireAuraIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\FireAuraIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader3);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(FireAuraIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"FireAuraIconBlackMater", spriteMaterial);
@@ -348,7 +348,7 @@ namespace ss
 			std::shared_ptr<Texture>HydraIconTex
 				= Resources::Load<Texture>(L"HydraIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\HydraIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(HydraIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"HydraIconMater", spriteMaterial);
@@ -358,7 +358,7 @@ namespace ss
 			std::shared_ptr<Texture>HydraIconBlackTex
 				= Resources::Load<Texture>(L"HydraIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\HydraIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(HydraIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"HydraIconBlackMater", spriteMaterial);
@@ -368,7 +368,7 @@ namespace ss
 			std::shared_ptr<Texture>HydraIconBlackTex
 				= Resources::Load<Texture>(L"HydraIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\HydraIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(HydraIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"HydraIconBlackMater", spriteMaterial);
@@ -378,7 +378,7 @@ namespace ss
 			std::shared_ptr<Texture>TelePortIconTex
 				= Resources::Load<Texture>(L"TelePortIconTex", L"..\\Resources\\Texture\\Skill\\Icon\\TeleportIcon.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(TelePortIconTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"TelePortIconMater", spriteMaterial);
@@ -388,7 +388,7 @@ namespace ss
 			std::shared_ptr<Texture>TelePortIconBlackTex
 				= Resources::Load<Texture>(L"TelePortIconBlackTex", L"..\\Resources\\Texture\\Skill\\Icon\\TeleportIconBlack.png");
 			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(CoolTimeShader4);
+			spriteMaterial->SetShader(SpShader);
 			spriteMaterial->SetTexture(TelePortIconBlackTex);
 			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			Resources::Insert(L"TelePortIconBlackMater", spriteMaterial);

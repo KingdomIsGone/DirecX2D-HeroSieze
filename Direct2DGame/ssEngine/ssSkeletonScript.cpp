@@ -114,11 +114,7 @@ namespace ss
 
 	void SkeletonScript::Attack()
 	{
-		
-			
-		
-
-		CalculateMoveDegree(mPos, mPlayerPos);
+		CalDir(mPlayerPos);
 
 		switch (mDirState)
 		{
@@ -166,14 +162,16 @@ namespace ss
 		else
 			mYAccess = false;
 
-		if (mPos.y < mPlayerPos.y && !mYAccess)
+		/*if (mPos.y < mPlayerPos.y && !mYAccess)
 			mDirState = eDirState::Up;
 		else if (mPos.y > mPlayerPos.y && !mYAccess)
 			mDirState = eDirState::Down;
 		else if (mPos.x > mPlayerPos.x && !mXAccess)
 			mDirState = eDirState::Left;
 		else if (mPos.x < mPlayerPos.x && !mXAccess)
-			mDirState = eDirState::Right;
+			mDirState = eDirState::Right;*/
+
+		CalDir(mPlayerPos);
 
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mDirState)
@@ -246,6 +244,20 @@ namespace ss
 			else if (colNum == 4)
 				iter->second->SetDirCountMinus(e4Direction::Right);
 		}
+	}
+
+	void SkeletonScript::CalDir(Vector3 targetPos)
+	{
+		float degree = math::CalculateDegree(Vector2(mPos.x, mPos.y), Vector2(targetPos.x, targetPos.y));
+
+		if (-45.f <= degree && degree < 45.f)
+			mDirState = eDirState::Right;
+		else if (45.f <= degree && degree < 135.f)
+			mDirState = eDirState::Up;
+		else if (135.f <= degree || degree < -135.f)
+			mDirState = eDirState::Left;
+		else if (-135.f <= degree && degree < -45.f)
+			mDirState = eDirState::Down;
 	}
 
 	void SkeletonScript::Damage()

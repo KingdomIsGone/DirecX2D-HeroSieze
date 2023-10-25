@@ -4,6 +4,8 @@
 
 namespace ss
 {
+	UINT ss::EnemyHpBar::mCount = 0;
+
 	EnemyHpBar::EnemyHpBar()
 		: mOffsetX(0.f)
 		, mOffsetY(0.f)
@@ -19,7 +21,8 @@ namespace ss
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"EnemyHpBarMater"));
 
-
+		mThisCount = mCount;
+		mCount++;
 	}
 	EnemyHpBar::~EnemyHpBar()
 	{
@@ -35,7 +38,7 @@ namespace ss
 		Vector3 ownerPos = mOwnerTransform->GetPosition();
 		ownerPos.x += mOffsetX;
 		ownerPos.y += mOffsetY;
-		ownerPos.z -= 0.05f;
+		ownerPos.z -= 0.05f + 0.001f * mThisCount;
 
 		mTransform->SetPosition(ownerPos);
 	}

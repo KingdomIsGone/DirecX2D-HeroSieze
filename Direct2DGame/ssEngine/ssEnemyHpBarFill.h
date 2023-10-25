@@ -41,5 +41,9 @@ namespace ss
 		bool mHpChanged;
 		float mCurHP;
 		float mFullHP;
+
+
+		static UINT mCount;
+		UINT mThisCount;
 	};
 }

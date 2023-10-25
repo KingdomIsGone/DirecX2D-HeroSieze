@@ -26,6 +26,7 @@ namespace ss
 		{
 			Waiting,
 			Play,
+			Play2,
 		};
 
 	private:
@@ -34,7 +35,7 @@ namespace ss
 		Vector2 mOffset;
 
 		class Animator* mAnimator;
-
+		class AudioSource* mAs;
 		eState mState;
 		bool mOn;
 	};

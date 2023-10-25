@@ -15,13 +15,13 @@ namespace ss
 		virtual void Render() override;
 
 		void aniPlay();
-		void setPos(Vector3 pos) { mPos = pos; }
+		void setPos(Vector3 pos);
 
 	private:
 		Transform* mTransform;
-		static Vector3 mPos;
+		Vector3 mPos;
 		float mSpeed;
 
-		static class Animator* mAnimator;
+		class Animator* mAnimator;
 	};
 }

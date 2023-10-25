@@ -89,6 +89,7 @@ namespace ss
 
 			Indicator* indicator = new Indicator();
 			AddGameObject(eLayerType::Cursor, indicator);
+			player->GetScript()->SetIndicator(indicator);
 
 			CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 			CollisionManager::SetLayer(eLayerType::Player, eLayerType::Summon1, true);

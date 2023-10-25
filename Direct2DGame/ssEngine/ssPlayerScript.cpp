@@ -36,6 +36,7 @@ namespace ss
 	bool ss::PlayerScript::mbOn = true;
 	float ss::PlayerScript::mExp = 0.f;
 	UINT ss::PlayerScript::mLevel = 1;
+	ss::PlayerScript::eDirState ss::PlayerScript::mDirState;
 
 	PlayerScript::PlayerScript()
 		: mCursorPos(Vector3::Zero)
@@ -61,7 +62,6 @@ namespace ss
 		mTransform = GetOwner()->GetComponent<Transform>();
 		Animator* at = GetOwner()->GetComponent<Animator>();
 		mCursor = new Cursor();
-		mIndicator = new Indicator();
 
 		//¿Àµð¿À
 		{
@@ -840,7 +840,9 @@ namespace ss
 		mAs->Play();
 
 		Hydra* hydra = new Hydra();
-		hydra->GetComponent<Transform>()->SetPosition(cursorPos);
+		Vector3 pos = cursorPos;
+		pos.z = 0.9f;
+		hydra->GetComponent<Transform>()->SetPosition(pos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Monster, hydra);
 	}
 
@@ -877,6 +879,7 @@ namespace ss
 		}
 		else if (mTeleportStage == 2)
 		{
+			cursorPos.z = 1.f;
 			mTransform->SetPosition(cursorPos);
 			mTeleportStage++;
 		}

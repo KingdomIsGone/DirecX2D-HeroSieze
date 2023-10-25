@@ -40,7 +40,7 @@ namespace ss
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Item, hat);
 		}
 
-		PlayerScript::AddExp(0.8f);
+		PlayerScript::AddExp(1.f);
 	}
 	void DesertArcherScript::Initialize()
 	{

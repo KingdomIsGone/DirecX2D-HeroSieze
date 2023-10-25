@@ -93,6 +93,10 @@ namespace ss
 		static void SetOnOff(bool is) { mbOn = is; }
 		void SetStop() { mCursorPos = mPlayerPos; }
 
+		static eDirState GetDirState() { return mDirState; }
+
+		void SetIndicator(class Indicator* cursor) { mIndicator = cursor; }
+
 	private:
 		static Vector3 mPlayerPos;
 		static Vector3 mPoint;
@@ -101,7 +105,7 @@ namespace ss
 		Transform* mTransform;
 
 		eState mState;
-		eDirState mDirState;
+		static eDirState mDirState;
 
 		static float mCurHp;
 		static float mCurMp;

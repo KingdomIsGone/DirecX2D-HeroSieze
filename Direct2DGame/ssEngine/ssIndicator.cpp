@@ -5,8 +5,6 @@
 
 namespace ss
 {
-	Animator* ss::Indicator::mAnimator = nullptr;
-	Vector3 ss::Indicator::mPos = {};
 
 	Indicator::Indicator()
 	{
@@ -42,7 +40,6 @@ namespace ss
 		if (mAnimator->GetActiveAnimation()->IsComplete())
 			mAnimator->PlayAnimation(L"Blank", true);
 
-		mTransform->SetPosition(mPos);
 	}
 	void Indicator::LateUpdate()
 	{
@@ -55,5 +52,9 @@ namespace ss
 	void Indicator::aniPlay()
 	{
 		mAnimator->PlayAnimation(L"Indicator", false);
+	}
+	void Indicator::setPos(Vector3 pos)
+	{
+		mTransform->SetPosition(pos);
 	}
 }
