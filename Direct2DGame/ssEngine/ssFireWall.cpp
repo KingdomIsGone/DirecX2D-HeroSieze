@@ -34,38 +34,39 @@ namespace ss
 		mInclination = (playerPos.x - cursorPos.x) / (playerPos.y - cursorPos.y);
 		mInclination = -1 / mInclination;
 
-		mWallPos[0] = mCursorPos;
+		mWallPos[0] = Vector3(mCursorPos.x, mCursorPos.y, 0.9f);
+
 		switch (mCase)
 		{
 		case ss::FireWall::UpDown:
-			mWallPos[1] = Vector3(mCursorPos.x - mDistance, mCursorPos.y, mCursorPos.z);
-			mWallPos[2] = Vector3(mCursorPos.x + mDistance, mCursorPos.y, mCursorPos.z);
-			mWallPos[3] = Vector3(mCursorPos.x - 2.f * mDistance, mCursorPos.y, mCursorPos.z);
-			mWallPos[4] = Vector3(mCursorPos.x + 2.f * mDistance, mCursorPos.y, mCursorPos.z);
-			mWallPos[5] = Vector3(mCursorPos.x - 3.f * mDistance, mCursorPos.y, mCursorPos.z);
-			mWallPos[6] = Vector3(mCursorPos.x + 3.f * mDistance, mCursorPos.y, mCursorPos.z);
+			mWallPos[1] = Vector3(mCursorPos.x - mDistance, mCursorPos.y, 0.9f);
+			mWallPos[2] = Vector3(mCursorPos.x + mDistance, mCursorPos.y, 0.9f);
+			mWallPos[3] = Vector3(mCursorPos.x - 2.f * mDistance, mCursorPos.y,0.9f);
+			mWallPos[4] = Vector3(mCursorPos.x + 2.f * mDistance, mCursorPos.y,0.9f);
+			mWallPos[5] = Vector3(mCursorPos.x - 3.f * mDistance, mCursorPos.y,0.9f);
+			mWallPos[6] = Vector3(mCursorPos.x + 3.f * mDistance, mCursorPos.y,0.9f);
 			break;
 		
 		case ss::FireWall::RightLeft:
-			mWallPos[1] = Vector3(mCursorPos.x , mCursorPos.y - mDistance, mCursorPos.z);
-			mWallPos[2] = Vector3(mCursorPos.x, mCursorPos.y + mDistance, mCursorPos.z);
-			mWallPos[3] = Vector3(mCursorPos.x, mCursorPos.y - 2.f * mDistance, mCursorPos.z);
-			mWallPos[4] = Vector3(mCursorPos.x, mCursorPos.y + 2.f * mDistance, mCursorPos.z);
-			mWallPos[5] = Vector3(mCursorPos.x, mCursorPos.y - 3.f * mDistance, mCursorPos.z);
-			mWallPos[6] = Vector3(mCursorPos.x, mCursorPos.y + 3.f * mDistance, mCursorPos.z);
+			mWallPos[1] = Vector3(mCursorPos.x , mCursorPos.y - mDistance, 0.9f);
+			mWallPos[2] = Vector3(mCursorPos.x, mCursorPos.y + mDistance, 0.9f);
+			mWallPos[3] = Vector3(mCursorPos.x, mCursorPos.y - 2.f * mDistance, 0.9f);
+			mWallPos[4] = Vector3(mCursorPos.x, mCursorPos.y + 2.f * mDistance, 0.9f);
+			mWallPos[5] = Vector3(mCursorPos.x, mCursorPos.y - 3.f * mDistance, 0.9f);
+			mWallPos[6] = Vector3(mCursorPos.x, mCursorPos.y + 3.f * mDistance, 0.9f);
 			break;
 
 		case ss::FireWall::Ohter:
-			mWallPos[1] = Vector3(mCursorPos.x + mDistance, mCursorPos.y + mDistance * mInclination, mCursorPos.z);
-			mWallPos[2] = Vector3(mCursorPos.x - mDistance, mCursorPos.y - mDistance * mInclination, mCursorPos.z);
+			mWallPos[1] = Vector3(mCursorPos.x + mDistance, mCursorPos.y + mDistance * mInclination, 0.9f);
+			mWallPos[2] = Vector3(mCursorPos.x - mDistance, mCursorPos.y - mDistance * mInclination, 0.9f);
 			mWallPos[3] = Vector3(mCursorPos.x + 2.f * mDistance
-				, mCursorPos.y + 2.f * mDistance * mInclination, mCursorPos.z);
+				, mCursorPos.y + 2.f * mDistance * mInclination, 0.9f);
 			mWallPos[4] = Vector3(mCursorPos.x - 2.f * mDistance
-				, mCursorPos.y - 2.f * mDistance * mInclination, mCursorPos.z);
+				, mCursorPos.y - 2.f * mDistance * mInclination, 0.9f);
 			mWallPos[5] = Vector3(mCursorPos.x + 3.f * mDistance
-				, mCursorPos.y + 3.f * mDistance * mInclination, mCursorPos.z);
+				, mCursorPos.y + 3.f * mDistance * mInclination, 0.9f);
 			mWallPos[6] = Vector3(mCursorPos.x - 3.f * mDistance
-				, mCursorPos.y - 3.f * mDistance * mInclination, mCursorPos.z);
+				, mCursorPos.y - 3.f * mDistance * mInclination, 0.9f);
 			break;
 		default:
 			break;

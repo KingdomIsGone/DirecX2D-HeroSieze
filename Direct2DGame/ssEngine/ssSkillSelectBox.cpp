@@ -68,7 +68,7 @@ namespace ss
 	{
 		GameObject::Update();
 
-		ImageSort();
+		ImagePositioning();
 		ImageSetting();
 
 		SlotClickCheck();
@@ -89,7 +89,7 @@ namespace ss
 			GameObject::Render();
 	}
 
-	void SkillSelectBox::ImageSort()
+	void SkillSelectBox::ImagePositioning()
 	{
 		if (mLearnedSkillCount == 0)
 		{
@@ -154,7 +154,7 @@ namespace ss
 			mSelectImage[5]->GetComponent<Transform>()->SetPosition(Vector3(-0.69f, -1.28f, 0.69f));
 		}
 
-	}  //포지션 정리
+	}  
 
 	void SkillSelectBox::ImageSetting()  //사용 가능스킬을 스킬이미지에 정보 넘기기
 	{
@@ -244,7 +244,7 @@ namespace ss
 					mSelectImage[i]->SetTex(Resources::Find<Texture>(L"TelePortIconTex"));
 					mSelectImage[i]->SetMater();
 					mSelectImage[i]->SetSkillID(eSkillID::Teleport);
-					mSelectImage[i]->SetCoolTime(0.15f);
+					mSelectImage[i]->SetCoolTime(0.2f);
 					break;
 				}
 			}
@@ -303,7 +303,7 @@ namespace ss
 						shader = Resources::Find<Shader>(L"CoolTimeShader3");
 					else if (mSelectSlotNum == 3)
 						shader = Resources::Find<Shader>(L"CoolTimeShader4");
-					
+										
 
 					mt->SetShader(shader);
 					mt->SetTexture(mSelectImage[i]->GetTex());

@@ -21,7 +21,7 @@ namespace ss
 			float CoolTime;
 		};
 
-		void ImageSort();
+		void ImagePositioning();
 		void ImageSetting();
 
 		void SetSkillCountPlus() { mLearnedSkillCount++; }

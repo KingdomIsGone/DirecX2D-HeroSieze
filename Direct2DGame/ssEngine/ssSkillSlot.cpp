@@ -8,13 +8,14 @@ namespace ss
 {
 	SkillSlot::SkillSlot()
 		: mCoolPercent(0.f)
-		, mCoolSpeed(1.f)
 	{
 		mMeshRenderer = AddComponent<MeshRenderer>();
 		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mMeshRenderer->SetMaterial(Resources::Find<Material>(L"BlankMater"));
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(0.24f, 0.24f, 1.0f);
+
+		mSkillID = eSkillID::None;
 	}
 	SkillSlot::~SkillSlot()
 	{

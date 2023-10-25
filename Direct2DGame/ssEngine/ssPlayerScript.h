@@ -26,6 +26,7 @@ namespace ss
 			ClickMove,
 			Attack,
 			Sleep,
+			TelePort,
 		};
 
 		enum class eDirState
@@ -54,6 +55,7 @@ namespace ss
 
 		Vector3 ReverseMove(Vector3 playerpos, Vector3 point);
 		float CalculateMoveDegree(Vector3 playerpos, Vector3 point);
+		void CalDirState(float degree);
 
 		Vector3 Project(Vector3 pos);
 		Vector3 UnProject(Vector3 pos);
@@ -73,6 +75,7 @@ namespace ss
 		void FireWalls(Vector3 cursorPos);
 		void FireAuraCast();
 		void HydraCast(Vector3 cursorPos);
+		void TelePortCast(Vector3 cursorPos);
 
 		void MpRecovery();
 		void HpRecovery();
@@ -127,6 +130,9 @@ namespace ss
 		Vector3 mColliderPos;
 
 		static UINT mSpellNum;
+		UINT mTeleportSlotNum;
+
+		UINT mTeleportStage;
 
 		std::map<UINT, UINT> mColDirMap;
 		std::vector<class SkillSlot*> mSkillSlots;

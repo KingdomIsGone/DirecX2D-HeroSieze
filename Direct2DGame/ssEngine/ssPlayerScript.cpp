@@ -45,6 +45,7 @@ namespace ss
 		, mTopColCount(0)
 		, mBottomColCount(0)
 		, mFullMp(1000.0f)
+		, mTeleportStage(0)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -55,6 +56,7 @@ namespace ss
 		mState = eState::Idle;
 		mDirState = eDirState::Down;
 
+		mTransform = GetOwner()->GetComponent<Transform>();
 		Animator* at = GetOwner()->GetComponent<Animator>();
 		mCursor = new Cursor();
 		mIndicator = new Indicator();
@@ -119,6 +121,9 @@ namespace ss
 			break;
 		case ss::PlayerScript::eState::Sleep:
 			Sleep();
+			break;
+		case ss::PlayerScript::eState::TelePort:
+			TelePortCast(mCursorPos);
 			break;
 		default:
 			break;
@@ -191,13 +196,10 @@ namespace ss
 	{
 		Animator* animator = GetOwner()->GetComponent<Animator>();
 
-		if (Input::GetKey(eKeyCode::DOWN)
-			|| Input::GetKey(eKeyCode::UP)
-			|| Input::GetKey(eKeyCode::RIGHT)
-			|| Input::GetKey(eKeyCode::LEFT))
-			mState = eState::Move;
-
 		Attack();
+
+		if (mState == eState::TelePort)
+			return;
 
 		ClickMove();
 
@@ -372,7 +374,6 @@ namespace ss
 				&& -1.4f <= mCursorPos.y && mCursorPos.y <= -1.13f)
 				return;
 			
-
 			mCursorPos = mCursor->GetPos();
 			mCursorPos += Vector3(-0.1f, 0.1f, 0.0f);
 			mState = eState::Attack;
@@ -420,6 +421,20 @@ namespace ss
 				mSpellNum = 0;
 			}
 				break;
+			case ss::enums::eSkillID::Teleport:
+			{
+				mState = eState::TelePort;
+				mShootOnce = true;
+				mTeleportSlotNum = mSpellNum;
+				mSpellNum = 0;
+			}
+				break;
+			case ss::enums::eSkillID::None:
+			{
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
 			default:
 				break;
 			}
@@ -451,6 +466,20 @@ namespace ss
 			case ss::enums::eSkillID::Hydra:
 			{
 				HydraCast(mCursorPos);
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::Teleport:
+			{
+				mState = eState::TelePort;
+				mShootOnce = true;
+				mTeleportSlotNum = mSpellNum;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::None:
+			{
 				mShootOnce = true;
 				mSpellNum = 0;
 			}
@@ -488,6 +517,20 @@ namespace ss
 				mSpellNum = 0;
 			}
 			break;
+			case ss::enums::eSkillID::Teleport:
+			{
+				mState = eState::TelePort;
+				mShootOnce = true;
+				mTeleportSlotNum = mSpellNum;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::None:
+			{
+				mShootOnce = true;
+				mSpellNum = 0;
+			}
+			break;
 			default:
 				break;
 			}
@@ -519,14 +562,29 @@ namespace ss
 				HydraCast(mCursorPos);
 				mShootOnce = true;
 				mSpellNum = 0;
+
+			}
+			break;
+			case ss::enums::eSkillID::Teleport:
+			{
+				mState = eState::TelePort;
+				mShootOnce = true;
+				mTeleportSlotNum = mSpellNum;
+				mSpellNum = 0;
+			}
+			break;
+			case ss::enums::eSkillID::None:
+			{
+				mShootOnce = true;
+				mSpellNum = 0;
 			}
 			break;
 			default:
 				break;
 			}
 		}
-		
-		AttackAni(mPlayerPos, mCursorPos);
+		if(mState != eState::TelePort)
+			AttackAni(mPlayerPos, mCursorPos);
 	}
 
 	void PlayerScript::Sleep()
@@ -671,6 +729,18 @@ namespace ss
 		return degree;
 	}
 
+	void PlayerScript::CalDirState(float degree)
+	{
+		if (-135.0f <= degree && degree < -45.0f)
+			mDirState = eDirState::Down;
+		else if (45.0f <= degree && degree < 135.0f)
+			mDirState = eDirState::Up;
+		else if (-45.0f <= degree && degree < 45.0f)
+			mDirState = eDirState::Right;
+		else if (135.0f <= degree || degree < -135.0f)
+			mDirState = eDirState::Left;
+	}
+
 	Vector3 PlayerScript::Project(Vector3 pos)
 	{
 		Viewport viewport;
@@ -766,6 +836,54 @@ namespace ss
 		Hydra* hydra = new Hydra();
 		hydra->GetComponent<Transform>()->SetPosition(cursorPos);
 		SceneManager::GetActiveScene()->AddGameObject(eLayerType::Monster, hydra);
+	}
+
+	void PlayerScript::TelePortCast(Vector3 cursorPos)
+	{
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+
+		if (mTeleportStage == 0)
+		{
+			if (mCurMp < 300.f)
+			{
+				mState = eState::Idle;
+				return;
+			}
+
+			mCurMp -= 300.f;
+
+			mSkillSlots[mTeleportSlotNum - 1]->CoolTimeStart();
+			mTeleportStage++;
+		}
+		else if (mTeleportStage == 1)
+		{
+			Vector3 playerPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+			float CurDegree = CalculateMoveDegree(playerPos, mCursorPos);
+			CalDirState(CurDegree);
+
+			animator->PlayAnimation(L"TelePortOut", false);
+
+			if (animator->GetActiveAnimation()->IsComplete())
+				mTeleportStage++;
+		}
+		else if (mTeleportStage == 2)
+		{
+			mTransform->SetPosition(cursorPos);
+			mTeleportStage++;
+		}
+		else if (mTeleportStage == 3)
+		{
+			animator->PlayAnimation(L"TelePortIn", false);
+
+			if (animator->GetActiveAnimation()->IsComplete())
+			{
+				mTeleportStage = 0;
+				mState = eState::Idle;
+				mIsAttacking = false;
+				mShootOnce = false;
+			}
+		}
+
 	}
 
 	void PlayerScript::MpRecovery()
